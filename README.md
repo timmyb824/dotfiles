@@ -6,7 +6,7 @@ This is a collection of my dotfiles and configurations. I use [chezmoi](https://
 
 I utilize [starship](https://starship.rs/) for customizing my prompt. My configuration is stored in `starship.toml`. I have separate files for my aliases and functions. To manage and install plugins, I employ simple zsh functions inspired by [zsh-unplugged](https://github.com/mattmc3/zsh_unplugged), which can be found in the `plugin_manager.zsh` file. All other settings are located in `zshrc`.
 
-Regarding terminals, I prefer using a combination of [hyper.js](https://hyper.is/) and [warp](https://www.warp.dev/). Each terminal offers specific features that I can leverage based on the task or situation at hand. It's worth mentioning that there are certain tools, such as [fig](https://fig.io/), which are not supported or that I prefer not to load in both terminals. To handle this, I have implemented logic in my `zshrc` to load specific tools based on the terminal I am using.
+Regarding terminals, I prefer using a combination of [hyper.js](https://hyper.is/) and [warp](https://www.warp.dev/). Each terminal offers specific features that I can leverage based on the task or situation at hand. For example, I prefer to use hyper.js when I am working on a remote machine.
 
 Additionally, you may notice comments next to certain lines in my `.zshrc`. These serve as reminders of which package manager I used to install a particular tool. While I rely on homebrew for specific cases where it is necessary or makes sense, I have transitioned to using [pkgx](https://docs.pkgx.sh/) for most other packages. Although it is still relatively new, I have encountered a few minor issues. However, I appreciate its concept and its efforts to minimize system pollution.
 
