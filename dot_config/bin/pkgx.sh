@@ -11,13 +11,13 @@ fi
 packages=(
     "aiac"
     "asciinema"
-    "atlas"
+    "atlasgo.io"
     "aws"
     "aws-vault"
     "aws-whoami"
     "awslogs"
     "bat"
-    "bore"
+    "bore.pub"
     "broot"
     "btm"
     "chezmoi.io"
@@ -51,7 +51,6 @@ packages=(
     "gh"
     "ghq"
     "git"
-    "git-credential-osxkeychain"
     "git-cvsserver"
     "git-gone"
     "git-receive-pack"
@@ -89,11 +88,6 @@ packages=(
     "locate"
     "lsd"
     "mackup"
-    "mc"
-    "mcdiff"
-    "mcedit"
-    "mcomm"
-    "mcview"
     "melt"
     "micro"
     "mprocs"
@@ -101,8 +95,8 @@ packages=(
     "neofetch"
     "nmap"
     "nping"
-    "nu"
-    "nvim"
+    "nushell.sh"
+    "neovim.io"
     "onefetch"
     "packer"
     "pgen"
@@ -134,13 +128,27 @@ packages=(
     "zap"
     "zellij"
     "zoxide"
+    # install these packages last to address identical binary
+    "midnight-commander.org"
+    "min.io/mc"
 )
+
+
+# Binary paths (edit these as per your system)
+mc_bin_path="$HOME/.local/bin/mc"
+mcomm_bin_path="$HOME/.local/bin/mcomm"
 
 # Iterate over the packages and install one by one
 for package in "${packages[@]}"
 do
     if pkgx install "${package}"; then
         echo "${package} installed successfully"
+
+        # If the package is mc (Midnight Commander), rename the binary
+        if [ "${package}" = "midnight-commander.org" ]; then
+            mv "${mc_bin_path}" "${mcomm_bin_path}"
+            echo "Renamed mc binary to mcomm"
+        fi
     else
         echo "Failed to install ${package}"
     fi
