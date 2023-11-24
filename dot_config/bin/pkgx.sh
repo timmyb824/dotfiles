@@ -141,7 +141,10 @@ mcomm_bin_path="$HOME/.local/bin/mcomm"
 # Iterate over the packages and install one by one
 for package in "${packages[@]}"
 do
-    if pkgx install "${package}"; then
+    # Capture the output of the package installation
+    output=$(pkgx install "${package}" 2>&1)
+
+    if [[ "${output}" == *"pkgx: installed:"* ]]; then
         echo "${package} installed successfully"
 
         # If the package is mc (Midnight Commander), rename the binary
@@ -149,6 +152,9 @@ do
             mv "${mc_bin_path}" "${mcomm_bin_path}"
             echo "Renamed mc binary to mcomm"
         fi
+    elif [[ "${output}" == *"pkgx: already installed:"* ]]; then
+        # Don't do anything, package is already installed
+        :
     else
         echo "Failed to install ${package}"
     fi
