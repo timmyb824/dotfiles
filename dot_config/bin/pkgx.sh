@@ -16,6 +16,7 @@ packages=(
     "aws-vault"
     "aws-whoami"
     "awslogs"
+    "bash"
     "bat"
     "bore.pub"
     "broot"
