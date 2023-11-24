@@ -139,6 +139,8 @@ packages=(
 mc_bin_path="$HOME/.local/bin/mc"
 mcomm_bin_path="$HOME/.local/bin/mcomm"
 
+echo "Installing packages..."
+
 # Iterate over the packages and install one by one
 for package in "${packages[@]}"
 do
