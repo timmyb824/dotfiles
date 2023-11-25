@@ -26,6 +26,7 @@ alias kns='kubectl ns' # installed with krew
 alias kcx='kubectl ctx' # installed with krew
 alias la="lsd -lAh"
 alias ldot="lsd -ld .*"
+alias lg="lazygit"
 alias ls="lsd"
 alias ll="lsd -lh"
 alias nano="/opt/homebrew/bin/nano"

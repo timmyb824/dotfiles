@@ -14,7 +14,9 @@ fi
 autoload -Uz compinit && compinit
 
 source <(pkgx --shellcode)  #docs.pkgx.sh/shellcode
-source "$HOME/.config/zsh/alias.zsh"
+precmd() {
+    source "$HOME/.config/zsh/alias.zsh"
+}
 source "$HOME/.config/zsh/plugin_manager.zsh"
 source "$HOME/.config/zsh/functions.zsh"
 source /Users/timothybryant/.config/broot/launcher/bash/br # pkgx
@@ -22,14 +24,12 @@ source <(chezmoi completion zsh)
 
 eval "$(zoxide init zsh)" # pkgx
 eval "$(direnv hook zsh)" # pkgx
-eval "$(thefuck --alias)" # pkgx
 eval "$(fnm env --use-on-cd)" # pkgx
 eval "$(rbenv init - zsh)" # homebrew
 eval "$(op completion zsh)"; compdef _op op # pkgx
 # eval "$(register-python-argcomplete pipx)" # pkgx
 
 export SOPS_AGE_KEY_FILE=$HOME/.sops/age-master-key.txt
-# export EDITOR="/opt/homebrew/bin/nano" # homebrew
 export EDITOR="micro" # pkgx
 export HOMEBREW_NO_ANALYTICS=1
 export PATH="/opt/homebrew/opt/grep/libexec/gnubin:$PATH" # homebrew
@@ -45,7 +45,6 @@ export VAULT_ADDR="https://vault.local.timmybtech.com"
 export PATH="$HOME/.basher/bin:$PATH" # source (git)
 eval "$(basher init - zsh)"
 eval "$(kickstart infect)" # basher
-
 
 export PYENV_ROOT="$HOME/.pyenv" # homebrew
 export PATH="$PYENV_ROOT/bin:$PATH"
