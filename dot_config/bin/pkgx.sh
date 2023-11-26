@@ -119,6 +119,7 @@ packages=(
     "tree"
     "tv"
     "updatedb"
+    "usql"
     "vals"
     "vault"
     "wget"
