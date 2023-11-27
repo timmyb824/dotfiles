@@ -107,6 +107,7 @@ packages=(
     "rclone"
     "rg"
     "scalar"
+    "scripthub"
     "sd"
     "shellcheck"
     "starship"
