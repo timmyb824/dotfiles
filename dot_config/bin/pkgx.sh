@@ -60,6 +60,7 @@ packages=(
     "git-trim"
     "git-upload-archive"
     "git-upload-pack"
+    "gitleaks"
     "gitopolis"
     "gitui"
     "gitweb"
