@@ -127,6 +127,7 @@ packages=(
     "wget"
     "when"
     "xargs"
+    "xcfile.dev"
     "yazi"
     "yj"
     "zap"
