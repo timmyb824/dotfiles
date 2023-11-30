@@ -90,6 +90,7 @@ packages=(
     "locate"
     "lsd"
     "mackup"
+    "pkgx/mash" # scripthub
     "melt"
     "micro"
     "mprocs"
@@ -103,7 +104,6 @@ packages=(
     "packer"
     "pgen"
     "pipx"
-    "pkgx.sh/scripthub"
     "pre-commit"
     "rclone"
     "rg"
