@@ -1,3 +1,0 @@
-return {
-  "rhysd/committia.vim",
-}

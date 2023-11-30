@@ -1,0 +1,4 @@
+.DS_Store
+/Users/timothybryant/.config/nvim/LICENSE
+/Users/timothybryant/.config/nvim/README.md
+/Users/timothybryant/.config/nvim/lua/plugins/*
