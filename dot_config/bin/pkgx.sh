@@ -90,7 +90,7 @@ packages=(
     "locate"
     "lsd"
     "mackup"
-    "pkgx/mash" # scripthub
+    "pkgxdev/mash" # scripthub
     "melt"
     "micro"
     "mprocs"
