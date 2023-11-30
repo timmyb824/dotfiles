@@ -33,7 +33,7 @@ packages=(
     "diskus"
     "dive"
     "docker-clean"
-    "docker-compose"
+    # "docker-compose" # installed via podman desktop at /usr/local/bin
     "dog"
     "dua"
     "duf"
@@ -90,7 +90,7 @@ packages=(
     "locate"
     "lsd"
     "mackup"
-    "pkgxdev/mash" # scripthub
+    "mash" # scripthub
     "melt"
     "micro"
     "mprocs"
