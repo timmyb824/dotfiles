@@ -1,0 +1,12 @@
+database:
+  - name: "healthchecks"
+    host: "{{ onepasswordRead "op://Personal/homelab-postgres/server" }}"
+    port: "{{ onepasswordRead "op://Personal/homelab-postgres/port" }}"
+    db: "healthchecks"
+    password: "{{ onepasswordRead "op://Personal/homelab-postgres/password" }}"
+    user: "{{ onepasswordRead "op://Personal/homelab-postgres/username" }}"
+    driver: "postgres"
+    # optional
+    # postgres only
+    # default value: public
+    schema: "public"
