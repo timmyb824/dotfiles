@@ -122,6 +122,7 @@ packages=(
     "toast"
     "tofu"
     "tree"
+    "trufflehog"
     "tv"
     "updatedb"
     "usql"
