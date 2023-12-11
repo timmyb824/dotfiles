@@ -43,6 +43,10 @@ truncation_symbol = "…/"
 home_symbol = " 🏠"
 disabled =  false
 
+[docker_context]
+format = 'via [🐳 $context](blue bold)'
+disabled = true
+
 [git_branch]
 format = " [$symbol$branch]($style) "
 symbol = "  "
