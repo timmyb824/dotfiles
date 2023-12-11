@@ -1,0 +1,81 @@
+[[repos]]
+path = "automation_ansible"
+tags = ["automation_ansible", "homelab", "ansible"]
+
+[repos.remotes.origin]
+name = "origin"
+url = "git@github.com:timmyb824/automation_ansible.git"
+
+[[repos]]
+path = "automation_pyinfra"
+tags = ["automation_pyinfra", "homelab", "pyinfra"]
+
+[repos.remotes.origin]
+name = "origin"
+url = "git@github.com:timmyb824/automation_pyinfra.git"
+
+[[repos]]
+path = "automation_scripts"
+tags = ["automation_scripts", "homelab", "scripts"]
+
+[repos.remotes.origin]
+name = "origin"
+url = "git@github.com:timmyb824/automation_scripts.git"
+
+[[repos]]
+path = "automation_terraform"
+tags = ["automation_terraform", "homelab", "terraform"]
+
+[repos.remotes.origin]
+name = "origin"
+url = "git@github.com:timmyb824/automation_terraform.git"
+
+[[repos]]
+path = "cloudflare-timmybtech"
+tags = ["cf-timmybtech", "gitea", "homelab"]
+
+[repos.remotes.origin]
+name = "origin"
+url = "https://gitea.local.timmybtech.com/tbryant/cloudflare-timmybtech.git"
+
+[[repos]]
+path = "cloudflare-timothybryantjr"
+tags = ["cf-timothybryantjr", "gitea", "homelab"]
+
+[repos.remotes.origin]
+name = "origin"
+url = "https://gitea.local.timmybtech.com/tbryant/cloudflare-timothybryantjr.git"
+
+[[repos]]
+path = "docker-apps"
+tags = ["docker-apps", "homelab"]
+
+[repos.remotes.origin]
+name = "origin"
+url = "git@github.com:timmyb824/docker-apps.git"
+
+[[repos]]
+path = "kubernetes-apps"
+tags = ["kubernetes-apps", "homelab"]
+
+[repos.remotes.origin]
+name = "origin"
+url = "git@github.com:timmyb824/kubernetes-apps.git"
+
+[[repos]]
+path = "oci-timmyb824"
+tags = ["oci-timmyb824", "gitea", "homelab"]
+
+[repos.remotes.origin]
+name = "origin"
+url = "https://gitea.local.timmybtech.com/tbryant/oci-timmyb824.git"
+
+[[repos]]
+path = "timmyb824"
+tags = ["timmyb824"]
+
+[repos.remotes.origin]
+name = "origin"
+url = "git@github.com:timmyb824/timmyb824.git"
+
+
