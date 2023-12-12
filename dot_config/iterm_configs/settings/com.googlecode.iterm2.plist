@@ -4,16 +4,6 @@
 <dict>
 	<key>AlternateMouseScroll</key>
 	<true/>
-	<key>AppleAntiAliasingThreshold</key>
-	<integer>1</integer>
-	<key>ApplePressAndHoldEnabled</key>
-	<false/>
-	<key>AppleScrollAnimationEnabled</key>
-	<integer>0</integer>
-	<key>AppleSmoothFixedFontsSizeThreshold</key>
-	<integer>1</integer>
-	<key>AppleWindowTabbingMode</key>
-	<string>manual</string>
 	<key>BadgeFont</key>
 	<string>Fira Code</string>
 	<key>Custom Color Presets</key>
@@ -3824,6 +3814,16 @@
 			<string>linux: check disk usage of a folder</string>
 			<key>value</key>
 			<string>sudo du -h --max-depth=1</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>guid</key>
+			<string>BA508BA2-524F-4BEE-B1D3-AC644C7910E9</string>
+			<key>title</key>
+			<string>1password: load all key files to ssh-agent</string>
+			<key>value</key>
+			<string>SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock ssh-add -l</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
