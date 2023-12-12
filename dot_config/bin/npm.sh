@@ -14,6 +14,9 @@ packages=(
     "neovim"
     "opencommit"
     "pm2"
+    "kubelive"
+    "gtop"
+    "lineselect"
 )
 
 # Iterate over the packages and install one by one
