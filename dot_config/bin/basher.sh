@@ -21,20 +21,20 @@ fi
 
 # List of packages to install
 packages=(
-    "LuRsT/hr"
+    "LuRsT/hr" # horizontal ruler for terminal
     "bashup/gitea-cli"
-    "bltavares/kickstart"
-    "dylanaraps/fff"
-    "kdabir/has"
+    "bltavares/kickstart" # bash only provisioning tool
+    "dylanaraps/fff" # file manager
+    "kdabir/has" # checks presence of command line tools
     "laurent22/rsync-time-backup"
     "lingtalfi/task-manager"
-    "molovo/lumberjack"
-    "pforret/bumpkeys"
-    "pforret/repeat"
-    "pforret/shtext"
+    "molovo/lumberjack" # log interface for shell scripts
+    "pforret/bumpkeys" # ssh-key upgrader
+    "pforret/repeat" # repeat a command
+    "pforret/shtext" # text manipulation
     "rauchg/wifi-password"
     "sdushantha/tmpmail"
-    "sickill/bitpocket"
+    "sickill/bitpocket" # DIY dropbox
     "vaniacer/sshto"
 )
 
