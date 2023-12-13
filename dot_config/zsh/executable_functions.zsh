@@ -8,7 +8,11 @@ list_local_bin() {
     # Prepare the grep command to ignore the executables
     ignore_grep=$(echo "$ignore_list" | tr ' ' '|')
 
-    find ~/.local/bin -type f -executable -printf "%f\n" | grep -vE "$ignore_grep" | sort
+    if [ -z "$ignore_grep" ]; then
+        find ~/.local/bin -type f -executable -printf "%f\n" | sort
+    else
+        find ~/.local/bin -type f -executable -printf "%f\n" | grep -vE "$ignore_grep" | sort
+    fi
 }
 
 
