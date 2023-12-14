@@ -33,7 +33,6 @@ export SOPS_AGE_KEY_FILE=$HOME/.sops/age-master-key.txt
 export EDITOR="micro" # pkgx
 export HOMEBREW_NO_ANALYTICS=1
 export PATH="/opt/homebrew/opt/grep/libexec/gnubin:$PATH" # homebrew
-export PATH="/opt/homebrew/opt/gawk/libexec/gnubin:$PATH" # homebrew (to use gawk as awk)
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export VIRTUAL_ENV_DISABLE_PROMPT=1 # stop issue where virtualenv was erroneously appearing at the end of every cmd output
 export KUBECONFIG="/Users/timothybryant/.kube/config_k3s"
