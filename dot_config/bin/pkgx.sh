@@ -103,6 +103,7 @@ packages=(
     "mash" # scripthub
     "melt"
     "micro"
+    "mongosh"
     "mprocs"
     "ncat"
     "neofetch"
