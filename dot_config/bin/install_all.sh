@@ -19,11 +19,11 @@ echo "Installing packages from Brewfile..."
 brew bundle --file=Brewfile
 
 # Run each of the .sh installers
+run_script pkgx.sh
 run_script basher.sh
 run_script krew.sh
 run_script micro.sh
 run_script npm.sh
 run_script pipx.sh
-run_script pkgx.sh
 
 echo "All packages have been installed."
