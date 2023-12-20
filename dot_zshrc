@@ -56,4 +56,8 @@ if command -v pyenv 1>/dev/null 2>&1; then
     eval "$(pyenv virtualenv-init -)"
 fi
 
+if command -v ngrok &>/dev/null; then
+  eval "$(ngrok completion)"
+fi
+
 [ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
