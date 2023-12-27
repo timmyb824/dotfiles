@@ -32,19 +32,19 @@ url = "git@github.com:timmyb824/automation_terraform.git"
 
 [[repos]]
 path = "cloudflare-timmybtech"
-tags = ["cf-timmybtech", "gitea", "homelab"]
+tags = ["cf-timmybtech", "homelab"]
 
 [repos.remotes.origin]
 name = "origin"
-url = "https://gitea.local.timmybtech.com/tbryant/cloudflare-timmybtech.git"
+url = "git@github.com:timmyb824/cloudflare-timmybtech.git"
 
 [[repos]]
 path = "cloudflare-timothybryantjr"
-tags = ["cf-timothybryantjr", "gitea", "homelab"]
+tags = ["cf-timothybryantjr", "homelab"]
 
 [repos.remotes.origin]
 name = "origin"
-url = "https://gitea.local.timmybtech.com/tbryant/cloudflare-timothybryantjr.git"
+url = "git@github.com:timmyb824/cloudflare-timothybryantjr.git"
 
 [[repos]]
 path = "docker-apps"
@@ -64,11 +64,11 @@ url = "git@github.com:timmyb824/kubernetes-apps.git"
 
 [[repos]]
 path = "oci-timmyb824"
-tags = ["oci-timmyb824", "gitea", "homelab"]
+tags = ["oci-timmyb824", "homelab"]
 
 [repos.remotes.origin]
 name = "origin"
-url = "https://gitea.local.timmybtech.com/tbryant/oci-timmyb824.git"
+url = "git@github.com:timmyb824/oci-timmyb824.git"
 
 [[repos]]
 path = "timmyb824"
