@@ -197,3 +197,20 @@ do
         echo "Failed to install ${package}"
     fi
 done
+
+# Add $HOME/.local/bin to PATH if it's not already there
+if ! echo "$PATH" | grep -q "$HOME/.local/bin"; then
+    echo "Adding $HOME/.local/bin to PATH for the current session..."
+    export PATH="$HOME/.local/bin:$PATH"
+fi
+
+# Persistently add $HOME/.local/bin to PATH in the shell's profile file
+# Choose .bashrc, .zshrc, or other relevant shell configuration file
+PROFILE_FILE="$HOME/.bashrc"
+if ! grep -q "$HOME/.local/bin" "$PROFILE_FILE"; then
+    echo "Adding $HOME/.local/bin to PATH in $PROFILE_FILE for future sessions..."
+    echo "# Add local bin to PATH" >> "$PROFILE_FILE"
+    echo "export PATH=\"$HOME/.local/bin:\$PATH\"" >> "$PROFILE_FILE"
+fi
+
+echo "Installation completed and $HOME/.local/bin added to PATH."

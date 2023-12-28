@@ -1,4 +1,5 @@
 # install with `brew bundle install`
+tap "cloudflare/cloudflare"
 tap "homebrew/bundle"
 tap "homebrew/cask-fonts"
 tap "homebrew/services"
@@ -35,7 +36,6 @@ brew "zlib"
 brew "pkgxdev/made/pkgx"
 brew "cloudflare/cloudflare/cloudflared"
 cask "1password-cli"
-# cask "fig"
 cask "font-fira-code"
 cask "font-hack-nerd-font"
 cask "podman-desktop"
