@@ -3,6 +3,18 @@
 # Make sure we exit if there is a failure at any step
 set -e
 
+# Check for Homebrew and install if not already installed
+if ! command -v brew &> /dev/null; then
+    echo "Homebrew not found. Installing Homebrew..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+# Verify if Homebrew was successfully installed
+if ! command -v brew &> /dev/null; then
+    echo "Error: Homebrew installation failed."
+    exit 1
+fi
+
 # Function to make a script executable and run it
 run_script() {
     local script=$1
