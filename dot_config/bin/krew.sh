@@ -10,7 +10,7 @@ line_in_file() {
 # Function to add krew to PATH if it's not already in the PATH
 add_krew_to_path() {
     local krew_path_export='export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"'
-    local profile_file="$HOME/.bashrc"  # or change to .zshrc or .profile depending on shell and preference
+    local profile_file="$HOME/.zshrc"  # or change to .zshrc or .profile depending on shell and preference
 
     if ! line_in_file "$krew_path_export" "$profile_file"; then
         echo "Adding krew to PATH in $profile_file"

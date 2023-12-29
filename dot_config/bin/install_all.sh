@@ -19,6 +19,28 @@ line_in_file() {
     grep -Fq -- "$line" "$file"
 }
 
+# Check for Zsh and install if not present
+if ! command -v zsh &> /dev/null; then
+    echo "Zsh not found. Installing Zsh..."
+
+    OS=$(get_os)
+    if [ "$OS" = "MacOS" ]; then
+        # Install Zsh using Homebrew on macOS
+        if ! command -v brew &> /dev/null; then
+            echo "Homebrew is required to install Zsh on macOS"
+            exit 1
+        fi
+        brew install zsh
+    elif [ "$OS" = "Linux" ]; then
+        # Install Zsh using apt-get on Linux
+        sudo apt-get update
+        sudo apt-get install -y zsh
+    else
+        echo "Unknown operating system. Cannot install Zsh."
+        exit 1
+    fi
+fi
+
 # Homebrew installation and PATH setup
 if ! command -v brew &> /dev/null; then
     echo "Homebrew not found. Installing Homebrew..."
@@ -28,7 +50,7 @@ if ! command -v brew &> /dev/null; then
     BREW_PATH_LINE='eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"'
     if ! line_in_file "$BREW_PATH_LINE" ~/.bashrc; then
         echo "Adding Homebrew to PATH in .bashrc..."
-        echo "$BREW_PATH_LINE" >> ~/.bashrc
+        echo "$BREW_PATH_LINE" >> ~/.zshrc
     fi
 
     # Now source the .bashrc line directly to update the current session

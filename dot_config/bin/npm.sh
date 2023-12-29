@@ -4,10 +4,10 @@
 add_fnm_to_shell() {
     local SHELL_CONFIG
 
-    if [[ -f "$HOME/.bashrc" ]]; then
-        SHELL_CONFIG="$HOME/.bashrc"
-    elif [[ -f "$HOME/.zshrc" ]]; then
+    if [[ -f "$HOME/.zshrc" ]]; then
         SHELL_CONFIG="$HOME/.zshrc"
+#    elif [[ -f "$HOME/.zshrc" ]]; then
+#        SHELL_CONFIG="$HOME/.zshrc"
     else
         echo "Could not find a shell configuration file to update with fnm initialization."
         exit 1
