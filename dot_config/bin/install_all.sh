@@ -95,5 +95,6 @@ run_script krew.sh
 run_script micro.sh
 run_script npm.sh
 run_script pipx.sh
+run_script create_symlinks.sh
 
 echo "All packages have been installed."

@@ -1,0 +1,1 @@
+~/.config/dot_files/dot_zshrc ~/.zshrc
