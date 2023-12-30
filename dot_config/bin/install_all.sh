@@ -41,6 +41,12 @@ if ! command -v zsh &> /dev/null; then
     fi
 fi
 
+# Change the default shell to Zsh if it is not already the default
+if [ "$(getent passwd "$USER" | cut -d: -f7)" != "$(command -v zsh)" ]; then
+    echo "Changing the default shell to Zsh..."
+    chsh -s "$(command -v zsh)"
+fi
+
 # Homebrew installation and PATH setup
 if ! command -v brew &> /dev/null; then
     echo "Homebrew not found. Installing Homebrew..."
@@ -95,6 +101,5 @@ run_script krew.sh
 run_script micro.sh
 run_script npm.sh
 run_script pipx.sh
-run_script create_symlinks.sh
 
 echo "All packages have been installed."

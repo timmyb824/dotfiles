@@ -1,0 +1,189 @@
+{{ if (and (eq .chezmoi.os "darwin") (ne .chezmoi.hostname "Timothy-Bryant")) -}}
+################### PERSONAL CONFIGUARTION ##################
+eval "$(/opt/homebrew/bin/brew shellenv)" # must be at top or in .zprofile
+
+FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+
+if [[ $TERM_PROGRAM != "WarpTerminal" ]]; then
+    source <($HOME/.local/bin/starship init zsh --print-full-init) #pkgx
+    export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
+    eval "$(atuin init zsh)" # homebrew
+    test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+fi
+
+# PS4='+ ${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]}:' # uncomment for debugging (run `set -x` to enable)
+
+autoload -Uz compinit && compinit
+
+source <(pkgx --shellcode)  #docs.pkgx.sh/shellcode
+precmd() {
+    source "$HOME/.config/zsh/alias.zsh"
+}
+source "$HOME/.config/zsh/plugin_manager.zsh"
+source "$HOME/.config/zsh/functions.zsh"
+source /Users/timothybryant/.config/broot/launcher/bash/br # pkgx
+source <(chezmoi completion zsh)
+
+eval "$(zoxide init zsh)" # pkgx
+eval "$(direnv hook zsh)" # pkgx
+eval "$(fnm env --use-on-cd)" # pkgx
+eval "$(rbenv init - zsh)" # homebrew
+eval "$(op completion zsh)"; compdef _op op # pkgx
+# eval "$(register-python-argcomplete pipx)" # pkgx
+
+export SOPS_AGE_KEY_FILE=$HOME/.sops/age-master-key.txt
+export EDITOR="micro" # pkgx
+export HOMEBREW_NO_ANALYTICS=1
+export PATH="/opt/homebrew/opt/grep/libexec/gnubin:$PATH" # homebrew
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+export VIRTUAL_ENV_DISABLE_PROMPT=1 # stop issue where virtualenv was erroneously appearing at the end of every cmd output
+export KUBECONFIG="/Users/timothybryant/.kube/config_k3s"
+export PATH=$PATH:$HOME/.local/bin/go # pkgx
+export GOPATH=$HOME/go
+export PATH=$PATH:$HOME/go/bin/
+export MICRO_TRUECOLOR=1
+export VAULT_ADDR="https://vault.local.timmybtech.com"
+export PATH="$HOME/.local/bin:$PATH"
+export DOCKER_HOST='unix:///Users/timothybryant/.local/share/containers/podman/machine/qemu/podman.sock'
+
+export PATH="$HOME/.basher/bin:$PATH" # source (git)
+eval "$(basher init - zsh)"
+eval "$(kickstart infect)" # basher
+
+export PYENV_ROOT="$HOME/.pyenv" # homebrew
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
+if command -v pyenv 1>/dev/null 2>&1; then
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+fi
+
+if command -v ngrok &>/dev/null; then
+  eval "$(ngrok completion)"
+fi
+
+[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
+{{ else if (and (eq .chezmoi.os "darwin") (eq .chezmoi.hostname "Timothy-Bryant")) -}}
+################### WORK CONFIGUARTION ##################
+##########NON-WARP TERMINAL CONFIGURATIONS##########
+if [[ $TERM_PROGRAM != "WarpTerminal" ]]; then
+  source ~/.iterm2_shell_integration.zsh
+  eval "$(starship init zsh)"
+  export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
+  test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+  eval "$(atuin init zsh)"
+fi
+##########NON-WARP TERMINAL CONFIGURATIONS##########
+
+###################USER CONFIGURATIONS##################
+
+autoload -Uz compinit && compinit
+autoload -Uz bashcompinit && bashcompinit
+
+#########SOURCES#########
+source "$HOME/.config/zsh/alias.zsh"
+source "$HOME/.config/zsh/plugin_manager.zsh"
+source <(kubectl completion zsh)
+source /Users/timothybryant/.config/broot/launcher/bash/br
+source ~/.awashcli.sh
+#########SOURCES#########
+
+#########EXPORTS#########
+export NEW_RELIC_API_KEY=""
+export NEW_RELIC_ACCOUNT_ID=""
+export NEW_RELIC_REGION="US"
+export NEW_RELIC_LICENSE_KEY=""
+export GH_TOKEN=""
+export PATH="/usr/local/sbin:$PATH" # added per brew doctor -tab
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+export PATH=$PATH:/usr/local/go/bin
+export GOPATH=$HOME/go
+export PATH=$PATH:$HOME/go/bin/
+export PATH="$PATH:/Users/timothybryant/.local/bin"
+export VIRTUAL_ENV_DISABLE_PROMPT=1 # stop issue where virtualenv was erroneously appearing at the end of every cmd output
+#########EXPORTS#########
+
+#########EVALS#########
+eval "$(register-python-argcomplete pipx)"
+eval "$(zoxide init zsh)"
+eval $(thefuck --alias)
+eval "$(direnv hook zsh)"
+#########EVALS#########
+
+#########OTHER#########
+# Added during pyenv/python3 installattion - TAB
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+  eval "$(pyenv virtualenv-init -)"
+fi
+
+export PATH="$HOME/.basher/bin:$PATH" # source (git)
+eval "$(basher init - zsh)"
+eval "$(kickstart infect)" # basher
+
+# Added manually after nvm install - TAB
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+fpath+=~/.zfunc
+. ~/.dx-zsh-completion.sh
+# Add my keys to the ssh agent; passwords are pulled from the keychain.
+# The --apple-load-keychain option is unique to MacOS.
+# ssh-add --apple-load-keychain
+# export PATH=$HOME/bin:$PATH # uncomment to use AWS kubectl
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+# . ~/.awashcli.sh # per awash README this is sourced automatically in future shells
+#########OTHER#########
+
+###################USER CONFIGURATIONS##################
+{{ else if (eq .chezmoi.os "linux") -}}
+################### LINUX CONFIGUARTION ##################
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" # linux
+
+FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+
+if [[ $TERM_PROGRAM != "WarpTerminal" ]]; then
+    source <($HOME/.local/bin/starship init zsh --print-full-init) #pkgx
+    export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
+    eval "$(atuin init zsh)" # homebrew
+    test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+fi
+
+autoload -Uz compinit && compinit
+
+source <(pkgx --shellcode)  #docs.pkgx.sh/shellcode
+precmd() {
+    source "$HOME/.config/zsh/alias.zsh"
+}
+source "$HOME/.config/zsh/plugin_manager.zsh"
+source "$HOME/.config/zsh/functions.zsh"
+source <(chezmoi completion zsh)
+
+eval "$(zoxide init zsh)" # pkgx
+eval "$(direnv hook zsh)" # pkgx
+eval "$(fnm env --use-on-cd)" # pkgx
+eval "$(rbenv init - zsh)" # homebrew
+eval "$(op completion zsh)"; compdef _op op # pkgx
+# eval "$(register-python-argcomplete pipx)" # pkgx
+
+export EDITOR="micro" # pkgx
+export HOMEBREW_NO_ANALYTICS=1
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+export VIRTUAL_ENV_DISABLE_PROMPT=1 # stop issue where virtualenv was erroneously appearing at the end of every cmd output
+export PATH=$PATH:$HOME/.local/bin/go # pkgx
+export GOPATH=$HOME/go
+export PATH=$PATH:$HOME/go/bin/
+export MICRO_TRUECOLOR=1
+export PATH="$HOME/.local/bin:$PATH"
+
+export PATH="$HOME/.basher/bin:$PATH" # source (git)
+eval "$(basher init - zsh)"
+eval "$(kickstart infect)" # basher
+
+if command -v ngrok &>/dev/null; then
+  eval "$(ngrok completion)"
+fi
+{{ end }}

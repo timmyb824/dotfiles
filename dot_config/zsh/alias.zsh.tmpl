@@ -1,0 +1,90 @@
+{{ if (and (eq .chezmoi.os "darwin") (ne .chezmoi.hostname "Timothy-Bryant")) -}}
+################### PERSONAL CONFIGUARTION ##################
+alias _=sudo
+alias awsp="source _awsp"
+alias awsprofile="source _awsp"
+alias btm="btm --color gruvbox"
+alias cat="bat"
+alias cd..="cd .."
+alias cdicloud="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs"
+alias chez="chezmoi"
+alias fdn='find . -type d -name' # fd is a seperate command
+alias ff="find . -type f -name"
+alias gop="gitopolis"
+alias g=git
+# alias k9s="k9s --kubeconfig ~/.kube/config_k3s "
+alias kk=kubectl
+alias kns='kubectl ns' # installed with krew
+alias kcx='kubectl ctx' # installed with krew
+alias la="lsd -lAh"
+alias ldot="lsd -ld .*"
+alias lg="lazygit"
+alias ls="lsd"
+alias ll="lsd -lh"
+alias nano="/opt/homebrew/bin/nano"
+alias oc="opencommit"
+alias po=podman
+alias poc='podman compose'
+alias please=sudo
+alias pr="poetry run"
+alias px=pkgx
+alias pxi="pkgx install"
+alias quit=exit
+alias reexec="exec zsh"
+alias reload="source ~/.zshrc"
+alias sopse="sops --encrypt --age $(cat $SOPS_AGE_KEY_FILE | grep -oP "public key: \K(.*)") -i "
+alias sopsd="sops --decrypt --age $(cat $SOPS_AGE_KEY_FILE | grep -oP "public key: \K(.*)") -i "
+alias sshadd="ssh-add ~/.ssh/id_master_key"
+alias sshstart="eval `ssh-agent -s`"
+alias tf=terraform
+alias wtf=wtfutil
+alias zbench="for i in {1..10}; do /usr/bin/time zsh -lic exit; done"
+alias zshconfig="micro ~/.zshrc"
+{{ else if (and (eq .chezmoi.os "darwin") (eq .chezmoi.hostname "Timothy-Bryant")) -}}
+################### WORK CONFIGUARTION ##################
+alias _=sudo
+alias awsp="source _awsp"
+alias awsprofile="source _awsp"
+alias btm="btm --color gruvbox"
+alias cat="bat"
+alias cd..="cd .."
+alias cdicloud="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs"
+alias dbuild="docker-compose up -d --force-recreate --build"
+alias dclogs="docker-compose logs -f"
+alias dcup="docker-compose up -d --force-recreate"
+alias ddown="docker-compose down"
+alias dockerports="docker ps --format "table {{.ID}}\t{{.Names}}\t{{.Ports}}\t{{.State}}\t{{.RunningFor}}""
+alias dockerps="docker ps --format "table {{.ID}}\t{{.Names}}\t{{.CreatedAt}}\t{{.Networks}}\t{{.State}}\t{{.RunningFor}}""
+alias dxprd='DEX_ENV=prd dx cluster-login'
+alias dxqa='dx cluster-login'
+alias dxstg='DEX_ENV=stg dx cluster-login'
+# alias fd='find . -type d -name' # fd is already a command
+alias ff="find . -type f -name"
+alias g=git
+alias k9s="k9s --kubeconfig ~/.kube/config_k3s "
+alias kk=kubectl
+alias kns=kubens
+alias kcx=kubectx
+alias la="lsd -lAh"
+alias ldot="lsd -ld .*"
+alias ls="lsd"
+alias ll="lsd -lh"
+alias nano='/usr/local/bin/nano' # nano installed with brew
+alias oc="opencommit"
+alias po=podman
+alias poc=podman compose
+alias please=sudo
+alias pp="poetry run python"
+alias pr="poetry run"
+alias px=pkgx
+alias quit=exit
+alias reload="source ~/.zshrc"
+alias sshadd="ssh-add ~/.ssh/id_master_key"
+alias sshstart="eval `ssh-agent -s`"
+alias tf=terraform
+alias zbench="for i in {1..10}; do /usr/bin/time zsh -lic exit; done"
+alias zshconfig="nano ~/.zshrc"
+{{ else if (eq .chezmoi.os "linux") -}}
+################### LINUX CONFIGUARTION ##################
+alias _=sudo
+{{ end }}

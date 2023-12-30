@@ -1,14 +1,18 @@
 [user]
     name = Tim Bryant
+{{- if (and (eq .chezmoi.os "darwin") (ne .chezmoi.hostname "Timothy-Bryant")) }}
     email = "{{ onepasswordRead "op://Personal/google.com-main/username" }}"
+{{- else if (and (eq .chezmoi.os "darwin") (eq .chezmoi.hostname "Timothy-Bryant")) }}
+    email = "{{ onepasswordRead "op://Personal/simplisafe-okta/username" }}"
+{{- else if (eq .chezmoi.os "linux") }}
+    email = "a@a.com"
+{{ end }}
 
 [pager]
     branch = false
 
-
 #[includeIf "gitdir:~/DevOps-Work/"]
 #    path = ~/DevOps-Work/.gitconfig
-
 
 [init]
     defaultBranch = main
@@ -24,3 +28,4 @@
 
 [trim]
 	bases = develop,main
+
