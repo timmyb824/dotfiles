@@ -84,7 +84,4 @@ alias sshstart="eval `ssh-agent -s`"
 alias tf=terraform
 alias zbench="for i in {1..10}; do /usr/bin/time zsh -lic exit; done"
 alias zshconfig="nano ~/.zshrc"
-{{ else if (eq .chezmoi.os "linux") -}}
-################### LINUX CONFIGUARTION ##################
-alias _=sudo
 {{ end }}

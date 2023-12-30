@@ -3,22 +3,12 @@
 /Users/timothybryant/.config/nvim/README.md
 /Users/timothybryant/.config/nvim/lua/plugins/*
 
-{{ if eq .chezmoi.os "linux" -}}
+{{ if ne .chezmoi.hostname "Timothys-MacBook-Pro" -}}
 /Users/timothybryant/.dblab.yaml
-/Users/timothybryant/.opencommit
-/Users/timothybryant/.aicommits
-Library/Application Support/iTerm2/*
 .ssh/*
 .oci/*
-.hyper.js
-/Users/timothybryant/.config/nvim/*
-/Users/timothybryant/.config/wtf/*
-/Users/timothybryant/.config/iterm_configs/*
 /Users/timothybryant/.config//gitearc/*
-/Users/timothybryant/.config/geany/*
 /Users/timothybryant/.config/fonts/*
 /Users/timothybryant/DEV/homelab/.gitopolis.toml
-/Users/timothybryant/.config/atuin/*
-
 {{ end -}}
 

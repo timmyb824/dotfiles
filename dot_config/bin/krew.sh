@@ -1,25 +1,11 @@
 #!/bin/bash
 
-# Function to check if a given line is in a file
-line_in_file() {
-    local line="$1"
-    local file="$2"
-    grep -Fq -- "$line" "$file"
-}
-
-# Function to add krew to PATH if it's not already in the PATH
-add_krew_to_path() {
-    local krew_path_export='export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"'
-    local profile_file="$HOME/.zshrc"  # or change to .zshrc or .profile depending on shell and preference
-
-    if ! line_in_file "$krew_path_export" "$profile_file"; then
-        echo "Adding krew to PATH in $profile_file"
-        echo "$krew_path_export" >> "$profile_file"
-        # Source the profile file to update the current session
-        source "$profile_file"
-    elif ! command -v kubectl-krew &> /dev/null; then
-        # The line exists in the file, but krew is not in the PATH of the current session
-        source "$profile_file"
+# Function to add krew to PATH for the current session if it's not already in the PATH
+add_krew_to_path_for_session() {
+    local krew_path="${KREW_ROOT:-$HOME/.krew}/bin"
+    if ! echo "$PATH" | grep -q "$krew_path"; then
+        echo "Adding krew to PATH for the current session"
+        export PATH="$krew_path:$PATH"
     fi
 }
 
@@ -29,13 +15,15 @@ if ! command -v kubectl &> /dev/null; then
     exit 1
 fi
 
-# Add krew to PATH if not already there
-add_krew_to_path
-
-# Check if krew is installed
+# Check if krew is installed and working
 if ! kubectl krew &> /dev/null; then
-    echo "krew could not be found"
-    exit 1
+    echo "krew could not be found or is not working properly, attempting to add to PATH for the current session"
+    add_krew_to_path_for_session
+    # Re-check if kubectl krew works after adding to PATH
+    if ! kubectl krew &> /dev/null; then
+        echo "krew is still not working after attempting to add to PATH"
+        exit 1
+    fi
 fi
 
 # List of plugins to install
@@ -47,12 +35,17 @@ plugins=(
 # Iterate over the plugins and install one by one
 for plugin in "${plugins[@]}"; do
     if ! kubectl krew list | grep -q "$plugin"; then
+        echo "Installing $plugin..."
         if kubectl krew install "$plugin"; then
             echo "$plugin installed successfully"
         else
             echo "Failed to install $plugin"
+            exit 1
         fi
     else
         echo "$plugin is already installed"
     fi
 done
+
+# If the script reaches this point, all plugins have been installed successfully
+echo "All specified krew plugins have been installed."

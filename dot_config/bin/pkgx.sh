@@ -1,29 +1,9 @@
 #!/bin/bash
 
 # Check if pkgx is installed
-if ! command -v pkgx &> /dev/null; then
+if ! command -v pkgx &> /dev/null
+then
     echo "pkgx could not be found"
-
-    # Check for Homebrew and install pkgx if Homebrew is available
-    if command -v brew &> /dev/null; then
-        echo "Installing pkgx using Homebrew..."
-        brew install pkgxdev/made/pkgx
-
-    # If Homebrew is not available, check for curl and install pkgx using the script
-    elif command -v curl &> /dev/null; then
-        echo "Installing pkgx using curl..."
-        curl -Ssf https://pkgx.sh | sh
-
-    # If neither Homebrew nor curl are available, exit the script with an error
-    else
-        echo "Error: Homebrew and curl are not installed. Cannot install pkgx."
-        exit 1
-    fi
-fi
-
-# Verify if pkgx was successfully installed
-if ! command -v pkgx &> /dev/null; then
-    echo "Error: pkgx installation failed."
     exit 1
 fi
 
@@ -169,7 +149,6 @@ packages=(
     "min.io/mc"
 )
 
-
 # Binary paths (edit these as per your system)
 mc_bin_path="$HOME/.local/bin/mc"
 mcomm_bin_path="$HOME/.local/bin/mcomm"
@@ -198,19 +177,4 @@ do
     fi
 done
 
-# Add $HOME/.local/bin to PATH if it's not already there
-if ! echo "$PATH" | grep -q "$HOME/.local/bin"; then
-    echo "Adding $HOME/.local/bin to PATH for the current session..."
-    export PATH="$HOME/.local/bin:$PATH"
-fi
-
-# Persistently add $HOME/.local/bin to PATH in the shell's profile file
-# Choose .bashrc, .zshrc, or other relevant shell configuration file
-PROFILE_FILE="$HOME/.bashrc"
-if ! grep -q "$HOME/.local/bin" "$PROFILE_FILE"; then
-    echo "Adding $HOME/.local/bin to PATH in $PROFILE_FILE for future sessions..."
-    echo "# Add local bin to PATH" >> "$PROFILE_FILE"
-    echo "export PATH=\"$HOME/.local/bin:\$PATH\"" >> "$PROFILE_FILE"
-fi
-
-echo "Installation completed and $HOME/.local/bin added to PATH."
+echo "All packages installed successfully"

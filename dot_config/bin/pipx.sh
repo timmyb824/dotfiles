@@ -4,7 +4,7 @@
 if ! command -v pipx &> /dev/null
 then
     echo "pipx could not be found"
-    exit
+    exit 1
 fi
 
 # List of packages to install
