@@ -49,6 +49,7 @@ packages=(
     "kubelive"
     "gtop"
     "lineselect"
+    "node-gyp" # dependacy of inshellisense
     "microsoft/inshellisense"
 )
 
