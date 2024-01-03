@@ -50,7 +50,7 @@ packages=(
     "gtop"
     "lineselect"
     "node-gyp" # dependacy of inshellisense
-    "microsoft/inshellisense"
+    "@microsoft/inshellisense"
 )
 
 echo "Installing npm global packages..."
