@@ -49,6 +49,7 @@ packages=(
     "kubelive"
     "gtop"
     "lineselect"
+    "microsoft/inshellisense"
 )
 
 echo "Installing npm global packages..."
