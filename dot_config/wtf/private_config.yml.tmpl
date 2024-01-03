@@ -1,3 +1,4 @@
+---
 wtf:
   colors:
     border:
@@ -7,8 +8,8 @@ wtf:
   exitMessage:
     display: false
   grid:
-    columns: [0, 50, 32, 32, 90]
-    rows: [10, 12, 10, 4, 4, 5, 5]
+    columns: [0, 50, 32, 32, 90, 90]
+    rows: [12, 12, 10, 4, 4, 5, 5, 5]
   refreshInterval: 1
   mods:
     prettyweather:
@@ -51,21 +52,6 @@ wtf:
       language: 'en'
       refreshInterval: 6h
 
-    opsgenie:
-      apiKey: "{{ onepasswordRead "op://Personal/ss-opsgenie-api-key/credential" }}"
-      displayEmpty: false
-      enabled: true
-      position:
-        top: 2
-        left: 1
-        height: 1
-        width: 1
-      refreshInterval: 6h
-      region: "us"
-      schedule:
-      - "Problem_Coordinator_schedule"
-      scheduleIdentifierType: "name"
-
     devto:
       enabled: true
       numberOfArticles: 10
@@ -76,7 +62,18 @@ wtf:
         width: 2
       contentTag: "devops"
       contentState: "rising"
-      refreshInterval: 1h
+      refreshInterval: 30m
+
+    hackernews:
+      enabled: true
+      numberOfStories: 10
+      position:
+        top: 2
+        left: 1
+        height: 1
+        width: 2
+      storyType: top
+      refreshInterval: 15m
 
     ipinfo:
       colors:
@@ -102,17 +99,32 @@ wtf:
     power:
       enabled: true
       position:
-        top: 2
-        left: 2
+        top: 6
+        left: 4
         height: 1
         width: 1
       refreshInterval: 15
       title: "⚡️"
 
+    opsgenie:
+      apiKey: "{{ onepasswordRead "op://Personal/ss-opsgenie-api-key/credential" }}"
+      displayEmpty: false
+      enabled: true
+      position:
+        top: 6
+        left: 3
+        height: 1
+        width: 1
+      refreshInterval: 6h
+      region: "us"
+      schedule:
+      - "Problem_Coordinator_schedule"
+      scheduleIdentifierType: "name"
+
     uptime:
       args: [""]
       cmd: "uptime"
-      enabled: true
+      enabled: false
       position:
         top: 3
         left: 1
@@ -131,7 +143,7 @@ wtf:
       position:
         top: 4
         left: 3
-        height: 3
+        height: 2
         width: 2
       refreshInterval: 1h
 
@@ -145,9 +157,9 @@ wtf:
       - nodes
       # - pods
       position:
-        top: 4
+        top: 3
         left: 1
-        height: 2
+        height: 3
         width: 2
       refreshInterval: 5m
       title: "Homelab"
@@ -167,4 +179,3 @@ wtf:
         height: 2
         width: 2
       refreshInterval: 30
-
