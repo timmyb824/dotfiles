@@ -4,10 +4,11 @@
 /Users/timothybryant/.config/nvim/lua/plugins/*
 
 {{ if ne .chezmoi.hostname "Timothys-MacBook-Pro" -}}
+/Users/timothybryant/.gitconfig
 /Users/timothybryant/.dblab.yaml
-.ssh/*
-.oci/*
-/Users/timothybryant/.config//gitearc/*
+/Users/timothybryant/.ssh/*
+/Users/timothybryant/.oci/*
+/Users/timothybryant/.config/gitearc/*
 /Users/timothybryant/.config/fonts/*
 /Users/timothybryant/DEV/homelab/.gitopolis.toml
 {{ end -}}

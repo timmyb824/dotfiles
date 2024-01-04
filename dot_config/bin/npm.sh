@@ -49,8 +49,9 @@ packages=(
     "kubelive"
     "gtop"
     "lineselect"
-    "node-gyp" # dependacy of inshellisense
-    "@microsoft/inshellisense"
+    # commenting out inshellisense for now (not working properly yet)
+    # "node-gyp" # dependacy of inshellisense
+    # "@microsoft/inshellisense"
 )
 
 echo "Installing npm global packages..."
