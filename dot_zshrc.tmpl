@@ -34,7 +34,7 @@ eval "$(op completion zsh)"; compdef _op op # pkgx
 export SOPS_AGE_KEY_FILE=$HOME/.sops/age-master-key.txt
 export EDITOR="micro" # pkgx
 export HOMEBREW_NO_ANALYTICS=1
-export PATH="/opt/homebrew/opt/grep/libexec/gnubin:$PATH" # homebrew
+export PATH="/opt/homebrew/opt/grep/libexec/gnubin:$PATH"
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export VIRTUAL_ENV_DISABLE_PROMPT=1 # stop issue where virtualenv was erroneously appearing at the end of every cmd output
 export KUBECONFIG="/Users/timothybryant/.kube/config_k3s"
@@ -44,6 +44,7 @@ export PATH=$PATH:$HOME/go/bin/
 export MICRO_TRUECOLOR=1
 export VAULT_ADDR="https://vault.local.timmybtech.com"
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="/opt/homebrew/opt/postgresql@13/bin:$PATH"
 export DOCKER_HOST='unix:///Users/timothybryant/.local/share/containers/podman/machine/qemu/podman.sock'
 
 export PATH="$HOME/.basher/bin:$PATH" # source (git)
