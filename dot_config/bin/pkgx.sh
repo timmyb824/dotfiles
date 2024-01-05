@@ -113,6 +113,7 @@ packages=(
     "neovim.io"
     "onefetch"
     "packer"
+    "pls"
     "pgen"
     "pipx"
     "pre-commit"
