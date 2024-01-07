@@ -48,7 +48,7 @@ function plugin-load {
     fpath+="$plugdir"
     (( $+functions[zsh-defer] )) && zsh-defer . "$initfile" || . "$initfile"
   done
-}
+}}
 
 # List of github repo plugins
 plugins=(
