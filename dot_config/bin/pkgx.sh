@@ -1,13 +1,36 @@
 #!/bin/bash
 
 # Check if pkgx is installed
-if ! command -v pkgx &> /dev/null
-then
+if ! command -v pkgx &> /dev/null; then
     echo "pkgx could not be found"
+
+    # Check for Homebrew and install pkgx if Homebrew is available
+    if command -v brew &> /dev/null; then
+        echo "Installing pkgx using Homebrew..."
+        brew install pkgxdev/made/pkgx
+
+    # If Homebrew is not available, check for curl and install pkgx using the script
+    elif command -v curl &> /dev/null; then
+        echo "Installing pkgx using curl..."
+        curl -Ssf https://pkgx.sh | sh
+
+    # If neither Homebrew nor curl are available, exit the script with an error
+    else
+        echo "Error: Homebrew and curl are not installed. Cannot install pkgx."
+        exit 1
+    fi
+fi
+
+# Verify if pkgx was successfully installed
+if ! command -v pkgx &> /dev/null; then
+    echo "Error: pkgx installation failed."
     exit 1
 fi
 
+
 # List of packages to install
+
+#### Need to add unzip and make but for linux only
 packages=(
     "aiac"
     "asciinema"
@@ -177,5 +200,11 @@ do
         echo "Failed to install ${package}"
     fi
 done
+
+# Add $HOME/.local/bin to PATH if it's not already there
+if ! echo "$PATH" | grep -q "$HOME/.local/bin"; then
+    echo "Adding $HOME/.local/bin to PATH for the current session..."
+    export PATH="$HOME/.local/bin:$PATH"
+fi
 
 echo "All packages installed successfully"

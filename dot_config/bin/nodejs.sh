@@ -5,7 +5,9 @@ NODE_VERSION="v21.0.0"
 
 # Function to initialize fnm for the current session
 initialize_fnm_for_session() {
-    eval "$(fnm env --use-on-cd)"
+    # Specify the shell directly if fnm can't infer it
+    local SHELL_NAME="zsh"
+    eval "$(fnm env --use-on-cd --shell=${SHELL_NAME})"
 }
 
 # Check if npm is installed and working
@@ -13,7 +15,7 @@ if ! command -v npm &> /dev/null; then
     echo "npm could not be found"
 
     # Check for fnm
-    if command -v fnm &> /dev/null; then
+    if command -v fnm &>/dev/null; then
         echo "Found fnm, attempting to install Node.js ${NODE_VERSION}..."
         if fnm install "${NODE_VERSION}"; then
             echo "Node.js ${NODE_VERSION} installed successfully"
