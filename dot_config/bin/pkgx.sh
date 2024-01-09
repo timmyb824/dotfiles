@@ -1,31 +1,28 @@
 #!/bin/bash
 
-# Check if pkgx is installed
-if ! command -v pkgx &> /dev/null; then
-    echo "pkgx could not be found"
+source "./init.sh"
 
-    # Check for Homebrew and install pkgx if Homebrew is available
-    if command -v brew &> /dev/null; then
+# Function to install pkgx
+install_pkgx() {
+    if command_exists brew; then
         echo "Installing pkgx using Homebrew..."
-        brew install pkgxdev/made/pkgx
-
-    # If Homebrew is not available, check for curl and install pkgx using the script
-    elif command -v curl &> /dev/null; then
+        brew install pkgxdev/made/pkgx || exit_with_error "Installation of pkgx using Homebrew failed."
+    elif command_exists curl; then
         echo "Installing pkgx using curl..."
-        curl -Ssf https://pkgx.sh | sh
-
-    # If neither Homebrew nor curl are available, exit the script with an error
+        curl -Ssf https://pkgx.sh | sh || exit_with_error "Installation of pkgx using curl failed."
     else
-        echo "Error: Homebrew and curl are not installed. Cannot install pkgx."
-        exit 1
+        exit_with_error "Homebrew and curl are not installed. Cannot install pkgx."
     fi
+}
+
+# Check if pkgx is installed, if not then install it
+if ! command_exists pkgx; then
+    echo "pkgx could not be found"
+    install_pkgx
 fi
 
 # Verify if pkgx was successfully installed
-if ! command -v pkgx &> /dev/null; then
-    echo "Error: pkgx installation failed."
-    exit 1
-fi
+command_exists pkgx || exit_with_error "pkgx installation failed."
 
 
 # List of packages to install
@@ -173,6 +170,11 @@ packages=(
     "min.io/mc"
 )
 
+# Linux specific packages
+if [ "$(get_os)" = "Linux" ]; then
+    packages+=("unzip" "make")
+fi
+
 # Binary paths (edit these as per your system)
 mc_bin_path="$HOME/.local/bin/mc"
 mcomm_bin_path="$HOME/.local/bin/mcomm"
@@ -180,8 +182,7 @@ mcomm_bin_path="$HOME/.local/bin/mcomm"
 echo "Installing packages..."
 
 # Iterate over the packages and install one by one
-for package in "${packages[@]}"
-do
+for package in "${packages[@]}"; do
     # Capture the output of the package installation
     output=$(pkgx install "${package}" 2>&1)
 
@@ -190,21 +191,17 @@ do
 
         # If the package is mc (Midnight Commander), rename the binary
         if [ "${package}" = "midnight-commander.org" ]; then
-            mv "${mc_bin_path}" "${mcomm_bin_path}"
+            mv "${mc_bin_path}" "${mcomm_bin_path}" || exit_with_error "Failed to rename mc binary to mcomm."
             echo "Renamed mc binary to mcomm"
         fi
     elif [[ "${output}" == *"pkgx: already installed:"* ]]; then
-        # Don't do anything, package is already installed
-        :
+        echo "${package} is already installed."
     else
-        echo "Failed to install ${package}"
+        echo "Failed to install ${package}: $output"
     fi
 done
 
 # Add $HOME/.local/bin to PATH if it's not already there
-if ! echo "$PATH" | grep -q "$HOME/.local/bin"; then
-    echo "Adding $HOME/.local/bin to PATH for the current session..."
-    export PATH="$HOME/.local/bin:$PATH"
-fi
+add_to_path "$HOME/.local/bin"
 
 echo "All packages installed successfully"
