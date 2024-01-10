@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define the path to the common.sh script
-COMMON_SCRIPT_PATH="/Users/timothybryant/.local/share/chezmoi/dot_config/bin/common.sh"
+COMMON_SCRIPT_PATH="$(dirname "$BASH_SOURCE")/common.sh"
 
 # Check if the common script exists and source it
 if [ -f "$COMMON_SCRIPT_PATH" ]; then

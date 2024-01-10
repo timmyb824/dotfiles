@@ -1,22 +1,22 @@
 #!/bin/bash
 
+source "$(dirname "$BASH_SOURCE")/init.sh"
+
 # Check if git is installed
 if ! command -v git &>/dev/null; then
-    echo "git is not installed. Please install git first."
-    exit 1
+    exit_with_error "git is not installed - please install git and run this script again"
 fi
 
 # Check if basher is not already installed
 if [ ! -d "$HOME/.basher" ]; then
     echo "basher is not installed. Installing now..."
     if git clone --depth=1 https://github.com/basherpm/basher.git ~/.basher; then
-        echo "basher installed successfully"
+        echo_with_color "32" "basher installed successfully"
     else
-        echo "basher could not be installed"
-        exit 1
+        exit_with_error "Failed to install basher"
     fi
 else
-    echo "basher is already installed at $HOME/.basher"
+    echo_with_color "34" "basher is already installed at $HOME/.basher"
 fi
 
 # List of packages to install
@@ -41,16 +41,13 @@ packages=(
 basher_bin="$HOME/.basher/bin"
 
 # Check if basher's bin directory is in the PATH
-if [[ ":$PATH:" != *":$basher_bin:"* ]]; then
-    # Add basher to PATH
-    export PATH="$basher_bin:$PATH"
-fi
+add_to_path_exact_match "$basher_bin"
 
 # Iterate over the packages and install one by one
 for package in "${packages[@]}"; do
     if basher install "${package}"; then
-        echo "${package} installed successfully"
+        echo_with_color "32" "${package} installed successfully"
     else
-        echo "Failed to install ${package}"
+        exit_with_error "Failed to install ${package}"
     fi
 done

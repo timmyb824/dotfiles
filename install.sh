@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Source the common functions
-source "./dot_config/bin/init.sh"
+source "$(dirname "$BASH_SOURCE")/dot_config/bin/init.sh"
 
 # Function to download and install chezmoi using curl or wget
 install_chezmoi() {
@@ -27,7 +27,7 @@ INSTALL_PACKAGES_SCRIPT="./dot_config/bin/install_packages.sh"
 OS=$(get_os)
 
 if [ "$OS" = "MacOS" ]; then
-    echo_with_color "32" "Detected macOS."
+    echo_with_color "34" "Detected macOS."
     install_chezmoi
 
     # Run chezmoi init only if it was just installed
