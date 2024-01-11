@@ -14,6 +14,8 @@ read -p "Enter the username for the remote SSH user: " SSH_REMOTE_USER
 read -p "Enter the public SSH key contents: " SSH_KEY_CONTENTS
 read -s -p "Enter the user's password: " SSH_PASSWORD
 echo ""
+read -p "Enter a salt for the password encryption: " SALT
+echo ""
 
 # Function to check if a user exists
 user_exists() {
@@ -28,11 +30,16 @@ user_exists() {
 create_user() {
     local username=$1
     local password=$2
+    local salt=$3
+    local enc_password
+
+    # Encrypt the password using openssl with the provided salt
+    enc_password=$(openssl passwd -6 -salt "$salt" "$password")
 
     if user_exists "$username"; then
         echo "User $username already exists"
     else
-        sudo useradd -m -s /bin/bash -p "$password" -G sudo "$username"
+        sudo useradd -m -s /bin/bash -p "$enc_password" -G sudo "$username"
         echo "User $username created and added to sudo group"
     fi
 }
@@ -71,7 +78,7 @@ create_sudoers_file() {
 # Create a login user and add public key
 for username in $LOCAL_USER $SSH_REMOTE_USER; do
     if [ -n "$username" ]; then
-        create_user "$username" "$SSH_PASSWORD"
+        create_user "$username" "$SSH_PASSWORD" "$SALT"
         add_ssh_key "$username" "$SSH_KEY_CONTENTS"
 
         if [ "$username" = "$SSH_REMOTE_USER" ]; then
