@@ -3,13 +3,20 @@
 # Make sure we exit if there is a failure at any step
 set -e
 
+# Source common functions
+source "$(dirname "$BASH_SOURCE")/init.sh"
+
 # Function to make a script executable and run it
 run_script() {
     local script=$1
-    echo "Running $script..."
-    chmod +x "$script"  # Make the script executable
-    ./"$script"         # Execute the script
-    echo "$script completed."
+    if ask_yes_or_no "Do you want to run $script?"; then
+        echo "Running $script..."
+        chmod +x "$SCRIPT_DIR/$script"  # Make the script executable
+        "$SCRIPT_DIR/$script"         # Execute the script
+        echo "$script completed."
+    else
+        echo "Skipping $script..."
+    fi
 }
 
 # Start the installation process
@@ -27,6 +34,5 @@ run_script pipx.sh
 run_script python.sh
 run_script tailscale.sh
 run_script terraform.sh
-
 
 echo "All packages have been installed."

@@ -38,7 +38,7 @@ get_os() {
 
 # Function to output an error message and exit
 exit_with_error() {
-    echo "Error: $1" >&2
+    echo_with_color "31" "Error: $1" >&2
     exit 1
 }
 

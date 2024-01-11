@@ -1,14 +1,14 @@
 #!/bin/bash
 
-source "./init.sh"
+source "$(dirname "$BASH_SOURCE")/init.sh"
 
 # Function to install pkgx
 install_pkgx() {
     if command_exists brew; then
-        echo "Installing pkgx using Homebrew..."
+        echo_with_color "34" "Installing pkgx using Homebrew..."
         brew install pkgxdev/made/pkgx || exit_with_error "Installation of pkgx using Homebrew failed."
     elif command_exists curl; then
-        echo "Installing pkgx using curl..."
+        echo_with_color "34" "Installing pkgx using curl..."
         curl -Ssf https://pkgx.sh | sh || exit_with_error "Installation of pkgx using curl failed."
     else
         exit_with_error "Homebrew and curl are not installed. Cannot install pkgx."
@@ -17,7 +17,7 @@ install_pkgx() {
 
 # Check if pkgx is installed, if not then install it
 if ! command_exists pkgx; then
-    echo "pkgx could not be found"
+    echo_with_color "31" "pkgx could not be found"
     install_pkgx
 fi
 
@@ -179,7 +179,7 @@ fi
 mc_bin_path="$HOME/.local/bin/mc"
 mcomm_bin_path="$HOME/.local/bin/mcomm"
 
-echo "Installing packages..."
+echo_with_color "34" "Installing packages..."
 
 # Iterate over the packages and install one by one
 for package in "${packages[@]}"; do
@@ -187,21 +187,21 @@ for package in "${packages[@]}"; do
     output=$(pkgx install "${package}" 2>&1)
 
     if [[ "${output}" == *"pkgx: installed:"* ]]; then
-        echo "${package} installed successfully"
+        echo_with_color "32" "${package} installed successfully"
 
         # If the package is mc (Midnight Commander), rename the binary
         if [ "${package}" = "midnight-commander.org" ]; then
             mv "${mc_bin_path}" "${mcomm_bin_path}" || exit_with_error "Failed to rename mc binary to mcomm."
-            echo "Renamed mc binary to mcomm"
+            echo_with_color "32" "Renamed mc binary to mcomm"
         fi
     elif [[ "${output}" == *"pkgx: already installed:"* ]]; then
-        echo "${package} is already installed."
+        echo_with_color "34" "${package} is already installed."
     else
-        echo "Failed to install ${package}: $output"
+        echo_with_color "31" "Failed to install ${package}: $output"
     fi
 done
 
 # Add $HOME/.local/bin to PATH if it's not already there
 add_to_path "$HOME/.local/bin"
 
-echo "All packages installed successfully"
+echo_with_color "32" "pkgx.sh completed successfully"

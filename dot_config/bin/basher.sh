@@ -51,3 +51,5 @@ for package in "${packages[@]}"; do
         exit_with_error "Failed to install ${package}"
     fi
 done
+
+echo_with_color "32" "basher.sh completed successfully."

@@ -1,10 +1,13 @@
 #!/bin/bash
 
+# Source the common functions script
+source "$(dirname "$BASH_SOURCE")/init.sh"
+
 # Check if micro is installed
-if ! command -v micro &> /dev/null
+if ! command_exists micro
 then
-    echo "micro could not be found"
-    exit
+    echo_with_color "31" "micro could not be found"
+    exit 1
 fi
 
 # List of plugins to install
@@ -38,8 +41,10 @@ plugins=(
 for plugin in "${plugins[@]}"
 do
     if micro -plugin install "${plugin}"; then
-        echo "${plugin} installed successfully"
+        echo_with_color "34" "${plugin} installed successfully"
     else
-        echo "Failed to install ${plugin}"
+        echo_with_color "31" "Failed to install ${plugin}"
     fi
 done
+
+echo_with_color "32" "micro.sh has completed successfully"

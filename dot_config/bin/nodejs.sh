@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Source the common functions script
+source "$(dirname "$BASH_SOURCE")/init.sh"
+
 # Set the desired Node.js version
 NODE_VERSION="v21.0.0"
 
@@ -11,34 +14,34 @@ initialize_fnm_for_session() {
 }
 
 # Check if npm is installed and working
-if ! command -v npm &> /dev/null; then
-    echo "npm could not be found"
+if ! command_exists npm; then
+    echo_with_color "31" "npm could not be found"
 
     # Check for fnm
-    if command -v fnm &>/dev/null; then
-        echo "Found fnm, attempting to install Node.js ${NODE_VERSION}..."
+    if command_exists fnm; then
+        echo_with_color "33" "Found fnm, attempting to install Node.js ${NODE_VERSION}..."
         if fnm install "${NODE_VERSION}"; then
-            echo "Node.js ${NODE_VERSION} installed successfully"
+            echo_with_color "32" "Node.js ${NODE_VERSION} installed successfully"
 
             # Initialize fnm for the current session
             initialize_fnm_for_session
 
             if fnm use "${NODE_VERSION}"; then
-                echo "Node.js ${NODE_VERSION} is now in use"
+                echo_with_color "32" "Node.js ${NODE_VERSION} is now in use"
             else
-                echo "Failed to use Node.js ${NODE_VERSION}, please check fnm setup"
+                echo_with_color "31" "Failed to use Node.js ${NODE_VERSION}, please check fnm setup"
                 exit 1
             fi
         else
-            echo "Failed to install Node.js ${NODE_VERSION}, please check fnm setup"
+            echo_with_color "31" "Failed to install Node.js ${NODE_VERSION}, please check fnm setup"
             exit 1
         fi
     else
-        echo "npm and fnm not found. Please install Node.js to continue."
+        echo_with_color "31" "npm and fnm not found. Please install Node.js to continue."
         exit 1
     fi
 else
-    echo "npm is already installed and working."
+    echo_with_color "32" "npm is already installed and working."
 fi
 
 # List of packages to install
@@ -52,20 +55,20 @@ packages=(
     "gtop"
     "lineselect"
     # commenting out inshellisense for now (not working properly yet)
-    # "node-gyp" # dependacy of inshellisense
+    # "node-gyp" # dependency of inshellisense
     # "@microsoft/inshellisense"
 )
 
-echo "Installing npm global packages..."
+echo_with_color "36" "Installing npm global packages..."
 
 # Iterate over the packages and install one by one
 for package in "${packages[@]}"; do
     if npm install -g "${package}"; then
-        echo "${package} installed successfully"
+        echo_with_color "32" "${package} installed successfully"
     else
-        echo "Failed to install ${package}"
+        echo_with_color "31" "Failed to install ${package}"
         exit 1
     fi
 done
 
-echo "All npm global packages installation attempted."
+echo_with_color "32" "nodejs.sh completed successfully"
