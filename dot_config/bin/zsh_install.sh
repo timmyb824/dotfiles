@@ -4,8 +4,10 @@
 #     Install Zsh     #
 #######################
 
+source "$(dirname "$BASH_SOURCE")/init.sh"
+
 # Check for Zsh and install if not present
-if ! command -v zsh &>/dev/null; then
+if command_exists zsh &>/dev/null; then
     echo_with_color "33" "Zsh not found. Installing Zsh..."
     if [ "$OS" = "Linux" ]; then
         sudo apt-get update
