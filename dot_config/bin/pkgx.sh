@@ -172,7 +172,7 @@ packages=(
 
 # Linux specific packages
 if [ "$(get_os)" = "Linux" ]; then
-    packages+=("unzip" "make")
+    packages+=("unzip" "make" "nano")
 fi
 
 # Binary paths (edit these as per your system)

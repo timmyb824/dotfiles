@@ -7,21 +7,21 @@ source "$(dirname "$BASH_SOURCE")/init.sh"
 # Define the source and destination pairs
 # indicate a dirtectory by adding a trailing slash
 declare -A files_to_destinations=(
-    ["$HOME/dotfiles/.zshrc"]="$HOME/.zshrc"
-    ["$HOME/dotfiles/.nanorc"]="$HOME/.nanorc"
-    ["$HOME/dotfiles/.aicommits"]="$HOME/.aicommits"
-    ["$HOME/dotfiles/.gitconfig"]="$HOME/.gitconfig"
-    ["$HOME/dotfiles/.opencommit"]="$HOME/.opencommit"
-    ["$HOME/dotfiles/.ssh/config"]="$HOME/.ssh/config"
-    ["$HOME/dotfiles/.ssh/id_master_key"]="$HOME/.ssh/id_master_key"
-    ["$HOME/dotfiles/.ssh/id_master_key_nopass"]="$HOME/.ssh/id_master_key_nopass"
-    ["$HOME/dotfiles/.oci/"]="$HOME/.oci"
-    ["$HOME/dotfiles/.config/atuin/"]="$HOME/.config/atuin"
-    ["$HOME/dotfiles/.config/bat/"]="$HOME/.config/bat"
-    ["$HOME/dotfiles/.config/gitearc/"]="$HOME/.config/gitearc"
-    ["$HOME/dotfiles/.config/nvim/"]="$HOME/.config/nvim"
-    ["$HOME/dotfiles/.config/starship/"]="$HOME/.config/starship"
-    ["$HOME/dotfiles/.config/zsh/"]="$HOME/.config/zsh"
+    ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/dot_config/bin/dotfiles_linux/.zshrc"]="$HOME/.zshrc"
+    ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/dot_config/bin/dotfiles_linux/.nanorc"]="$HOME/.nanorc"
+    ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/dot_config/bin/dotfiles_linux/.aicommits"]="$HOME/.aicommits"
+    ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/dot_config/bin/dotfiles_linux/.gitconfig"]="$HOME/.gitconfig"
+    ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/dot_config/bin/dotfiles_linux/.opencommit"]="$HOME/.opencommit"
+    # ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/.ssh/config"]="$HOME/.ssh/config"
+    # ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/.ssh/id_master_key"]="$HOME/.ssh/id_master_key"
+    # ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/.ssh/id_master_key_nopass"]="$HOME/.ssh/id_master_key_nopass"
+    # ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/.oci/"]="$HOME/.oci"
+    ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/atuin/"]="$HOME/.config/atuin"
+    ["$HOME/dotfiles/dot_config/bin/dotfiles_linux//bat/"]="$HOME/.config/bat"
+    ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/gitearc/"]="$HOME/.config/gitearc"
+    ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/nvim/"]="$HOME/.config/nvim"
+    ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/starship/"]="$HOME/.config/starship"
+    ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/zsh/"]="$HOME/.config/zsh"
 )
 
 # Function to copy or symlink files and directories
@@ -46,9 +46,11 @@ handle_files() {
             if [ "$action" == "copy" ]; then
                 echo_with_color "32" "Copying file $source to $destination..."
                 cp -f "$source" "$destination"
+                source $HOME/.zshrc
             elif [ "$action" == "symlink" ]; then
                 echo_with_color "32" "Creating symlink from file $source to $destination..."
                 ln -sfn "$source" "$destination"
+                source $HOME/.zshrc
             elif [ "$action" == "remove" ]; then
                 echo_with_color "32" "Removing file $destination..."
                 rm -f "$destination"
