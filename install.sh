@@ -23,6 +23,9 @@ install_chezmoi() {
 # Define the path to the install_packages.sh script
 INSTALL_PACKAGES_SCRIPT="./dot_config/bin/install_packages.sh"
 
+# make all shell scripts excutable
+chmod +x ./dot_config/bin/*.sh
+
 # Determine the current operating system
 OS=$(get_os)
 
