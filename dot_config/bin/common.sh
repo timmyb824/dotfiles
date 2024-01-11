@@ -91,3 +91,12 @@ ask_yes_or_no() {
         esac
     done
 }
+
+# Function to ask for input
+ask_for_input() {
+    local prompt="$1"
+    local input
+    echo_with_color "35" "$prompt"
+    read -r input
+    echo "$input"
+}

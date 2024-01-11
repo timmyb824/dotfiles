@@ -1,90 +1,47 @@
 #!/bin/bash
 
-###################################
-# Check OS and Install Tailscale  #
-###################################
+#######################
+#  Install Terraform  #
+#######################
 
 source "$(dirname "$BASH_SOURCE")/init.sh"
 
-# Function to install tailscale on Linux
-install_tailscale_linux() {
-    echo_with_color "34" "Tailscale is not installed. Would you like to install Tailscale? (y/n)"
-    read -r install_confirm
-    if [[ "$install_confirm" =~ ^[Yy]$ ]]; then
-        echo_with_color "35" "Please enter your Tailscale authorization key:"
-        read -r TAILSCALE_AUTH_KEY
+TF_VERSION="latest"
 
-        echo_with_color "32" "Installing Tailscale..."
+# Check if Terraform is installed and working
+if ! command_exists terraform; then
+    echo_with_color "33" "Terraform could not be found."
 
-        # Add the Tailscale repository signing key and repository
-        curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/jammy.noarmor.gpg | sudo tee /usr/share/keyrings/tailscale-archive-keyring.gpg >/dev/null
-        curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/jammy.tailscale-keyring.list | sudo tee /etc/apt/sources.list.d/tailscale.list
-
-        # Update the package list and install Tailscale
-        sudo apt-get update -y
-        sudo apt-get install tailscale -y
-
-        # Start Tailscale and authenticate
-        sudo tailscale up --authkey="$TAILSCALE_AUTH_KEY" --operator="$USER"
-    else
-        echo_with_color "34" "Skipping Tailscale installation."
+    # Check for tfenv
+    if ! command_exists tfenv; then
+        echo_with_color "33" "tfenv not found. Installing tfenv..."
+        # Clone tfenv into ~/.tfenv
+        git clone --depth=1 https://github.com/tfutils/tfenv.git ~/.tfenv
+        # Create symlink in a directory that is on the user's PATH
+        # Ensure the directory exists and is on PATH
+        TFENV_BIN="$HOME/.local/bin"
+        mkdir -p "$TFENV_BIN"
+        ln -s ~/.tfenv/bin/* "$TFENV_BIN"
+        # Add directory to PATH if it's not already there
+        add_to_path_exact_match "$TFENV_BIN"
     fi
-}
 
-# Function to install tailscale on macOS
-install_tailscale_macos() {
-    if mas list | grep -q "Tailscale"; then
-        echo_with_color "34" "Tailscale is already installed."
-    else
-        echo_with_color "35" "Tailscale is not installed. Would you like to install Tailscale? (y/n)"
-        read -r install_confirm
-        if [[ "$install_confirm" =~ ^[Yy]$ ]]; then
-            echo_with_color "35" "Please enter your Tailscale authorization key:"
-            read -r TAILSCALE_AUTH_KEY
-
-            echo_with_color "32" "Installing Tailscale..."
-            mas install 1475387142
-            # Check if Tailscale is successfully installed after the attempt
-            if mas list | grep -q "Tailscale"; then
-                echo_with_color "32" "Tailscale has been successfully installed."
-                # Start Tailscale and authenticate
-                sudo tailscale up --authkey="$TAILSCALE_AUTH_KEY" --operator="$USER"
+    # Re-check for tfenv after attempting to install it
+    if command_exists tfenv; then
+        echo_with_color "32" "Successfully installed tfenv. Attempting to install Terraform ${TF_VERSION}..."
+        if tfenv install "${TF_VERSION}"; then
+            echo_with_color "32" "Terraform ${TF_VERSION} installed successfully."
+            if tfenv use "${TF_VERSION}"; then
+                echo_with_color "32" "Terraform ${TF_VERSION} is now in use."
             else
-                echo_with_color "31" "Failed to install Tailscale."
+                exit_with_error "Failed to use Terraform ${TF_VERSION}, please check tfenv setup."
             fi
         else
-            echo_with_color "31" "Skipping Tailscale installation."
-        fi
-    fi
-}
-
-# Detect the operating system
-OS=$(get_os)
-
-if [[ "$OS" == "MacOS" ]]; then
-    # macOS specific checks
-    if ! command -v mas &>/dev/null; then
-        echo "mas-cli is not installed. Please install mas-cli to proceed."
-        exit 1
-    fi
-    install_tailscale_macos
-elif [[ "$OS" == "Linux" ]]; then
-    # Linux specific checks
-    if command -v tailscale &>/dev/null; then
-        # Check Tailscale status
-        status=$(sudo tailscale status)
-        if [[ $status == *"Tailscale is stopped."* ]]; then
-            echo "Tailscale is installed but stopped. Starting Tailscale..."
-            echo "Please enter your Tailscale authorization key:"
-            read -r TAILSCALE_AUTH_KEY
-            sudo tailscale up --authkey="$TAILSCALE_AUTH_KEY" --operator="$USER"
-        else
-            echo "Tailscale is running."
+            exit_with_error "Failed to install Terraform ${TF_VERSION}, please check tfenv setup."
         fi
     else
-        install_tailscale_linux
+        exit_with_error "Failed to install tfenv. Please check the installation steps."
     fi
 else
-    echo "Unsupported operating system."
-    exit 1
+    echo_with_color "32" "Terraform is already installed and working."
 fi
