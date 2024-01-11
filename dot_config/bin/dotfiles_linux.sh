@@ -4,24 +4,38 @@ source "$(dirname "$BASH_SOURCE")/init.sh"
 
 ##### Consider storing linux dotfiles in thier own private repo #####
 
+# ensure the shell is zsh and if not, try to switch to zsh
+if [ "$SHELL" != "/bin/zsh" ]; then
+    echo_with_color "31" "Your shell is not zsh. Attempting to switch to zsh..."
+    if [ -f "/bin/zsh" ]; then
+        chsh -s /bin/zsh
+    elif [ -f "/usr/bin/zsh" ]; then
+        chsh -s /usr/bin/zsh
+    else
+        echo_with_color "31" "Could not find zsh. Please install zsh and try again."
+        exit 1
+    fi
+fi
+
+
 # Define the source and destination pairs
 # indicate a dirtectory by adding a trailing slash
 declare -A files_to_destinations=(
-    ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/.zshrc"]="$HOME/.zshrc"
-    ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/.nanorc"]="$HOME/.nanorc"
-    ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/.aicommits"]="$HOME/.aicommits"
-    ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/.gitconfig"]="$HOME/.gitconfig"
-    ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/.opencommit"]="$HOME/.opencommit"
-    # ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/.ssh/config"]="$HOME/.ssh/config"
-    # ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/.ssh/id_master_key"]="$HOME/.ssh/id_master_key"
-    # ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/.ssh/id_master_key_nopass"]="$HOME/.ssh/id_master_key_nopass"
-    # ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/.oci/"]="$HOME/.oci"
-    ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/atuin/"]="$HOME/.config/atuin"
-    ["$HOME/dotfiles/dot_config/bin/dotfiles_linux//bat/"]="$HOME/.config/bat"
-    ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/gitearc/"]="$HOME/.config/gitearc"
-    ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/nvim/"]="$HOME/.config/nvim"
-    ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/starship/"]="$HOME/.config/starship"
-    ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/zsh/"]="$HOME/.config/zsh"
+    ["./dotfiles_linux/.zshrc"]="$HOME/.zshrc"
+    ["./dotfiles_linux/.nanorc"]="$HOME/.nanorc"
+    ["./dotfiles_linux/.aicommits"]="$HOME/.aicommits"
+    ["./dotfiles_linux/.gitconfig"]="$HOME/.gitconfig"
+    ["./dotfiles_linux/.opencommit"]="$HOME/.opencommit"
+    # ["./dotfiles_linux/.ssh/config"]="$HOME/.ssh/config"
+    # ["./dotfiles_linux/.ssh/id_master_key"]="$HOME/.ssh/id_master_key"
+    # ["./dotfiles_linux/.ssh/id_master_key_nopass"]="$HOME/.ssh/id_master_key_nopass"
+    # ["./dotfiles_linux/.oci/"]="$HOME/.oci"
+    ["./dotfiles_linux/atuin/"]="$HOME/.config/atuin"
+    ["./dotfiles_linux//bat/"]="$HOME/.config/bat"
+    ["./dotfiles_linux/gitearc/"]="$HOME/.config/gitearc"
+    ["./dotfiles_linux/nvim/"]="$HOME/.config/nvim"
+    ["./dotfiles_linux/starship/"]="$HOME/.config/starship"
+    ["./dotfiles_linux/zsh/"]="$HOME/.config/zsh"
 )
 
 # Function to copy or symlink files and directories
@@ -46,11 +60,9 @@ handle_files() {
             if [ "$action" == "copy" ]; then
                 echo_with_color "32" "Copying file $source to $destination..."
                 cp -f "$source" "$destination"
-                source $HOME/.zshrc
             elif [ "$action" == "symlink" ]; then
                 echo_with_color "32" "Creating symlink from file $source to $destination..."
                 ln -sfn "$source" "$destination"
-                source $HOME/.zshrc
             elif [ "$action" == "remove" ]; then
                 echo_with_color "32" "Removing file $destination..."
                 rm -f "$destination"
