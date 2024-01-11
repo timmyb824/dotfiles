@@ -7,11 +7,11 @@ source "$(dirname "$BASH_SOURCE")/init.sh"
 # Define the source and destination pairs
 # indicate a dirtectory by adding a trailing slash
 declare -A files_to_destinations=(
-    ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/dot_config/bin/dotfiles_linux/.zshrc"]="$HOME/.zshrc"
-    ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/dot_config/bin/dotfiles_linux/.nanorc"]="$HOME/.nanorc"
-    ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/dot_config/bin/dotfiles_linux/.aicommits"]="$HOME/.aicommits"
-    ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/dot_config/bin/dotfiles_linux/.gitconfig"]="$HOME/.gitconfig"
-    ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/dot_config/bin/dotfiles_linux/.opencommit"]="$HOME/.opencommit"
+    ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/.zshrc"]="$HOME/.zshrc"
+    ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/.nanorc"]="$HOME/.nanorc"
+    ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/.aicommits"]="$HOME/.aicommits"
+    ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/.gitconfig"]="$HOME/.gitconfig"
+    ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/.opencommit"]="$HOME/.opencommit"
     # ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/.ssh/config"]="$HOME/.ssh/config"
     # ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/.ssh/id_master_key"]="$HOME/.ssh/id_master_key"
     # ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/.ssh/id_master_key_nopass"]="$HOME/.ssh/id_master_key_nopass"
