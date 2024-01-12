@@ -6,6 +6,8 @@
 
 source "$(dirname "$BASH_SOURCE")/init.sh"
 
+OS=$(get_os)
+
 # Check for Zsh and install if not present
 if command_exists zsh &>/dev/null; then
     echo_with_color "33" "Zsh not found. Installing Zsh..."
