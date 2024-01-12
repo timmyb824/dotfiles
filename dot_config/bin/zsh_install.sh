@@ -32,14 +32,16 @@ else
 fi
 
 # Check if we're already running Zsh to prevent a loop
-if [ -n "$ZSH_VERSION" ]; then
-    echo_with_color "34" "Already running Zsh, no need to switch."
-else
-    # Executing the Zsh shell
-    # The exec command replaces the current shell with zsh.
-    # The "$0" refers to the script itself, and "$@" passes all the original arguments passed to the script.
-    if [ -x "$(command -v zsh)" ]; then
-        echo_with_color "34" "Switching to Zsh for the remainder of the script..."
-        exec zsh -l "$0" "$@"
-    fi
-fi
+# if [ -n "$ZSH_VERSION" ]; then
+#     echo_with_color "34" "Already running Zsh, no need to switch."
+# else
+#     # Executing the Zsh shell
+#     # The exec command replaces the current shell with zsh.
+#     # The "$0" refers to the script itself, and "$@" passes all the original arguments passed to the script.
+#     if [ -x "$(command -v zsh)" ]; then
+#         echo_with_color "34" "Switching to Zsh for the remainder of the script..."
+#         exec zsh -l "$0" "$@"
+#     fi
+# fi
+
+echo_with_color "32" "Zsh has been installed successfully. Please restart your terminal!"
