@@ -19,20 +19,37 @@ run_script() {
     fi
 }
 
+# Function to run remaining scripts with zsh
+run_remaining_scripts_with_zsh() {
+    # Source the .zshrc file if it exists
+    if [ -f "$HOME/.zshrc" ]; then
+        source "$HOME/.zshrc"
+    fi
+
+    # Run the remaining scripts
+    run_script basher.sh
+    run_script krew.sh
+    run_script micro.sh
+    run_script nodejs.sh
+    run_script pipx.sh
+    run_script python.sh
+    run_script tailscale.sh
+    run_script terraform.sh
+
+    echo "All packages have been installed."
+}
+
 # Start the installation process
 echo "Starting package installations..."
 
-run_script zsh_install.sh
 run_script homebrew.sh
 run_script pkgx.sh
 run_script dotfiles_linux.sh
-run_script basher.sh
-run_script krew.sh
-run_script micro.sh
-run_script nodejs.sh
-run_script pipx.sh
-run_script python.sh
-run_script tailscale.sh
-run_script terraform.sh
 
-echo "All packages have been installed."
+# Now switch to zsh and run the remaining scripts
+if [ -n "$(command -v zsh)" ]; then
+    zsh -c "$(declare -f run_script run_remaining_scripts_with_zsh); run_remaining_scripts_with_zsh"
+else
+    echo "zsh is not installed. Please install zsh and retry."
+    exit 1
+fi

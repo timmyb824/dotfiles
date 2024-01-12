@@ -9,7 +9,7 @@ source "$(dirname "$BASH_SOURCE")/init.sh"
 OS=$(get_os)
 
 # Check for Zsh and install if not present
-if command_exists zsh &>/dev/null; then
+if ! command_exists zsh; then
     echo_with_color "33" "Zsh not found. Installing Zsh..."
     if [ "$OS" = "Linux" ]; then
         sudo apt-get update
@@ -31,6 +31,13 @@ else
     echo_with_color "34" "Zsh is already the default shell."
 fi
 
+# confirm zsh is installed
+if command_exists zsh; then
+    echo_with_color "32" "Zsh has been installed successfully. Please restart your terminal!"
+else
+    exit_with_error "Zsh could not be installed."
+fi
+
 # Check if we're already running Zsh to prevent a loop
 # if [ -n "$ZSH_VERSION" ]; then
 #     echo_with_color "34" "Already running Zsh, no need to switch."
@@ -43,5 +50,3 @@ fi
 #         exec zsh -l "$0" "$@"
 #     fi
 # fi
-
-echo_with_color "32" "Zsh has been installed successfully. Please restart your terminal!"
