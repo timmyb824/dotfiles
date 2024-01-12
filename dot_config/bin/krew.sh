@@ -9,11 +9,7 @@ add_krew_to_path_for_session() {
     add_to_path_exact_match "$krew_path"
 }
 
-# Check if kubectl is installed
-if ! command_exists kubectl; then
-    echo_with_color "31" "kubectl could not be found"
-    exit 1
-fi
+attempt_fix_command "kubectl" "$HOME/.local/bin"
 
 # Check if krew is installed and working
 if ! kubectl krew &> /dev/null; then
@@ -46,6 +42,3 @@ for plugin in "${plugins[@]}"; do
         echo_with_color "34" "$plugin is already installed"
     fi
 done
-
-# If the script reaches this point, all plugins have been installed successfully
-echo_with_color "32" "krew.sh has completed successfully"

@@ -100,3 +100,27 @@ ask_for_input() {
     read -r input
     echo "$input"
 }
+
+# General function to check if a command is available
+check_command() {
+    local cmd="$1"
+    if ! command -v "$cmd" &> /dev/null; then
+        echo "$cmd could not be found"
+        return 1
+    else
+        echo "$cmd is available"
+        return 0
+    fi
+}
+
+attempt_fix_command() {
+    local cmd="$1"
+    local cmd_path="$2"
+    if ! check_command "$cmd"; then
+        add_to_path "$cmd_path"
+        if ! check_command "$cmd"; then
+            echo "$cmd is still not available after updating the PATH"
+            exit 1
+        fi
+    fi
+}

@@ -3,7 +3,7 @@
 source "$(dirname "$BASH_SOURCE")/init.sh"
 
 # Check if git is installed
-if ! command -v git &>/dev/null; then
+if ! command_exists git; then
     exit_with_error "git is not installed - please install git and run this script again"
 fi
 

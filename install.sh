@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Source the common functions
-source "$(dirname "$BASH_SOURCE")/dot_config/bin/init.sh"
+source "$(dirname "$BASH_SOURCE")/init.sh"
 
 # Function to download and install chezmoi using curl or wget
 install_chezmoi() {
@@ -22,9 +22,6 @@ install_chezmoi() {
 
 # Define the path to the install_packages.sh script
 INSTALL_PACKAGES_SCRIPT="./dot_config/bin/install_packages.sh"
-
-# make all shell scripts excutable
-chmod +x ./dot_config/bin/*.sh
 
 # Determine the current operating system
 OS=$(get_os)

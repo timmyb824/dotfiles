@@ -2,7 +2,7 @@
 if [[ $TERM_PROGRAM != "WarpTerminal" ]]; then
     source <($HOME/.local/bin/starship init zsh --print-full-init) #pkgx
     export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
-    eval "$(atuin init zsh)" # homebrew
+    # eval "$(atuin init zsh)" # homebrew
     test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 fi
 
@@ -16,7 +16,7 @@ precmd() {
 }
 source "$HOME/.config/zsh/plugin_manager.zsh"
 source "$HOME/.config/zsh/functions.zsh"
-source /Users/timothybryant/.config/broot/launcher/bash/br # pkgx
+source "$HOME/.config/broot/launcher/bash/br" # pkgx
 
 eval "$(zoxide init zsh)" # pkgx
 eval "$(direnv hook zsh)" # pkgx

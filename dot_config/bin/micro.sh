@@ -4,11 +4,7 @@
 source "$(dirname "$BASH_SOURCE")/init.sh"
 
 # Check if micro is installed
-if ! command_exists micro
-then
-    echo_with_color "31" "micro could not be found"
-    exit 1
-fi
+attempt_fix_command "micro" "$HOME/.local/bin"
 
 # List of plugins to install
 plugins=(
@@ -46,5 +42,3 @@ do
         echo_with_color "31" "Failed to install ${plugin}"
     fi
 done
-
-echo_with_color "32" "micro.sh has completed successfully"

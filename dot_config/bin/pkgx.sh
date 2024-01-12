@@ -204,4 +204,3 @@ done
 # Add $HOME/.local/bin to PATH if it's not already there
 add_to_path "$HOME/.local/bin"
 
-echo_with_color "32" "pkgx.sh completed successfully"
