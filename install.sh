@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Source the common functions
-source "$(dirname "$BASH_SOURCE")/init.sh"
+source "$(dirname "$BASH_SOURCE")/dot_config/bin/init.sh"
 
 # Function to download and install chezmoi using curl or wget
 install_chezmoi() {

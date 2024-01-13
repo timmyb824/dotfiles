@@ -9,8 +9,7 @@ NODE_VERSION="v21.0.0"
 # Function to initialize fnm for the current session
 initialize_fnm_for_session() {
     # Specify the shell directly if fnm can't infer it
-    local SHELL_NAME="zsh"
-    eval "$(fnm env --use-on-cd --shell=${SHELL_NAME})"
+    eval "$(fnm env --use-on-cd)"
 }
 
 # Check if npm is installed and working

@@ -22,17 +22,17 @@ run_script() {
 # Start the installation process
 echo "Starting package installations..."
 
-run_script zsh_install.sh
 run_script homebrew.sh
 run_script pkgx.sh
 run_script basher.sh
 run_script krew.sh
 run_script micro.sh
-run_script nodejs.sh
-run_script pipx.sh
 run_script python.sh
-run_script tailscale.sh
+run_script pipx.sh
+run_script nodejs.sh
 run_script terraform.sh
+run_script tailscale.sh
+run_script zsh_install.sh
 run_script dotfiles_linux.sh
 
 echo "All packages have been installed."

@@ -31,6 +31,7 @@ declare -A files_to_destinations=(
     # ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/.oci/"]="$HOME/.oci"
     ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/atuin/"]="$HOME/.config/atuin"
     ["$HOME/dotfiles/dot_config/bin/dotfiles_linux//bat/"]="$HOME/.config/bat"
+    ["$HOME/dotfiles/dot_config/bin/dotfiles_linux//broot/"]="$HOME/.config/broot"
     ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/gitearc/"]="$HOME/.config/gitearc"
     ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/nvim/"]="$HOME/.config/nvim"
     ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/starship/"]="$HOME/.config/starship"
