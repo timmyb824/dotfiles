@@ -8,21 +8,30 @@ source "$(dirname "$BASH_SOURCE")/init.sh"
 
 # Function to install tailscale on Linux
 install_tailscale_linux() {
-    echo_with_color "34" "Tailscale is not installed. Would you like to install Tailscale? (y/n)"
-    read -r install_confirm
-    if [[ "$install_confirm" =~ ^[Yy]$ ]]; then
-        echo_with_color "35" "Please enter your Tailscale authorization key:"
-        read -r TAILSCALE_AUTH_KEY
+    if ask_yes_or_no "Tailscale is not installed. Would you like to install Tailscale?"; then
+        read -sp "Please enter your Tailscale authorization key: " TAILSCALE_AUTH_KEY
+        echo
 
-        echo_with_color "32" "Installing Tailscale..."
-
-        # Add the Tailscale repository signing key and repository
-        curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/jammy.noarmor.gpg | sudo tee /usr/share/keyrings/tailscale-archive-keyring.gpg >/dev/null
-        curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/jammy.tailscale-keyring.list | sudo tee /etc/apt/sources.list.d/tailscale.list
+        if command_exists curl; then
+            echo_with_color "32" "Installing Tailscale..."
+            RELEASE=$(lsb_release -cs)
+            # Add the Tailscale repository signing key and repository
+            curl -fsSL "https://pkgs.tailscale.com/stable/ubuntu/${RELEASE}.noarmor.gpg" | sudo tee /usr/share/keyrings/tailscale-archive-keyring.gpg >/dev/null
+            curl -fsSL "https://pkgs.tailscale.com/stable/ubuntu/${RELEASE}.tailscale-keyring.list" | sudo tee /etc/apt/sources.list.d/tailscale.list
+        else
+            exit_with_error "curl is not installed. Please install curl to proceed."
+        fi
 
         # Update the package list and install Tailscale
         sudo apt-get update -y
+        if [ $? -ne 0 ]; then
+            exit_with_error "Failed to update package list. Exiting."
+        fi
+
         sudo apt-get install tailscale -y
+        if [ $? -ne 0 ]; then
+            exit_with_error "Failed to install Tailscale. Exiting."
+        fi
 
         # Start Tailscale and authenticate
         sudo tailscale up --authkey="$TAILSCALE_AUTH_KEY" --operator="$USER"
@@ -36,12 +45,7 @@ install_tailscale_macos() {
     if mas list | grep -q "Tailscale"; then
         echo_with_color "34" "Tailscale is already installed."
     else
-        echo_with_color "35" "Tailscale is not installed. Would you like to install Tailscale? (y/n)"
-        read -r install_confirm
-        if [[ "$install_confirm" =~ ^[Yy]$ ]]; then
-            echo_with_color "35" "Please enter your Tailscale authorization key:"
-            read -r TAILSCALE_AUTH_KEY
-
+        if ask_yes_or_no "Tailscale is not installed. Would you like to install Tailscale?"; then
             echo_with_color "32" "Installing Tailscale..."
             mas install 1475387142
             # Check if Tailscale is successfully installed after the attempt
@@ -63,28 +67,25 @@ OS=$(get_os)
 
 if [[ "$OS" == "MacOS" ]]; then
     # macOS specific checks
-    if ! command -v mas &>/dev/null; then
+    if ! command_exists mas; then
         echo "mas-cli is not installed. Please install mas-cli to proceed."
         exit 1
     fi
     install_tailscale_macos
 elif [[ "$OS" == "Linux" ]]; then
     # Linux specific checks
-    if command -v tailscale &>/dev/null; then
+    if ! command_exists tailscale; then
+        install_tailscale_linux
+    else
         # Check Tailscale status
         status=$(sudo tailscale status)
-        if [[ $status == *"Tailscale is stopped."* ]]; then
-            echo "Tailscale is installed but stopped. Starting Tailscale..."
-            echo "Please enter your Tailscale authorization key:"
-            read -r TAILSCALE_AUTH_KEY
+        if [[ "$status" == *"Tailscale is stopped."* ]]; then
+            echo_with_color "34" "Tailscale is installed but stopped. Starting Tailscale..."
+            read -sp "Please enter your Tailscale authorization key: " TAILSCALE_AUTH_KEY
+            echo
             sudo tailscale up --authkey="$TAILSCALE_AUTH_KEY" --operator="$USER"
         else
-            echo "Tailscale is running."
+            echo_with_color "32" "Tailscale is running."
         fi
-    else
-        install_tailscale_linux
     fi
-else
-    echo "Unsupported operating system."
-    exit 1
 fi
