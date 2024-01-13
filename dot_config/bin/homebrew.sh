@@ -78,4 +78,3 @@ case $OS in
         ;;
 esac
 
-echo_with_color "32" "Homebrew installation completed."

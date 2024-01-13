@@ -1,82 +1,128 @@
 #!/bin/bash
 
-# Source the common functions script
-source "$(dirname "$BASH_SOURCE")/init.sh"
+#
+# Setup common environment variables and configurations
+#
 
-# Set the desired Node.js version
-NODE_VERSION="v21.0.0"
+# Global variables #
 
-# Function to initialize fnm for the current session
-initialize_fnm_for_session() {
-    # Initialize fnm without specifying a shell
-    eval "$(fnm env --use-on-cd)"
+# Get the directory of the current script
+SCRIPT_DIR="$(dirname "$(realpath "$BASH_SOURCE")")"
+export SCRIPT_DIR
+
+# Global functions #
+
+# Function to check if a given line is in a file
+line_in_file() {
+    local line="$1"
+    local file="$2"
+    grep -Fq -- "$line" "$file"
 }
 
-# Function to add a directory to PATH
+# Function to echo with color and newlines for visibility
+# 31=red, 32=green, 33=yellow, 34=blue, 35=purple, 36=cyan
+echo_with_color() {
+    local color_code="$1"
+    local message="$2"
+    echo -e "\n\033[${color_code}m$message\033[0m\n"
+}
+
+# Function to determine the current operating system
+get_os() {
+    case "$(uname -s)" in
+    Linux*) echo "Linux" ;;
+    Darwin*) echo "MacOS" ;;
+    *) echo "Unknown" ;;
+    esac
+}
+OS=$(get_os)
+
+# Function to output an error message and exit
+exit_with_error() {
+    echo_with_color "31" "Error: $1" >&2
+    exit 1
+}
+
+# Function to check if a command exists
+command_exists() {
+    command -v "$1" &>/dev/null
+}
+
+# Function to add a directory to PATH if it's not already there
 add_to_path() {
-    PATH="$1:$PATH"
-    export PATH
+    if ! echo "$PATH" | grep -q "$1"; then
+        echo_with_color "32" "Adding $1 to PATH for the current session..."
+        export PATH="$1:$PATH"
+    fi
 }
 
-# Check if npm is installed and working
-if ! command_exists npm; then
-    echo_with_color "31" "npm could not be found"
+# Function to add a directory to PATH if it's not already there and if it's an exact match
+add_to_path_exact_match() {
+    if [[ ":$PATH:" != *":$1:"* ]]; then
+        echo_with_color "32" "Adding $1 to PATH for the current session..."
+        export PATH="$1:$PATH"
+    else
+        echo_with_color "34" "$1 is already in PATH"
+    fi
+}
 
-    # Attempt to fix fnm command availability
-    attempt_fix_command fnm "$HOME/.local/bin"
+# Function to safely remove a command using sudo if it exists
+safe_remove_command() {
+    local cmd_path
+    cmd_path=$(command -v "$1") || return 0
+    if [[ -n $cmd_path ]]; then
+        sudo rm "$cmd_path" && echo_with_color "32" "$1 removed successfully." || exit_with_error "Failed to remove $1."
+    fi
+}
 
-    # Check for fnm again
-    if command_exists fnm; then
-        echo_with_color "33" "Found fnm, attempting to install Node.js ${NODE_VERSION}..."
-        if fnm install "${NODE_VERSION}"; then
-            echo_with_color "32" "Node.js ${NODE_VERSION} installed successfully"
+# Function to ask for yes or no
+ask_yes_or_no() {
+    while true; do
+        read -p "$1 (y/N): " -n 1 -r
+        echo
+        case "$REPLY" in
+        [yY])
+            return 0
+            ;;
+        [nN] | "")
+            return 1
+            ;;
+        *)
+            echo_with_color "32" "Please answer yes or no."
+            ;;
+        esac
+    done
+}
 
-            # Initialize fnm for the current session
-            initialize_fnm_for_session
+# Function to ask for input
+ask_for_input() {
+    local prompt="$1"
+    local input
+    echo_with_color "35" "$prompt"
+    read -r input
+    echo "$input"
+}
 
-            if fnm use "${NODE_VERSION}"; then
-                echo_with_color "32" "Node.js ${NODE_VERSION} is now in use"
-            else
-                echo_with_color "31" "Failed to use Node.js ${NODE_VERSION}, please check fnm setup"
-                exit 1
-            fi
-        else
-            echo_with_color "31" "Failed to install Node.js ${NODE_VERSION}, please check fnm setup"
+# General function to check if a command is available
+check_command() {
+    local cmd="$1"
+    if ! command -v "$cmd" &> /dev/null; then
+        echo "$cmd could not be found"
+        return 1
+    else
+        echo "$cmd is available"
+        return 0
+    fi
+}
+
+attempt_fix_command() {
+    local cmd="$1"
+    local cmd_path="$2"
+    if ! check_command "$cmd"; then
+        add_to_path "$cmd_path"
+        if ! check_command "$cmd"; then
+            echo "$cmd is still not available after updating the PATH"
             exit 1
         fi
-    else
-        echo_with_color "31" "fnm is still not found after attempting to fix the PATH. Please install Node.js to continue."
-        exit 1
     fi
-else
-    echo_with_color "32" "npm is already installed and working."
-fi
-
-# List of packages to install
-packages=(
-    "aicommits"
-    "awsp"
-    "neovim"
-    "opencommit"
-    "pm2"
-    "kubelive"
-    "gtop"
-    "lineselect"
-    # commenting out inshellisense for now (not working properly yet)
-    # "node-gyp" # dependency of inshellisense
-    # "@microsoft/inshellisense"
-)
-
-echo_with_color "36" "Installing npm global packages..."
-
-# Iterate over the packages and install one by one
-for package in "${packages[@]}"; do
-    if npm install -g "${package}"; then
-        echo_with_color "32" "${package} installed successfully"
-    else
-        echo_with_color "31" "Failed to install ${package}"
-        exit 1
-    fi
-done
-
-echo_with_color "32" "nodejs.sh completed successfully"
+}

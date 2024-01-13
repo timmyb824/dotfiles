@@ -8,15 +8,24 @@ NODE_VERSION="v21.0.0"
 
 # Function to initialize fnm for the current session
 initialize_fnm_for_session() {
-    # Specify the shell directly if fnm can't infer it
+    # Initialize fnm without specifying a shell
     eval "$(fnm env --use-on-cd)"
+}
+
+# Function to add a directory to PATH
+add_to_path() {
+    PATH="$1:$PATH"
+    export PATH
 }
 
 # Check if npm is installed and working
 if ! command_exists npm; then
     echo_with_color "31" "npm could not be found"
 
-    # Check for fnm
+    # Attempt to fix fnm command availability
+    attempt_fix_command fnm "$HOME/.local/bin"
+
+    # Check for fnm again
     if command_exists fnm; then
         echo_with_color "33" "Found fnm, attempting to install Node.js ${NODE_VERSION}..."
         if fnm install "${NODE_VERSION}"; then
@@ -36,7 +45,7 @@ if ! command_exists npm; then
             exit 1
         fi
     else
-        echo_with_color "31" "npm and fnm not found. Please install Node.js to continue."
+        echo_with_color "31" "fnm is still not found after attempting to fix the PATH. Please install Node.js to continue."
         exit 1
     fi
 else
