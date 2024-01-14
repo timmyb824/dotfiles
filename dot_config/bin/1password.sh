@@ -49,8 +49,8 @@ install_op_cli() {
     # Download and install the 1Password CLI
     curl -sSfo op.zip \
     "https://cache.agilebits.com/dist/1P/op2/pkg/${OP_VERSION}/op_linux_${ARCH}_${OP_VERSION}.zip" \
-    && unzip -od /usr/local/bin/ op.zip \
-    && chmod +x /usr/local/bin/op \
+    && sudo unzip -od /usr/local/bin/op.zip \
+    && sudo chmod +x /usr/local/bin/op \
     && rm op.zip
 
     if [ $? -ne 0 ]; then
@@ -94,8 +94,11 @@ fi
 ########## CONFIGURATION STEPS ##########
 
 read -sp "1Password email: " OP_EMAIL
+echo
 read -sp "1Passwored Secret Key: " OP_SECRET_KEY
+echo
 read -sp "1Password Signin Address: " OP_SIGNIN_ADDRESS
+echo
 
 # Sign in to your 1Password account to obtain a session token
 # The session token is output to STDOUT, so we capture it in a variable
