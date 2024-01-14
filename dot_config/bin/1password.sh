@@ -2,9 +2,38 @@
 
 source "$(dirname "$BASH_SOURCE")/init.sh"
 
+########## HELPER FUNCTIONS ##########
+
+install_unzip() {
+    if ! command_exists unzip; then
+        echo "unzip is not installed. Installing unzip..."
+        sudo apt-get update && sudo apt-get install -y unzip
+        if [ $? -ne 0 ]; then
+            echo "Error: Failed to install unzip."
+            return 1
+        fi
+        UNZIP_INSTALLED=1
+    else
+        UNZIP_INSTALLED=0
+    fi
+}
+
+remove_unzip() {
+    if [ "$UNZIP_INSTALLED" -eq 1 ]; then
+        echo "Removing unzip..."
+        sudo apt-get remove --purge -y unzip
+    fi
+}
+
 ########## INSTALLATION STEPS ##########
 
 install_op_cli() {
+    # Install unzip if necessary
+    install_unzip
+    if [ $? -ne 0 ]; then
+        return 1
+    fi
+
     # Determine the system's architecture
     ARCH="amd64"
 
@@ -13,6 +42,7 @@ install_op_cli() {
 
     if [ -z "$OP_VERSION" ]; then
         echo "Error: Unable to retrieve the latest 1Password CLI version."
+        remove_unzip
         return 1
     fi
 
@@ -25,15 +55,20 @@ install_op_cli() {
 
     if [ $? -ne 0 ]; then
         echo "Error: The 1Password CLI installation failed."
+        remove_unzip
         return 1
     fi
 
     if ! command_exists op; then
         echo "Error: The 'op' command does not exist after attempting installation."
+        remove_unzip
         return 1
     else
         echo "The 1Password CLI was installed successfully."
     fi
+
+    # If unzip was installed by this script, remove it
+    remove_unzip
 }
 
 # Check if the OS is Linux and install op CLI if it's not already installed
@@ -43,9 +78,16 @@ if [ "$(get_os)" = "Linux" ]; then
     else
         echo "Installing the 1Password CLI..."
         install_op_cli
+        INSTALL_SUCCESS=$?
     fi
 else
     echo "This script only supports Linux systems."
+    exit 1
+fi
+
+# Exit if installation failed
+if [ "$INSTALL_SUCCESS" -ne 0 ]; then
+    echo "Installation failed. Exiting."
     exit 1
 fi
 
