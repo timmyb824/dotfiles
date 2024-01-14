@@ -23,15 +23,9 @@ install_tailscale_linux() {
         fi
 
         # Update the package list and install Tailscale
-        sudo apt-get update -y
-        if [ $? -ne 0 ]; then
-            exit_with_error "Failed to update package list. Exiting."
-        fi
+        sudo apt-get update -y || exit_with_error "Failed to update package list. Exiting."
 
-        sudo apt-get install tailscale -y
-        if [ $? -ne 0 ]; then
-            exit_with_error "Failed to install Tailscale. Exiting."
-        fi
+        sudo apt-get install tailscale -y || exit_with_error "Failed to install Tailscale. Exiting."
 
         # Start Tailscale and authenticate
         sudo tailscale up --authkey="$TAILSCALE_AUTH_KEY" --operator="$USER"
@@ -48,16 +42,13 @@ install_tailscale_macos() {
         if ask_yes_or_no "Tailscale is not installed. Would you like to install Tailscale?"; then
             echo_with_color "32" "Installing Tailscale..."
             mas install 1475387142
-            # Check if Tailscale is successfully installed after the attempt
             if mas list | grep -q "Tailscale"; then
-                echo_with_color "32" "Tailscale has been successfully installed."
-                # Start Tailscale and authenticate
-                sudo tailscale up --authkey="$TAILSCALE_AUTH_KEY" --operator="$USER"
+                echo_with_color "32" "Tailscale has been successfully installed. Please start Tailscale manually from your Applications folder."
             else
                 echo_with_color "31" "Failed to install Tailscale."
             fi
         else
-            echo_with_color "31" "Skipping Tailscale installation."
+            echo_with_color "34" "Skipping Tailscale installation."
         fi
     fi
 }
@@ -66,18 +57,14 @@ install_tailscale_macos() {
 OS=$(get_os)
 
 if [[ "$OS" == "MacOS" ]]; then
-    # macOS specific checks
-    if ! command_exists mas; then
-        echo "mas-cli is not installed. Please install mas-cli to proceed."
+    if command_exists mas; then
+        install_tailscale_macos
+    else
+        echo_with_color "31" "mas-cli is not installed. Please install mas-cli to proceed."
         exit 1
     fi
-    install_tailscale_macos
 elif [[ "$OS" == "Linux" ]]; then
-    # Linux specific checks
-    if ! command_exists tailscale; then
-        install_tailscale_linux
-    else
-        # Check Tailscale status
+    if command_exists tailscale; then
         status=$(sudo tailscale status)
         if [[ "$status" == *"Tailscale is stopped."* ]]; then
             echo_with_color "34" "Tailscale is installed but stopped. Starting Tailscale..."
@@ -87,5 +74,7 @@ elif [[ "$OS" == "Linux" ]]; then
         else
             echo_with_color "32" "Tailscale is running."
         fi
+    else
+        install_tailscale_linux
     fi
 fi
