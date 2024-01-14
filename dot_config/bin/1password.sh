@@ -2,73 +2,36 @@
 
 source "$(dirname "$BASH_SOURCE")/init.sh"
 
-########## HELPER FUNCTIONS ##########
-
-install_unzip() {
-    if ! command_exists unzip; then
-        echo "unzip is not installed. Installing unzip..."
-        sudo apt-get update && sudo apt-get install -y unzip
-        if [ $? -ne 0 ]; then
-            echo "Error: Failed to install unzip."
-            return 1
-        fi
-        UNZIP_INSTALLED=1
-    else
-        UNZIP_INSTALLED=0
-    fi
-}
-
-remove_unzip() {
-    if [ "$UNZIP_INSTALLED" -eq 1 ]; then
-        echo "Removing unzip..."
-        sudo apt-get remove --purge -y unzip
-    fi
-}
-
 ########## INSTALLATION STEPS ##########
 
 install_op_cli() {
-    # Install unzip if necessary
-    install_unzip
-    if [ $? -ne 0 ]; then
-        return 1
-    fi
+    # Install the 1Password CLI using the new steps provided
+    sudo -s -- <<EOF
+curl -sS https://downloads.1password.com/linux/keys/1password.asc | \
+gpg --dearmor --output /usr/share/keyrings/1password-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/1password-archive-keyring.gpg] https://downloads.1password.com/linux/debian/$(dpkg --print-architecture) stable main" | \
+tee /etc/apt/sources.list.d/1password.list
+mkdir -p /etc/debsig/policies/AC2D62742012EA22/
+curl -sS https://downloads.1password.com/linux/debian/debsig/1password.pol | \
+tee /etc/debsig/policies/AC2D62742012EA22/1password.pol
+mkdir -p /usr/share/debsig/keyrings/AC2D62742012EA22
+curl -sS https://downloads.1password.com/linux/keys/1password.asc | \
+gpg --dearmor --output /usr/share/debsig/keyrings/AC2D62742012EA22/debsig.gpg
+apt update && apt install 1password-cli
+EOF
 
-    # Determine the system's architecture
-    ARCH="amd64"
-
-    # Get the latest 1Password CLI version number
-    OP_VERSION="v$(curl https://app-updates.agilebits.com/check/1/0/CLI2/en/2.0.0/N -s | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+')"
-
-    if [ -z "$OP_VERSION" ]; then
-        echo "Error: Unable to retrieve the latest 1Password CLI version."
-        remove_unzip
-        return 1
-    fi
-
-    # Download and install the 1Password CLI
-    curl -sSfo op.zip \
-    "https://cache.agilebits.com/dist/1P/op2/pkg/${OP_VERSION}/op_linux_${ARCH}_${OP_VERSION}.zip" \
-    && sudo unzip -od /usr/local/bin/op.zip \
-    && sudo chmod +x /usr/local/bin/op \
-    && rm op.zip
-
+    # Check for any errors during the installation process
     if [ $? -ne 0 ]; then
         echo "Error: The 1Password CLI installation failed."
-        remove_unzip
         return 1
     fi
 
     if ! command_exists op; then
         echo "Error: The 'op' command does not exist after attempting installation."
-        remove_unzip
         return 1
     else
         echo "The 1Password CLI was installed successfully."
     fi
-
-    # If unzip was installed by this script, remove it
-    remove_unzip
 }
 
 # Check if the OS is Linux and install op CLI if it's not already installed
