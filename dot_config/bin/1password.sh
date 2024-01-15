@@ -7,10 +7,10 @@ source "$(dirname "$BASH_SOURCE")/init.sh"
 # Function to download and install 1Password CLI on macOS
 install_op_cli_macos() {
     if command_exists op; then
-        echo "The 1Password CLI is already installed."
+        echo_with_color "33" "The 1Password CLI is already installed."
         return 0 # Indicate that it's already installed
     else
-        echo "Installing the 1Password CLI for macOS..."
+        echo_with_color "32" "Installing the 1Password CLI for macOS..."
 
         # Determine download tool
         if command_exists curl; then
@@ -18,7 +18,7 @@ install_op_cli_macos() {
         elif command_exists wget; then
             DOWNLOAD_CMD="wget --quiet -O"
         else
-            echo "Error: 'curl' or 'wget' is required to download files."
+            echo_with_color "31" "Error: 'curl' or 'wget' is required to download files."
             return 1
         fi
 
@@ -150,8 +150,8 @@ declare -A file_map
 file_map["$HOME/dotfiles/dot_aicommits.tmpl"]="$HOME/.aicommits"
 file_map["$HOME/dotfiles/dot_dblab.yaml.tmpl"]="$HOME/.dblab.yaml"
 file_map["$HOME/dotfiles/dot_opencommit.tmpl"]="$HOME/.opencommit"
-file_map["$HOME/dotfiles/dot_config/gitearc"]="$HOME/.config/.gitearc"
-file_map["$HOME/dotfiles/dot_config/wtf"]="$HOME/.config/wtf/config.yml"
+file_map["$HOME/dotfiles/dot_config/gitearc/dot_gitearc.tmpl"]="$HOME/.config/.gitearc"
+file_map["$HOME/dotfiles/dot_config/wtf/private_config.yml.tmpl"]="$HOME/.config/wtf/config.yml"
 
 if ask_yes_or_no "Do you want to process the templates?"; then
     echo "Processing templates..."
