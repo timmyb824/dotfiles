@@ -6,7 +6,7 @@ source "$(dirname "$BASH_SOURCE")/init.sh"
 
 install_op_cli() {
     # Install the 1Password CLI using the new steps provided
-    sudo -s -- <<EOF
+    if ! sudo -s -- <<EOF
 curl -sS https://downloads.1password.com/linux/keys/1password.asc | \
 gpg --dearmor --output /usr/share/keyrings/1password-archive-keyring.gpg
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/1password-archive-keyring.gpg] https://downloads.1password.com/linux/debian/$(dpkg --print-architecture) stable main" | \
@@ -17,11 +17,9 @@ tee /etc/debsig/policies/AC2D62742012EA22/1password.pol
 mkdir -p /usr/share/debsig/keyrings/AC2D62742012EA22
 curl -sS https://downloads.1password.com/linux/keys/1password.asc | \
 gpg --dearmor --output /usr/share/debsig/keyrings/AC2D62742012EA22/debsig.gpg
-apt update && apt install 1password-cli
+apt update && apt install -y 1password-cli
 EOF
-
-    # Check for any errors during the installation process
-    if [ $? -ne 0 ]; then
+    then
         echo "Error: The 1Password CLI installation failed."
         return 1
     fi
@@ -33,6 +31,8 @@ EOF
         echo "The 1Password CLI was installed successfully."
     fi
 }
+
+INSTALL_SUCCESS=0 # Default value assuming success
 
 # Check if the OS is Linux and install op CLI if it's not already installed
 if [ "$(get_os)" = "Linux" ]; then
@@ -76,25 +76,20 @@ fi
 
 ########## USAGE ##########
 
-# Function to replace template placeholders with secret values from 1Password
 process_file() {
     local file_path="$1"
-    local destination_dir="$2"
-    local file_name=$(basename "$file_path")
-
-    # Ensure destination directory exists
-    mkdir -p "$destination_dir"
+    local output_path="$2"
 
     while IFS= read -r line; do
         if [[ "$line" == *"onepasswordRead"* ]]; then
             # Extract the 1Password path
-            local op_path=$(echo "$line" | grep -oP '{{ onepasswordRead "\K[^"]+')
+            local op_path=$(echo "$line" | grep -oP '(?<=onepasswordRead ").*(?=" }})')
             if [[ -n "$op_path" ]]; then
                 # Fetch the secret from 1Password
-                local secret=$(op get item "$op_path" --fields "your_field_name" --session="$OP_SESSION_TOKEN")
+                local secret=$(op read "$op_path" --session="$OP_SESSION_TOKEN")
                 if [[ -n "$secret" ]]; then
                     # Replace the placeholder with the actual secret value
-                    line=${line/\{\{ onepasswordRead "op:\/\/Personal\/openai-api\/credential" \}\}/$secret}
+                    line=${line/\{\{ onepasswordRead \"$op_path\" \}\}/$secret}
                 else
                     echo "Error: Unable to retrieve the secret for $op_path"
                     return 1
@@ -102,23 +97,22 @@ process_file() {
             fi
         fi
         echo "$line"
-    done < "$file_path" > "$destination_dir/$file_name"
+    done < "$file_path" > "$output_path"
 }
 
-# Predefined list of source files and their destinations
+# Predefined list of source files and their output paths
 declare -A file_map
-# file_map["/path/to/source/template1.tpl"]="/path/to/destination1"
+# file_map["/path/to/source/template1.tpl"]="/path/to/output/file1"
 file_map["$HOME/dotfiles/dot_aicommits.tmpl"]="$HOME/.aicommits"
-# Add more file mappings as needed
 
-# Process each file and copy it to the destination directory
+# Process each file and copy it to the designated output path
 for file_path in "${!file_map[@]}"; do
-    destination_dir="${file_map[$file_path]}"
+    output_path="${file_map[$file_path]}"
     if [[ -f "$file_path" ]]; then
         echo "Processing $file_path..."
-        process_file "$file_path" "$destination_dir"
+        process_file "$file_path" "$output_path"
         if [ $? -eq 0 ]; then
-            echo "Processed file $file_path and saved to $destination_dir"
+            echo "Processed file $file_path and saved as $output_path"
         else
             echo "Failed to process $file_path"
         fi
