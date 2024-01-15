@@ -29,7 +29,6 @@ declare -A files_to_destinations=(
     ["$HOME/dotfiles/dot_config/zsh/executable_functions.zsh"]="$HOME/.config/zsh/functions.zsh"
     ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/alias.zsh"]="$HOME/.config/zsh/alias.zsh"
     ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/.zshrc"]="$HOME/.zshrc"
-    ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/.nanorc"]="$HOME/.nanorc"
     ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/.gitconfig"]="$HOME/.gitconfig"
     # ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/.ssh/config"]="$HOME/.ssh/config"
     # ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/.ssh/id_master_key"]="$HOME/.ssh/id_master_key"
