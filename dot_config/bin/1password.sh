@@ -66,7 +66,6 @@ echo
 # Sign in to your 1Password account to obtain a session token
 # The session token is output to STDOUT, so we capture it in a variable
 OP_SESSION_TOKEN=$(op account add --address $OP_SIGNIN_ADDRESS --email $OP_EMAIL --secret-key $OP_SECRET_KEY --shorthand personal --signin --raw)
-echo "OP_SESSION_TOKEN=$OP_SESSION_TOKEN"
 export OP_SESSION_TOKEN
 
 # Check if sign-in was successful
@@ -105,6 +104,7 @@ process_file() {
 declare -A file_map
 # file_map["/path/to/source/template1.tpl"]="/path/to/output/file1"
 file_map["$HOME/dotfiles/dot_aicommits.tmpl"]="$HOME/.aicommits"
+file_map["$HOME/dotfiles/dot_dblab.yaml.tmpl"]="$HOME/.dblab.yaml"
 
 # Process each file and copy it to the designated output path
 for file_path in "${!file_map[@]}"; do
