@@ -13,9 +13,9 @@ run_script() {
         echo "Running $script..."
         chmod +x "$SCRIPT_DIR/$script"  # Make the script executable
         "$SCRIPT_DIR/$script"         # Execute the script
-        echo "$script completed."
+        echo_with_color "32" "$script completed."
     else
-        echo "Skipping $script..."
+        echo_with_color "33" "Skipping $script..."
     fi
 }
 
@@ -33,6 +33,7 @@ run_script nodejs.sh
 run_script terraform.sh
 run_script tailscale.sh
 run_script zsh_install.sh
+run_script 1password.sh
 run_script dotfiles_linux.sh
 
 echo "All packages have been installed."

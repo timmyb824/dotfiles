@@ -105,6 +105,9 @@ declare -A file_map
 # file_map["/path/to/source/template1.tpl"]="/path/to/output/file1"
 file_map["$HOME/dotfiles/dot_aicommits.tmpl"]="$HOME/.aicommits"
 file_map["$HOME/dotfiles/dot_dblab.yaml.tmpl"]="$HOME/.dblab.yaml"
+file_map["$HOME/dotfiles/dot_opencommit.tmpl"]="$HOME/.opencommit"
+file_map["$HOME/dotfiles/dot_config/gitearc"]="$HOME/.config/.gitearc"
+file_map["$HOME/dotfiles/dot_config/wtf"]="$HOME/.config/wtf/config.yml"
 
 # Process each file and copy it to the designated output path
 for file_path in "${!file_map[@]}"; do
