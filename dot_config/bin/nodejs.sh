@@ -3,9 +3,6 @@
 # Source the common functions script
 source "$(dirname "$BASH_SOURCE")/init.sh"
 
-# Set the desired Node.js version
-NODE_VERSION="v21.0.0"
-
 # Function to initialize fnm for the current session
 initialize_fnm_for_session() {
     # Initialize fnm without specifying a shell

@@ -6,8 +6,6 @@
 
 source "$(dirname "$BASH_SOURCE")/init.sh"
 
-TF_VERSION="latest"
-
 # Check if Terraform is installed and working
 if ! command_exists terraform; then
     echo_with_color "33" "Terraform could not be found."

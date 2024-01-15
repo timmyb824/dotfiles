@@ -1,16 +1,21 @@
 #!/bin/bash
 
-#
-# Setup common environment variables and configurations
-#
-
-# Global variables #
+############# Global Variables #############
 
 # Get the directory of the current script
 SCRIPT_DIR="$(dirname "$(realpath "$BASH_SOURCE")")"
 export SCRIPT_DIR
 
-# Global functions #
+# Set the desired Node.js version
+export NODE_VERSION="v21.0.0"
+
+# Set the desired Python version
+export PYTHON_VERSION="3.11.0"
+
+# Set the desired Terraform version
+export TF_VERSION="latest"
+
+############# Global functions #############
 
 # Function to check if a given line is in a file
 line_in_file() {

@@ -6,9 +6,6 @@
 
 source "$(dirname "$BASH_SOURCE")/init.sh"
 
-# Set the desired Python version
-PYTHON_VERSION="3.11.0"
-
 # Pip packages to install
 pip_packages=(
     "ansible"
