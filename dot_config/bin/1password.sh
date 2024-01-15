@@ -4,7 +4,42 @@ source "$(dirname "$BASH_SOURCE")/init.sh"
 
 ########## INSTALLATION STEPS ##########
 
-install_op_cli() {
+# Function to download and install 1Password CLI on macOS
+install_op_cli_macos() {
+    if command_exists op; then
+        echo "The 1Password CLI is already installed."
+        return 0 # Indicate that it's already installed
+    else
+        echo "Installing the 1Password CLI for macOS..."
+
+        # Determine download tool
+        if command_exists curl; then
+            DOWNLOAD_CMD="curl -Lso"
+        elif command_exists wget; then
+            DOWNLOAD_CMD="wget --quiet -O"
+        else
+            echo "Error: 'curl' or 'wget' is required to download files."
+            return 1
+        fi
+
+        # Download the latest release of the 1Password CLI
+        OP_CLI_PKG="op_apple_universal_v2.24.0.pkg"
+        $DOWNLOAD_CMD "$OP_CLI_PKG" "https://cache.agilebits.com/dist/1P/op2/pkg/v2.24.0/$OP_CLI_PKG"
+
+        # Install the package
+        sudo installer -pkg "$OP_CLI_PKG" -target /
+
+        # Verify the installation
+        if command_exists op; then
+            echo "The 1Password CLI was installed successfully."
+        else
+            echo "Error: The 1Password CLI installation failed."
+            return 1
+        fi
+    fi
+}
+
+install_op_cli_linux() {
     # Install the 1Password CLI using the new steps provided
     if ! sudo -s -- <<EOF
 curl -sS https://downloads.1password.com/linux/keys/1password.asc | \
@@ -32,46 +67,55 @@ EOF
     fi
 }
 
+OS=$(get_os)
 INSTALL_SUCCESS=0 # Default value assuming success
 
-# Check if the OS is Linux and install op CLI if it's not already installed
-if [ "$(get_os)" = "Linux" ]; then
-    if command_exists op; then
-        echo "The 1Password CLI is already installed."
-    else
-        echo "Installing the 1Password CLI..."
-        install_op_cli
+if [ "$OS" = "Linux" ]; then
+    if ! command_exists op; then
+        echo "Installing the 1Password CLI for Linux..."
+        install_op_cli_linux
         INSTALL_SUCCESS=$?
+    else
+        echo "The 1Password CLI is already installed."
     fi
+elif [ "$OS" = "MacOS" ]; then
+    install_op_cli_macos
+    INSTALL_SUCCESS=$?
 else
-    echo "This script only supports Linux systems."
+    echo "This script only supports Linux and macOS systems."
     exit 1
 fi
 
-# Exit if installation failed
-if [ "$INSTALL_SUCCESS" -ne 0 ]; then
-    echo "Installation failed. Exiting."
-    exit 1
+# Exit if installation failed or if we're on macOS (no further steps required)
+if [ "$INSTALL_SUCCESS" -ne 0 ] || [ "$OS" = "Darwin" ]; then
+    echo "Installation failed or completed for macOS. Exiting."
+    exit $INSTALL_SUCCESS
 fi
 
 ########## CONFIGURATION STEPS ##########
 
-read -sp "1Password email: " OP_EMAIL
-echo
-read -sp "1Passwored Secret Key: " OP_SECRET_KEY
-echo
-read -sp "1Password Signin Address: " OP_SIGNIN_ADDRESS
-echo
+if ask_yes_or_no "Would you like to configure 1Password CLI?"; then
+    echo_with_color "32" "Configuring 1Password CLI..."
 
-# Sign in to your 1Password account to obtain a session token
-# The session token is output to STDOUT, so we capture it in a variable
-OP_SESSION_TOKEN=$(op account add --address $OP_SIGNIN_ADDRESS --email $OP_EMAIL --secret-key $OP_SECRET_KEY --shorthand personal --signin --raw)
-export OP_SESSION_TOKEN
+    read -sp "1Password email: " OP_EMAIL
+    echo
+    read -sp "1Passwored Secret Key: " OP_SECRET_KEY
+    echo
+    read -sp "1Password Signin Address: " OP_SIGNIN_ADDRESS
+    echo
 
-# Check if sign-in was successful
-if [[ -z "$OP_SESSION_TOKEN" ]]; then
-    echo "Failed to sign in to 1Password CLI."
-    exit 1
+    # Sign in to your 1Password account to obtain a session token
+    # The session token is output to STDOUT, so we capture it in a variable
+    OP_SESSION_TOKEN=$(op account add --address $OP_SIGNIN_ADDRESS --email $OP_EMAIL --secret-key $OP_SECRET_KEY --shorthand personal --signin --raw)
+    export OP_SESSION_TOKEN
+
+    # Check if sign-in was successful
+    if [[ -z "$OP_SESSION_TOKEN" ]]; then
+        echo "Failed to sign in to 1Password CLI."
+        exit 1
+    fi
+else
+    echo_with_color "33" "Skipping 1Password CLI configuration."
 fi
 
 ########## USAGE ##########
@@ -109,18 +153,25 @@ file_map["$HOME/dotfiles/dot_opencommit.tmpl"]="$HOME/.opencommit"
 file_map["$HOME/dotfiles/dot_config/gitearc"]="$HOME/.config/.gitearc"
 file_map["$HOME/dotfiles/dot_config/wtf"]="$HOME/.config/wtf/config.yml"
 
-# Process each file and copy it to the designated output path
-for file_path in "${!file_map[@]}"; do
-    output_path="${file_map[$file_path]}"
-    if [[ -f "$file_path" ]]; then
-        echo "Processing $file_path..."
-        process_file "$file_path" "$output_path"
-        if [ $? -eq 0 ]; then
-            echo "Processed file $file_path and saved as $output_path"
+if ask_yes_or_no "Do you want to process the templates?"; then
+    echo "Processing templates..."
+
+    # Process each file and copy it to the designated output path
+    for file_path in "${!file_map[@]}"; do
+        output_path="${file_map[$file_path]}"
+        if [[ -f "$file_path" ]]; then
+            echo "Processing $file_path..."
+            process_file "$file_path" "$output_path"
+            if [ $? -eq 0 ]; then
+                echo "Processed file $file_path and saved as $output_path"
+            else
+                echo "Failed to process $file_path"
+            fi
         else
-            echo "Failed to process $file_path"
+            echo "File $file_path does not exist."
         fi
-    else
-        echo "File $file_path does not exist."
-    fi
-done
+    done
+else
+    echo "Skipping template processing."
+    exit 0
+fi

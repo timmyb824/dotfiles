@@ -65,6 +65,7 @@ add_brew_to_path() {
 OS=$(get_os)
 case $OS in
     "MacOS")
+        safe_remove_command "/usr/local/bin/op"
         install_brew_macos
         install_packages_with_brew
         ;;
