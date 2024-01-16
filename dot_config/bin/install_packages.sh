@@ -1,4 +1,4 @@
-#!/Users/timothybryant/.local/bin/bash
+#!/usr/bin/env bash
 
 # Make sure we exit if there is a failure at any step
 set -e

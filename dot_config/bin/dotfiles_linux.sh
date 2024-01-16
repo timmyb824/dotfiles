@@ -1,4 +1,4 @@
-#!/Users/timothybryant/.local/bin/bash
+#!/usr/bin/env bash
 
 source "$(dirname "$BASH_SOURCE")/init.sh"
 
@@ -24,6 +24,7 @@ declare -A files_to_destinations=(
     ["$HOME/dotfiles/dot_config/nvim/"]="$HOME/.config/nvim"
     ["$HOME/dotfiles/dot_config/lsd/"]="$HOME/.config/lsd"
     ["$HOME/dotfiles/dot_config/starship/"]="$HOME/.config/starship"
+    ["$HOME/dotfiles/dot_config/psi/"]="$HOME/.config/psi"
     ["$HOME/dotfiles/dot_config/zsh/plugin_manager.zsh"]="$HOME/.config/zsh/plugin_manager.zsh"
     ["$HOME/dotfiles/dot_config/zsh/executable_functions.zsh"]="$HOME/.config/zsh/functions.zsh"
     ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/alias.zsh"]="$HOME/.config/zsh/alias.zsh"

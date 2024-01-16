@@ -1,4 +1,4 @@
-#!/Users/timothybryant/.local/bin/bash
+#!/usr/bin/env bash
 
 # Correct the source path if necessary and ensure init.sh is in the correct location
 source "$(dirname "$BASH_SOURCE")/init.sh"

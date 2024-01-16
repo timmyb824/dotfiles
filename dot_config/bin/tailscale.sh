@@ -1,4 +1,4 @@
-#!/Users/timothybryant/.local/bin/bash
+#!/usr/bin/env bash
 
 ###################################
 # Check OS and Install Tailscale  #

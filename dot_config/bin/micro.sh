@@ -1,4 +1,4 @@
-#!/Users/timothybryant/.local/bin/bash
+#!/usr/bin/env bash
 
 # Source the common functions script
 source "$(dirname "$BASH_SOURCE")/init.sh"

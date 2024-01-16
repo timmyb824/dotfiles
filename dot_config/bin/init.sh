@@ -1,4 +1,4 @@
-#!/Users/timothybryant/.local/bin/bash
+#!/usr/bin/env bash
 
 # Define the path to the common.sh script
 COMMON_SCRIPT_PATH="$(dirname "$BASH_SOURCE")/common.sh"
