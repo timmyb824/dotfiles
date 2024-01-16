@@ -21,7 +21,7 @@ source "$HOME/.config/broot/launcher/bash/br" # pkgx
 eval "$(zoxide init zsh)" # pkgx
 eval "$(direnv hook zsh)" # pkgx
 eval "$(fnm env --use-on-cd)" # pkgx
-eval "$(rbenv init - zsh)" # homebrew
+#eval "$(rbenv init - zsh)" # homebrew
 
 export SOPS_AGE_KEY_FILE=$HOME/.sops/age-master-key.txt
 export EDITOR="micro" # pkgx
