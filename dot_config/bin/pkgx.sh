@@ -158,6 +158,7 @@ packages=(
     "usql"
     "vals"
     "vault"
+    "watchman"
     "wget"
     "when"
     "xargs"
