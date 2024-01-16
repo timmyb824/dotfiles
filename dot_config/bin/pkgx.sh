@@ -62,6 +62,7 @@ packages=(
     "dog"
     "dua"
     "duf"
+    "eget"
     "enc"
     "exa"
     "eza"
