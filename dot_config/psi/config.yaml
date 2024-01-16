@@ -1,0 +1,26 @@
+ping_hosts:
+- google.com
+- timothybryantjr.com
+- blog.timothybryantjr.com
+- n8n.timmybtech.com
+- wiki.timmybtech.com
+- github.com
+services:
+- host: localhost
+  name: FTP Server
+  port: 21
+- host: localhost
+  name: SSH
+  port: 22
+- host: localhost
+  name: HTTP
+  port: 80
+- host: localhost
+  name: HTTPS
+  port: 443
+- host: localhost
+  name: MySQL Server
+  port: 3306
+- host: localhost
+  name: PostgreSQL Server
+  port: 5432
