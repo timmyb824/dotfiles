@@ -35,6 +35,5 @@ run_script tailscale.sh
 run_script zsh_install.sh
 run_script 1password.sh
 run_script dotfiles_linux.sh
-# run_script fonts.sh
 
 echo "All packages have been installed."
