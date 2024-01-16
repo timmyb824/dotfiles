@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/Users/timothybryant/.local/bin/bash
 
 source "$(dirname "$BASH_SOURCE")/init.sh"
 

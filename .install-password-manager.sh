@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/Users/timothybryant/.local/bin/bash
 
 # Source the common functions
 source "$(dirname "$BASH_SOURCE")/dot_config/bin/init.sh"
