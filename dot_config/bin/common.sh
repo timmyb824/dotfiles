@@ -40,7 +40,6 @@ get_os() {
     *) echo "Unknown" ;;
     esac
 }
-OS=$(get_os)
 
 # Function to output an error message and exit
 exit_with_error() {
