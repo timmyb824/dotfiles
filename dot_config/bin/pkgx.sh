@@ -60,6 +60,7 @@ packages=(
     "docker-clean"
     # "docker-compose" # installed via podman desktop at /usr/local/bin
     "dog"
+    "dotenvx"
     "dua"
     "duf"
     "eget"
