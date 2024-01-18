@@ -114,7 +114,7 @@ packages=(
     "k9s"
     "killport"
     "kind"
-    "kubectl"
+    "kubectl@1.25" # pinned to 1.25 to align with cluster version
     "kubectl-krew"
     "kubeshark"
     "lazygit"
