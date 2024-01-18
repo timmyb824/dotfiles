@@ -15,6 +15,14 @@ export PYTHON_VERSION="3.11.0"
 # Set the desired Terraform version
 export TF_VERSION="latest"
 
+export AGE_RECIPIENT="op://Personal/age-secret-key/username"
+export AGE_SECRET_KEY="op://Personal/age-secret-key/credential"
+export AGE_SECRET_KEY_FILE="op://Personal/age-secret-key-file/age-master-key.txt"
+export AGE_SECRET_KEY_LOCATION="$HOME/.sops/age-master-key-test.txt"
+
+export CHEZMOI_CONFIG_FILE="op://Personal/chezmoi-toml-config-file/chezmoi.toml"
+export CHEZMOI_CONFIG_FILE_LOCATION="$HOME/.config/chezmoi/chezmoi-test.toml"
+
 ############# Global functions #############
 
 # Function to check if a given line is in a file
@@ -130,3 +138,47 @@ attempt_fix_command() {
         fi
     fi
 }
+
+configure_1password_account() {
+    if ask_yes_or_no "Would you like to configure 1Password CLI?"; then
+        echo_with_color "32" "Configuring 1Password CLI..."
+
+        read -sp "1Password email: " OP_EMAIL
+        echo
+        read -sp "1Password Secret Key: " OP_SECRET_KEY
+        echo
+        read -sp "1Password Signin Address: " OP_SIGNIN_ADDRESS
+        echo
+
+        # Attempt to sign in to your 1Password account to obtain a session token
+        # The session token is output to STDOUT, so we capture it in a variable
+        if OP_SESSION_TOKEN=$(op account add --address "$OP_SIGNIN_ADDRESS" --email "$OP_EMAIL" --secret-key "$OP_SECRET_KEY" --shorthand personal --signin --raw); then
+            export OP_SESSION_TOKEN
+            echo_with_color "32" "Successfully signed into 1Password CLI."
+        else
+            echo_with_color "31" "Failed to sign in to 1Password CLI."
+            return 1
+        fi
+    else
+        echo_with_color "33" "Skipping 1Password CLI configuration."
+    fi
+}
+
+1password_sign_in() {
+    if ! op account list &>/dev/null; then
+        echo_with_color "32" "No 1Password account found. Attempting to configure 1Password CLI..."
+        configure_1password_account || exit_with_error "Failed to configure 1Password CLI."
+    else
+        echo_with_color "32" "1Password account already added. Attempting to sign in..."
+        if OP_SESSION_TOKEN=$(op signin --raw --account my.1password.com 2>&1); then
+            export OP_SESSION_TOKEN
+            echo_with_color "32" "Successfully signed into 1Password CLI."
+        else
+            local error_message=$OP_SESSION_TOKEN  # Capturing the error message from stderr
+            OP_SESSION_TOKEN=""  # Clear the token since signin failed
+            echo_with_color "31" "Failed to sign in to 1Password CLI. Error: $error_message"
+            return 1
+        fi
+    fi
+}
+

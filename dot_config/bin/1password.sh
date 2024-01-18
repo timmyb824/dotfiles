@@ -94,29 +94,7 @@ fi
 
 ########## CONFIGURATION STEPS ##########
 
-if ask_yes_or_no "Would you like to configure 1Password CLI?"; then
-    echo_with_color "32" "Configuring 1Password CLI..."
-
-    read -sp "1Password email: " OP_EMAIL
-    echo
-    read -sp "1Passwored Secret Key: " OP_SECRET_KEY
-    echo
-    read -sp "1Password Signin Address: " OP_SIGNIN_ADDRESS
-    echo
-
-    # Sign in to your 1Password account to obtain a session token
-    # The session token is output to STDOUT, so we capture it in a variable
-    OP_SESSION_TOKEN=$(op account add --address $OP_SIGNIN_ADDRESS --email $OP_EMAIL --secret-key $OP_SECRET_KEY --shorthand personal --signin --raw)
-    export OP_SESSION_TOKEN
-
-    # Check if sign-in was successful
-    if [[ -z "$OP_SESSION_TOKEN" ]]; then
-        echo "Failed to sign in to 1Password CLI."
-        exit 1
-    fi
-else
-    echo_with_color "33" "Skipping 1Password CLI configuration."
-fi
+1password_sign_in
 
 ########## USAGE ##########
 

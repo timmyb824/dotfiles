@@ -22,6 +22,7 @@ install_chezmoi() {
 
 # Define the path to the install_packages.sh script
 INSTALL_PACKAGES_SCRIPT="./dot_config/bin/install_packages.sh"
+PREPARE_ENCRYPTION_FILES="./dot_config/bin/age_encryption.sh"
 
 # make all shell scripts excutable
 chmod +x ./dot_config/bin/*.sh
@@ -35,6 +36,9 @@ if [ "$OS" = "MacOS" ]; then
 
     # Run chezmoi init only if it was just installed
     if [ $? -eq 0 ]; then
+        echo_with_color "32" "Preparing encryption files."
+        $PREPARE_ENCRYPTION_FILES || exit_with_error "Failed to prepare encryption files."
+        echo_with_color "32" "Installing chezmoi dotfiles."
         chezmoi init --apply timmyb824
         if [ $? -eq 0 ]; then
             echo_with_color "32" "chezmoi dotfiles have been applied successfully."
