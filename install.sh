@@ -30,8 +30,13 @@ prepare_encryption_files() {
 # Function to initialize and apply chezmoi dotfiles
 initialize_chezmoi() {
     echo_with_color "32" "Initializing chezmoi dotfiles."
-    if "$CHEZMOI_BIN" init --apply timmyb824; then
-        echo_with_color "32" "chezmoi dotfiles have been applied successfully."
+    if "$CHEZMOI_BIN" init timmyb824; then
+        echo_with_color "32" "chezmoi dotfiles have been downloaded successfully."
+        if "$CHEZMOI_BIN" apply; then
+            echo_with_color "32" "chezmoi dotfiles have been applied successfully."
+        else
+            exit_with_error "chezmoi dotfiles could not be applied."
+        fi
     else
         exit_with_error "chezmoi dotfiles could not be applied."
     fi
