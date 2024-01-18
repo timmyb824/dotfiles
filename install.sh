@@ -5,59 +5,76 @@ source "$(dirname "$BASH_SOURCE")/dot_config/bin/init.sh"
 
 # Function to download and install chezmoi using curl or wget
 install_chezmoi() {
-    if ! command_exists chezmoi; then
-        if command_exists curl; then
-            sudo sh -c "$(curl -fsLS get.chezmoi.io)" -- -b /usr/local/bin
-        elif command_exists wget; then
-            sudo sh -c "$(wget -qO- get.chezmoi.io)" -- -b /usr/local/bin
-        else
-            exit_with_error "neither curl nor wget is available."
-        fi
-        return 0
-    else
+    if command_exists chezmoi; then
         echo_with_color "32" "chezmoi is already installed."
         return 1
     fi
+
+    if command_exists curl; then
+        sh -c "$(curl -fsLS get.chezmoi.io)" -- -b "$(dirname "$CHEZMOI_BIN")"
+    elif command_exists wget; then
+        sh -c "$(wget -qO- get.chezmoi.io)" -- -b "$(dirname "$CHEZMOI_BIN")"
+    else
+        exit_with_error "neither curl nor wget is available."
+    fi
 }
 
-# Define the path to the install_packages.sh script
+# Function to prepare encryption files
+prepare_encryption_files() {
+    echo_with_color "32" "Preparing encryption files."
+    "$PREPARE_ENCRYPTION_FILES" || exit_with_error "Failed to prepare encryption files."
+}
+
+# Function to initialize and apply chezmoi dotfiles
+initialize_chezmoi() {
+    echo_with_color "32" "Initializing chezmoi dotfiles."
+    if "$CHEZMOI_BIN" init --apply timmyb824; then
+        echo_with_color "32" "chezmoi dotfiles have been applied successfully."
+    else
+        exit_with_error "chezmoi dotfiles could not be applied."
+    fi
+}
+
+# Define the path to the scripts
 INSTALL_PACKAGES_SCRIPT="./dot_config/bin/install_packages.sh"
 PREPARE_ENCRYPTION_FILES="./dot_config/bin/age_encryption.sh"
+CHEZMOI_BIN="/usr/local/bin/chezmoi"
 
-# make all shell scripts excutable
+# make all shell scripts executable
 chmod +x ./dot_config/bin/*.sh
 
 # Determine the current operating system
 OS=$(get_os)
 
-if [ "$OS" = "MacOS" ]; then
-    echo_with_color "34" "Detected macOS."
-    install_chezmoi
-
-    # Run chezmoi init only if it was just installed
-    if [ $? -eq 0 ]; then
-        echo_with_color "32" "Preparing encryption files."
-        $PREPARE_ENCRYPTION_FILES || exit_with_error "Failed to prepare encryption files."
-        echo_with_color "32" "Installing chezmoi dotfiles."
-        chezmoi init --apply timmyb824
-        if [ $? -eq 0 ]; then
-            echo_with_color "32" "chezmoi dotfiles have been applied successfully."
-        else
-            exit_with_error "chezmoi dotfiles could not be applied."
+# Proceed based on the OS
+case "$OS" in
+    "MacOS")
+        echo_with_color "34" "Detected macOS."
+        if install_chezmoi; then
+            prepare_encryption_files
+            initialize_chezmoi
+            safe_remove_command $CHEZMOI_BIN
         fi
-    fi
+        ;;
+    "Linux")
+        echo_with_color "32" "Detected Linux."
+        echo_with_color "32" "Skipping chezmoi installation."
+        ;;
+    *)
+        exit_with_error "Unsupported operating system."
+        ;;
+esac
 
-elif [ "$OS" = "Linux" ]; then
-    echo_with_color "32" "Detected Linux."
-    echo_with_color "32" "Skipping chezmoi installation."
-fi
-
-# Run install_packages script regardless of the OS or chezmoi installation if the user wants to
+# Ask for package installation
 if ask_yes_or_no "Do you want to install the packages?"; then
     echo "Running $INSTALL_PACKAGES_SCRIPT script."
-    if ! "$INSTALL_PACKAGES_SCRIPT"; then
-        exit_with_error "Failed to execute $INSTALL_PACKAGES_SCRIPT."
-    fi
+    "$INSTALL_PACKAGES_SCRIPT" || exit_with_error "Failed to execute $INSTALL_PACKAGES_SCRIPT."
 else
     echo "Package installation skipped."
+fi
+
+# Check if the script is being run as root
+if [ "$(id -u)" -ne 0 ]; then
+    echo_with_color "31" "Please run this script with sudo or as root."
+    exit 1
 fi
