@@ -20,6 +20,7 @@ if command_exists op; then
     echo_with_color "32" "op is already installed."
 else
     install_op
+    prepare_encryption_files
 fi
 
 # Exit with a successful code

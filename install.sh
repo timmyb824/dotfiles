@@ -12,8 +12,10 @@ install_chezmoi() {
 
     if command_exists curl; then
         sudo sh -c "$(curl -fsLS get.chezmoi.io)" -- -b "$(dirname "$CHEZMOI_BIN")"
+        echo_with_color "32" "chezmoi has been installed successfully."
     elif command_exists wget; then
         sudo sh -c "$(wget -qO- get.chezmoi.io)" -- -b "$(dirname "$CHEZMOI_BIN")"
+        echo_with_color "32" "chezmoi has been installed successfully."
     else
         exit_with_error "neither curl nor wget is available."
     fi
@@ -51,7 +53,6 @@ case "$OS" in
     "MacOS")
         echo_with_color "34" "Detected macOS."
         if install_chezmoi; then
-            prepare_encryption_files
             initialize_chezmoi
             safe_remove_command $CHEZMOI_BIN
         fi
