@@ -11,9 +11,9 @@ install_chezmoi() {
     fi
 
     if command_exists curl; then
-        sh -c "$(curl -fsLS get.chezmoi.io)" -- -b "$(dirname "$CHEZMOI_BIN")"
+        sudo sh -c "$(curl -fsLS get.chezmoi.io)" -- -b "$(dirname "$CHEZMOI_BIN")"
     elif command_exists wget; then
-        sh -c "$(wget -qO- get.chezmoi.io)" -- -b "$(dirname "$CHEZMOI_BIN")"
+        sudo sh -c "$(wget -qO- get.chezmoi.io)" -- -b "$(dirname "$CHEZMOI_BIN")"
     else
         exit_with_error "neither curl nor wget is available."
     fi
@@ -71,10 +71,4 @@ if ask_yes_or_no "Do you want to install the packages?"; then
     "$INSTALL_PACKAGES_SCRIPT" || exit_with_error "Failed to execute $INSTALL_PACKAGES_SCRIPT."
 else
     echo "Package installation skipped."
-fi
-
-# Check if the script is being run as root
-if [ "$(id -u)" -ne 0 ]; then
-    echo_with_color "31" "Please run this script with sudo or as root."
-    exit 1
 fi
