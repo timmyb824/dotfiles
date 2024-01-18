@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Source the common functions
-source "$(dirname "$BASH_SOURCE")/dot_config/bin/init.sh"
+source "dot_config/bin/utilities/init.sh"
 
 # Function to download and install chezmoi using curl or wget
 install_chezmoi() {
@@ -43,8 +43,7 @@ initialize_chezmoi() {
 }
 
 # Define the path to the scripts
-INSTALL_PACKAGES_SCRIPT="./dot_config/bin/install_packages.sh"
-PREPARE_ENCRYPTION_FILES="./dot_config/bin/age_encryption.sh"
+INSTALL_PACKAGES_SCRIPT="dot_config/bin/install.sh"
 CHEZMOI_BIN="/usr/local/bin/chezmoi"
 
 # make all shell scripts executable

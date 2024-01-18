@@ -4,7 +4,7 @@
 #  Install Terraform  #
 #######################
 
-source "$(dirname "$BASH_SOURCE")/init.sh"
+source "$(dirname "$BASH_SOURCE")/../utilities/init.sh"
 
 # Check if Terraform is installed and working
 if ! command_exists terraform; then

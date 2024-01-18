@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Source the common functions script
-source "$(dirname "$BASH_SOURCE")/init.sh"
+source "$(dirname "$BASH_SOURCE")/../utilities/init.sh"
 
 # Function to add krew to PATH for the current session if it's not already in the PATH
 add_krew_to_path_for_session() {

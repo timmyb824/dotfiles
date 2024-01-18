@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source "$(dirname "$BASH_SOURCE")/init.sh"
+source "$(dirname "$BASH_SOURCE")/../utilities/init.sh"
 
 # Function to install pkgx
 install_pkgx() {

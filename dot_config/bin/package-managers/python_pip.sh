@@ -4,7 +4,7 @@
 #  Install Python     #
 #######################
 
-source "$(dirname "$BASH_SOURCE")/init.sh"
+source "$(dirname "$BASH_SOURCE")/../utilities/init.sh"
 
 # Pip packages to install
 pip_packages=(

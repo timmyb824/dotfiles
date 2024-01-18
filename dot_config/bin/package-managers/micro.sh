@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Source the common functions script
-source "$(dirname "$BASH_SOURCE")/init.sh"
+source "$(dirname "$BASH_SOURCE")/../utilities/init.sh"
 
 # Check if micro is installed
 attempt_fix_command "micro" "$HOME/.local/bin"

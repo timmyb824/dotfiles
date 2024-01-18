@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Source the common functions script
-source "$(dirname "$BASH_SOURCE")/init.sh"
+source "$(dirname "$BASH_SOURCE")/../utilities/init.sh"
 
 # Function to initialize fnm for the current session
 initialize_fnm_for_session() {

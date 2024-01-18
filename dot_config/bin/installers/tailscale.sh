@@ -4,7 +4,7 @@
 # Check OS and Install Tailscale  #
 ###################################
 
-source "$(dirname "$BASH_SOURCE")/init.sh"
+source "$(dirname "$BASH_SOURCE")/../utilities/init.sh"
 
 # Function to install tailscale on Linux
 install_tailscale_linux() {
