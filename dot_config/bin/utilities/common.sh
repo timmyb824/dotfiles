@@ -18,10 +18,13 @@ export TF_VERSION="latest"
 export AGE_RECIPIENT="op://Personal/age-secret-key/username"
 export AGE_SECRET_KEY="op://Personal/age-secret-key/credential"
 export AGE_SECRET_KEY_FILE="op://Personal/age-secret-key-file/age-master-key.txt"
-export AGE_SECRET_KEY_LOCATION="$HOME/.sops/age-master-key-test.txt"
+export AGE_SECRET_KEY_LOCATION="$HOME/.sops/age-master-key.txt"
 
 export CHEZMOI_CONFIG_FILE="op://Personal/chezmoi-toml-config-file/chezmoi.toml"
-export CHEZMOI_CONFIG_FILE_LOCATION="$HOME/.config/chezmoi/chezmoi-test.toml"
+export CHEZMOI_CONFIG_FILE_LOCATION="$HOME/.config/chezmoi/chezmoi.toml"
+
+export SOPS_VERSION="v3.8.1"
+export AGE_VERSION="v1.1.1"
 
 ############# Global functions #############
 
