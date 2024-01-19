@@ -3,11 +3,13 @@
 # Define safe_remove_command function and other necessary utilities
 source "$(dirname "$BASH_SOURCE")/../utilities/init.sh"
 
+OS=$(get_os)
+
 # Functions to install sops and age
 install_sops() {
-    if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    if [[ "$OS" == "Linux" ]]; then
         SOPS_BINARY="sops-${SOPS_VERSION}.linux.amd64"
-    elif [[ "$OSTYPE" == "darwin"* ]]; then
+    elif [[ "$OS" == "MacOS" ]]; then
         SOPS_BINARY="sops-${SOPS_VERSION}.darwin.arm64"
     else
         echo "Unsupported OS type: $OSTYPE"
@@ -22,15 +24,17 @@ install_sops() {
 }
 
 install_age() {
-    if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    if [[ "$OS" == "Linux" ]]; then
         curl -LO "https://github.com/FiloSottile/age/releases/download/${AGE_VERSION}/age-${AGE_VERSION}-linux-amd64.tar.gz"
         tar -xvf "age-${AGE_VERSION}-linux-amd64.tar.gz"
-        sudo mv age /usr/local/bin/age
-    elif [[ "$OSTYPE" == "darwin"* ]]; then
+        sudo mv age/age /usr/local/bin/age
+        rm -rf age
+    elif [[ "$OS" == "MacOS" ]]; then
         echo "Downloading age binary..."
         curl -LO "https://github.com/FiloSottile/age/releases/download/${AGE_VERSION}/age-${AGE_VERSION}-darwin-arm64.tar.gz"
         tar -xvf "age-${AGE_VERSION}-darwin-arm64.tar.gz"
-        sudo mv age /usr/local/bin/age
+        sudo mv age/age /usr/local/bin/age
+        rm -rf age
     else
         echo "Unsupported OS type: $OSTYPE"
         exit 1
@@ -47,14 +51,15 @@ if command -v sops >/dev/null && command -v age >/dev/null; then
     read -p "Do you want to configure sops/age? (y/N) " -n 1 -r
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
-        if [[ -f "../configuration/age_secret.sh" ]]; then
-            bash "../configuration/age_secret.sh"
+        if [[ -f "dot_config/bin/configuration/age_secret.sh" ]]; then
+            chmod +x "dot_config/bin/configuration/age_secret.sh"
+            bash "dot_config/bin/configuration/age_secret.sh"
         else
             echo "Configuration script not found."
         fi
     fi
     # Post-installation cleanup for MacOS
-    if [[ "$OSTYPE" == "darwin"* ]]; then
+    if [[ "$OS" == "MacOS" ]]; then
         safe_remove_command sops
         safe_remove_command age
     fi
