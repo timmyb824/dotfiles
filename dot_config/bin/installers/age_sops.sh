@@ -42,9 +42,17 @@ install_age() {
     echo "age installed successfully."
 }
 
-# Installation steps
-install_sops
-install_age
+if command_exists sops; then
+    echo "sops is already installed."
+else
+    install_sops
+fi
+
+if command_exists age; then
+    echo "age is already installed."
+else
+    install_age
+fi
 
 # Check if both sops and age are installed successfully
 if command -v sops >/dev/null && command -v age >/dev/null; then
