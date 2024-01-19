@@ -21,7 +21,6 @@ source "$HOME/.config/broot/launcher/bash/br" # pkgx
 eval "$(zoxide init zsh)" # pkgx
 eval "$(direnv hook zsh)" # pkgx
 eval "$(fnm env --use-on-cd)" # pkgx
-#eval "$(rbenv init - zsh)" # homebrew
 
 export SOPS_AGE_KEY_FILE=$HOME/.sops/age-master-key.txt
 export EDITOR="micro" # pkgx
@@ -46,6 +45,9 @@ if command -v pyenv 1>/dev/null 2>&1; then
     eval "$(pyenv init -)"
     eval "$(pyenv virtualenv-init -)"
 fi
+
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init - zsh)"
 
 if command -v ngrok &>/dev/null; then
   eval "$(ngrok completion)"

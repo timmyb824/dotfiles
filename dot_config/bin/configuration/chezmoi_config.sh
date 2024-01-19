@@ -5,6 +5,7 @@ source "$(dirname "$BASH_SOURCE")/../utilities/init.sh"
 create_chezmoi_config() {
     if [ ! -f "$CHEZMOI_CONFIG_FILE_LOCATION" ]; then
         echo_with_color "32" "Creating chezmoi config file..."
+        mkdir -p "$(dirname "$CHEZMOI_CONFIG_FILE_LOCATION")"
         if op read "$CHEZMOI_CONFIG_FILE" 2>/dev/null > "$CHEZMOI_CONFIG_FILE_LOCATION"; then
             echo_with_color "32" "Chezmoi config file created successfully."
         else

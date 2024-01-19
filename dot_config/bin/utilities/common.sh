@@ -26,6 +26,8 @@ export CHEZMOI_CONFIG_FILE_LOCATION="$HOME/.config/chezmoi/chezmoi.toml"
 export SOPS_VERSION="v3.8.1"
 export AGE_VERSION="v1.1.1"
 
+export RUBY_VERSION="3.1.2"
+
 ############# Global functions #############
 
 # Function to check if a given line is in a file
@@ -168,12 +170,12 @@ configure_1password_account() {
 }
 
 1password_sign_in() {
-    if ! op account list &>/dev/null; then
+    if op account list &>/dev/null; then
         echo_with_color "32" "No 1Password account found. Attempting to configure 1Password CLI..."
         configure_1password_account || exit_with_error "Failed to configure 1Password CLI."
     else
         echo_with_color "32" "1Password account already added. Attempting to sign in..."
-        if OP_SESSION_TOKEN=$(op signin --raw --account my.1password.com 2>&1); then
+        if OP_SESSION_TOKEN=$(op signin --raw 2>&1); then
             export OP_SESSION_TOKEN
             echo_with_color "32" "Successfully signed into 1Password CLI."
         else

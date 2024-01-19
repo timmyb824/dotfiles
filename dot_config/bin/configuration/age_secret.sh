@@ -5,6 +5,7 @@ source "$(dirname "$BASH_SOURCE")/../utilities/init.sh"
 create_age_secret_key() {
     if [ ! -f "$AGE_SECRET_KEY_LOCATION" ]; then
         echo_with_color "32" "Creating age secret key..."
+        mkdir -p "$(dirname "$AGE_SECRET_KEY_LOCATION")"
         if op read "$AGE_SECRET_KEY_FILE" 2>/dev/null > "$AGE_SECRET_KEY_LOCATION"; then
             echo_with_color "32" "Age secret key created successfully."
         else

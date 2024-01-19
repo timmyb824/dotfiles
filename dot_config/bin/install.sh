@@ -52,10 +52,11 @@ case $OS in
         run_script package-managers/node_npm.sh
         run_script installers/terraform.sh
         run_script installers/tailscale.sh
+        run_script installers/rbenv_ruby.sh
         run_script installers/zsh_shell.sh
         run_script installers/1password.sh
         run_script installers/age_sops.sh
-        run_script configuration/age_secret.sh
+        run_script configuration/go_directories.sh
         run_script dotfiles_linux/copy_dotfiles.sh
         run_script dotfiles_linux/process_dotfiles.sh
         ;;
