@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Define safe_remove_command function and other necessary utilities
-source "$(dirname "$BASH_SOURCE")/init.sh"
+source "$(dirname "$BASH_SOURCE")/../utilities/init.sh"
 
 # Functions to install sops and age
 install_sops() {
@@ -16,19 +16,21 @@ install_sops() {
 
     echo "Downloading sops binary..."
     curl -LO "https://github.com/mozilla/sops/releases/download/${SOPS_VERSION}/${SOPS_BINARY}"
-    mv "$SOPS_BINARY" /usr/local/bin/sops
-    chmod +x /usr/local/bin/sops
+    sudo mv "$SOPS_BINARY" /usr/local/bin/sops
+    sudo chmod +x /usr/local/bin/sops
     echo "sops installed successfully."
 }
 
 install_age() {
     if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-        sudo apt install age
+        curl -LO "https://github.com/FiloSottile/age/releases/download/${AGE_VERSION}/age-${AGE_VERSION}-linux-amd64.tar.gz"
+        tar -xvf "age-${AGE_VERSION}-linux-amd64.tar.gz"
+        sudo mv age /usr/local/bin/age
     elif [[ "$OSTYPE" == "darwin"* ]]; then
         echo "Downloading age binary..."
-        curl -LO "https://dl.filippo.io/age/${AGE_VERSION}?for=darwin/arm64"
-        mv "age-${AGE_VERSION}?for=darwin/arm64" /usr/local/bin/age
-        chmod +x /usr/local/bin/age
+        curl -LO "https://github.com/FiloSottile/age/releases/download/${AGE_VERSION}/age-${AGE_VERSION}-darwin-arm64.tar.gz"
+        tar -xvf "age-${AGE_VERSION}-darwin-arm64.tar.gz"
+        sudo mv age /usr/local/bin/age
     else
         echo "Unsupported OS type: $OSTYPE"
         exit 1

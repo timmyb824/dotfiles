@@ -146,11 +146,11 @@ configure_1password_account() {
     if ask_yes_or_no "Would you like to configure 1Password CLI?"; then
         echo_with_color "32" "Configuring 1Password CLI..."
 
-        read -sp "1Password email: " OP_EMAIL
+        read -p "1Password email: " OP_EMAIL
+        echo
+        read -p "1Password Signin Address: " OP_SIGNIN_ADDRESS
         echo
         read -sp "1Password Secret Key: " OP_SECRET_KEY
-        echo
-        read -sp "1Password Signin Address: " OP_SIGNIN_ADDRESS
         echo
 
         # Attempt to sign in to your 1Password account to obtain a session token
