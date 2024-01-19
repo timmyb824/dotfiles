@@ -11,8 +11,8 @@ run_script() {
     local script=$1
     if ask_yes_or_no "Do you want to run $script?"; then
         echo "Running $script..."
-        chmod +x "$script"  # Make the script executable
-        "$script"           # Execute the script
+        chmod +x "$SCRIPT_DIR/$script"  # Make the script executable
+        "$SCRIPT_DIR/$script"           # Execute the script
         echo_with_color "32" "$script completed."
     else
         echo_with_color "33" "Skipping $script..."
@@ -21,6 +21,8 @@ run_script() {
 
 # Start the installation process
 echo "Starting package installations..."
+
+SCRIPT_DIR="dot_config/bin"
 
 # Detect the operating system using get_os function
 OS=$(get_os)
@@ -52,6 +54,7 @@ case $OS in
         run_script installers/tailscale.sh
         run_script installers/zsh_shell.sh
         run_script installers/1password.sh
+        run_script installers/age_sops.sh
         run_script configuration/age_encryption.sh
         run_script dotfiles_linux/copy_dotfiles.sh
         run_script dotfiles_linux/process_dotfiles.sh
