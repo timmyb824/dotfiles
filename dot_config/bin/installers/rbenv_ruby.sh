@@ -5,6 +5,11 @@ source "$(dirname "$BASH_SOURCE")/../utilities/init.sh"
 
 # Function to install rbenv using the official installer script
 install_rbenv() {
+  # Install dependencies for rbenv and Ruby build
+  sudo apt update || exit_with_error "Failed to update apt."
+  sudo apt install -y git curl autoconf bison build-essential libssl-dev libyaml-dev \
+    libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm6 libgdbm-dev libdb-dev ||
+    exit_with_error "Failed to install dependencies for rbenv and Ruby build."
   curl -fsSL https://github.com/rbenv/rbenv-installer/raw/HEAD/bin/rbenv-installer | bash
 }
 
