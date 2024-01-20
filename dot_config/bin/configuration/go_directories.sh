@@ -21,8 +21,20 @@ create_go_directories() {
     fi
 }
 
-if command_exists go; then
-    create_go_directories || exit_with_error "Unable to create go directories." 2
+if ! command_exists go; then
+    echo_with_color "31" "Go could not be found."
+
+    attempt_fix_command "go" "$HOME/.local/bin"
+
+    if command_exists go; then
+        echo_with_color "33" "Found go, attempting to create go directories..."
+        create_go_directories || exit_with_error "Unable to create go directories." 2
+    else
+        echo_with_color "31" "Go is still not found after attempting to fix the PATH. Please install Go to continue."
+        exit 1
+    fi
 else
-    echo_with_color "33" "Go is not installed."
+    echo_with_color "32" "Go is already installed and working."
+    echo_with_color "33" "Attempting to create go directories..."
+    create_go_directories || exit_with_error "Unable to create go directories." 2
 fi

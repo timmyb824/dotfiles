@@ -68,6 +68,7 @@ if command -v sops >/dev/null && command -v age >/dev/null; then
     fi
     # Post-installation cleanup for MacOS
     if [[ "$OS" == "MacOS" ]]; then
+        echo_with_color "32" "Removing sops and age binaries since they will be installed via Homebrew."
         safe_remove_command sops
         safe_remove_command age
     fi
