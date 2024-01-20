@@ -67,7 +67,6 @@ processed_files=()
 if ask_yes_or_no "Do you want to process the templates into dotfiles?"; then
     # Attempt to sign into 1Password
     if 1password_sign_in; then
-        echo "Signed in to 1Password successfully."
         echo "Processing templates..."
 
         # Process each file and copy it to the designated output path

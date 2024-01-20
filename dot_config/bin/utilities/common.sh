@@ -170,20 +170,10 @@ configure_1password_account() {
 }
 
 1password_sign_in() {
-    if op account list &>/dev/null; then
-        echo_with_color "32" "No 1Password account found. Attempting to configure 1Password CLI..."
-        configure_1password_account || exit_with_error "Failed to configure 1Password CLI."
+    if eval "$(op signin)"; then
+        echo_with_color "32" "Successfully signed into 1Password CLI."
     else
-        echo_with_color "32" "1Password account already added. Attempting to sign in..."
-        if OP_SESSION_TOKEN=$(op signin --raw 2>&1); then
-            export OP_SESSION_TOKEN
-            echo_with_color "32" "Successfully signed into 1Password CLI."
-        else
-            local error_message=$OP_SESSION_TOKEN  # Capturing the error message from stderr
-            OP_SESSION_TOKEN=""  # Clear the token since signin failed
-            echo_with_color "31" "Failed to sign in to 1Password CLI. Error: $error_message"
-            return 1
-        fi
+        echo_with_color "31" "Failed to sign in to 1Password CLI."
+        return 1
     fi
 }
-
