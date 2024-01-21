@@ -49,6 +49,20 @@ run_setup_scripts_macos() {
     echo_with_color "32" "$script completed."
 }
 
+package_installation() {
+    # Ask for package installation
+    if ask_yes_or_no "Do you want to install the packages?"; then
+        if [ -f "$INSTALL_PACKAGES_SCRIPT" ] && [ -x "$INSTALL_PACKAGES_SCRIPT" ]; then
+            echo "Running $INSTALL_PACKAGES_SCRIPT script."
+            "$INSTALL_PACKAGES_SCRIPT" || exit_with_error "Failed to execute $INSTALL_PACKAGES_SCRIPT."
+        else
+            exit_with_error "$INSTALL_PACKAGES_SCRIPT does not exist or is not executable."
+        fi
+    else
+        echo "Package installation skipped."
+    fi
+}
+
 # Determine the current operating system
 OS=$(get_os)
 
@@ -59,53 +73,47 @@ case "$OS" in
 "MacOS")
     echo_with_color "34" "Detected macOS."
 
-    echo_with_color "32" "Installing 1password cli..."
-    run_setup_scripts_macos "installers/1password.sh"
+    if [[ -d "$HOME/.local/share/chezmoi" && -f "$HOME/.zshrc" ]]; then
+        echo_with_color "33" "It appears chezmoi is already installed and initialized."
+        if ask_yes_or_no "Do you still want to proceed with all installations including chezmoi initialization?"; then
+            echo_with_color "32" "Proceeding with all installations:"
+            echo_with_color "32" "Installing 1password cli..."
+            run_setup_scripts_macos "installers/1password.sh"
 
-    # echo_with_color "32" "Installing age and sops..."
-    # run_setup_scripts_macos "installers/age_sops.sh"
+            echo_with_color "32" "Creating chezmoi config file..."
+            run_setup_scripts_macos "configuration/chezmoi_config.sh"
 
-    echo_with_color "32" "Creating chezmoi config file..."
-    run_setup_scripts_macos "configuration/chezmoi_config.sh"
+            echo_with_color "32" "Creating age secret key..."
+            run_setup_scripts_macos "configuration/age_secret.sh"
 
-    echo_with_color "32" "Creating age secret key..."
-    run_setup_scripts_macos "configuration/age_secret.sh"
+            if 1password_sign_in; then
+                install_chezmoi
+                initialize_chezmoi
+            else
+                exit_with_error "Failed to install chezmoi."
+            fi
 
-    if 1password_sign_in; then
-        install_chezmoi
-        initialize_chezmoi
-    else
-        exit_with_error "Failed to install chezmoi."
+            if ask_yes_or_no "Do you want to remove the chezmoi binary?"; then
+                echo_with_color "34" "Removing chezmoi binary..."
+                safe_remove_command $CHEZMOI_BIN
+            else
+                echo_with_color "34" "Skipping chezmoi binary removal."
+            fi
+
+            package_installation
+        else
+            echo_with_color "34" "Skipping chezmoi installation and initialization."
+            package_installation
+        fi
     fi
 
-    echo_with_color "34" "Removing chezmoi binary..."
-    safe_remove_command $CHEZMOI_BIN || exit_with_error "Failed to remove chezmoi binary."
     ;;
 "Linux")
     echo_with_color "32" "Detected Linux."
     echo_with_color "32" "Skipping chezmoi installation."
+    package_installation
     ;;
 *)
     exit_with_error "Unsupported operating system."
     ;;
 esac
-
-# # Ask for package installation
-# if ask_yes_or_no "Do you want to install the packages?"; then
-#     echo "Running $INSTALL_PACKAGES_SCRIPT script."
-#     "$INSTALL_PACKAGES_SCRIPT" || exit_with_error "Failed to execute $INSTALL_PACKAGES_SCRIPT."
-# else
-#     echo "Package installation skipped."
-# fi
-
-# Ask for package installation
-if ask_yes_or_no "Do you want to install the packages?"; then
-    if [ -f "$INSTALL_PACKAGES_SCRIPT" ] && [ -x "$INSTALL_PACKAGES_SCRIPT" ]; then
-        echo "Running $INSTALL_PACKAGES_SCRIPT script."
-        "$INSTALL_PACKAGES_SCRIPT" || exit_with_error "Failed to execute $INSTALL_PACKAGES_SCRIPT."
-    else
-        exit_with_error "$INSTALL_PACKAGES_SCRIPT does not exist or is not executable."
-    fi
-else
-    echo "Package installation skipped."
-fi

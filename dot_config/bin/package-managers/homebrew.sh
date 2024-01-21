@@ -35,7 +35,7 @@ install_brew_linux() {
 # Prompt the user to install packages using Homebrew
 install_packages_with_brew() {
     if ask_yes_or_no "Do you want to install the packages from the Brewfile?"; then
-        brew bundle --file=./dot_config/bin/Brewfile
+        brew bundle --file="dot_config/bin/package-managers/Brewfile"
     else
         echo "Skipping package installation."
     fi
