@@ -6,7 +6,21 @@ source "$(dirname "$BASH_SOURCE")/../utilities/init.sh"
 # Function to install rbenv using Homebrew on macOS
 install_rbenv_macos() {
   echo_with_color "32" "Installing rbenv using Homebrew..."
-  brew install rbenv ruby-build || exit_with_error "Failed to install rbenv and/or ruby-build."
+  # Check for Homebrew in the common installation locations
+  if command_exists brew; then
+    echo_with_color "32" "Homebrew is already installed."
+  else
+    # Attempt to initialize Homebrew if it's installed but not in the PATH
+    if [[ -x "/opt/homebrew/bin/brew" ]]; then
+      eval "$(/opt/homebrew/bin/brew shellenv)"
+    else
+      # Homebrew is not installed, provide instructions to install it
+      echo_with_color "33" "Homebrew is not installed. Please run homebrew.sh first."
+      exit_with_error "Homebrew installation required"
+    fi
+  fi
+  brew update
+  brew install rbenv ruby-build
 }
 
 # Function to install rbenv using the official installer script on Linux
@@ -22,7 +36,7 @@ install_rbenv_linux() {
 # Function to initialize rbenv within the script
 initialize_rbenv() {
   if [[ "$(get_os)" == "MacOS" ]]; then
-    eval "$(rbenv init -)"
+    eval "$(rbenv init - zsh)"
   elif [[ "$(get_os)" == "Linux" ]]; then
     export PATH="$HOME/.rbenv/bin:$PATH"
     eval "$(rbenv init -)"

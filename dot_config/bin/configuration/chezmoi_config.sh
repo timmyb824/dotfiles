@@ -19,8 +19,7 @@ create_chezmoi_config() {
 
 # Ensure required chezmoi config variables are set
 if [ -z "$CHEZMOI_CONFIG_FILE" ] || [ -z "$CHEZMOI_CONFIG_FILE_LOCATION" ]; then
-    echo_with_color "31" "Required chezmoi config environment variables are not set."
-    exit 1
+    exit_with_error "Required chezmoi config environment variables are not set."
 fi
 
 # Determine the OS

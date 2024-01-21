@@ -25,7 +25,6 @@ create_age_secret_key() {
 # Ensure required age secret key variables are set
 if [ -z "$AGE_SECRET_KEY_LOCATION" ] || [ -z "$AGE_SECRET_KEY_FILE" ]; then
     echo_with_color "31" "Required age secret key environment variables are not set."
-    exit 1
 fi
 
 # Run the sign-in process
