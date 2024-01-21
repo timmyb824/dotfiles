@@ -35,11 +35,13 @@ case $OS in
         run_script package-managers/basher.sh
         run_script package-managers/krew.sh
         run_script package-managers/micro.sh
-        run_script package-managers/python_pip.sh
         run_script package-managers/pipx.sh
+        run_script installers/pyenv_python.sh
+        run_script package-managers/pip.sh
         run_script package-managers/node_npm.sh
         run_script installers/terraform.sh
         run_script installers/tailscale.sh
+        run_script installers/rbenv_ruby.sh
 
         ;;
     Linux)
@@ -47,9 +49,10 @@ case $OS in
         run_script package-managers/basher.sh
         run_script package-managers/krew.sh
         run_script package-managers/micro.sh
-        run_script package-managers/python_pip.sh
         run_script package-managers/pipx.sh
         run_script package-managers/node_npm.sh
+        run_script installers/pyenv_python.sh
+        run_script package-managers/pip.sh
         run_script installers/terraform.sh
         run_script installers/tailscale.sh
         run_script installers/rbenv_ruby.sh
