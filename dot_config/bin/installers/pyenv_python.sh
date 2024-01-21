@@ -22,6 +22,23 @@ install_pyenv_linux() {
 # Function to install pyenv and Python on MacOS
 install_pyenv_macos() {
     echo_with_color "32" "Installing pyenv and pyenv-virtualenv using Homebrew for MacOS..."
+
+    # Check for Homebrew in the common installation locations
+    if command_exists brew; then
+        echo_with_color "32" "Homebrew is already installed."
+    else
+        # Attempt to initialize Homebrew if it's installed but not in the PATH
+        if [[ -x "/opt/homebrew/bin/brew" ]]; then
+            eval "$(/opt/homebrew/bin/brew shellenv)"
+        elif [[ -x "/usr/local/bin/brew" ]]; then
+            eval "$(/usr/local/bin/brew shellenv)"
+        else
+            # Homebrew is not installed, provide instructions to install it
+            echo_with_color "33" "Homebrew is not installed. Please run homebrew.sh first."
+            exit_with_error "Homebrew installation required"
+        fi
+    fi
+
     brew update
     brew install pyenv pyenv-virtualenv
 
