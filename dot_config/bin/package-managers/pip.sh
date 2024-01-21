@@ -19,6 +19,7 @@ initialize_pip() {
     else
         # Attempt to initialize pip if it's installed but not in the PATH
         if [[ -x "$HOME/.pyenv/shims/pip" ]]; then
+            eval "$(/opt/homebrew/bin/brew shellenv)"
             export PYENV_ROOT="$HOME/.pyenv"
             export PATH="$PYENV_ROOT/bin:$PATH"
             eval "$(pyenv init --path)"
