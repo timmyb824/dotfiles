@@ -53,26 +53,3 @@ if command_exists age; then
 else
     install_age
 fi
-
-# Check if both sops and age are installed successfully
-if command -v sops >/dev/null && command -v age >/dev/null; then
-    read -p "Do you want to configure sops/age? (y/N) " -n 1 -r
-    echo
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-        if [[ -f "dot_config/bin/configuration/age_secret.sh" ]]; then
-            chmod +x "dot_config/bin/configuration/age_secret.sh"
-            bash "dot_config/bin/configuration/age_secret.sh"
-        else
-            echo "Configuration script not found."
-        fi
-    fi
-    # Post-installation cleanup for MacOS
-    if [[ "$OS" == "MacOS" ]]; then
-        echo_with_color "32" "Removing sops and age binaries since they will be installed via Homebrew."
-        safe_remove_command sops
-        safe_remove_command age
-    fi
-else
-    echo "Failed to install sops and/or age."
-    exit 1
-fi

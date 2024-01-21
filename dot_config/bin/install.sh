@@ -56,6 +56,7 @@ case $OS in
         run_script installers/zsh_shell.sh
         run_script installers/1password.sh
         run_script installers/age_sops.sh
+        run_script configuration/age_secret.sh
         run_script configuration/go_directories.sh
         run_script dotfiles_linux/copy_dotfiles.sh
         run_script dotfiles_linux/process_dotfiles.sh
