@@ -12,6 +12,25 @@ pip_packages=(
     "spotify_to_ytmusic"
 )
 
+initialize_pip() {
+    # Check for pip in the common installation locations
+    if command_exists pip; then
+        echo_with_color "32" "pip is already installed."
+    else
+        # Attempt to initialize pip if it's installed but not in the PATH
+        if [[ -x "$HOME/.pyenv/shims/pip" ]]; then
+            export PYENV_ROOT="$HOME/.pyenv"
+            export PATH="$PYENV_ROOT/bin:$PATH"
+            eval "$(pyenv init --path)"
+            eval "$(pyenv init -)"
+        else
+            # pip is not installed, provide instructions to install it
+            echo_with_color "33" "pip is not installed. Please run pyenv_python.sh first."
+            exit_with_error "pip installation required"
+        fi
+    fi
+}
+
 # Function to confirm Python version and pip availability
 confirm_python_and_pip() {
     local version
@@ -40,5 +59,6 @@ install_pip_packages() {
     done
 }
 
+initialize_pip
 confirm_python_and_pip
 install_pip_packages
