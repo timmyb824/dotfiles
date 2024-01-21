@@ -11,12 +11,6 @@ install_pyenv_linux() {
         libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
 
     curl https://pyenv.run | bash
-
-    # Initialize pyenv for the current session
-    export PYENV_ROOT="$HOME/.pyenv"
-    export PATH="$PYENV_ROOT/bin:$PATH"
-    eval "$(pyenv init --path)"
-    eval "$(pyenv init -)"
 }
 
 # Function to install pyenv and Python on MacOS
@@ -39,12 +33,6 @@ install_pyenv_macos() {
 
     brew update
     brew install pyenv pyenv-virtualenv
-
-    # Initialize pyenv for the current session
-    export PYENV_ROOT="$HOME/.pyenv"
-    export PATH="$PYENV_ROOT/bin:$PATH"
-    eval "$(pyenv init --path)"
-    eval "$(pyenv init -)"
 }
 
 # Function to install and set up Python version using pyenv
@@ -62,11 +50,18 @@ setup_python_version() {
     fi
 }
 
+intialize_pyenv() {
+    # Initialize pyenv for the current session
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PATH="$PYENV_ROOT/bin:$PATH"
+    eval "$(pyenv init --path)"
+    eval "$(pyenv init -)"
+}
+
 # Main installation process
 if ! command_exists pyenv; then
     echo_with_color "32" "pyenv could not be found."
 
-    # Distinguish between Linux and MacOS for installation steps
     OS=$(get_os)
     if [[ "$OS" == "Linux" ]]; then
         install_pyenv_linux
@@ -76,7 +71,7 @@ if ! command_exists pyenv; then
         exit_with_error "Unsupported operating system: $OS"
     fi
 
-    # Proceed with Python installation using pyenv
+    intialize_pyenv
     setup_python_version
 else
     echo_with_color "32" "pyenv is already installed."
