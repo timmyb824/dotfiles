@@ -61,7 +61,7 @@ if [[ "$(get_os)" == "MacOS" ]]; then
     install_rbenv_macos || exit_with_error "Failed to install rbenv."
     echo_with_color "32" "rbenv has been successfully installed."
     echo_with_color "32" "Please restart your terminal to initialize rbenv"
-    echo_with_color "32" "Install ruby by running `rbenv install $RUBY_VERSION`"
+    echo_with_color "32" "Install ruby by running 'rbenv install $RUBY_VERSION'"
   fi
 elif [[ "$(get_os)" == "Linux" ]]; then
   # Linux system
