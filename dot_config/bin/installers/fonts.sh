@@ -45,7 +45,7 @@ if [ "$(get_os)" == "Linux" ]; then
         # If neither 'ghq' nor 'git' is installed, exit with an error
         exit_with_error "Neither ghq nor git is installed."
     fi
-elif [ "$(get_os)" == "macOS" ]; then
+elif [ "$(get_os)" == "MacOS" ]; then
     # If the operating system is macOS, install fonts using the function defined above
     install_fonts_macos
 else
