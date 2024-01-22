@@ -3,7 +3,7 @@
 source "$(dirname "$BASH_SOURCE")/../utilities/init.sh"
 
 # Function to install fonts using the cloned repository
-install_fonts() {
+install_fonts_linux() {
     local fonts_dir=$1
 
     echo_with_color "32" "Installing fonts..."
@@ -12,6 +12,18 @@ install_fonts() {
         ./install.sh "$font" || exit_with_error "Could not install $font."
     done
     echo_with_color "32" "Fonts installed."
+}
+
+install_fonts_macos() {
+    # Define the directory where your .ttf files are located
+    FONT_DIR="$HOME/.config/fonts/berkeley-mono-nerd-font"
+
+    # The destination directory for the fonts
+    USER_FONT_DIR="$HOME/Library/Fonts"
+
+    # Copy each .ttf font file to the user's font directory
+    echo "Installing fonts..."
+    find "$FONT_DIR" -name "*.ttf" -exec cp "{}" "$USER_FONT_DIR" \;
 }
 
 # Check if the script is running on Linux
@@ -23,7 +35,7 @@ if [ "$(get_os)" == "Linux" ]; then
         if [ -z "$nerd_fonts_dir" ]; then
             exit_with_error "Could not find nerd-fonts directory."
         fi
-        install_fonts "$nerd_fonts_dir"
+        install_fonts_linux "$nerd_fonts_dir"
     elif command_exists "git"; then
         # If 'ghq' isn't installed but 'git' is, then clone and install fonts using 'git'
         echo_with_color "32" "ghq not found. Falling back to git for downloading fonts..."
@@ -33,7 +45,10 @@ if [ "$(get_os)" == "Linux" ]; then
         # If neither 'ghq' nor 'git' is installed, exit with an error
         exit_with_error "Neither ghq nor git is installed."
     fi
+elif [ "$(get_os)" == "macOS" ]; then
+    # If the operating system is macOS, install fonts using the function defined above
+    install_fonts_macos
 else
-    # If the operating system is not Linux, inform the user and exit
-    echo_with_color "31" "This script is only for Linux."
+    # If the operating system is not linux or macos, inform the user and exit
+    echo_with_color "31" "Operating system not supported."
 fi
