@@ -47,7 +47,9 @@ initialize_rbenv() {
 
 # Function to install Ruby and set it as the global version
 install_and_set_ruby() {
+  echo_with_color "32" "Installing Ruby version $RUBY_VERSION..."
   rbenv install $RUBY_VERSION || exit_with_error "Failed to install Ruby version $RUBY_VERSION."
+  echo_with_color "32" "Setting Ruby version $RUBY_VERSION as global..."
   rbenv global $RUBY_VERSION || exit_with_error "Failed to set Ruby version $RUBY_VERSION as global."
   echo "Ruby installation completed. Ruby version set to $RUBY_VERSION."
 }
@@ -59,24 +61,17 @@ if [[ "$(get_os)" == "MacOS" ]]; then
     echo_with_color "32" "rbenv is already installed."
   else
     install_rbenv_macos || exit_with_error "Failed to install rbenv."
-    echo_with_color "32" "rbenv has been successfully installed."
-    echo_with_color "32" "Please restart your terminal to initialize rbenv"
-    echo_with_color "32" "Install ruby by running 'rbenv install $RUBY_VERSION'"
   fi
 elif [[ "$(get_os)" == "Linux" ]]; then
   # Linux system
   if command_exists rbenv; then
     echo_with_color "32" "rbenv is already installed."
   else
-    install_rbenv_linux
-    initialize_rbenv
-    install_and_set_ruby
+    install_rbenv_linux || exit_with_error "Failed to install rbenv."
   fi
 else
   exit_with_error "Unsupported OS type: $OSTYPE"
 fi
 
-# TODO: MacOS installation fails at the last step but it works if I run the commands manually in the terminal,
-# therefore moving these steps to run for Linux only and adding instructions for MacOS users to run them manually
-# initialize_rbenv
-# install_and_set_ruby
+initialize_rbenv
+install_and_set_ruby
