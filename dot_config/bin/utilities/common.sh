@@ -124,10 +124,10 @@ ask_for_input() {
 check_command() {
     local cmd="$1"
     if ! command -v "$cmd" &> /dev/null; then
-        echo "$cmd could not be found"
+        echo_with_color "31" "$cmd could not be found"
         return 1
     else
-        echo "$cmd is available"
+        echo_with_color "32" "$cmd is available"
         return 0
     fi
 }
@@ -138,8 +138,7 @@ attempt_fix_command() {
     if ! check_command "$cmd"; then
         add_to_path "$cmd_path"
         if ! check_command "$cmd"; then
-            echo "$cmd is still not available after updating the PATH"
-            exit 1
+            exit_with_error "$cmd is still not available after updating the PATH"
         fi
     fi
 }
