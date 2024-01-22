@@ -14,15 +14,15 @@ install_fonts_linux() {
     echo_with_color "32" "Fonts installed."
 }
 
-install_fonts_macos() {
-    # Define the directory where your .ttf files are located
-    FONT_DIR="$HOME/.config/fonts/berkeley-mono-nerd-font"
 
+install_fonts_macos() {
+    # Get the directory where your .ttf files are located from the parameter
+    FONT_DIR="$1"
     # The destination directory for the fonts
     USER_FONT_DIR="$HOME/Library/Fonts"
 
     # Copy each .ttf font file to the user's font directory
-    echo "Installing fonts..."
+    echo_with_color "32" "Installing fonts from $FONT_DIR..."
     find "$FONT_DIR" -name "*.ttf" -exec cp "{}" "$USER_FONT_DIR" \;
 }
 
@@ -47,7 +47,9 @@ if [ "$(get_os)" == "Linux" ]; then
     fi
 elif [ "$(get_os)" == "MacOS" ]; then
     # If the operating system is macOS, install fonts using the function defined above
-    install_fonts_macos
+    install_fonts_macos "$HOME/.config/fonts/berkeley-mono-nerd-font" || exit_with_error "Could not install fonts berkeley-mono-nerd-font."
+    install_fonts_macos "$HOME/.config/fonts/berkeley-mono-typeface/berkeley-mono/TTF" || exit_with_error "Could not install fonts berkeley-mono-typeface."
+    install_fonts_macos "$HOME/.config/fonts/berkeley-mono-typeface/berkeley-mono-variable/TTF" || exit_with_error "Could not install fonts berkeley-mono-typeface."
 else
     # If the operating system is not linux or macos, inform the user and exit
     echo_with_color "31" "Operating system not supported."
