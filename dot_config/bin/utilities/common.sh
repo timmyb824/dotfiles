@@ -26,7 +26,7 @@ export CHEZMOI_CONFIG_FILE_LOCATION="$HOME/.config/chezmoi/chezmoi.toml"
 export SOPS_VERSION="v3.8.1"
 export AGE_VERSION="v1.1.1"
 
-export RUBY_VERSION="3.1.2"
+export RUBY_VERSION="3.2.1"
 
 ############# Global functions #############
 
