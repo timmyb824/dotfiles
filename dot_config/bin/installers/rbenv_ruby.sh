@@ -36,8 +36,10 @@ install_rbenv_linux() {
 # Function to initialize rbenv within the script
 initialize_rbenv() {
   if [[ "$(get_os)" == "MacOS" ]]; then
-    eval "$(rbenv init - zsh)"
+    echo_with_color "32" "Initializing rbenv for the current MacOS session..."
+    eval "$(rbenv init -)"
   elif [[ "$(get_os)" == "Linux" ]]; then
+    echo_with_color "32" "Initializing rbenv for the current Linux session..."
     export PATH="$HOME/.rbenv/bin:$PATH"
     eval "$(rbenv init -)"
   fi
@@ -60,12 +62,13 @@ if [[ "$(get_os)" == "MacOS" ]]; then
   fi
 elif [[ "$(get_os)" == "Linux" ]]; then
   # Linux system
-  if ! command_exists rbenv; then
+  if command_exists rbenv; then
+    echo_with_color "32" "rbenv is already installed."
+  else
     install_rbenv_linux
   fi
 else
-  echo "Unsupported OS type: $OSTYPE"
-  exit 1
+  exit_with_error "Unsupported OS type: $OSTYPE"
 fi
 
 # Initialize rbenv for this script session
