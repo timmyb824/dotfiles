@@ -3827,6 +3827,36 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>guid</key>
+			<string>D7290910-8CF3-43C8-93D8-A4E0B05300E9</string>
+			<key>title</key>
+			<string>linux: diff with process substitution</string>
+			<key>value</key>
+			<string>diff ~/.zshrc &lt;(cat dot_zshrc.tmpl | chez execute-template)</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>guid</key>
+			<string>D37FFFE9-8B7D-416C-AC35-34B6CA954E63</string>
+			<key>title</key>
+			<string>linux: list installed apt packages</string>
+			<key>value</key>
+			<string>comm -23 &lt;(apt-mark showmanual | sort -u) &lt;(grep -oP 'Package: \K\S+' /var/log/installer/status | sort -u)</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>guid</key>
+			<string>3D847C8E-86D8-4889-9E50-7F66187FDD4E</string>
+			<key>title</key>
+			<string>linux: launch zsh with no configurations</string>
+			<key>value</key>
+			<string>zsh -d -f -i</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>SoundForEsc</key>
 	<false/>
