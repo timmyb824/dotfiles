@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-# Execut with bash: `bash setup.sh` or `curl -sSL https://raw.githubusercontent.com/timmyb824/dotfiles/main/setup.sh | bash`
-
+# Execute with bash: `bash setup.sh`
 
 # Source the common functions
 source "dot_config/bin/utilities/init.sh"
@@ -66,30 +65,8 @@ package_installation() {
     fi
 }
 
-prepare_setup() {
-    # check if git is installed
-    if command_exists git; then
-        # clone the dotfiles repo to $HOME/dotfiles
-        if [ ! -d "$HOME/dotfiles" ]; then
-            echo "Cloning dotfiles repo to $HOME/dotfiles..."
-            git clone https://github.com/timmyb824/dotfiles.git "$HOME/dotfiles" || exit_with_error "Failed to clone dotfiles repo."
-        else
-            echo "dotfiles repo already exists."
-        fi
-    else
-        exit_with_error "git is not installed."
-    fi
-}
-
 # Determine the current operating system
 OS=$(get_os)
-
-# Prepare the setup
-if ask_yes_or_no "Do you want to prepare the setup?"; then
-    prepare_setup || exit_with_error "Failed to prepare setup."
-else
-    echo "Skipping setup preparation."
-fi
 
 # Check if chezmoi and .zshrc already exist
 CHEZMOI_INITIALIZED=false
