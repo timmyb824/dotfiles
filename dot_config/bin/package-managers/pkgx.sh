@@ -147,6 +147,7 @@ packages=(
     "starship"
     "steampipe"
     "stern"
+    "tart"
     "tldr"
     "tmux"
     "toast"

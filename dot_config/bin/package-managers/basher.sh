@@ -36,6 +36,7 @@ packages=(
     "sdushantha/tmpmail"
     "sickill/bitpocket" # DIY dropbox
     "vaniacer/sshto"
+    "xwmx/nb" # note taking
 )
 
 basher_bin="$HOME/.basher/bin"
