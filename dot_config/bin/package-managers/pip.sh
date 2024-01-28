@@ -10,6 +10,7 @@ pip_packages=(
     "python-sysinformer"
     "sourcery"
     "spotify_to_ytmusic"
+    "grafana-backup"
 )
 
 initialize_pip() {
