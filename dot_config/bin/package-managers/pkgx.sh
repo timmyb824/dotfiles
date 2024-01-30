@@ -43,6 +43,7 @@ packages=(
     "bore.pub"
     "broot"
     "btm"
+    "btop"
     "chezmoi.io"
     "click"
     "cloc"
