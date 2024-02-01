@@ -74,7 +74,7 @@ warp_exclusive_plugins=(
   Aloxaf/fzf-tab
   zdharma/fast-syntax-highlighting
   clarketm/zsh-completions
-  zsh-users/zsh-autosuggestions
+  # zsh-users/zsh-autosuggestions # testing out Termium autocomplete
 )
 
 # If not running on Warp terminal, load the additional plugins
