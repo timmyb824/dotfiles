@@ -56,6 +56,7 @@ case $OS in
         run_script installers/terraform.sh
         run_script installers/tailscale.sh
         run_script installers/rbenv_ruby.sh
+        run_script installers/docker.sh
         run_script installers/zsh_shell.sh
         run_script installers/1password.sh
         run_script installers/age_sops.sh
