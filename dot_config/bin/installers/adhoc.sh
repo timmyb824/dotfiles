@@ -18,3 +18,5 @@ install_termium() {
         fi
     fi
 }
+
+install_termium()
