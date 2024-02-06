@@ -63,9 +63,9 @@ if command -v ngrok &>/dev/null; then
   eval "$(ngrok completion)"
 fi
 
-if command -v termium > /dev/null 2>&1; then
-  eval "$(termium shell-hook show post)"
-fi
+#if command -v termium > /dev/null 2>&1; then
+#  eval "$(termium shell-hook show post)"
+#fi
 
 [ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
 {{ else if (and (eq .chezmoi.os "darwin") (eq .chezmoi.hostname "Timothy-Bryant")) -}}
