@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-source "$(dirname "$BASH_SOURCE")/../utilities/init.sh"
-
+source "$(dirname "$BASH_SOURCE")/../init/init.sh"
 ##### Consider storing linux dotfiles in their own private repo #####
 
 # # ensure the shell is zsh and if not, try to switch to zsh

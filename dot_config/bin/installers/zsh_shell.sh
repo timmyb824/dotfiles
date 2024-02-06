@@ -4,8 +4,7 @@
 #     Install Zsh     #
 #######################
 
-source "$(dirname "$BASH_SOURCE")/../utilities/init.sh"
-
+source "$(dirname "$BASH_SOURCE")/../init/init.sh"
 OS=$(get_os)
 
 # Check for Zsh and install if not present

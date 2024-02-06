@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-source "$(dirname "$BASH_SOURCE")/../utilities/init.sh"
-
+source "$(dirname "$BASH_SOURCE")/../init/init.sh"
 # Function to install Homebrew on macOS
 install_brew_macos() {
     if ! command_exists brew; then

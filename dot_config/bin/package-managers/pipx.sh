@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
 # Correct the source path if necessary and ensure init.sh is in the correct location
-source "$(dirname "$BASH_SOURCE")/../utilities/init.sh"
-
+source "$(dirname "$BASH_SOURCE")/../init/init.sh"
 # List of packages to install
 packages=(
     "poetry"

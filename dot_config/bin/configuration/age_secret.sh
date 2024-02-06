@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-source "$(dirname "$BASH_SOURCE")/../utilities/init.sh"
-
+source "$(dirname "$BASH_SOURCE")/../init/init.sh"
 create_age_secret_key() {
     if [ ! -f "$AGE_SECRET_KEY_LOCATION" ]; then
         echo_with_color "32" "Creating age secret key..."

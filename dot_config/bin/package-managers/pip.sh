@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-source "$(dirname "$BASH_SOURCE")/../utilities/init.sh"
-
+source "$(dirname "$BASH_SOURCE")/../init/init.sh"
 # Pip packages to install
 pip_packages=(
     "ansible"

@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-source "$(dirname "$BASH_SOURCE")/../utilities/init.sh"
-
+source "$(dirname "$BASH_SOURCE")/../init/init.sh"
 # install rosetta
 if [[ ! -d "/Library/Apple/System/Library/LaunchDaemons" ]]; then
   echo "Rosetta is not installed. Installing Rosetta..."

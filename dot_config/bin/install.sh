@@ -4,7 +4,7 @@
 set -e
 
 # Source common functions
-source "$(dirname "$BASH_SOURCE")/utilities/init.sh"
+source "$(dirname "$BASH_SOURCE")/init/init.sh"
 
 # Function to make a script executable and run it
 run_script() {

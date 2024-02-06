@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-source "$(dirname "$BASH_SOURCE")/../utilities/init.sh"
-
+source "$(dirname "$BASH_SOURCE")/../init/init.sh"
 create_chezmoi_config() {
     if [ ! -f "$CHEZMOI_CONFIG_FILE_LOCATION" ]; then
         echo_with_color "32" "Creating chezmoi config file..."

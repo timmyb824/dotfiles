@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
 # Define safe_remove_command function and other necessary utilities
-source "$(dirname "$BASH_SOURCE")/../utilities/init.sh"
-
+source "$(dirname "$BASH_SOURCE")/../init/init.sh"
 OS=$(get_os)
 
 # Functions to install sops and age

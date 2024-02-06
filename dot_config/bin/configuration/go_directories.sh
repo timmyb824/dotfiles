@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-source "$(dirname "$BASH_SOURCE")/../utilities/init.sh"
-
+source "$(dirname "$BASH_SOURCE")/../init/init.sh"
 # if directors $HOME/go and $HOME/go/bin do not exist, create them
 create_go_directories() {
     if [ ! -d "$HOME/go" ]; then

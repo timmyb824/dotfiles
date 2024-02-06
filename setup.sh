@@ -3,7 +3,7 @@
 # Execute with bash: `bash setup.sh`
 
 # Source the common functions
-source "dot_config/bin/utilities/init.sh"
+source "dot_config/bin/init/init.sh"
 
 # Define the path to the scripts
 SCRIPT_DIR="dot_config/bin"

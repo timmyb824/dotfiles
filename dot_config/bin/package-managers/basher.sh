@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-source "$(dirname "$BASH_SOURCE")/../utilities/init.sh"
-
+source "$(dirname "$BASH_SOURCE")/../init/init.sh"
 # Check if git is installed
 if ! command_exists git; then
     exit_with_error "git is not installed - please install git and run this script again"
