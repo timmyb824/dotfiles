@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 source "$(dirname "$BASH_SOURCE")/../init/init.sh"
+
 # Function to install pkgx
 install_pkgx() {
     if command_exists brew; then
@@ -22,7 +23,6 @@ fi
 
 # Verify if pkgx was successfully installed
 command_exists pkgx || exit_with_error "pkgx installation failed."
-
 
 # List of packages to install
 

@@ -5,6 +5,7 @@
 ###################################
 
 source "$(dirname "$BASH_SOURCE")/../init/init.sh"
+
 # Function to install tailscale on Linux
 install_tailscale_linux() {
     if ask_yes_or_no "Tailscale is not installed. Would you like to install Tailscale?"; then

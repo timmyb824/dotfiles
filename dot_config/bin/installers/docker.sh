@@ -2,6 +2,7 @@
 
 # Define safe_remove_command function and other necessary utilities
 source "$(dirname "$BASH_SOURCE")/../init/init.sh"
+
 # Function to check if Docker is already installed
 check_docker_installed() {
   if command_exists docker; then

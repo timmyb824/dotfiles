@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 source "$(dirname "$BASH_SOURCE")/../init/init.sh"
+
 # Function to install pyenv and Python on MacOS
 install_tfenv_macos() {
     echo_with_color "32" "Installing tfenv using Homebrew for MacOS..."

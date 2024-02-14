@@ -2,16 +2,11 @@
 
 # Source the common functions script
 source "$(dirname "$BASH_SOURCE")/../init/init.sh"
+
 # Function to initialize fnm for the current session
 initialize_fnm_for_session() {
     # Initialize fnm without specifying a shell
     eval "$(fnm env --use-on-cd)"
-}
-
-# Function to add a directory to PATH
-add_to_path() {
-    PATH="$1:$PATH"
-    export PATH
 }
 
 # Check if npm is installed and working

@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 source "$(dirname "$BASH_SOURCE")/../init/init.sh"
+
 # Function to install pyenv and Python on Linux
 install_pyenv_linux() {
     echo_with_color "32" "Installing pyenv and Python dependencies for Linux..."

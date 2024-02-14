@@ -2,6 +2,7 @@
 
 # Correct the source path if necessary and ensure init.sh is in the correct location
 source "$(dirname "$BASH_SOURCE")/../init/init.sh"
+
 # List of packages to install
 packages=(
     "poetry"
@@ -18,12 +19,6 @@ install_pipx_packages() {
             exit 1
         fi
     done
-}
-
-# Function to add a directory to PATH
-add_to_path() {
-    PATH="$1:$PATH"
-    export PATH
 }
 
 # Check if pipx is installed

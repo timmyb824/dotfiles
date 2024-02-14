@@ -2,6 +2,7 @@
 
 # Define safe_remove_command function and other necessary utilities
 source "$(dirname "$BASH_SOURCE")/../init/init.sh"
+
 # Function to install rbenv using Homebrew on macOS
 install_rbenv_macos() {
   echo_with_color "32" "Installing rbenv using Homebrew..."
