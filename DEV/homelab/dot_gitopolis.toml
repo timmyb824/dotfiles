@@ -7,6 +7,14 @@ name = "origin"
 url = "git@github.com:timmyb824/automation_ansible.git"
 
 [[repos]]
+path = "automation_packer"
+tags = ["automation_packer", "homelab", "packer"]
+
+[repos.remotes.origin]
+name = "origin"
+url = "git@github.com:timmyb824/automation_packer.git"
+
+[[repos]]
 path = "automation_pyinfra"
 tags = ["automation_pyinfra", "homelab", "pyinfra"]
 
