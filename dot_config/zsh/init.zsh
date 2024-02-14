@@ -1,6 +1,6 @@
 # Initialization settings
 eval "$(/opt/homebrew/bin/brew shellenv)"
-FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+FPATH="$HOME/.zsh/completion:$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 
 if [[ $TERM_PROGRAM != "WarpTerminal" ]]; then
     source <($HOME/.local/bin/starship init zsh --print-full-init)
