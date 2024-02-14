@@ -20,16 +20,3 @@ source "$HOME/.config/zsh/completions.zsh"
 
 # Load plugins and package managers
 source "$HOME/.config/zsh/packages.zsh"
-
-
-
-
-
-
-
-
-
-
-
-
-
