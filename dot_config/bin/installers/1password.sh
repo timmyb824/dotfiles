@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 source "$(dirname "$BASH_SOURCE")/../init/init.sh"
+
 # Function to download and install 1Password CLI on macOS
 install_op_cli_macos() {
     if command_exists op; then

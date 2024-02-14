@@ -2,6 +2,9 @@
 
 source "$(dirname "$BASH_SOURCE")/../init/init.sh"
 
+OS=$(get_os)
+
+
 # Pip packages to install
 pip_packages=(
     "ansible"
@@ -20,7 +23,12 @@ initialize_pip() {
     else
         # Attempt to initialize pip if it's installed but not in the PATH
         if [[ -x "$HOME/.pyenv/shims/pip" ]]; then
-            eval "$(/opt/homebrew/bin/brew shellenv)"
+            if [[ "$OS" == "MacOS" ]]; then
+                echo_with_color "32" "Adding Homebrew Python to PATH for MacOS."
+                eval "$(/opt/homebrew/bin/brew shellenv)"
+            else
+                echo_with_color "32" "Adding pyenv Python to PATH."
+            fi
             export PYENV_ROOT="$HOME/.pyenv"
             export PATH="$PYENV_ROOT/bin:$PATH"
             eval "$(pyenv init --path)"

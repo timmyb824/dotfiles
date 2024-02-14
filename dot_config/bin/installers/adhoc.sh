@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 source "$(dirname "$BASH_SOURCE")/../init/init.sh"
+
 install_termium() {
     if command_exists termium; then
         echo_with_color "33" "Termium is already installed."

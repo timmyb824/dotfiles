@@ -1,4 +1,3 @@
-################### PERSONAL CONFIGUARTION ##################
 alias _=sudo
 # alias awsp="source _awsp"
 # alias awsprofile="source _awsp"

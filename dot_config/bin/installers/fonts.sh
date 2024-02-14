@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 source "$(dirname "$BASH_SOURCE")/../init/init.sh"
+
 # Function to install fonts using the cloned repository
 install_fonts_linux() {
     local fonts_dir=$1

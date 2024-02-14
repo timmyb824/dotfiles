@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 source "$(dirname "$BASH_SOURCE")/../init/init.sh"
+
 ##### Consider storing linux dotfiles in their own private repo #####
 
 # # ensure the shell is zsh and if not, try to switch to zsh
@@ -26,10 +27,15 @@ declare -A files_to_destinations=(
     ["$HOME/dotfiles/dot_config/psi/"]="$HOME/.config/psi"
     ["$HOME/dotfiles/dot_config/zsh/plugin_manager.zsh"]="$HOME/.config/zsh/plugin_manager.zsh"
     ["$HOME/dotfiles/dot_config/zsh/executable_functions.zsh"]="$HOME/.config/zsh/functions.zsh"
-    ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/alias.zsh"]="$HOME/.config/zsh/alias.zsh"
+    ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/zsh/alias.zsh"]="$HOME/.config/zsh/alias.zsh"
+    ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/zsh/completions.zsh"]="$HOME/.config/zsh/completions.zsh"
+    ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/zsh/env.zsh"]="$HOME/.config/zsh/env.zsh"
+    ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/zsh/init.zsh"]="$HOME/.config/zsh/init.zsh"
+    ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/zsh/packages.zsh"]="$HOME/.config/zsh/packages.zsh"
     ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/.zshrc"]="$HOME/.zshrc"
     ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/.gitconfig"]="$HOME/.gitconfig"
     ["$HOME/dotfiles/dot_config/bat/private_executable_config"]="$HOME/.config/bat/config"
+    ["$HOME/dotfiles/dot_nanorc"]="$HOME/.nanorc"
     # ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/.ssh/config"]="$HOME/.ssh/config"
     # ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/.ssh/id_master_key"]="$HOME/.ssh/id_master_key"
     # ["$HOME/dotfiles/dot_config/bin/dotfiles_linux/.ssh/id_master_key_nopass"]="$HOME/.ssh/id_master_key_nopass"
