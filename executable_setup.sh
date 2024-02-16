@@ -41,10 +41,18 @@ initialize_chezmoi() {
     fi
 }
 
+make_packaage_script_executable() {
+    local script=$1
+    if [ -f "$SCRIPT_DIR/$script" ] && [ ! -x "$SCRIPT_DIR/$script" ]; then
+        echo "Making $script executable..."
+        chmod +x "$SCRIPT_DIR/$script"
+    fi
+}
+
 run_setup_scripts() {
     local script=$1
     echo "Running $script..."
-    chmod +x "$SCRIPT_DIR/$script"
+    make_packaage_script_executable "$script"
     "$SCRIPT_DIR/$script"
     echo_with_color "32" "$script completed."
 }
@@ -73,6 +81,7 @@ fi
 if $CHEZMOI_INITIALIZED; then
     if ! ask_yes_or_no "Do you still want to proceed with all installations including chezmoi initialization?"; then
         echo_with_color "34" "Skipping chezmoi installation and initialization."
+        make_package_script_executable "install.sh"
         package_installation
         exit 0
     fi
@@ -109,6 +118,7 @@ else
     echo_with_color "34" "Skipping binaries removal."
 fi
 
+make_packaage_script_executable "install.sh"
 package_installation
 
 # Additional setup scripts can be run here as needed
