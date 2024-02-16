@@ -2,33 +2,15 @@
 
 source "$(dirname "$BASH_SOURCE")/../init/init.sh"
 
-OS=$(get_os)
-
-
-# Pip packages to install
-pip_packages=(
-    "ansible"
-    "gita"
-    "pip-autoremove"
-    "python-sysinformer"
-    "sourcery"
-    "spotify_to_ytmusic"
-    "grafana-backup"
-)
-
-initialize_pip() {
+initialize_pip_macos() {
     # Check for pip in the common installation locations
     if command_exists pip; then
         echo_with_color "32" "pip is already installed."
     else
         # Attempt to initialize pip if it's installed but not in the PATH
         if [[ -x "$HOME/.pyenv/shims/pip" ]]; then
-            if [[ "$OS" == "MacOS" ]]; then
-                echo_with_color "32" "Adding Homebrew Python to PATH for MacOS."
-                eval "$(/opt/homebrew/bin/brew shellenv)"
-            else
-                echo_with_color "32" "Adding pyenv Python to PATH."
-            fi
+            echo_with_color "32" "Adding Homebrew Python to PATH for MacOS."
+            eval "$(/opt/homebrew/bin/brew shellenv)"
             export PYENV_ROOT="$HOME/.pyenv"
             export PATH="$PYENV_ROOT/bin:$PATH"
             eval "$(pyenv init --path)"
@@ -60,15 +42,17 @@ confirm_python_and_pip() {
 
 # Function to install pip packages
 install_pip_packages() {
-    for package in "${pip_packages[@]}"; do
-        if pip install "${package}"; then
-            echo_with_color "32" "${package} installed successfully."
-        else
-            echo_with_color "31" "Failed to install ${package}."
+    while IFS= read -r package; do
+        if [ -n "$package" ]; then  # Ensure the line is not empty
+            if pip install "$package"; then
+                echo_with_color "32" "${package} installed successfully."
+            else
+                exit_with_error "Failed to install ${package}."
+            fi
         fi
-    done
+    done < <(get_package_list pip)
 }
 
-initialize_pip
+initialize_pip_macos
 confirm_python_and_pip
 install_pip_packages

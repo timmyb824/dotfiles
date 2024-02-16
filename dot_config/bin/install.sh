@@ -20,55 +20,21 @@ run_script() {
 }
 
 # Start the installation process
-echo "Starting package installations..."
+echo "Starting package installations for macOS..."
 
 SCRIPT_DIR="dot_config/bin"
 
-# Detect the operating system using get_os function
-OS=$(get_os)
+run_script package-managers/homebrew.sh
+run_script package-managers/pkgx.sh
+run_script package-managers/basher.sh
+run_script package-managers/krew.sh
+run_script package-managers/micro.sh
+run_script package-managers/pipx.sh
+run_script installers/pyenv_python.sh
+run_script package-managers/pip.sh
+run_script package-managers/node_npm.sh
+run_script installers/tfenv_terraform.sh
+run_script installers/tailscale.sh
+run_script installers/rbenv_ruby.sh
 
-# Change the SCRIPT_DIR based on the OS detected
-case $OS in
-    MacOS)
-        run_script package-managers/homebrew.sh
-        run_script package-managers/pkgx.sh
-        run_script package-managers/basher.sh
-        run_script package-managers/krew.sh
-        run_script package-managers/micro.sh
-        run_script package-managers/pipx.sh
-        run_script installers/pyenv_python.sh
-        run_script package-managers/pip.sh
-        run_script package-managers/node_npm.sh
-        run_script installers/terraform.sh
-        run_script installers/tailscale.sh
-        run_script installers/rbenv_ruby.sh
-
-        ;;
-    Linux)
-        run_script package-managers/pkgx.sh
-        run_script package-managers/basher.sh
-        run_script package-managers/krew.sh
-        run_script package-managers/micro.sh
-        run_script package-managers/pipx.sh
-        run_script package-managers/node_npm.sh
-        run_script installers/pyenv_python.sh
-        run_script package-managers/pip.sh
-        run_script installers/terraform.sh
-        run_script installers/tailscale.sh
-        run_script installers/rbenv_ruby.sh
-        run_script installers/docker.sh
-        run_script installers/zsh_shell.sh
-        run_script installers/1password.sh
-        run_script installers/age_sops.sh
-        run_script configuration/age_secret.sh
-        run_script configuration/go_directories.sh
-        run_script dotfiles_linux/copy_dotfiles.sh
-        run_script dotfiles_linux/process_dotfiles.sh
-        ;;
-    *)
-        echo "Unsupported operating system: $OS"
-        exit 1
-        ;;
-esac
-
-echo "All packages have been installed."
+echo "All macOS packages have been installed."

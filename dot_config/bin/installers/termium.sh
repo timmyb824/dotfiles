@@ -19,4 +19,4 @@ install_termium() {
     fi
 }
 
-install_termium()
+install_termium

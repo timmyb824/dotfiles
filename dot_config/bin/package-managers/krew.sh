@@ -21,23 +21,20 @@ if ! kubectl krew &> /dev/null; then
     fi
 fi
 
-# List of plugins to install
-plugins=(
-    "ctx"
-    "ns"
-)
-
-# Iterate over the plugins and install one by one
-for plugin in "${plugins[@]}"; do
-    if ! kubectl krew list | grep -q "$plugin"; then
-        echo_with_color "36" "Installing $plugin..."
-        if kubectl krew install "$plugin"; then
-            echo_with_color "32" "$plugin installed successfully"
+# Get the list of plugins from the gist and iterate over them
+while IFS= read -r plugin; do
+    trimmed_plugin=$(echo "$plugin" | xargs)  # Trim whitespace
+    if [ -n "$trimmed_plugin" ]; then  # Ensure the line is not empty
+        if ! kubectl krew list | grep -q "$trimmed_plugin"; then
+            echo_with_color "36" "Installing $trimmed_plugin..."
+            if kubectl krew install "$trimmed_plugin"; then
+                echo_with_color "32" "$trimmed_plugin installed successfully"
+            else
+                echo_with_color "31" "Failed to install $trimmed_plugin"
+                exit 1
+            fi
         else
-            echo_with_color "31" "Failed to install $plugin"
-            exit 1
+            echo_with_color "34" "$trimmed_plugin is already installed"
         fi
-    else
-        echo_with_color "34" "$plugin is already installed"
     fi
-done
+done < <(get_package_list krew)

@@ -7,7 +7,7 @@ SCRIPT_DIR="$(dirname "$(realpath "$BASH_SOURCE")")"
 export SCRIPT_DIR
 
 # Set the desired Node.js version
-export NODE_VERSION="v21.0.0"
+export NODE_VERSION="v21.1.0"
 
 # Set the desired Python version
 export PYTHON_VERSION="3.11.0"
@@ -29,6 +29,15 @@ export AGE_VERSION="v1.1.1"
 export RUBY_VERSION="3.2.1"
 
 ############# Global functions #############
+
+# Function to get a list of packages from a Gist
+function get_package_list() {
+    local package_list_name="$1.list"
+    local gist_url="https://gist.githubusercontent.com/timmyb824/807597f33b14eceeb26e4e6f81d45962/raw/${package_list_name}"
+
+    # Fetch the package list, remove comments, and trim whitespace
+    curl -fsSL "$gist_url" | sed 's/#.*//' | awk '{$1=$1};1'
+}
 
 # Function to check if a given line is in a file
 line_in_file() {

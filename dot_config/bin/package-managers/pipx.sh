@@ -3,22 +3,17 @@
 # Correct the source path if necessary and ensure init.sh is in the correct location
 source "$(dirname "$BASH_SOURCE")/../init/init.sh"
 
-# List of packages to install
-packages=(
-    "poetry"
-    "pyinfra"
-)
 
 install_pipx_packages() {
-    # Iterate over the packages and install one by one
-    for package in "${packages[@]}"; do
-        if pipx install "${package}"; then
-            echo_with_color "32" "${package} installed successfully"
-        else
-            echo_with_color "31" "Failed to install ${package}"
-            exit 1
+    while IFS= read -r package; do
+        if [ -n "$package" ]; then  # Ensure the line is not empty
+            if pipx install "$package"; then
+                echo_with_color "32" "${package} installed successfully."
+            else
+                exit_with_error "Failed to install ${package}."
+            fi
         fi
-    done
+    done < <(get_package_list pipx)
 }
 
 # Check if pipx is installed

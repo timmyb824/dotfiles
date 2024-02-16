@@ -6,39 +6,12 @@ source "$(dirname "$BASH_SOURCE")/../init/init.sh"
 # Check if micro is installed
 attempt_fix_command "micro" "$HOME/.local/bin"
 
-# List of plugins to install
-plugins=(
-    "aspell"
-    "yapf"
-    "bookmark"
-    "bounce"
-    "filemanager"
-    "fish"
-    "fzf"
-    "go"
-    "jump"
-    "lsp"
-    "manipulator"
-    "misspell"
-    "nordcolors"
-    "quoter"
-    "snippets"
-    "wc"
-    "autoclose"
-    "comment"
-    "diff"
-    "ftoptions"
-    "linter"
-    "literate"
-    "status"
-)
-
-# Iterate over the plugins and install one by one
-for plugin in "${plugins[@]}"
-do
-    if micro -plugin install "${plugin}"; then
-        echo_with_color "34" "${plugin} installed successfully"
-    else
-        echo_with_color "31" "Failed to install ${plugin}"
+while IFS= read -r package; do
+    if [ -n "$package" ]; then  # Ensure the line is not empty
+        if micro -plugin install "$package"; then
+            echo_with_color "32" "${package} installed successfully"
+        else
+            exit_with_error "Failed to install ${package}"
+        fi
     fi
-done
+done < <(get_package_list micro_plugins)

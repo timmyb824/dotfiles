@@ -2,18 +2,7 @@
 
 source "$(dirname "$BASH_SOURCE")/../init/init.sh"
 
-# Function to install pyenv and Python on Linux
-install_pyenv_linux() {
-    echo_with_color "32" "Installing pyenv and Python dependencies for Linux..."
-    sudo apt update
-    sudo apt install -y build-essential libssl-dev zlib1g-dev \
-        libbz2-dev libreadline-dev libsqlite3-dev curl \
-        libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
-
-    curl https://pyenv.run | bash
-}
-
-# Function to install pyenv and Python on MacOS
+# Function to install pyenv and pyenv-virtualenv using Homebrew for MacOS
 install_pyenv_macos() {
     echo_with_color "32" "Installing pyenv and pyenv-virtualenv using Homebrew for MacOS..."
 
@@ -50,7 +39,7 @@ setup_python_version() {
     fi
 }
 
-intialize_pyenv() {
+initialize_pyenv() {
     # Initialize pyenv for the current session
     export PYENV_ROOT="$HOME/.pyenv"
     export PATH="$PYENV_ROOT/bin:$PATH"
@@ -62,18 +51,15 @@ intialize_pyenv() {
 if ! command_exists pyenv; then
     echo_with_color "32" "pyenv could not be found."
 
-    OS=$(get_os)
-    if [[ "$OS" == "Linux" ]]; then
-        install_pyenv_linux
-    elif [[ "$OS" == "MacOS" ]]; then
+    if [[ "$(get_os)" == "MacOS" ]]; then
         install_pyenv_macos
+        initialize_pyenv
+        setup_python_version
     else
-        exit_with_error "Unsupported operating system: $OS"
+        exit_with_error "Unsupported operating system: $(get_os)"
     fi
-
-    intialize_pyenv
-    setup_python_version
 else
-    echo_with_color "32" "pyenv is already installed."
+    echo_with_color "32""pyenv is already installed."
+    initialize_pyenv
     # Assuming that Python version is already set
 fi

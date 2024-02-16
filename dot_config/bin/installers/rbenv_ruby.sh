@@ -1,20 +1,16 @@
 #!/usr/bin/env bash
 
-# Define safe_remove_command function and other necessary utilities
 source "$(dirname "$BASH_SOURCE")/../init/init.sh"
 
 # Function to install rbenv using Homebrew on macOS
 install_rbenv_macos() {
-  echo_with_color "32" "Installing rbenv using Homebrew..."
-  # Check for Homebrew in the common installation locations
+  echo_with_color "32" "Installing rbenv using Homebrew on macOS..."
   if command_exists brew; then
     echo_with_color "32" "Homebrew is already installed."
   else
-    # Attempt to initialize Homebrew if it's installed but not in the PATH
     if [[ -x "/opt/homebrew/bin/brew" ]]; then
       eval "$(/opt/homebrew/bin/brew shellenv)"
     else
-      # Homebrew is not installed, provide instructions to install it
       echo_with_color "33" "Homebrew is not installed. Please run homebrew.sh first."
       exit_with_error "Homebrew installation required"
     fi
@@ -23,26 +19,10 @@ install_rbenv_macos() {
   brew install rbenv ruby-build
 }
 
-# Function to install rbenv using the official installer script on Linux
-install_rbenv_linux() {
-  # Install dependencies for rbenv and Ruby build
-  sudo apt update || exit_with_error "Failed to update apt."
-  sudo apt install -y git curl autoconf bison build-essential libssl-dev libyaml-dev \
-    libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm6 libgdbm-dev libdb-dev ||
-    exit_with_error "Failed to install dependencies for rbenv and Ruby build."
-  curl -fsSL https://github.com/rbenv/rbenv-installer/raw/HEAD/bin/rbenv-installer | bash
-}
-
 # Function to initialize rbenv within the script
 initialize_rbenv() {
-  if [[ "$(get_os)" == "MacOS" ]]; then
-    echo_with_color "32" "Initializing rbenv for the current MacOS session..."
-    eval "$(rbenv init -)"
-  elif [[ "$(get_os)" == "Linux" ]]; then
-    echo_with_color "32" "Initializing rbenv for the current Linux session..."
-    export PATH="$HOME/.rbenv/bin:$PATH"
-    eval "$(rbenv init -)"
-  fi
+  echo_with_color "32" "Initializing rbenv for the current macOS session..."
+  eval "$(rbenv init -)"
 }
 
 # Function to install Ruby and set it as the global version
@@ -55,22 +35,10 @@ install_and_set_ruby() {
 }
 
 # Main execution
-if [[ "$(get_os)" == "MacOS" ]]; then
-  # macOS system
-  if command_exists rbenv; then
-    echo_with_color "32" "rbenv is already installed."
-  else
-    install_rbenv_macos || exit_with_error "Failed to install rbenv."
-  fi
-elif [[ "$(get_os)" == "Linux" ]]; then
-  # Linux system
-  if command_exists rbenv; then
-    echo_with_color "32" "rbenv is already installed."
-  else
-    install_rbenv_linux || exit_with_error "Failed to install rbenv."
-  fi
+if command_exists rbenv; then
+  echo_with_color "32" "rbenv is already installed."
 else
-  exit_with_error "Unsupported OS type: $OSTYPE"
+  install_rbenv_macos || exit_with_error "Failed to install rbenv."
 fi
 
 initialize_rbenv
