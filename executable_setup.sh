@@ -29,7 +29,7 @@ install_chezmoi() {
 # Function to initialize and apply chezmoi dotfiles
 initialize_chezmoi() {
     echo_with_color "32" "Initializing chezmoi dotfiles."
-    if "$CHEZMOI_BIN" init timmyb824; then
+    if "$CHEZMOI_BIN" init timmyb824/dotfiles; then
         echo_with_color "32" "chezmoi dotfiles have been downloaded successfully."
         if "$CHEZMOI_BIN" apply; then
             echo_with_color "32" "chezmoi dotfiles have been applied successfully."
