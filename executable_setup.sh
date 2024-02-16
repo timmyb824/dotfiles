@@ -81,6 +81,7 @@ fi
 echo_with_color "32" "Proceeding with all installations:"
 echo_with_color "32" "Installing 1password cli..."
 run_setup_scripts "installers/1password.sh"
+run_setup_scripts "installers/age_sops.sh"
 
 # Only run chezmoi scripts if not initialized
 if ! $CHEZMOI_INITIALIZED; then
@@ -98,11 +99,14 @@ else
     exit_with_error "Failed to sign into 1Password, which is required for chezmoi installation."
 fi
 
-if $CHEZMOI_INITIALIZED && ask_yes_or_no "Do you want to remove the chezmoi binary?"; then
+# if [[ "$CHEZMOI_INITIALIZED" == true ]] && ask_yes_or_no "Do you want to remove the chezmoi, sops, and age binaries?"; then
+if ask_yes_or_no "Do you want to remove the chezmoi, sops, and age binaries?"; then
     echo_with_color "34" "Removing chezmoi binary..."
-    safe_remove_command $CHEZMOI_BIN
+    safe_remove_command "$CHEZMOI_BIN"
+    safe_remove_command "/usr/local/bin/sops"
+    safe_remove_command "/usr/local/bin/age"
 else
-    echo_with_color "34" "Skipping chezmoi binary removal."
+    echo_with_color "34" "Skipping binaries removal."
 fi
 
 package_installation
