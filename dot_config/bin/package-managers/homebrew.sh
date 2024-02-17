@@ -16,23 +16,6 @@ install_brew_macos() {
     command_exists brew || exit_with_error "Homebrew installation failed or PATH setup was not successful."
 }
 
-# Function to update PATH for the current session
-add_brew_to_path() {
-    # Determine the system architecture for the correct Homebrew path
-    local BREW_PREFIX
-    if [[ "$(uname -m)" == "arm64" ]]; then
-        BREW_PREFIX="/opt/homebrew/bin"
-    else
-        BREW_PREFIX="/usr/local/bin"
-    fi
-
-    # Check if Homebrew PATH is already in the PATH
-    if ! echo "$PATH" | grep -q "${BREW_PREFIX}"; then
-        echo_with_color "34" "Adding Homebrew to PATH for the current session..."
-        eval "$(${BREW_PREFIX}/brew shellenv)"
-    fi
-}
-
 # Prompt the user to install packages using Homebrew
 install_packages_with_brew() {
     local temp_brewfile=$(mktemp)

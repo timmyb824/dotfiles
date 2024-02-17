@@ -193,3 +193,20 @@ configure_1password_account() {
         return 1
     fi
 }
+
+# Function to update PATH for the current session
+add_brew_to_path() {
+    # Determine the system architecture for the correct Homebrew path
+    local BREW_PREFIX
+    if [[ "$(uname -m)" == "arm64" ]]; then
+        BREW_PREFIX="/opt/homebrew/bin"
+    else
+        BREW_PREFIX="/usr/local/bin"
+    fi
+
+    # Check if Homebrew PATH is already in the PATH
+    if ! echo "$PATH" | grep -q "${BREW_PREFIX}"; then
+        echo_with_color "34" "Adding Homebrew to PATH for the current session..."
+        eval "$(${BREW_PREFIX}/brew shellenv)"
+    fi
+}

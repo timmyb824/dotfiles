@@ -7,17 +7,11 @@ install_pyenv_macos() {
     echo_with_color "32" "Installing pyenv and pyenv-virtualenv using Homebrew for MacOS..."
 
     # Check for Homebrew in the common installation locations
-    if command_exists brew; then
-        echo_with_color "32" "Homebrew is already installed."
+    if ! command_exists brew; then
+        echo_with_color "31" "Homebrew could not be found. Attempting to add Homebrew to PATH..."
+        add_brew_to_path
     else
-        # Attempt to initialize Homebrew if it's installed but not in the PATH
-        if [[ -x "/opt/homebrew/bin/brew" ]]; then
-            eval "$(/opt/homebrew/bin/brew shellenv)"
-        else
-            # Homebrew is not installed, provide instructions to install it
-            echo_with_color "33" "Homebrew is not installed. Please run homebrew.sh first."
-            exit_with_error "Homebrew installation required"
-        fi
+        echo_with_color "32" "Homebrew is already installed."
     fi
 
     brew update

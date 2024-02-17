@@ -24,9 +24,31 @@ uninstall_packages_from_list() {
     done
 }
 
+# function to uninstall pkgx either the binary or via homebrew
+uninstall_pkgx() {
+    if command_exists pkgx; then
+        echo_with_color "34" "Uninstalling pkgx..."
+        if command_exists brew; then
+            brew uninstall pkgxdev/made/pkgx || exit_with_error "Uninstallation of pkgx using Homebrew failed."
+        else
+            sudo rm -f "$(command -v pkgx)" || exit_with_error "Uninstallation of pkgx failed."
+        fi
+    else
+        echo_with_color "32" "pkgx is not installed."
+    fi
+}
+
+# function to unisntall .pkgx directory
+uninstall_pkgx_directory() {
+    echo_with_color "34" "Uninstalling .pkgx directory..."
+    rm -rf "$HOME/.pkgx" || exit_with_error "Uninstallation of .pkgx directory failed."
+}
+
 echo_with_color "34" "Starting the uninstallation process..."
 
 # Uninstall all 'pkgx' packages first
 uninstall_packages_from_list "pkgx"
+uninstall_pkgx
+uninstall_pkgx_directory
 
 echo_with_color "34" "Uninstallation process completed."

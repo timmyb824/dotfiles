@@ -9,6 +9,9 @@ initialize_fnm_for_session() {
     eval "$(fnm env --use-on-cd)"
 }
 
+# First, add the brew binary to the PATH if it's not already there
+add_brew_to_path
+
 # Check if npm is installed and working
 if ! command_exists npm; then
     echo_with_color "31" "npm could not be found"
