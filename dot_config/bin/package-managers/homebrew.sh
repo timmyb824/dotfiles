@@ -59,7 +59,7 @@ install_packages_with_brew() {
 }
 
 # Main execution for macOS
-if [[ "$(get_os)" == "macOS" ]]; then
+if [[ "$(get_os)" == "MacOS" ]]; then
     safe_remove_command "/usr/local/bin/op"
     install_brew_macos
     install_packages_with_brew
