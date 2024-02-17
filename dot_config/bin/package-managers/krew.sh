@@ -8,6 +8,7 @@ add_krew_to_path_for_session() {
     add_to_path_exact_match "$krew_path"
 }
 
+add_brew_to_path
 attempt_fix_command "kubectl" "$HOME/.local/bin"
 
 # Check if krew is installed and working
