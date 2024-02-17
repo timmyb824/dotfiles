@@ -41,7 +41,7 @@ initialize_chezmoi() {
     fi
 }
 
-make_packaage_script_executable() {
+make_package_script_executable() {
     local script=$1
     if [ -f "$SCRIPT_DIR/$script" ] && [ ! -x "$SCRIPT_DIR/$script" ]; then
         echo "Making $script executable..."
@@ -52,7 +52,7 @@ make_packaage_script_executable() {
 run_setup_scripts() {
     local script=$1
     echo "Running $script..."
-    make_packaage_script_executable "$script"
+    make_package_script_executable "$script"
     "$SCRIPT_DIR/$script"
     echo_with_color "32" "$script completed."
 }
@@ -118,7 +118,7 @@ else
     echo_with_color "34" "Skipping binaries removal."
 fi
 
-make_packaage_script_executable "install.sh"
+make_package_script_executable "install.sh"
 package_installation
 
 # Additional setup scripts can be run here as needed
