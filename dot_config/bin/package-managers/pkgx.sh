@@ -2,6 +2,23 @@
 
 source "$(dirname "$BASH_SOURCE")/../init/init.sh"
 
+# Function to update PATH for the current session
+add_brew_to_path() {
+    # Determine the system architecture for the correct Homebrew path
+    local BREW_PREFIX
+    if [[ "$(uname -m)" == "arm64" ]]; then
+        BREW_PREFIX="/opt/homebrew/bin"
+    else
+        BREW_PREFIX="/usr/local/bin"
+    fi
+
+    # Check if Homebrew PATH is already in the PATH
+    if ! echo "$PATH" | grep -q "${BREW_PREFIX}"; then
+        echo_with_color "34" "Adding Homebrew to PATH for the current session..."
+        eval "$(${BREW_PREFIX}/brew shellenv)"
+    fi
+}
+
 # Function to install pkgx
 install_pkgx() {
     # Try to add Homebrew to PATH and check again for pkgx
@@ -31,7 +48,7 @@ fi
 command_exists pkgx || exit_with_error "pkgx installation failed."
 
 # Fetch the list of packages to install using get_package_list
-packages=( $(get_package_list pkgx) )
+packages=( "$(get_package_list pkgx)" )
 
 # Binary paths (edit these as per your system)
 mc_bin_path="$HOME/.local/bin/mc"
