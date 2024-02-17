@@ -32,7 +32,7 @@ run_script package-managers/micro.sh
 run_script package-managers/pipx.sh
 run_script installers/pyenv_python.sh
 run_script package-managers/pip.sh
-run_script package-managers/fnm_node.sh
+run_script installers/fnm_node.sh
 run_script package-managers/npm.sh
 run_script installers/tfenv_terraform.sh
 run_script installers/tailscale.sh
