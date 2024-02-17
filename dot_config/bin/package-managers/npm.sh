@@ -48,6 +48,9 @@ install_npm_packages() {
 }
 
 # Main script logic
+# First, add Brew to the PATH if it's not already there
+add_brew_to_path
+
 if ! command_exists npm; then
     echo_with_color "31" "npm could not be found"
 
