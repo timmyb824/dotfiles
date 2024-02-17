@@ -30,10 +30,18 @@ export RUBY_VERSION="3.2.1"
 
 ############# Global functions #############
 
+# source via init.sh
 # Function to get a list of packages from a Gist
 function get_package_list() {
-    local package_list_name="$1.list"
-    local gist_url="https://gist.githubusercontent.com/timmyb824/807597f33b14eceeb26e4e6f81d45962/raw/${package_list_name}"
+    local package_list_name="$1"
+    local gist_url=""
+
+    # Check if the file is Brewfile or ends with .list
+    if [[ "$package_list_name" == "Brewfile" ]] || [[ "$package_list_name" == *".list" ]]; then
+        gist_url="https://gist.githubusercontent.com/timmyb824/807597f33b14eceeb26e4e6f81d45962/raw/${package_list_name}"
+    else
+        gist_url="https://gist.githubusercontent.com/timmyb824/807597f33b14eceeb26e4e6f81d45962/raw/${package_list_name}.list"
+    fi
 
     # Fetch the package list, remove comments, and trim whitespace
     curl -fsSL "$gist_url" | sed 's/#.*//' | awk '{$1=$1};1'
