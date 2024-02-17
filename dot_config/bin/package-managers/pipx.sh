@@ -22,6 +22,8 @@ if command_exists pipx; then
 else
     echo_with_color "31" "pipx command not found, attempting to fix..."
 
+    add_brew_to_path
+
     # Attempt to fix pipx command availability
     attempt_fix_command pipx "$HOME/.local/bin"
 
@@ -29,8 +31,7 @@ else
     if command_exists pipx; then
         install_pipx_packages
     else
-        echo_with_color "31" "pipx is still not found after attempting to fix the PATH. Please install pipx to continue."
-        exit 1
+        exit_with_error "pipx is still not found after attempting to fix the PATH. Please install pipx to continue."
     fi
 fi
 
