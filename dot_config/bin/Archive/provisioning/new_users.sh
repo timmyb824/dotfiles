@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-source "$(dirname "$BASH_SOURCE")/../init/init.sh"
+source_init_script
+
 OS=$(get_os)
 # Check if the OS is Linux
 if [ "$OS" != "Linux" ]; then

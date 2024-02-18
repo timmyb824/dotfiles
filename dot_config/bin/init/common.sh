@@ -2,12 +2,14 @@
 
 ############# Global Variables #############
 
-# Get the directory of the current script
-SCRIPT_DIR="$(dirname "$(realpath "$BASH_SOURCE")")"
-export SCRIPT_DIR
+export GREEN_COLOR="32"
+export YELLOW_COLOR="33"
+export BLUE_COLOR="34"
+export RED_COLOR="31"
+export CYAN_COLOR="36"
 
 # Set the desired Node.js version
-export NODE_VERSION="v21.1.0"
+export NODE_VERSION="21.1.0"
 
 # Set the desired Python version
 export PYTHON_VERSION="3.11.0"
@@ -198,15 +200,34 @@ configure_1password_account() {
 add_brew_to_path() {
     # Determine the system architecture for the correct Homebrew path
     local BREW_PREFIX
+    local BREW_EXECUTABLE
     if [[ "$(uname -m)" == "arm64" ]]; then
         BREW_PREFIX="/opt/homebrew/bin"
     else
         BREW_PREFIX="/usr/local/bin"
     fi
+    BREW_EXECUTABLE="${BREW_PREFIX}/brew"
 
-    # Check if Homebrew PATH is already in the PATH
-    if ! echo "$PATH" | grep -q "${BREW_PREFIX}"; then
-        echo_with_color "34" "Adding Homebrew to PATH for the current session..."
-        eval "$(${BREW_PREFIX}/brew shellenv)"
+    # Check if Homebrew executable is present
+    if [[ -f "$BREW_EXECUTABLE" ]]; then
+        # Check if Homebrew PATH is already in the PATH
+        if ! echo "$PATH" | grep -q "${BREW_PREFIX}"; then
+            echo_with_color "34" "Adding Homebrew to PATH for the current session..."
+            export PATH="${BREW_PREFIX}:${PATH}"
+        fi
+    else
+        echo_with_color "33" "Homebrew is not installed at ${BREW_PREFIX}."
+    fi
+}
+
+# This function sources the init script and exits with an error if it doesn't exist.
+source_init_script() {
+    local script_dir="$(dirname "$BASH_SOURCE")"
+    local init_script_path="${script_dir}/../init/init.sh"
+
+    if [[ -f "$init_script_path" ]]; then
+        source "$init_script_path"
+    else
+        exit_with_error "Unable to source init.sh, file not found." >&2
     fi
 }

@@ -1,13 +1,12 @@
 #!/usr/bin/env bash
 
-source "$(dirname "$BASH_SOURCE")/../init/init.sh"
+source_init_script
 
 install_termium() {
     if command_exists termium; then
-        echo_with_color "33" "Termium is already installed."
-        exit 0
+        exit_with_error "Termium is already installed."
     else
-        echo_with_color "32" "Installing Termium..."
+        echo_with_color "$GREEN" "Installing Termium..."
         # Determine download tool
         if command_exists curl; then
             curl -L https://github.com/Exafunction/codeium/releases/download/termium-v0.2.0/install.sh | bash

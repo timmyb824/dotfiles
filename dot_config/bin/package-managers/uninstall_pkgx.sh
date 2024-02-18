@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 
-source "$(dirname "$BASH_SOURCE")/../init/init.sh"
+source_init_script
 
 # Function to uninstall a package
 uninstall_package() {
     local package=$1
-    echo_with_color "34" "Uninstalling ${package}..."
+    echo_with_color $BLUE_COLOR "Uninstalling ${package}..."
     if pkgx uninstall "${package}"; then
-        echo_with_color "32" "${package} uninstalled successfully."
+        echo_with_color $GREEN_COLOR "${package} uninstalled successfully."
     else
-        echo_with_color "31" "Failed to uninstall ${package}."
+        echo_with_color $RED_COLOR "Failed to uninstall ${package}."
     fi
 }
 
@@ -24,31 +24,31 @@ uninstall_packages_from_list() {
     done
 }
 
-# function to uninstall pkgx either the binary or via homebrew
+# Function to uninstall pkgx either the binary or via homebrew
 uninstall_pkgx() {
     if command_exists pkgx; then
-        echo_with_color "34" "Uninstalling pkgx..."
+        echo_with_color $BLUE_COLOR "Uninstalling pkgx..."
         if command_exists brew; then
             brew uninstall pkgxdev/made/pkgx || exit_with_error "Uninstallation of pkgx using Homebrew failed."
         else
             sudo rm -f "$(command -v pkgx)" || exit_with_error "Uninstallation of pkgx failed."
         fi
     else
-        echo_with_color "32" "pkgx is not installed."
+        echo_with_color $GREEN_COLOR "pkgx is not installed."
     fi
 }
 
-# function to unisntall .pkgx directory
+# Function to uninstall .pkgx directory
 uninstall_pkgx_directory() {
-    echo_with_color "34" "Uninstalling .pkgx directory..."
+    echo_with_color $BLUE_COLOR "Uninstalling .pkgx directory..."
     rm -rf "$HOME/.pkgx" || exit_with_error "Uninstallation of .pkgx directory failed."
 }
 
-echo_with_color "34" "Starting the uninstallation process..."
+echo_with_color $BLUE_COLOR "Starting the uninstallation process..."
 
 # Uninstall all 'pkgx' packages first
 uninstall_packages_from_list "pkgx"
 uninstall_pkgx
 uninstall_pkgx_directory
 
-echo_with_color "34" "Uninstallation process completed."
+echo_with_color $BLUE_COLOR "Uninstallation process completed."

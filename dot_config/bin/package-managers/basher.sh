@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source "$(dirname "$BASH_SOURCE")/../init/init.sh"
+source_init_script
 
 # Check if git is installed
 if ! command_exists git; then
@@ -11,28 +11,40 @@ fi
 if [ ! -d "$HOME/.basher" ]; then
     echo "basher is not installed. Installing now..."
     if git clone --depth=1 https://github.com/basherpm/basher.git ~/.basher; then
-        echo_with_color "32" "basher installed successfully"
+        echo_with_color "$GREEN_COLOR" "basher installed successfully"
     else
         exit_with_error "Failed to install basher"
     fi
 else
-    echo_with_color "34" "basher is already installed at $HOME/.basher"
+    echo_with_color "$BLUE_COLOR" "basher is already installed at $HOME/.basher"
 fi
 
 basher_bin="$HOME/.basher/bin"
 
-# Check if basher's bin directory is in the PATH
+# Ensure basher's bin directory is in the PATH
 add_to_path_exact_match "$basher_bin"
 
-# Get the list of packages from the gist and iterate over them
+# Function to install a package with basher
+install_package_with_basher() {
+    local package=$1
+    if basher install "$package"; then
+        echo_with_color "$GREEN_COLOR" "${package} installed successfully"
+    else
+        exit_with_error "Failed to install ${package}"
+    fi
+}
+
+# Get the list of packages from the gist
+package_list=$(get_package_list basher)
+
+# Check if the package list is retrieved successfully
+if [ -z "$package_list" ]; then
+    exit_with_error "Failed to retrieve the package list."
+fi
+
+# Iterate over the package list and install packages
 while IFS= read -r package; do
     if [ -n "$package" ]; then  # Ensure the line is not empty
-        if basher install "$package"; then
-            echo_with_color "32" "${package} installed successfully"
-        else
-            exit_with_error "Failed to install ${package}"
-        fi
+        install_package_with_basher "$package"
     fi
-done < <(get_package_list basher)
-
-echo_with_color "32" "basher.sh completed successfully."
+done <<< "$package_list"

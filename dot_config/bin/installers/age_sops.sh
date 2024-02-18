@@ -1,42 +1,44 @@
 #!/usr/bin/env bash
 
-# Define safe_remove_command function and other necessary utilities
-source "$(dirname "$BASH_SOURCE")/../init/init.sh"
+source_init_script
 
-# macOS specific SOPS and AGE versions
-SOPS_VERSION="v3.7.1" # replace with the version you want to install
-AGE_VERSION="v1.0.0" # replace with the version you want to install
+# Check for 'curl' command existence
+if ! command_exists curl; then
+    exit_with_error "Error: 'curl' is required to download files."
+fi
 
 # Function to install sops on macOS
 install_sops_macos() {
-    echo "Downloading sops binary for macOS..."
-    SOPS_BINARY="sops-${SOPS_VERSION}.darwin.arm64"
-    curl -LO "https://github.com/mozilla/sops/releases/download/${SOPS_VERSION}/${SOPS_BINARY}"
-    sudo mv "$SOPS_BINARY" /usr/local/bin/sops
+    local sops_binary="sops-${SOPS_VERSION}.darwin.arm64"
+    echo_with_color "$GREEN_COLOR" "Downloading sops binary for macOS..."
+    curl -LO "https://github.com/mozilla/sops/releases/download/${SOPS_VERSION}/${sops_binary}"
+    sudo mv "$sops_binary" /usr/local/bin/sops
     sudo chmod +x /usr/local/bin/sops
-    echo "sops installed successfully on macOS."
+    echo_with_color "$GREEN_COLOR" "sops installed successfully on macOS."
 }
 
 # Function to install age on macOS
 install_age_macos() {
-    echo "Downloading age binary for macOS..."
-    curl -LO "https://github.com/FiloSottile/age/releases/download/${AGE_VERSION}/age-${AGE_VERSION}-darwin-arm64.tar.gz"
-    tar -xvf "age-${AGE_VERSION}-darwin-arm64.tar.gz"
+    local age_archive="age-${AGE_VERSION}-darwin-arm64.tar.gz"
+    echo_with_color "$GREEN_COLOR" "Downloading age binary for macOS..."
+    curl -LO "https://github.com/FiloSottile/age/releases/download/${AGE_VERSION}/${age_archive}"
+    tar -xvf "$age_archive"
     sudo mv age/age /usr/local/bin/age
     rm -rf age
-    echo "age installed successfully on macOS."
+    rm -f "$age_archive"
+    echo_with_color "$GREEN_COLOR" "age installed successfully on macOS."
 }
 
 # Check and install sops if not installed
 if command_exists sops; then
-    echo "sops is already installed on macOS."
+    echo_with_color "$YELLOW_COLOR" "sops is already installed on macOS."
 else
     install_sops_macos
 fi
 
 # Check and install age if not installed
 if command_exists age; then
-    echo "age is already installed on macOS."
+    echo_with_color "$YELLOW_COLOR" "age is already installed on macOS."
 else
     install_age_macos
 fi
