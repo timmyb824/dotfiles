@@ -220,14 +220,3 @@ add_brew_to_path() {
     fi
 }
 
-# This function sources the init script and exits with an error if it doesn't exist.
-source_init_script() {
-    local script_dir="$(dirname "$BASH_SOURCE")"
-    local init_script_path="${script_dir}/init.sh"
-
-    if [[ -f "$init_script_path" ]]; then
-        source "$init_script_path"
-    else
-        exit_with_error "Unable to source init.sh, file not found." >&2
-    fi
-}

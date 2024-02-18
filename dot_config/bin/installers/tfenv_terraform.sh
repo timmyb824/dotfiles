@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source_init_script
+source "$(dirname "$BASH_SOURCE")/../init/init.sh"
 
 # Function to install tfenv and Terraform on MacOS
 install_tfenv_macos() {

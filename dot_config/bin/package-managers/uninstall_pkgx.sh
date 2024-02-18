@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source_init_script
+source "$(dirname "$BASH_SOURCE")/../init/init.sh"
 
 # Function to uninstall a package
 uninstall_package() {

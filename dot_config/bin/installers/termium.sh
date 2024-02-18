@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source_init_script
+source "$(dirname "$BASH_SOURCE")/../init/init.sh"
 
 install_termium() {
     if command_exists termium; then

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source_init_script
+source "$(dirname "$BASH_SOURCE")/../init/init.sh"
 
 # Check for 'curl' command existence
 if ! command_exists curl; then

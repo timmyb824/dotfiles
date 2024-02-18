@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source_init_script
+source "$(dirname "$BASH_SOURCE")/../init/init.sh"
 
 create_age_secret_key() {
     if [ ! -f "$AGE_SECRET_KEY_LOCATION" ]; then

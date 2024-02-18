@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source_init_script
+source "$(dirname "$BASH_SOURCE")/../init/init.sh"
 
 install_fonts_macos() {
     # Get the directory where your .ttf files are located from the parameter

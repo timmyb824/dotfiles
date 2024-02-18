@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source_init_script
+source "$(dirname "$BASH_SOURCE")/../init/init.sh"
 
 create_chezmoi_config() {
     if [ ! -f "$CHEZMOI_CONFIG_FILE_LOCATION" ]; then
