@@ -2,6 +2,18 @@
 
 source "$(dirname "$BASH_SOURCE")/../init/init.sh"
 
+# Function to check if Terraform is properly installed and return its version
+# This step is necessary because when tfenv is installed, it also includes a terraform binary.
+# However, this binary may not function properly until the tfenv install/use command is executed.
+terraform_version() {
+    local version_output
+    if version_output=$(terraform --version 2>&1); then
+        echo "$version_output" | head -n 1
+    else
+        return 1
+    fi
+}
+
 # Function to install tfenv and Terraform on MacOS
 install_tfenv_macos() {
     echo_with_color "$GREEN_COLOR" "Installing tfenv using Homebrew for macOS..."
@@ -37,15 +49,15 @@ fi
 add_brew_to_path
 
 # Check if Terraform is installed and working
-if ! command_exists terraform; then
-    echo_with_color "$YELLOW_COLOR" "Terraform could not be found."
+if ! terraform_version >/dev/null; then
+    echo_with_color "$YELLOW_COLOR" "Terraform could not be found or is not properly installed."
     install_tfenv_macos
     install_terraform_version
 else
-    current_version=$(terraform version | head -n 1)
+    current_version=$(terraform_version)
     echo_with_color "$GREEN_COLOR" "Terraform is already installed and working: $current_version"
     # Optionally check if the current version matches TF_VERSION and install if necessary
-    if [[ "$(terraform version | head -n 1)" != "Terraform v${TF_VERSION}"* ]]; then
+    if [[ "$current_version" != "Terraform v${TF_VERSION}"* ]]; then
         install_terraform_version
     else
         echo_with_color "$GREEN_COLOR" "Terraform version ${TF_VERSION} is already in use."
