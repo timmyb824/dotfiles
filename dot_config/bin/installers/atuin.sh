@@ -7,6 +7,8 @@ initialize_atuin() {
     eval "$(atuin init zsh)"
 }
 
+add_brew_to_path
+
 if command_exists atuin; then
     echo_with_color "32" "atuin is already installed"
     if atuin status | grep -q "session not found"; then
