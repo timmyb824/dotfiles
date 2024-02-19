@@ -45,7 +45,7 @@ for package in "${packages[@]}"; do
         echo_with_color "$GREEN_COLOR" "${package} installed successfully"
         if [[ "${package}" == "midnight-commander.org" ]]; then
             mv "$mc_bin_path" "$mcomm_bin_path" || exit_with_error "Failed to rename mc binary to mcomm."
-            echo_with_color "$GREEN_COLOR" "Renamed mc binary to mcomm"
+            echo_with_color "$BLUE_COLOR" "Renamed mc binary to mcomm"
         fi
     elif [[ "$output" == *"pkgx: already installed:"* ]]; then
         echo_with_color "$YELLOW_COLOR" "${package} is already installed."
