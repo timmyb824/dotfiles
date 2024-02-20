@@ -2,20 +2,23 @@
 .DS_Store
 
 # nvim
-/Users/timothybryant/.config/nvim/LICENSE,md
-/Users/timothybryant/.config/nvim/README.md
-/Users/timothybryant/.config/nvim/doc/*
-/Users/timothybryant/.config/nvim/.git/*
-/Users/timothybryant/.config/nvim/.github/*
-/Users/timothybryant/.config/nvim/.gitignore
+~/.config/nvim/LICENSE,md
+~/.config/nvim/README.md
+~/.config/nvim/doc/*
+~/.config/nvim/.git/*
+~/.config/nvim/.github/*
+~/.config/nvim/.gitignore
 
 # files to ignore on work mac
-{{ if ne .chezmoi.hostname "Timothys-MacBook-Pro" -}}
-/Users/timothybryant/.gitconfig
-/Users/timothybryant/.dblab.yaml
-/Users/timothybryant/.ssh/*
-/Users/timothybryant/.oci/*
-/Users/timothybryant/.config/gitearc/*
-/Users/timothybryant/.config/fonts/*
-/Users/timothybryant/DEV/homelab/.gitopolis.toml
+{{ if (or (ne .chezmoi.hostname "Timothys-MacBook-Pro") (ne .chezmoi.hostname "Timothys-MacBook-Air")) }}
+~/.gitconfig
+~/.dblab.yaml
+~/.ssh/*
+~/.oci/*
+~/.config/gitearc/*
+~/DEV/homelab/.gitopolis.toml
+~/.vault-token
+~/.aws/*
+~/.kube/*
+~/.hyper.js
 {{ end -}}
