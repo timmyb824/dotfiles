@@ -10,7 +10,7 @@ setup.sh
 .ssh/
 .oci/
 gitearc/
-.gitopolis.toml
+DEV/
 .vault-token
 .aws/
 .kube/
