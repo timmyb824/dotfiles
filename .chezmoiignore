@@ -9,7 +9,7 @@ setup.sh
 .dblab.yaml
 .ssh/
 .oci/
-/gitearc/
+gitearc/
 .gitopolis.toml
 .vault-token
 .aws/
