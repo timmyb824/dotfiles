@@ -1,24 +1,18 @@
 # global
 .DS_Store
-
-# nvim
-~/.config/nvim/LICENSE,md
-~/.config/nvim/README.md
-~/.config/nvim/doc/*
-~/.config/nvim/.git/*
-~/.config/nvim/.github/*
-~/.config/nvim/.gitignore
+README.md
+setup.sh
 
 # files to ignore on work mac
-{{ if (and (ne .chezmoi.hostname "Timothys-MacBook-Pro") (ne .chezmoi.hostname "Timothys-MacBook-Air")) }}
-~/.gitconfig
-~/.dblab.yaml
-~/.ssh/*
-~/.oci/*
-~/.config/gitearc/*
-~/DEV/homelab/.gitopolis.toml
-~/.vault-token
-~/.aws/*
-~/.kube/*
-~/.hyper.js
-{{ end -}}
+{{- if (and (eq .chezmoi.hostname "Timothys-MacBook-Pro") (eq .chezmoi.hostname "Timothys-MacBook-Air")) }}
+.gitconfig
+dblab.yaml
+.ssh/*
+.oci/*
+/gitearc/*
+.gitopolis.toml
+.vault-token
+.aws/*
+.kube/*
+.hyper.js
+{{- end }}
