@@ -7,12 +7,12 @@ setup.sh
 {{ if (and (ne .chezmoi.hostname "Timothys-MacBook-Pro") (ne .chezmoi.hostname "Timothys-MacBook-Air")) -}}
 .gitconfig
 .dblab.yaml
-.ssh/*
-.oci/*
-/gitearc/*
+.ssh/
+.oci/
+/gitearc/
 .gitopolis.toml
 .vault-token
-.aws/*
-.kube/*
+.aws/
+.kube/
 .hyper.js
 {{- end }}
