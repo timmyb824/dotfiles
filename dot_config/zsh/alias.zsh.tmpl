@@ -1,4 +1,4 @@
-{{ if (and (eq .chezmoi.os "darwin") (ne .chezmoi.hostname "Timothy-Bryant")) -}}
+{{ if (or (eq .chezmoi.hostname "Timothys-MacBook-Pro") (eq .chezmoi.hostname "Timothys-MacBook-Air")) -}}
 ################### PERSONAL CONFIGUARTION ##################
 alias _=sudo
 alias awsp="source _awsp"
@@ -40,7 +40,7 @@ alias tf=terraform
 alias wtf=wtfutil
 alias zbench="for i in {1..10}; do /usr/bin/time zsh -lic exit; done"
 alias zshconfig="micro ~/.zshrc"
-{{ else if (and (eq .chezmoi.os "darwin") (eq .chezmoi.hostname "Timothy-Bryant")) -}}
+{{ else if (and (ne .chezmoi.hostname "Timothys-MacBook-Pro") (ne .chezmoi.hostname "Timothys-MacBook-Air")) -}}
 ################### WORK CONFIGUARTION ##################
 alias _=sudo
 alias awsp="source _awsp"
@@ -49,6 +49,7 @@ alias btm="btm --color gruvbox"
 alias cat="bat"
 alias cd..="cd .."
 alias cdicloud="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs"
+alias chez="chezmoi"
 alias dbuild="docker-compose up -d --force-recreate --build"
 alias dclogs="docker-compose logs -f"
 alias dcup="docker-compose up -d --force-recreate"
@@ -61,15 +62,15 @@ alias dxstg='DEX_ENV=stg dx cluster-login'
 # alias fd='find . -type d -name' # fd is already a command
 alias ff="find . -type f -name"
 alias g=git
-alias k9s="k9s --kubeconfig ~/.kube/config_k3s "
 alias kk=kubectl
-alias kns=kubens
-alias kcx=kubectx
+alias kns='kubectl ns
+alias kcx='kubectl ctx'
 alias la="lsd -lAh"
 alias ldot="lsd -ld .*"
+alias lg="lazygit"
 alias ls="lsd"
 alias ll="lsd -lh"
-alias nano='/usr/local/bin/nano' # nano installed with brew
+alias nano="/opt/homebrew/bin/nano"
 alias oc="opencommit"
 alias po=podman
 alias poc=podman compose
@@ -77,7 +78,10 @@ alias please=sudo
 alias pp="poetry run python"
 alias pr="poetry run"
 alias px=pkgx
+alias pxi="pkgx install"
+alias px=pkgx
 alias quit=exit
+alias reexec="exec zsh"
 alias reload="source ~/.zshrc"
 alias sshadd="ssh-add ~/.ssh/id_master_key"
 alias sshstart="eval `ssh-agent -s`"

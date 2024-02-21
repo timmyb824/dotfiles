@@ -11,8 +11,13 @@ eval "$(direnv hook zsh)" # pkgx
 eval "$(fnm env --use-on-cd)" # pkgx
 eval "$(rbenv init - zsh)" # homebrew
 # eval "$(register-python-argcomplete pipx)" # pkgx
-source /Users/timothybryant/.config/broot/launcher/bash/br # pkgx
+source $HOME/.config/broot/launcher/bash/br # pkgx
 
 #if command -v termium > /dev/null 2>&1; then
 #  eval "$(termium shell-hook show post)"
 #fi
+
+{{ if (and (ne .chezmoi.hostname "Timothys-MacBook-Pro") (ne .chezmoi.hostname "Timothys-MacBook-Air")) -}}
+. ~/.dx-zsh-completion.sh
+. ~/.awashcli.sh
+{{ end -}}
