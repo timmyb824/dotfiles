@@ -4,7 +4,7 @@ README.md
 setup.sh
 
 # files to ignore on work mac
-{{- if (and (eq .chezmoi.hostname "Timothys-MacBook-Pro") (eq .chezmoi.hostname "Timothys-MacBook-Air")) }}
+{{ if (and (ne .chezmoi.hostname "Timothys-MacBook-Pro") (ne .chezmoi.hostname "Timothys-MacBook-Air")) -}}
 .gitconfig
 dblab.yaml
 .ssh/*
