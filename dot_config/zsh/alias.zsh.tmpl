@@ -54,12 +54,9 @@ alias dbuild="docker-compose up -d --force-recreate --build"
 alias dclogs="docker-compose logs -f"
 alias dcup="docker-compose up -d --force-recreate"
 alias ddown="docker-compose down"
-alias dockerports="docker ps --format "table {{.ID}}\t{{.Names}}\t{{.Ports}}\t{{.State}}\t{{.RunningFor}}""
-alias dockerps="docker ps --format "table {{.ID}}\t{{.Names}}\t{{.CreatedAt}}\t{{.Networks}}\t{{.State}}\t{{.RunningFor}}""
 alias dxprd='DEX_ENV=prd dx cluster-login'
 alias dxqa='dx cluster-login'
 alias dxstg='DEX_ENV=stg dx cluster-login'
-# alias fd='find . -type d -name' # fd is already a command
 alias ff="find . -type f -name"
 alias g=git
 alias kk=kubectl
