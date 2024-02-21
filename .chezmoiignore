@@ -6,7 +6,7 @@ setup.sh
 # files to ignore on work mac
 {{ if (and (ne .chezmoi.hostname "Timothys-MacBook-Pro") (ne .chezmoi.hostname "Timothys-MacBook-Air")) -}}
 .gitconfig
-dblab.yaml
+.dblab.yaml
 .ssh/*
 .oci/*
 /gitearc/*
