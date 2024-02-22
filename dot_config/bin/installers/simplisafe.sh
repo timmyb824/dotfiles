@@ -2,15 +2,15 @@
 
 source "$(dirname "$BASH_SOURCE")/../init/init.sh"
 
-install_ss_private() {
-    echo_with_color "$GREEN_COLOR" "Tapping simplisafe/simplisafe-tools..."
+install_ss_brew() {
+    echo_with_color "$GREEN_COLOR" "Install SimpliSafe brew packages..."
     if ! command_exists brew; then
         exit_with_error "Homebrew could not be found. Please install Homebrew to continue."
     fi
 
-    brew update
     brew tap simplisafe/simplisafe-tools git+ssh://git@github.com/simplisafe/homebrew-simplisafe-tools.git
     brew install saml2aws
+    brew install meetingbar
 }
 
 # Function to download and install 1Password CLI on macOS
@@ -72,7 +72,7 @@ install_awashcli() {
 
 if ask_yes_or_no "PLEASE CONFIRM YOU ARE ON THE VPN ELSE THIS SCRIPT WILL FAIL"; then
     add_brew_to_path
-    install_ss_private
+    install_ss_brew
     install_dex
     install_awashcli
     echo_with_color "$GREEN_COLOR" "SimpliSafe installations complete."
