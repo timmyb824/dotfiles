@@ -14,7 +14,6 @@ terraform_version() {
     fi
 }
 
-# Function to install tfenv and Terraform on MacOS
 install_tfenv_macos() {
     echo_with_color "$GREEN_COLOR" "Installing tfenv using Homebrew for macOS..."
 
@@ -22,12 +21,17 @@ install_tfenv_macos() {
         exit_with_error "Homebrew could not be found. Please install Homebrew to continue."
     fi
 
-    brew update
-    brew install tfenv
+    if command_exists tfenv; then
+        echo_with_color "$YELLOW_COLOR" "tfenv is already installed."
+        return
+    fi
 
-    if ! command_exists tfenv; then
+    echo_with_color "$YELLOW_COLOR" "tfenv is not installed. Installing tfenv..."
+    if ! brew install tfenv; then
         exit_with_error "tfenv installation failed."
     fi
+
+    echo_with_color "$GREEN_COLOR" "tfenv installation was successful."
 }
 
 # Function to install and set the desired version of Terraform

@@ -3,18 +3,14 @@
 source "$(dirname "$BASH_SOURCE")/../init/init.sh"
 
 install_ss_private() {
-    echo_with_color "$GREEN_COLOR" "Installing rbenv using Homebrew on macOS..."
+    echo_with_color "$GREEN_COLOR" "Tapping simplisafe/simplisafe-tools..."
     if ! command_exists brew; then
         exit_with_error "Homebrew could not be found. Please install Homebrew to continue."
     fi
 
     brew update
     brew tap simplisafe/simplisafe-tools git+ssh://git@github.com/simplisafe/homebrew-simplisafe-tools.git
-    brew install saml-aws-auth
-
-    if ! command_exists rbenv; then
-        exit_with_error "rbenv installation failed."
-    fi
+    brew install saml2aws
 }
 
 # Function to download and install 1Password CLI on macOS
