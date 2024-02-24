@@ -15,4 +15,5 @@ DEV/
 .aws/
 .kube/
 .hyper.js
+.config/bin/Archive/
 {{- end }}
