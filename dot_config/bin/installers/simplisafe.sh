@@ -9,6 +9,7 @@ install_ss_brew() {
     fi
 
     brew tap simplisafe/simplisafe-tools git+ssh://git@github.com/simplisafe/homebrew-simplisafe-tools.git
+    brew install --cask simplisafe/simplisafe-tools/saml-aws-auth
     brew install saml2aws
     brew install meetingbar
 }
