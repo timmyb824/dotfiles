@@ -44,11 +44,18 @@ uninstall_pkgx_directory() {
     rm -rf "$HOME/.pkgx" || exit_with_error "Uninstallation of .pkgx directory failed."
 }
 
+uninstall_pkgx_cache() {
+    echo_with_color $BLUE_COLOR "Uninstalling pkgx cache..."
+    rm -rf "${XDG_CACHE_HOME:-$HOME/Library/Caches}/pkgx" || exit_with_error "Uninstallation of pkgx cache failed."
+    rm -rf "${XDG_DATA_HOME:-$HOME/Library/Application Support}"/pkgx || exit_with_error "Uninstallation of pkgx cache failed."
+}
+
 echo_with_color $BLUE_COLOR "Starting the uninstallation process..."
 
 # Uninstall all 'pkgx' packages first
 uninstall_packages_from_list "pkgx"
 uninstall_pkgx
 uninstall_pkgx_directory
+uninstall_pkgx_cache
 
 echo_with_color $BLUE_COLOR "Uninstallation process completed."
