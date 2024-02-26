@@ -51,6 +51,10 @@ vault = "Private"
 {{ else if (and (ne .chezmoi.hostname "Timothys-MacBook-Pro") (ne .chezmoi.hostname "Timothys-MacBook-Air")) -}}
 ################### WORK CONFIGUARTION ##################
 [[ssh-keys]]
+item = "id_master_key_work"
+vault = "Personal"
+
+[[ssh-keys]]
 item = "csebot-prd"
 vault = "Private"
 
