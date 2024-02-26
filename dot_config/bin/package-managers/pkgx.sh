@@ -28,8 +28,21 @@ fi
 # Verify pkgx installation
 command_exists pkgx || exit_with_error "pkgx installation failed."
 
-# Fetch the list of packages to install
-packages=( $(get_package_list pkgx) )
+# Define the array of packages that are common to both environments
+common_packages=( $(get_package_list pkgx) )
+
+# Define the array of additional packages for your personal computer
+personal_packages=( $(get_package_list pkgx_personal) )
+
+# Fetch the list of packages to install based on the hostname
+hostname=$(hostname)
+if [[ "$hostname" == "$WORK_HOSTNAME" ]]; then
+    echo_with_color "$CYAN_COLOR" "Installing packages for work environment..."
+    packages=( "${common_packages[@]}" )
+else
+    echo_with_color "$CYAN_COLOR" "Installing packages for personal environment..."
+    packages=( "${personal_packages[@]}" "${common_packages[@]}" )
+fi
 
 # Define binary paths
 mc_bin_path="$HOME/.local/bin/mc"

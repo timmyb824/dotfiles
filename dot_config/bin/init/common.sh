@@ -30,6 +30,8 @@ export AGE_VERSION="v1.1.1"
 
 export RUBY_VERSION="3.2.1"
 
+export WORK_HOSTNAME="timothy.bryant-SSM-MLX7N3TCYP"
+
 ############# Global functions #############
 
 # source via init.sh

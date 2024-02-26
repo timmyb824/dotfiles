@@ -46,8 +46,13 @@ uninstall_pkgx_directory() {
 
 uninstall_pkgx_cache() {
     echo_with_color $BLUE_COLOR "Uninstalling pkgx cache..."
-    rm -rf "${XDG_CACHE_HOME:-$HOME/Library/Caches}/pkgx" || exit_with_error "Uninstallation of pkgx cache failed."
-    rm -rf "${XDG_DATA_HOME:-$HOME/Library/Application Support}"/pkgx || exit_with_error "Uninstallation of pkgx cache failed."
+    sudo rm -rf "${XDG_CACHE_HOME:-$HOME/Library/Caches}/pkgx" || exit_with_error "Uninstallation of pkgx cache failed."
+    sudo rm -rf "${XDG_DATA_HOME:-$HOME/Library/Application Support}"/pkgx || exit_with_error "Uninstallation of pkgx cache failed."
+}
+
+remove_special_pkgx_files() {
+    echo_with_color $BLUE_COLOR "Removing special pkgx files..."
+    rm -f $HOME/.local/bin/mcomm || exit_with_error "Uninstallation of mcomm failed."
 }
 
 echo_with_color $BLUE_COLOR "Starting the uninstallation process..."
@@ -57,5 +62,6 @@ uninstall_packages_from_list "pkgx"
 uninstall_pkgx
 uninstall_pkgx_directory
 uninstall_pkgx_cache
+remove_special_pkgx_files
 
 echo_with_color $BLUE_COLOR "Uninstallation process completed."
