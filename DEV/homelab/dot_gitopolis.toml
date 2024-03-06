@@ -63,6 +63,23 @@ name = "origin"
 url = "git@github.com:timmyb824/docker-apps.git"
 
 [[repos]]
+path = "dotfiles"
+tags = ["dotfiles", "homelab"]
+
+[repos.remotes.origin]
+name = "origin"
+url = "git@github.com:timmyb824/dotfiles.git"
+
+
+[[repos]]
+path = "dotfiles_linux"
+tags = ["dotfiles_linux", "homelab"]
+
+[repos.remotes.origin]
+name = "origin"
+url = "git@github.com:timmyb824/dotfiles_linux.git"
+
+[[repos]]
 path = "kubernetes-apps"
 tags = ["kubernetes-apps", "homelab"]
 
