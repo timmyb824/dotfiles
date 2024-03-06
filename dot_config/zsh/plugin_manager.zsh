@@ -63,6 +63,7 @@ plugins=(
   amstrad/oh-my-matrix
   MichaelAquilina/zsh-you-should-use
   supercrabtree/k
+  arzzen/calc.plugin.zsh
   # zsh-users/zsh-syntax-highlighting
 
   # speed things up by loading intensive plugins after zsh-defer
