@@ -3857,6 +3857,26 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>guid</key>
+			<string>DAF0076B-B8A1-4D6E-B37A-5D78AA468530</string>
+			<key>title</key>
+			<string>linux: prepend 1.1.1.1 to resolv.conf</string>
+			<key>value</key>
+			<string>sudo sh -c 'echo "nameserver 1.1.1.1" | cat - /etc/resolv.conf &gt; /tmp/resolv.conf &amp;&amp; mv /tmp/resolv.conf /etc/resolv.conf'</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>guid</key>
+			<string>50FB20EC-153A-4290-BE5E-50CF6841DC6A</string>
+			<key>title</key>
+			<string>linux: get size of a directory </string>
+			<key>value</key>
+			<string>du -sh [folder or cws]</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>SoundForEsc</key>
 	<false/>
