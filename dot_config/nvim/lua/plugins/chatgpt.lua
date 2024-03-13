@@ -1,5 +1,6 @@
 return {
   "jackMort/ChatGPT.nvim",
+  Lazy = true,
   enabled = true,
   dependencies = {
     "MunifTanjim/nui.nvim",

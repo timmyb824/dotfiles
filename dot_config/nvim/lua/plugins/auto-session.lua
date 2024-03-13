@@ -1,5 +1,6 @@
 return {
   "rmagatti/auto-session",
+  LazyLoad = true,
   config = function()
     require("auto-session").setup({
       --auto_restore_enabled = true,

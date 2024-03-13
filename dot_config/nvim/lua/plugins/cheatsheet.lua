@@ -1,4 +1,5 @@
 return {
-    'sudormrfbin/cheatsheet.nvim'
+    'sudormrfbin/cheatsheet.nvim',
+    Lazy = true,
   }
-  
+

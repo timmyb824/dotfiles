@@ -4,6 +4,7 @@ return {
   -- lspconfig
   {
     "neovim/nvim-lspconfig",
+    Lazy = true,
     event = "LazyFile",
     dependencies = {
       { "folke/neoconf.nvim", cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },

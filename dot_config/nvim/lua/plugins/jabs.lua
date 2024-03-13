@@ -1,4 +1,4 @@
 return {
-  "famiu/bufdelete.nvim",
+  "matbme/JABS.nvim",
   Lazy = true,
 }
