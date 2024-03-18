@@ -6,7 +6,7 @@ fi
 
 eval "$(basher init - zsh)"
 eval "$(kickstart infect)" # basher
-eval "$(zoxide init zsh)" # pkgx
+eval "$(zoxide init --cmd cd zsh)" # pkgx
 eval "$(direnv hook zsh)" # pkgx
 eval "$(rbenv init - zsh)" # homebrew
 # eval "$(register-python-argcomplete pipx)" # pkgx
