@@ -2,8 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>AllowClipboardAccess</key>
+	<true/>
 	<key>AlternateMouseScroll</key>
 	<true/>
+	<key>AutoHideTmuxClientSession</key>
+	<false/>
 	<key>BadgeFont</key>
 	<string>Fira Code</string>
 	<key>Custom Color Presets</key>
@@ -3403,13 +3407,6 @@
 					<key>Text</key>
 					<string>[1;6A</string>
 				</dict>
-				<key>0xf700-0x280000</key>
-				<dict>
-					<key>Action</key>
-					<integer>11</integer>
-					<key>Text</key>
-					<string>0x1b 0x1b 0x5b 0x41</string>
-				</dict>
 				<key>0xf701-0x220000-0x0</key>
 				<dict>
 					<key>Action</key>
@@ -3430,13 +3427,6 @@
 					<integer>10</integer>
 					<key>Text</key>
 					<string>[1;6B</string>
-				</dict>
-				<key>0xf701-0x280000</key>
-				<dict>
-					<key>Action</key>
-					<integer>11</integer>
-					<key>Text</key>
-					<string>0x1b 0x1b 0x5b 0x42</string>
 				</dict>
 				<key>0xf702-0x220000-0x0</key>
 				<dict>
@@ -3874,6 +3864,16 @@
 			<string>linux: get size of a directory </string>
 			<key>value</key>
 			<string>du -sh [folder or cws]</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>guid</key>
+			<string>26D5E28B-9237-4627-81E5-8047D06F8948</string>
+			<key>title</key>
+			<string>podman: compose up</string>
+			<key>value</key>
+			<string>podman-compose -p appname up -d --force-recreate</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>

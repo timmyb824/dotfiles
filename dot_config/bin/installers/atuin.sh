@@ -4,8 +4,16 @@ source "$(dirname "$BASH_SOURCE")/../init/init.sh"
 
 # Function to initialize atuin for zsh
 initialize_atuin() {
-    echo_with_color "$YELLOW_COLOR" "Initializing atuin..."
-    eval "$(atuin init zsh)"
+    local shell_name
+    shell_name=$(basename "$SHELL")
+
+    if [ -z "$shell_name" ]; then
+        echo_with_color "$RED_COLOR" "Unable to determine the shell for atuin initialization."
+        exit_with_error "Shell not found for atuin initialization." 1
+    else
+        echo_with_color "$YELLOW_COLOR" "Initializing atuin for $shell_name..."
+        eval "$(atuin init "$shell_name")"
+    fi
 }
 
 # Ensure brew is in the PATH
