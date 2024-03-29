@@ -2,22 +2,37 @@
 
 source "$(dirname "$BASH_SOURCE")/../init/init.sh"
 
-# Function to install pkgx using Homebrew
+# Function to install pkgx
 install_pkgx() {
-    if command_exists pkgx; then
-        echo_with_color "$GREEN_COLOR" "pkgx is already installed."
-        return
+    # Ensure curl is installed before attempting to install pkgx
+    if ! command_exists curl; then
+        echo_with_color "$GREEN_COLOR" "curl is not installed. Installing curl..."
+        sudo apt-get update || exit_with_error "Failed to update apt-get."
+        sudo apt-get install -y curl || exit_with_error "Installation of curl failed."
     fi
 
-    if command_exists brew; then
-        echo_with_color "$CYAN_COLOR" "Installing pkgx using Homebrew..."
-        brew install pkgxdev/made/pkgx || exit_with_error "Installation of pkgx using Homebrew failed."
-    else
-        exit_with_error "Homebrew is not installed. Cannot install pkgx."
-    fi
+    echo_with_color "$BLUE_COLOR" "Installing pkgx using curl..."
+    curl -Ssf https://pkgx.sh | sh || exit_with_error "Installation of pkgx using curl failed."
 }
 
-add_brew_to_path
+# Function to prompt user for package list
+prompt_for_package_list() {
+    echo_with_color "$CYAN_COLOR" "Please select the package list you want to install:"
+    echo "1) pkgx_code_server.list"
+    echo "2) pkgx_work.list"
+    echo "3) pkgx_personal.list"
+    echo "4) pkgx_linux.list"
+    read -rp "Enter the number (1-4): " choice
+
+    case $choice in
+        1) package_list="pkgx_code_server.list" ;;
+        2) package_list="pkgx_work.list" ;;
+        3) package_list="pkgx_personal.list" ;;
+        4) package_list="pkgx_linux.list" ;;
+        *) echo_with_color "$RED_COLOR" "Invalid selection. Exiting."
+           exit 1 ;;
+    esac
+}
 
 # Install pkgx if it's not already available
 if ! command_exists pkgx; then
@@ -26,23 +41,13 @@ if ! command_exists pkgx; then
 fi
 
 # Verify pkgx installation
-command_exists pkgx || exit_with_error "pkgx installation failed."
+check_command pkgx
 
-# Define the array of packages that are common to both environments
-common_packages=( $(get_package_list pkgx) )
+# Prompt user for the package list
+prompt_for_package_list
 
-# Define the array of additional packages for your personal computer
-personal_packages=( $(get_package_list pkgx_personal) )
-
-# Fetch the list of packages to install based on the hostname
-hostname=$(hostname)
-if [[ "$hostname" == "$WORK_HOSTNAME" ]]; then
-    echo_with_color "$CYAN_COLOR" "Installing packages for work environment..."
-    packages=( "${common_packages[@]}" )
-else
-    echo_with_color "$CYAN_COLOR" "Installing packages for personal environment..."
-    packages=( "${personal_packages[@]}" "${common_packages[@]}" )
-fi
+# Fetch the selected package list
+packages=( $(get_package_list "$package_list") )
 
 # Define binary paths
 mc_bin_path="$HOME/.local/bin/mc"
@@ -56,7 +61,8 @@ for package in "${packages[@]}"; do
 
     if [[ "$output" == *"pkgx: installed:"* ]]; then
         echo_with_color "$GREEN_COLOR" "${package} installed successfully"
-        if [[ "${package}" == "midnight-commander.org" ]]; then
+        # Check if the package is "midnight-commander.org", and user is privileged
+        if [[ "${package}" == "midnight-commander.org" ]] && is_privileged_user; then
             mv "$mc_bin_path" "$mcomm_bin_path" || exit_with_error "Failed to rename mc binary to mcomm."
             echo_with_color "$BLUE_COLOR" "Renamed mc binary to mcomm"
         fi

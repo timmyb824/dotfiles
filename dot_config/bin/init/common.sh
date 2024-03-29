@@ -32,6 +32,8 @@ export RUBY_VERSION="3.2.1"
 
 export WORK_HOSTNAME="timothy.bryant-SSM-MLX7N3TCYP"
 
+export ATUIN_USER="tbryant"
+
 ############# Global functions #############
 
 # source via init.sh
@@ -144,7 +146,7 @@ ask_for_input() {
 # General function to check if a command is available
 check_command() {
     local cmd="$1"
-    if ! command -v "$cmd" &> /dev/null; then
+    if ! command_exists "$cmd"; then
         echo_with_color "31" "$cmd could not be found"
         return 1
     else
