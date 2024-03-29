@@ -100,15 +100,20 @@ for package in "${packages[@]}"; do
     elif [[ "$output" == "nothing provides:"* ]]; then
         echo_with_color "$RED_COLOR" "Error: Package ${package} is not a valid package."
         echo_with_color "$YELLOW_COLOR" "Continuing with the next package..."
+    elif [[ "$output" == *"No such file or directory"* ]]; then
+        # This is the new case we are adding
+        echo_with_color "$RED_COLOR" "Error: An unexpected error occurred while trying to uninstall ${package}: $output"
+        echo_with_color "$YELLOW_COLOR" "Continuing with the next package..."
+        # Optionally, you can write the error to a log file
+        echo "Error uninstalling ${package}: $output" >> uninstall_errors.log
     elif [[ -z "$output" ]]; then
         echo_with_color "$YELLOW_COLOR" "${package} was not installed."
     else
-        # Log the error but do not exit the script
+        # This case is for other unexpected errors
         echo_with_color "$RED_COLOR" "An unexpected error occurred while trying to uninstall ${package}: $output"
-        # Optionally, you can write the error to a log file
-        # echo "Error uninstalling ${package}: $output" >> uninstall_errors.log
-        # Continue with the next iteration
         echo_with_color "$YELLOW_COLOR" "Continuing with the next package..."
+        # Optionally, you can write the error to a log file
+        echo "Error uninstalling ${package}: $output" >> uninstall_errors.log
     fi
 done
 
