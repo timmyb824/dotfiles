@@ -3,7 +3,7 @@ list_local_bin() {
     echo "Listing all non-symlinked executables in ~/.local/bin"
 
     # Define the list of executables to ignore
-    ignore_list="code dotenv"
+    ignore_list="code"
 
     # Prepare the grep command to ignore the executables
     ignore_grep=$(echo "$ignore_list" | tr ' ' '|')
