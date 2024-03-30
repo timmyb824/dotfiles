@@ -68,8 +68,15 @@ for package in "${packages[@]}"; do
         fi
     elif [[ "$output" == *"pkgx: already installed:"* ]]; then
         echo_with_color "$YELLOW_COLOR" "${package} is already installed."
+    elif [[ "$output" == "nothing provides:"* ]]; then
+        echo_with_color "$RED_COLOR" "Error: Package ${package} is not a valid package."
+        echo_with_color "$YELLOW_COLOR" "Continuing with the next package..."
+    elif [[ "$output" == *"already exists"* ]]; then
+        echo_with_color "$RED_COLOR" "Error: Package ${package} already exists: $output"
+        echo_with_color "$YELLOW_COLOR" "Continuing with the next package..."
     else
-        exit_with_error "Failed to install ${package}: $output"
+        echo_with_color "$RED_COLOR" "An unexpected error occurred: failed to install ${package}: $output"
+        echo_with_color "$YELLOW_COLOR" "Continuing with the next package..."
     fi
 done
 

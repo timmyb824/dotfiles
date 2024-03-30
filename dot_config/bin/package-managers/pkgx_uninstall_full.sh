@@ -113,7 +113,7 @@ for package in "${packages[@]}"; do
         echo_with_color "$RED_COLOR" "An unexpected error occurred while trying to uninstall ${package}: $output"
         echo_with_color "$YELLOW_COLOR" "Continuing with the next package..."
         # Optionally, you can write the error to a log file
-        echo "Error uninstalling ${package}: $output" >> uninstall_errors.log
+        # echo "Error uninstalling ${package}: $output" >> uninstall_errors.log
     fi
 done
 
