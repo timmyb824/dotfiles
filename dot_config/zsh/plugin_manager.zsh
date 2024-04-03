@@ -75,6 +75,7 @@ warp_exclusive_plugins=(
   zdharma/fast-syntax-highlighting
   clarketm/zsh-completions
   zsh-users/zsh-autosuggestions # comment to use termium instead
+  zsh-users/zsh-history-substring-search
 )
 
 # If not running on Warp terminal, load the additional plugins
