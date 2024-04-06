@@ -4,23 +4,14 @@ if command -v pyenv 1>/dev/null 2>&1; then
     eval "$(pyenv virtualenv-init -)"
 fi
 
-# Initialize normally
-#eval "$(basher init - zsh)"
-#eval "$(kickstart infect)" # basher
-#eval "$(rbenv init - zsh)" # homebrew
-#eval "$(zoxide init --cmd cd zsh)" # pkgx
-#eval "$(direnv hook zsh)" # pkgx
-#source $HOME/.config/broot/launcher/bash/br # pkgx
-#eval "$(fnm env --use-on-cd)" # pkgx
+eval "$(basher init - zsh)"
+eval "$(kickstart infect)" # basher
+eval "$(rbenv init - zsh)" # homebrew
+eval "$(zoxide init --cmd cd zsh)" # pkgx
+eval "$(direnv hook zsh)" # pkgx
+source $HOME/.config/broot/launcher/bash/br # pkgx
+eval "$(fnm env --use-on-cd)" # pkgx
 
-# Initialize with a delay, suppress output and errors, and disown the job
-{ sleep 5; eval "$(basher init - zsh)"; } &>/dev/null &!
-{ sleep 5; eval "$(kickstart infect)"; } &>/dev/null &!
-{ sleep 5; eval "$(rbenv init - zsh)"; } &>/dev/null &!
-{ sleep 5; eval "$(zoxide init --cmd cd zsh)"; } &>/dev/null &!
-{ sleep 5; eval "$(direnv hook zsh)"; } &>/dev/null &!
-{ sleep 5; source $HOME/.config/broot/launcher/bash/br; } &>/dev/null &!
-{ sleep 5; eval "$(fnm env --use-on-cd)"; } &>/dev/null &!
 
 {{ if (or (eq .chezmoi.hostname "Timothys-MacBook-Pro") (eq .chezmoi.hostname "Timothys-MacBook-Air")) -}}
 {{ end -}}
