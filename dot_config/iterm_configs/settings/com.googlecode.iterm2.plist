@@ -3877,6 +3877,16 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>guid</key>
+			<string>28D2064E-86E6-4FCB-A58E-AA40B2FE542E</string>
+			<key>title</key>
+			<string>linux: log zsh executions at startup</string>
+			<key>value</key>
+			<string>zsh -xvlic 'exit' &amp;&gt;~/zsh_startup.log</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>SoundForEsc</key>
 	<false/>
