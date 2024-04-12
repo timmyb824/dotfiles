@@ -38,6 +38,7 @@ alias sopsd="sops --decrypt --age $(cat $SOPS_AGE_KEY_FILE | grep -oP "public ke
 alias sshadd="ssh-add ~/.ssh/id_master_key"
 alias sshstart="eval `ssh-agent -s`"
 alias tf=terraform
+alias update_spotify_playlist='spotify_to_ytmusic liked --name "Liked songs (Spotify)"'
 alias wtf=wtfutil
 alias zbench="for i in {1..10}; do /usr/bin/time zsh -lic exit; done"
 alias zshconfig="micro ~/.zshrc"
