@@ -3887,6 +3887,46 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>guid</key>
+			<string>AF2CF06A-80BE-4D05-BAE4-87417CA6DCF3</string>
+			<key>title</key>
+			<string>vault - current argocd plugin policies </string>
+			<key>value</key>
+			<string>kubectl exec vault-0 -n vault -- vault write auth/approle/role/argocd policies=botkube,default,firefly,fluentbit,gitea,grafanabackuptool,homepage,ngrok,postgres_db,slack,speedtesttracker,zincobserve,zincsearch,shlink,netdata,codex-docs,cloudflared,loki,authentik,grafana,umami,google_smtp,docker_hub,tailscale</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>guid</key>
+			<string>DE31281F-9613-47F5-A83E-EFBF7B2906DC</string>
+			<key>title</key>
+			<string>python - create an encryption key</string>
+			<key>value</key>
+			<string>python -c "import base64, os; print(base64.urlsafe_b64encode(os.urandom(32)).decode())"</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>guid</key>
+			<string>C7001085-1185-422A-98BF-ECAE33EA0D2A</string>
+			<key>title</key>
+			<string>ssh: delete key for a host</string>
+			<key>value</key>
+			<string>  ssh-keygen -f "/home/tbryant/.ssh/known_hosts" -R “[“HOST OR IP]</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>guid</key>
+			<string>E2E56B4F-15AA-45EE-BE65-92B51407CA0A</string>
+			<key>title</key>
+			<string>podman: execute into a container</string>
+			<key>value</key>
+			<string>podman exec -it [container] /bin/sh</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>SoundForEsc</key>
 	<false/>
