@@ -97,7 +97,7 @@ url = "git@github.com:timmyb824/oci-timmyb824.git"
 
 [[repos]]
 path = "timmyb824"
-tags = ["timmyb824"]
+tags = ["timmyb824", "homelab"]
 
 [repos.remotes.origin]
 name = "origin"

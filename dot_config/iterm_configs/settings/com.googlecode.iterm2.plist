@@ -3927,6 +3927,16 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>guid</key>
+			<string>9D590365-3D53-46F7-BE2D-E9F6A38457B1</string>
+			<key>title</key>
+			<string>git: stash changes</string>
+			<key>value</key>
+			<string>git stash push -m "Your stash message"</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>SoundForEsc</key>
 	<false/>
