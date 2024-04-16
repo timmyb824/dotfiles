@@ -3937,6 +3937,16 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>guid</key>
+			<string>1A3EF8F7-37E3-41A2-8F6D-933673ABFEFA</string>
+			<key>title</key>
+			<string>pkgx: upgrade packages in cache</string>
+			<key>value</key>
+			<string>pkgx mash pkgx/cache upgrade</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>SoundForEsc</key>
 	<false/>
