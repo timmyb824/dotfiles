@@ -2,6 +2,27 @@
 
 source "$(dirname "$BASH_SOURCE")/../init/init.sh"
 
+# Function to initialize pip on macOS
+initialize_pip_macos() {
+    if command_exists pip; then
+        echo_with_color "$GREEN_COLOR" "pip is already installed."
+        return
+    fi
+
+    local pip_path="$HOME/.pyenv/shims/pip"
+    if [[ -x "$pip_path" ]]; then
+        echo_with_color "$GREEN_COLOR" "Adding pyenv pip to PATH."
+        export PYENV_ROOT="$HOME/.pyenv"
+        export PATH="$PYENV_ROOT/bin:$PATH"
+        eval "$(pyenv init --path)"
+        eval "$(pyenv init -)"
+    else
+        echo_with_color "$YELLOW_COLOR" "pip is not installed. Please run pyenv_python.sh first."
+        exit_with_error "pip installation required"
+    fi
+}
+
+
 install_pipx_packages() {
     echo_with_color "$YELLOW_COLOR" "Installing pipx packages..."
     while IFS= read -r package; do
@@ -18,24 +39,12 @@ install_pipx_packages() {
     echo_with_color "$GREEN_COLOR" "All pipx packages installed successfully."
 }
 
-# Function to ensure pipx is available and install it if necessary
-ensure_pipx_installed() {
-    if command_exists pipx; then
-        return
-    fi
 
-    echo_with_color "$RED_COLOR" "pipx command not found, attempting to fix..."
-
-
-    # Attempt to fix pipx command availability
-    attempt_fix_command pipx "$HOME/.local/bin"
-
-    # Check if pipx is available again
-    if ! command_exists pipx; then
-        exit_with_error "pipx is still not found after attempting to fix the PATH. Please install pipx to continue."
-    fi
-}
-
-add_brew_to_path
-ensure_pipx_installed
-install_pipx_packages
+if command_exists pipx; then
+    echo_with_color "$GREEN_COLOR" "pipx is already installed."
+    install_pipx_packages
+else
+    echo_with_color "$YELLOW_COLOR" "pipx is not installed. Initializing pipx..."
+    initialize_pip_macos
+    install_pipx_packages
+fi
