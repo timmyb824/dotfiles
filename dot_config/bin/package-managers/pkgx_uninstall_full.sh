@@ -19,7 +19,7 @@ prompt_for_package_list() {
     echo "4) pkgx_linux.list"
     echo "5) pkgx_linux_init.list"
     echo "6) pkgx_linux_all.list"
-    read -p "Enter the number (1-4): " choice
+    read -p "Enter the number (1-6): " choice
 
     case $choice in
     1) package_list="pkgx_code_server.list" ;;
