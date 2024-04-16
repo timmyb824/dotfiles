@@ -17,6 +17,8 @@ prompt_for_package_list() {
     echo "2) pkgx_work.list"
     echo "3) pkgx_personal.list"
     echo "4) pkgx_linux.list"
+    echo "5) pkgx_linux_init.list"
+    echo "6) pkgx_linux_all.list"
     read -p "Enter the number (1-4): " choice
 
     case $choice in
@@ -24,6 +26,8 @@ prompt_for_package_list() {
     2) package_list="pkgx_work.list" ;;
     3) package_list="pkgx_personal.list" ;;
     4) package_list="pkgx_linux.list" ;;
+    5) package_list="pkgx_linux_init.list" ;;
+    6) package_list="pkgx_linux_all.list" ;;
     *)
         echo_with_color "$RED_COLOR" "Invalid selection. Exiting."
         exit 1
@@ -78,7 +82,6 @@ if ! command_exists pkgx; then
     exit_with_error "pkgx is not installed."
 fi
 
-
 # Prompt user for the package list
 prompt_for_package_list
 
@@ -105,7 +108,7 @@ for package in "${packages[@]}"; do
         echo_with_color "$RED_COLOR" "Error: An unexpected error occurred while trying to uninstall ${package}: $output"
         echo_with_color "$YELLOW_COLOR" "Continuing with the next package..."
         # Optionally, you can write the error to a log file
-        echo "Error uninstalling ${package}: $output" >> uninstall_errors.log
+        echo "Error uninstalling ${package}: $output" >>uninstall_errors.log
     elif [[ -z "$output" ]]; then
         echo_with_color "$YELLOW_COLOR" "${package} was not installed."
     else
