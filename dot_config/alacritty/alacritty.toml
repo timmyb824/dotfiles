@@ -2,9 +2,23 @@ import = [
     "~/.config/alacritty/themes/tommorow_night.toml"
 ]
 
+[env]
+TERM = "xterm-256color"
+
 [font]
 size = 16.0
 
 [font.normal]
 #family = "Berkeley Mono Nerd Font"
 family = "BerkeleyMono Nerd Font Mono Plus Font Awesome Plus Octicons Plus Power Symbols Plus Codicons Plus Pomicons Plus Font Logos Plus Material Design Icons Plus Weather Icons"
+
+[window]
+title = "Bryant Homelab"
+
+[selection]
+save_to_clipboard = true
+
+[cursor]
+style = { shape = "Beam", blinking = "Always"}
+blink_timeout = 0
+thickness = 0.25
