@@ -104,7 +104,7 @@ name = "origin"
 url = "git@github.com:timmyb824/timmyb824.git"
 
 [[repos]]
-path = "807597f33b14eceeb26e4e6f81d45962.git"
+path = "807597f33b14eceeb26e4e6f81d45962"
 tags = ["packages", "homelab"]
 
 [repos.remotes.origin]
