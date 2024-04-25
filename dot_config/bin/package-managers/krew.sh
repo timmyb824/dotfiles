@@ -36,7 +36,7 @@ install_krew_plugin() {
 }
 
 add_brew_to_path
-attempt_fix_command "kubectl" "$HOME/.local/bin"
+# attempt_fix_command "kubectl" "$HOME/.local/bin"
 
 check_krew_installation
 

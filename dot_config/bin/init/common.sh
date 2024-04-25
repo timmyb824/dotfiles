@@ -41,6 +41,8 @@ export WORK_HOSTNAME="timothy.bryant-SSM-MLX7N3TCYP"
 
 export ATUIN_USER="tbryant"
 
+export KUBECTL_VERSION="v1.25.0"
+
 ############# Global functions #############
 
 # Function to check if the current user is privileged
