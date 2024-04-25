@@ -34,6 +34,7 @@ declare -a scripts_to_run=(
     "package-managers/homebrew.sh"
     "package-managers/pkgx.sh"
     "package-managers/basher.sh"
+    "installers/kubectl_krew.sh"
     "package-managers/krew.sh"
     "package-managers/micro.sh"
     "installers/pyenv_python.sh"
