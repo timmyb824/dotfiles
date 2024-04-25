@@ -21,8 +21,11 @@ prompt_for_package_list() {
     echo "1) pkgx_code_server.list"
     echo "2) pkgx_work.list"
     echo "3) pkgx_personal.list"
-    echo "4) pkgx_linux.list"
-    read -rp "Enter the number (1-4): " choice
+    echo "4) pkgx_linux_all.list"
+    echo "5) pkgx_linux_init.list"
+    echo "6) pkgx_linux.list"
+    echo "7) pkgx_mac.list"
+    read -rp "Enter the number (1-7): " choice
 
     case $choice in
         1) package_list="pkgx_code_server.list" ;;
@@ -31,6 +34,7 @@ prompt_for_package_list() {
         4) package_list="pkgx_linux_all.list" ;;
         5) package_list="pkgx_linux_init.list" ;;
         6) package_list="pkgx_linux.list" ;;
+        7) package_list="pkgx_mac.list" ;;
         *) echo_with_color "$RED_COLOR" "Invalid selection. Exiting."
            exit 1 ;;
     esac
