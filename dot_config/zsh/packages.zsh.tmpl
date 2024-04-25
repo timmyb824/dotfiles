@@ -13,6 +13,9 @@ eval "$(direnv hook zsh)" # pkgx
 source $HOME/.config/broot/launcher/bash/br # pkgx
 eval "$(fnm env --use-on-cd)" # pkgx
 
+if [ -d "$HOME/.cargo" ]; then
+  . "$HOME/.cargo/env"
+fi
 
 {{ if (or (eq .chezmoi.hostname "Timothys-MacBook-Pro") (eq .chezmoi.hostname "Timothys-MacBook-Air")) -}}
 {{ end -}}

@@ -45,6 +45,7 @@ declare -a scripts_to_run=(
     "installers/tfenv_terraform.sh"
     "installers/tailscale.sh"
     "installers/rbenv_ruby.sh"
+    "installers/rust.sh
     "installers/atuin.sh"
     "configuration/go_directories.sh"
 )
