@@ -13,14 +13,20 @@ install_micro_plugin() {
     fi
 }
 
-# Function to attempt fixing the command, added for consistency
-attempt_fix_micro_command() {
-    attempt_fix_command "micro" "$HOME/.local/bin"
-}
+# # Function to attempt fixing the command, added for consistency
+# attempt_fix_micro_command() {
+#     attempt_fix_command "micro" "$HOME/.local/bin"
+# }
 
 add_brew_to_path
 
-attempt_fix_micro_command
+# attempt_fix_micro_command
+
+if ! command_exists micro; then
+    exit_with_error "micro not found"
+else
+    echo_with_color "$GREEN_COLOR" "micro found continuing with plugins installation"
+fi
 
 # Read package list and install plugins
 while IFS= read -r package; do

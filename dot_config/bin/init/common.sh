@@ -58,7 +58,7 @@ is_privileged_user() {
 
 # source via init.sh
 # Function to get a list of packages from a Gist
-function get_package_list() {
+get_package_list() {
     local package_list_name="$1"
     local gist_url=""
 
