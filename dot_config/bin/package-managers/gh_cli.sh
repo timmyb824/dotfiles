@@ -28,4 +28,4 @@ while IFS= read -r package; do
     if [ -n "$trimmed_package" ]; then
         install_gh_extension "$trimmed_package"
     fi
-done < <(get_package_list gh_extensions)
+done < <(get_package_list gh_cli)
