@@ -7,9 +7,11 @@ install_gh_extension() {
     local extension=$1
     local output
     output=$(gh extension install "$extension" 2>&1)
+    echo "$output"
     if [[ $output == *"already installed"* ]]; then
         echo_with_color "$YELLOW_COLOR" "${extension} already installed; attempting to update"
         output=$(gh extension upgrade "$extension" 2>&1)
+        echo "$output"
         if [[ $output == *"upgraded"* ]]; then
             echo_with_color "$GREEN_COLOR" "${extension} updated successfully"
         elif [[ $output == *"already up to date"* ]]; then
