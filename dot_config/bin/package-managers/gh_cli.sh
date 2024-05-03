@@ -2,14 +2,29 @@
 
 source "$(dirname "$BASH_SOURCE")/../init/init.sh"
 
-# Function to install micro editor plugin
+# create new install function that captures the output of the gh extension install command
 install_gh_extension() {
     local extension=$1
-    if gh extension install "$extension"; then
+    local output
+    output=$(gh extension install "$extension" 2>&1)
+    if [[ $output == *"already installed"* ]]; then
+        echo_with_color "$YELLOW_COLOR" "${extension} already installed; attempting to update"
+        output=$(gh extension upgrade "$extension" 2>&1)
+        if [[ $output == *"upgraded"* ]]; then
+            echo_with_color "$GREEN_COLOR" "${extension} updated successfully"
+        elif [[ $output == *"already up to date"* ]]; then
+            echo_with_color "$YELLOW_COLOR" "${extension} already up to date"
+        else
+            # Instead of exiting, the script will report the error and continue with other plugins
+            echo_with_color "$RED_COLOR" "Failed to update ${extension}"
+            echo_with_color "$RED_COLOR" "$output"
+        fi
+    elif [[ $output == *"Installed extension"* ]] || [[ $output == *"Cloning"* ]]; then
         echo_with_color "$GREEN_COLOR" "${extension} installed successfully"
     else
         # Instead of exiting, the script will report the error and continue with other plugins
         echo_with_color "$RED_COLOR" "Failed to install ${extension}"
+        echo_with_color "$RED_COLOR" "$output"
     fi
 }
 
