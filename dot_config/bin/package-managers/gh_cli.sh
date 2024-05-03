@@ -23,6 +23,9 @@ install_gh_extension() {
         fi
     elif [[ $output == *"Installed extension"* ]] || [[ $output == *"Cloning"* ]]; then
         echo_with_color "$GREEN_COLOR" "${extension} installed successfully"
+    elif [[ $output == *"To get started with GitHub CLI"* ]] || [[ $output == *"gh auth login"* ]]; then
+        echo_with_color "$YELLOW_COLOR" "Please authenticate with GitHub CLI to install extensions"
+        exit 1
     else
         # Instead of exiting, the script will report the error and continue with other plugins
         echo_with_color "$RED_COLOR" "Failed to install ${extension}"
