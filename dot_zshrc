@@ -21,7 +21,5 @@ source "$HOME/.config/zsh/completions.zsh"
 # Load plugins and package managers
 source "$HOME/.config/zsh/packages.zsh"
 
-# Source any miscellaneous settings
-source "$HOME/.config/zsh/misc.zsh"
 
 

@@ -8,7 +8,6 @@ autoload -Uz compinit && compinit
 
 # initialize shell integration
 source <(pkgx --shellcode)  #docs.pkgx.sh/shellcode
-export PATH="$HOME/.local/bin:$PATH"
 
 if [[ $TERM_PROGRAM != "WarpTerminal" ]]; then
     source <(starship init zsh --print-full-init)

@@ -56,3 +56,4 @@ git_branch() {
 cheat() {
   curl "https://cheat.sh/${1}"
 }
+
