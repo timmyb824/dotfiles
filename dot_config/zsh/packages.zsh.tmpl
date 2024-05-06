@@ -1,9 +1,7 @@
 # --- pyenv ---
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
-
 eval "$(pyenv init --path)"
-
 if command -v pyenv 1>/dev/null 2>&1; then
     eval "$(pyenv init -)"
     eval "$(pyenv virtualenv-init -)"
@@ -65,17 +63,17 @@ _fzf_comprun() {
 
 # --- other ---
 eval "$(basher init - zsh)"
-eval "$(kickstart infect)" # basher
-eval "$(rbenv init - zsh)"
-eval "$(zoxide init --cmd cd zsh)"
-eval "$(direnv hook zsh)" # pkgx
-source $HOME/.config/broot/launcher/bash/br
+eval "$(direnv hook zsh)"
 eval "$(fnm env --use-on-cd)"
+eval "$(kickstart infect)"
+eval "$(rbenv init - zsh)"
+eval $(thefuck --alias fk)
+eval "$(zoxide init --cmd cd zsh)"
 
 if [ -d "$HOME/.cargo" ]; then
   . "$HOME/.cargo/env"
 fi
-
+source $HOME/.config/broot/launcher/bash/br
 
 {{ if (or (eq .chezmoi.hostname "Timothys-MacBook-Pro") (eq .chezmoi.hostname "Timothys-MacBook-Air")) -}}
 {{ end -}}
