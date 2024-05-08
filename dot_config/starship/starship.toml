@@ -136,7 +136,7 @@ style = "bold green"
 disabled = false
 
 [terraform]
-format = '[🏎💨 tf-$version $workspace]($style) '
+format = '[🏎💨 tf -$version $workspace]($style) '
 
 [time]
 time_format = "%T"
