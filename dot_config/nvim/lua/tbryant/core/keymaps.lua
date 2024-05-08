@@ -30,3 +30,12 @@ keymap.set("n", "<leader>tx", "<cmd>tabclose<CR>", { desc = "Close current tab" 
 keymap.set("n", "<leader>tn", "<cmd>tabn<CR>", { desc = "Go to next tab" }) --  go to next tab
 keymap.set("n", "<leader>tp", "<cmd>tabp<CR>", { desc = "Go to previous tab" }) --  go to previous tab
 keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>", { desc = "Open current buffer in new tab" }) --  move current buffer to new tab
+
+-- sourcery and coc
+keymap.set("n", "<leader>cl", "<cmd>CocDiagnostics<CR>", { desc = "Show Diagnostics" })
+keymap.set("n", "<leader>ch", "<cmd>call CocAction('doHover')<CR>", { desc = "Show description of refactoring" })
+keymap.set("n", "<leader>cf", "<plug>(coc-codeaction-cursor)", { desc = "Show code actions" }) -- show code actions
+keymap.set("n", "<leader>ca", "<cmd>call CocActionAsync('codeAction', 'cursor')<CR>", { desc = "Accept code suggestion" }) -- rename symbol
+keymap.set("n", "<leader>ca", "<plug>(coc-fix-current)", { desc = "Fix current" }) -- fix current
+keymap.set("n", "[c", "<plug>(coc-diagnostic-prev)", { desc = "Previous diagnostic" }) -- previous diagnostic
+keymap.set("n", "]c", "<plug>(coc-diagnostic-next)", { desc = "Next diagnostic" }) -- next diagnostic

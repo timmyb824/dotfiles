@@ -42,7 +42,7 @@ return {
 				"dockerls",
 				"gopls",
 				"helm_ls",
-				"sourcery",
+				--"sourcery",
 				"yamlls",
 				"terraformls",
 			},

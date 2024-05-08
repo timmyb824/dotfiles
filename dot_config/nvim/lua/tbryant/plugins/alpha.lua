@@ -8,12 +8,12 @@ return {
     -- Set header
     dashboard.section.header.val = {
       "                                                     ",
-      "  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ ",
-      "  ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║ ",
-      "  ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║ ",
-      "  ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║ ",
-      "  ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║ ",
-      "  ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ ",
+      " ████████╗██╗███╗   ███╗███╗   ███╗██╗   ██╗██████╗  ",
+      " ╚══██╔══╝██║████╗ ████║████╗ ████║╚██╗ ██╔╝██╔══██╗ ",
+      "    ██║   ██║██╔████╔██║██╔████╔██║ ╚████╔╝ ██████╔╝ ",
+      "    ██║   ██║██║╚██╔╝██║██║╚██╔╝██║  ╚██╔╝  ██╔══██╗ ",
+      "    ██║   ██║██║ ╚═╝ ██║██║ ╚═╝ ██║   ██║   ██████╔╝ ",
+      "    ╚═╝   ╚═╝╚═╝     ╚═╝╚═╝     ╚═╝   ╚═╝   ╚═════╝  ",
       "                                                     ",
     }
 
@@ -25,6 +25,8 @@ return {
       dashboard.button("SPC fs", "  > Find Word", "<cmd>Telescope live_grep<CR>"),
       dashboard.button("SPC wr", "󰁯  > Restore Session For Current Directory", "<cmd>SessionRestore<CR>"),
       dashboard.button("q", " > Quit NVIM", "<cmd>qa<CR>"),
+      dashboard.button("SPC l", "  > Lazy Dashboard", "<cmd>Lazy<CR>"),
+      dashboard.button("SPC mm", "  > Mason Dashboard", "<cmd>Mason<CR>"),
     }
 
     -- Send config to alpha
