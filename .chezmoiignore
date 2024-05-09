@@ -2,6 +2,7 @@
 .DS_Store
 README.md
 setup.sh
+lazy-lock.json
 
 # files to ignore on work mac
 {{ if (and (ne .chezmoi.hostname "Timothys-MacBook-Pro") (ne .chezmoi.hostname "Timothys-MacBook-Air")) -}}
