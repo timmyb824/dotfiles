@@ -11,22 +11,22 @@ return {
                 name = "+code"
             },
             ["<leader>e"] = {
-                name = "+file explorer"
+                name = "+explorer"
             },
             ["<leader>f"] = {
-                name = "+fuzzy find"
+                name = "+fuzzy"
             },
             ["<leader>m"] = {
-                name = "+format visual mode"
+                name = "+format"
             },
             ["<leader>n"] = {
                 name = "+clear search"
             },
             ["<leader>s"] = {
-                name = "+split windows"
+                name = "+windows"
             },
             ["<leader>t"] = {
-                name = "+tab management"
+                name = "+tabs"
             },
             ["<leader>w"] = {
                 name = "+session"
@@ -41,4 +41,4 @@ return {
         wk.setup(opts)
         wk.register(opts.defaults)
     end
-}
+  }
