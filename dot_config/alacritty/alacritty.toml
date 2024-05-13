@@ -14,6 +14,12 @@ family = "BerkeleyMono Nerd Font Mono Plus Font Awesome Plus Octicons Plus Power
 
 [window]
 title = "Bryant Homelab"
+padding.x = 10
+padding.y = 10
+decorations = "Buttonless"
+opacity =  1.0
+blur = false
+option_as_alt = "Both"
 
 [selection]
 save_to_clipboard = true
@@ -22,3 +28,18 @@ save_to_clipboard = true
 style = { shape = "Beam", blinking = "Always"}
 blink_timeout = 0
 thickness = 0.25
+
+[keyboard]
+bindings = [
+  { key = "Right", mods = "Alt", chars = "\u001BF" },
+  { key = "Left",  mods = "Alt", chars = "\u001BB" },
+]
+
+[[hints.enabled]]
+command = "open"
+hyperlinks = true
+mouse.enabled = true
+mouse.mods = "Super"
+post_processing = true
+persist = false
+regex = "(ipfs:|ipns:|magnet:|mailto:|gemini://|gopher://|https://|http://|news:|file:|git://|ssh:|ftp://)[^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩‘]+"
