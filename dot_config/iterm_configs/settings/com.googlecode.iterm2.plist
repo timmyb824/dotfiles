@@ -3893,7 +3893,7 @@
 			<key>title</key>
 			<string>vault - current argocd plugin policies </string>
 			<key>value</key>
-			<string>kubectl exec vault-0 -n vault -- vault write auth/approle/role/argocd policies=botkube,default,firefly,fluentbit,gitea,grafanabackuptool,homepage,ngrok,postgres_db,slack,speedtesttracker,zincobserve,zincsearch,shlink,netdata,codex-docs,cloudflared,loki,authentik,grafana,umami,google_smtp,docker_hub,tailscale</string>
+			<string>kubectl exec vault-0 -n vault -- vault write auth/approle/role/argocd policies=botkube,default,firefly,fluentbit,gitea,grafanabackuptool,homepage,ngrok,postgres_db,slack,speedtesttracker,zincobserve,zincsearch,shlink,netdata,codex-docs,cloudflared,loki,authentik,grafana,umami,google_smtp,docker_hub,tailscale,ntfy</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -3947,14 +3947,24 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>guid</key>
+			<string>138EE568-F1F6-4ECC-BB4E-DE9F7EAF8915</string>
+			<key>title</key>
+			<string>zsh: see terminal commands as you use them</string>
+			<key>value</key>
+			<string>cat -v</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>SoundForEsc</key>
 	<false/>
 	<key>ToolbeltTools</key>
 	<array>
 		<string>Notes</string>
-		<string>Recent Directories</string>
-		<string>Command History</string>
+		<string>Captured Output</string>
+		<string>Paste History</string>
 		<string>Snippets</string>
 	</array>
 	<key>VisualIndicatorForEsc</key>
