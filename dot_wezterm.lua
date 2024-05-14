@@ -6,7 +6,13 @@ local config = wezterm.config_builder()
 
 -- This is where you actually apply your config choices
 
-config.color_scheme = 'Tokyo Night'
+config.color_scheme = 'FirefoxDev'
+
+-- Overwrrite the color_scheme with custom colors
+config.colors = {
+    background = "#000000",
+    foreground = "#8ea0b3",
+}
 
 config.font = wezterm.font(
     "BerkeleyMono Nerd Font Mono Plus Font Awesome Plus Octicons Plus Power Symbols Plus Codicons Plus Pomicons Plus Font Logos Plus Material Design Icons Plus Weather Icons",
@@ -17,7 +23,7 @@ config.font_size = 16
 
 config.enable_tab_bar = true
 
-config.window_decorations = "RESIZE"
+config.window_decorations = "TITLE | RESIZE"
 config.window_background_opacity = 1.0 -- 0.75
 config.macos_window_background_blur = 0 -- 8
 

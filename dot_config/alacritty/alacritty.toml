@@ -1,5 +1,5 @@
 import = [
-    "~/.config/alacritty/themes/tommorow_night.toml"
+    "~/.config/alacritty/themes/tomorrow_night_custom.toml"
 ]
 
 [env]
@@ -16,7 +16,7 @@ family = "BerkeleyMono Nerd Font Mono Plus Font Awesome Plus Octicons Plus Power
 title = "Bryant Homelab"
 padding.x = 10
 padding.y = 10
-decorations = "Buttonless"
+decorations = "Full"
 opacity =  1.0
 blur = false
 option_as_alt = "Both"
