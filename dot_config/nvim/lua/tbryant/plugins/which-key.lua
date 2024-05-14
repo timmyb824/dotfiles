@@ -19,6 +19,9 @@ return {
 			["<leader>f"] = {
 				name = "+fuzzy",
 			},
+			["<leader>l"] = {
+				name = "+lazygit",
+			},
 			["<leader>m"] = {
 				name = "+format",
 			},
