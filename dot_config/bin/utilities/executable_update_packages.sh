@@ -3,13 +3,12 @@
 # Function to log messages
 log() {
   echo "$(date +'%Y-%m-%d %H:%M:%S') - $1"
-  echo ""
+  echo "----------------------------------------"
 }
 
 # Function to handle errors
 handle_error() {
   log "Error: $1"
-  echo "----------------------------------------"
   exit 1
 }
 
