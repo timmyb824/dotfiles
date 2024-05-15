@@ -32,7 +32,6 @@ install_micro_plugin() {
     else
         echo_with_color "$GREEN_COLOR" "${plugin} installed successfully"
     fi
-
 }
 
 # # Function to attempt fixing the command, added for consistency
