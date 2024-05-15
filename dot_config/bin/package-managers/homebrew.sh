@@ -27,7 +27,14 @@ install_packages_with_brew() {
         # Ensure that the temporary Brewfile has content before proceeding
         if [ -s "$temp_brewfile" ]; then
             echo_with_color "$BLUE_COLOR" "Installing packages from the Brewfile..."
-            brew bundle --file="$temp_brewfile" || exit_with_error "Failed to install packages using the Brewfile."
+            output=$(brew bundle --file="$temp_brewfile" 2>&1)
+            echo "$output"
+            if echo "$output" | grep -q "failed"; then
+                echo_with_color "$RED_COLOR" "Failed to install packages from the Brewfile."
+            else
+                echo_with_color "$GREEN_COLOR" "Packages installed successfully."
+            fi
+
         else
             exit_with_error "The fetched Brewfile is empty."
         fi

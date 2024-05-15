@@ -74,7 +74,7 @@ install_gh_extension() {
             echo_with_color "$RED_COLOR" "Failed to update ${extension}"
             echo_with_color "$RED_COLOR" "$output"
         fi
-    elif echo "$output" | grep -E "Installed extension|Cloning"; then
+    elif echo "$output" | grep -E "Cloning"; then
         echo_with_color "$GREEN_COLOR" "${extension} installed successfully"
     elif echo "$output" | grep -E "To get started with GitHub CLI|gh auth login"; then
         echo_with_color "$YELLOW_COLOR" "Please authenticate with GitHub CLI to install extensions"
