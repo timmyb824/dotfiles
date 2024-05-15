@@ -2,15 +2,37 @@
 
 source "$(dirname "$BASH_SOURCE")/../init/init.sh"
 
-# Function to install micro editor plugin
+# # Function to install micro editor plugin
+# install_micro_plugin() {
+#     local plugin=$1
+#     if micro -plugin install "$plugin"; then
+#         echo_with_color "$GREEN_COLOR" "${plugin} installed successfully"
+#     else
+#         # Instead of exiting, the script will report the error and continue with other plugins
+#         echo_with_color "$RED_COLOR" "Failed to install ${plugin}"
+#     fi
+# }
+
 install_micro_plugin() {
     local plugin=$1
-    if micro -plugin install "$plugin"; then
-        echo_with_color "$GREEN_COLOR" "${plugin} installed successfully"
-    else
-        # Instead of exiting, the script will report the error and continue with other plugins
+    output=$(micro -plugin install "$plugin" 2>&1)
+    echo "$output"
+    if output=$(echo "$output" | grep -i "already installed"); then
+        echo_with_color "$YELLOW_COLOR" "${plugin} already installed, attempting to update"
+        if micro -plugin update "$plugin"; then
+            echo_with_color "$GREEN_COLOR" "${plugin} updated successfully"
+        else
+            echo_with_color "$RED_COLOR" "Failed to update ${plugin}"
+        fi
+    elif echo "$output" | grep -i "failed"; then
         echo_with_color "$RED_COLOR" "Failed to install ${plugin}"
+        echo_with_color "$RED_COLOR" "$output"
+    elif echo "$output" | grep -i "Unknown"; then
+        echo_with_color "$YELLOW_COLOR" "${plugin} unknow"
+    else
+        echo_with_color "$GREEN_COLOR" "${plugin} installed successfully"
     fi
+
 }
 
 # # Function to attempt fixing the command, added for consistency
