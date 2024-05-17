@@ -45,6 +45,9 @@ truncation_symbol = "…/"
 home_symbol = " 🏠"
 disabled =  false
 
+[direnv]
+disabled = true
+
 [docker_context]
 format = 'via [🐳 $context](blue bold)'
 disabled = true
@@ -100,7 +103,7 @@ format = '[$symbol$context( \($namespace\) )]($style)'
 symbol = "⛵ "
 detect_folders = ["!~/"]
 detect_files = ["config_k3s"]
-disabled = false
+disabled = true
 # [kubernetes.context_aliases]
 # "arn:aws:eks:us-east-1:0123456789:cluster/qa-us-east-1-cse-app" = "QA"
 
