@@ -1,0 +1,5 @@
+{{ if (or (eq .chezmoi.hostname "Timothys-MacBook-Pro") (eq .chezmoi.hostname "Timothys-MacBook-Air")) -}}
+{{- onepasswordDocument "personal_nvim_coc-settings" -}}
+{{ else if (and (ne .chezmoi.hostname "Timothys-MacBook-Pro") (ne .chezmoi.hostname "Timothys-MacBook-Air")) -}}
+{{- onepasswordDocument "work_nvim_coc-settings" -}}
+{{ end -}}
