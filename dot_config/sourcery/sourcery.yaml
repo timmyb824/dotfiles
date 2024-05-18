@@ -1,2 +1,6 @@
 coding_assistant:
   enabled: true
+
+rule_settings:
+  disable:
+  - remove-redundant-pass
