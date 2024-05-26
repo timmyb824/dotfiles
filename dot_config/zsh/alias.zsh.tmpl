@@ -44,6 +44,7 @@ alias update_spotify_playlist='spotify_to_ytmusic liked --name "Liked songs (Spo
 alias wtf=wtfutil
 alias zbench="for i in {1..10}; do /usr/bin/time zsh -lic exit; done"
 alias zshconfig="micro ~/.zshrc"
+alias zj="zellij"
 {{ else if (and (ne .chezmoi.hostname "Timothys-MacBook-Pro") (ne .chezmoi.hostname "Timothys-MacBook-Air")) -}}
 ################### WORK CONFIGUARTION ##################
 alias _=sudo
@@ -94,4 +95,5 @@ alias sshstart="eval `ssh-agent -s`"
 alias tf=terraform
 alias zbench="for i in {1..10}; do /usr/bin/time zsh -lic exit; done"
 alias zshconfig="nano ~/.zshrc"
+alias zj="zellij"
 {{ end }}
