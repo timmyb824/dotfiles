@@ -132,13 +132,6 @@ return {
           },
         })
       end,
-      -- ["sourcery"] = function()
-      --   -- configure sourcery server
-      --   lspconfig["sourcery"].setup({
-      --     capabilities = capabilities,
-      --     filetypes = { "python" },
-      --   })
-      -- end,
       ["yamlls"] = function()
         -- configure yamlls server
         lspconfig["yamlls"].setup({
