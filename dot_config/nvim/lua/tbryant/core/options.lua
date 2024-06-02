@@ -44,4 +44,13 @@ opt.splitbelow = true -- split horizontal window to the bottom
 opt.swapfile = false
 
 -- use python virtualenv
-vim.cmd("let g:python3_host_prog = '$HOME/.pyenv/versions/neovim/bin/python'")
+vim.cmd("let g:python3_host_prog = '~/.pyenv/versions/neovim/bin/python'")
+
+-- use ruby virtualenv
+vim.cmd("let g:ruby_host_prog = '~/.rbenv/versions/3.2.1/bin/neovim-ruby-host'")
+
+-- disable perl provider
+vim.cmd("let g:loaded_perl_provider = 0")
+
+
+
