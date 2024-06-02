@@ -19,11 +19,8 @@ clone_repositories_with_gitopolis() {
 
 add_brew_to_path
 
-if ! command_exists ghq; then
-    add_to_path "$HOME/.local/bin"
-    if ! command_exists ghq; then
-        exit_with_error "ghq is still not available. Please install it first with homebrew."
-    fi
+if ! command_exists gitopolis; then
+    exit_with_error "gitopolis is still not available. Please install it first with homebrew."
 fi
 
 clone_repositories_with_gitopolis
