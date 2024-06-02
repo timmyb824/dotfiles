@@ -45,9 +45,12 @@ declare -a scripts_to_run=(
     "installers/tfenv_terraform.sh"
     "installers/tailscale.sh"
     "installers/rbenv_ruby.sh"
-    "installers/rust.sh
+    "package-managers/gem.sh"
+    "installers/rust.sh"
+    "installers/cargo.sh"
     "installers/atuin.sh"
     "configuration/go_directories.sh"
+    "installers/gh_cli.sh"
 )
 
 # Iterate through the scripts and run them
