@@ -52,6 +52,7 @@ declare -a scripts_to_run=(
     "configuration/go_directories.sh"
     "installers/gh_cli.sh"
     "package-managers/ghq.sh"
+    "package-managers/gitopolis.sh"
 )
 
 # Iterate through the scripts and run them
