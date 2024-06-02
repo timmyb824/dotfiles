@@ -25,7 +25,7 @@ get_repositories() {
 add_brew_to_path
 
 if ! command_exists ghq; then
-    exit_with_error "ghq is not available. Please install it first."
+    exit_with_error "ghq is not available. Please install it first with homebrew."
 fi
 
 get_repositories

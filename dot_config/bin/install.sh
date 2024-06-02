@@ -51,6 +51,7 @@ declare -a scripts_to_run=(
     "installers/atuin.sh"
     "configuration/go_directories.sh"
     "installers/gh_cli.sh"
+    "package-managers/ghq.sh"
 )
 
 # Iterate through the scripts and run them
