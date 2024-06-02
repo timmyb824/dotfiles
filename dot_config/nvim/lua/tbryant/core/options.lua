@@ -42,3 +42,6 @@ opt.splitbelow = true -- split horizontal window to the bottom
 
 -- turn off swapfile
 opt.swapfile = false
+
+-- use python virtualenv
+vim.cmd("let g:python3_host_prog = '$HOME/.pyenv/versions/neovim/bin/python'")
