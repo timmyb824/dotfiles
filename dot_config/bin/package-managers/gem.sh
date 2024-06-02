@@ -11,7 +11,7 @@ initialize_gem_macos() {
 
     if command_exists rbenv; then
         echo_with_color "$GREEN_COLOR" "Adding rbenv to PATH."
-        eval "$(rbenv init - zsh)"
+        eval "$(rbenv init -)"
     else
         exit_with_error "rbenv is not available."
     fi
