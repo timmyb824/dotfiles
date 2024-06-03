@@ -3,8 +3,8 @@
 source "$(dirname "$BASH_SOURCE")/../init/init.sh"
 
 clone_repositories_with_gitopolis() {
-    if [ ! -f "$HOME/DEV/homelab/.gitopolis" ]; then
-        exit_with_error "No .gitopolis file found at $HOME/DEV/homelab"
+    if [ ! -f "$HOME/DEV/homelab/.gitopolis.toml" ]; then
+        exit_with_error "No .gitopolis.toml file found at $HOME/DEV/homelab"
     fi
 
     # change into direcotry
