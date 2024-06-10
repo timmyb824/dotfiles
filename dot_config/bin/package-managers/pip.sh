@@ -50,7 +50,7 @@ install_pip_packages() {
         else
             exit_with_error "Failed to install ${package}."
         fi
-    done < <(get_package_list pip)
+    done < <(get_package_list pip_mac)
 }
 
 add_brew_to_path
