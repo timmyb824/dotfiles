@@ -61,7 +61,7 @@ plugins:
       - -c
       - "kubectl get-all --context $CONTEXT -n $NAME | less -K"
   get-all-other:
-    shortCut: g
+    shortCut: Shift-G
     confirm: false
     description: get-all
     scopes:
