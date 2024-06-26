@@ -52,3 +52,6 @@ keymap.set("n", "<leader>bn", "<cmd>bn<CR>", { desc = "Next buffer" }) -- next b
 keymap.set("n", "<leader>bp", "<cmd>bp<CR>", { desc = "Previous buffer" }) -- previous buffer
 keymap.set("n", "<leader>bl", "<cmd>ls<CR>", { desc = "List buffers" }) -- list buffers
 keymap.set("n", "<leader>bf", "<cmd>Telescope buffers<CR>", { desc = "Find buffer" }) -- find buffer
+
+-- oil.nvim
+keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
