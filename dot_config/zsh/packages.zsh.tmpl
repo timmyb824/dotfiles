@@ -96,7 +96,7 @@ eval "$(kickstart infect)"
 eval "$(rbenv init - zsh)"
 eval "$(zoxide init --cmd cd zsh)"
 
-{{- if eq .chezmoi.os "darwin" -}}
+{{- if eq .chezmoi.os "darwin" }}
 eval $(thefuck --alias fk)
 
 if [ -d "$HOME/.cargo" ]; then
