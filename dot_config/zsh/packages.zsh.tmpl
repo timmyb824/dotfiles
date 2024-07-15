@@ -13,7 +13,11 @@ export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
 
+{{ if eq .chezmoi.os "darwin" -}}
 eval "$(fzf --zsh)"
+{{- else if eq .chezmoi.os "linux" -}}
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+{{- end }}
 
 source $HOME/ghq/github.com/junegunn/fzf-git.sh/fzf-git.sh
 
@@ -90,18 +94,21 @@ eval "$(direnv hook zsh)"
 eval "$(fnm env --use-on-cd)"
 eval "$(kickstart infect)"
 eval "$(rbenv init - zsh)"
-eval $(thefuck --alias fk)
 eval "$(zoxide init --cmd cd zsh)"
+
+{{- if eq .chezmoi.os "darwin" -}}
+eval $(thefuck --alias fk)
 
 if [ -d "$HOME/.cargo" ]; then
   . "$HOME/.cargo/env"
 fi
+{{- else if eq .chezmoi.os "linux" }}
+eval "$(op signin)"
+{{- end }}
+
 source $HOME/.config/broot/launcher/bash/br
 
-{{ if (or (eq .chezmoi.hostname "Timothys-MacBook-Pro") (eq .chezmoi.hostname "Timothys-MacBook-Air")) -}}
-{{ end -}}
-
-{{ if (and (ne .chezmoi.hostname "Timothys-MacBook-Pro") (ne .chezmoi.hostname "Timothys-MacBook-Air")) -}}
+{{ if (and (ne .chezmoi.hostname "Timothys-MacBook-Pro") (ne .chezmoi.hostname "Timothys-MacBook-Air") (ne .chezmoi.os "linux")) -}}
 . ~/.dx-zsh-completion.sh
 source ~/.awashcli.sh
 {{ end -}}

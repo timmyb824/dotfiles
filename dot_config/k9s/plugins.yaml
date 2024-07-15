@@ -1,0 +1,173 @@
+plugins:
+  #--- Create debug container for selected pod in current namespace
+  # See https://kubernetes.io/docs/tasks/debug/debug-application/debug-running-pod/#ephemeral-container
+  debug:
+    shortCut: Shift-D
+    description: Add debug container
+    dangerous: true
+    scopes:
+      - containers
+    command: bash
+    background: false
+    confirm: true
+    args:
+      - -c
+      - "kubectl debug -it --context $CONTEXT -n=$NAMESPACE $POD --target=$NAME --image=nicolaka/netshoot:v0.12 --share-processes -- bash"
+  # Manage cert-manager Certificate resouces via cmctl.
+  # See: https://github.com/cert-manager/cmctl
+  cert-status:
+    shortCut: Shift-S
+    confirm: false
+    description: Certificate status
+    scopes:
+      - certificates
+    command: bash
+    background: false
+    args:
+      - -c
+      - "cmctl status certificate --context $CONTEXT -n $NAMESPACE $NAME |& less"
+  cert-renew:
+    shortCut: Shift-R
+    confirm: false
+    description: Certificate renew
+    scopes:
+      - certificates
+    command: bash
+    background: false
+    args:
+      - -c
+      - "cmctl renew --context $CONTEXT -n $NAMESPACE $NAME |& less"
+  secret-inspect:
+    shortCut: Shift-I
+    confirm: false
+    description: Inspect secret
+    scopes:
+      - secrets
+    command: bash
+    background: false
+    args:
+      - -c
+      - "cmctl inspect secret --context $CONTEXT -n $NAMESPACE $NAME |& less"
+  #get all resources in a namespace using the krew get-all plugin
+  get-all-namespace:
+    shortCut: g
+    confirm: false
+    description: get-all
+    scopes:
+      - namespaces
+    command: sh
+    background: false
+    args:
+      - -c
+      - "kubectl get-all --context $CONTEXT -n $NAME | less -K"
+  get-all-other:
+    shortCut: Shift-G
+    confirm: false
+    description: get-all
+    scopes:
+      - all
+    command: sh
+    background: false
+    args:
+      - -c
+      - "kubectl get-all --context $CONTEXT -n $NAMESPACE | less -K"
+  helm-values:
+    shortCut: v
+    confirm: false
+    description: Values
+    scopes:
+      - helm
+    command: sh
+    background: false
+    args:
+      - -c
+      - "helm get values $COL-NAME -n $NAMESPACE --kube-context $CONTEXT | less -K"
+      # Leverage stern (https://github.com/stern/stern) to output logs.
+  stern:
+    shortCut: Ctrl-L
+    confirm: false
+    description: "Logs <Stern>"
+    scopes:
+      - pods
+    command: stern
+    background: false
+    args:
+      - --tail
+      - 50
+      - $FILTER
+      - -n
+      - $NAMESPACE
+      - --context
+      - $CONTEXT
+  # Removes all finalizers from the selected resource. Finalizers are namespaced keys that tell Kubernetes to wait
+  # until specific conditions are met before it fully deletes resources marked for deletion.
+  # Before deleting an object you need to ensure that all finalizers has been removed. Usually this would be done
+  # by the specific controller but under some circumstances it is possible to encounter a set of objects blocked
+  # for deletion.
+  # This plugins makes this task easier by providing a shortcut to directly removing them all.
+  # Be careful when using this plugin as it may leave dangling resources or instantly deleting resources that were
+  # blocked by the finalizers.
+  # Author: github.com/jalvarezit
+  remove_finalizers:
+    shortCut: Ctrl-F
+    confirm: true
+    dangerous: true
+    scopes:
+      - all
+    description: |
+      Removes all finalizers from selected resource. Be careful when using it,
+      it may leave dangling resources or delete them
+    command: kubectl
+    background: true
+    args:
+      - patch
+      - --context
+      - $CONTEXT
+      - --namespace
+      - $NAMESPACE
+      - $RESOURCE_NAME
+      - $NAME
+      - -p
+      - '{"metadata":{"finalizers":null}}'
+      - --type
+      - merge
+  # Author: Daniel Rubin
+  # Get recommendations for CPU/Memory requests and limits using Robusta KRR
+  # Requires Prometheus in the Cluster and Robusta KRR (https://github.com/robusta-dev/krr) on your system
+  # Open K9s in deployments/daemonsets/statefulsets view, then:
+  # Shift-K to get recommendations
+  krr:
+    shortCut: Shift-K
+    description: Get krr
+    scopes:
+      - deployments
+      - daemonsets
+      - statefulsets
+    command: bash
+    background: false
+    confirm: false
+    args:
+      - -c
+      - |
+        LABELS=$(kubectl get $RESOURCE_NAME $NAME -n $NAMESPACE  --context $CONTEXT  --show-labels | awk '{print $NF}' | awk '{if(NR>1)print}')
+        krr simple --cluster $CONTEXT --selector $LABELS --prometheus-url "https://prometheus.local.timmybtech.com"
+        echo "Press 'q' to exit"
+        while : ; do
+        read -n 1 k <&1
+        if [[ $k = q ]] ; then
+        break
+        fi
+        done
+  # remove finalizers from a stuck namespace
+  rm-ns:
+    shortCut: n
+    confirm: true
+    dangerous: true
+    description: Remove NS Finalizers
+    scopes:
+    - namespace
+    command: sh
+    background: false
+    args:
+    - -c
+    - "kubectl get namespace $NAME -o json | jq '.spec.finalizers=[]' | kubectl replace --raw /api/v1/namespaces/$NAME/finalize -f - > /dev/null"

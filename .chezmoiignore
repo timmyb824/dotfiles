@@ -5,7 +5,7 @@ setup.sh
 lazy-lock.json
 
 # files to ignore on work mac
-{{ if (and (ne .chezmoi.hostname "Timothys-MacBook-Pro") (ne .chezmoi.hostname "Timothys-MacBook-Air")) -}}
+{{ if (and (ne .chezmoi.hostname "Timothys-MacBook-Pro") (ne .chezmoi.hostname "Timothys-MacBook-Air") (ne .chezmoi.os "linux")) -}}
 .dblab.yaml
 .ssh/
 .oci/
@@ -17,3 +17,20 @@ DEV/
 .hyper.js
 .config/bin/Archive/
 {{- end }}
+
+# files to ignore on linux
+{{ if (ne .chezmoi.os "darwin") -}}
+Library/
+.cache/
+.cache/starship/
+.config/geany/
+.config/iterm_configs/
+{{- end }}
+
+# files to ignore on macos
+{{ if (ne .chezmoi.os "linux") -}}
+.config/k9s/
+.config/pypoetry/
+.config/ngrok/
+{{- end }}
+

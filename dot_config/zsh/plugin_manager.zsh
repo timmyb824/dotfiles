@@ -59,7 +59,7 @@ plugins=(
   ChrisPenner/copy-pasta
   reegnz/jq-zsh-plugin
   hlissner/zsh-autopair
-
+  Matt561/zsh-nhl-schedule
   amstrad/oh-my-matrix
   MichaelAquilina/zsh-you-should-use
   supercrabtree/k
