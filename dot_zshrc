@@ -4,6 +4,7 @@ source "$HOME/.config/zsh/init.zsh"
 # Source the alias file
 precmd() {
     source "$HOME/.config/zsh/alias.zsh"
+    source "$HOME/.config/zsh/special_alias.zsh"
 }
 
 # Source the plugin manager
