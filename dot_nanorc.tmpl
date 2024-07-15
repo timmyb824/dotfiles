@@ -9,4 +9,8 @@ set keycolor cyan
 set functioncolor cyan
 set numbercolor yellow
 set mouse
+{{ if (eq .chezmoi.os "darwin") -}}
 include /opt/homebrew/share/nano/*.nanorc
+{{ else -}}
+include /usr/share/nano/*.nanorc
+{{ end }}
