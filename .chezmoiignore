@@ -26,6 +26,7 @@ Library/
 .config/1Password/
 .config/geany/
 .config/iterm_configs/
+.config/bin/ # this is temporary until scripts are combined
 .hyper.js
 {{- end }}
 
