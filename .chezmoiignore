@@ -23,8 +23,10 @@ DEV/
 Library/
 .cache/
 .cache/starship/
+.config/1Password/
 .config/geany/
 .config/iterm_configs/
+.hyper.js
 {{- end }}
 
 # files to ignore on macos
