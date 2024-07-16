@@ -4,6 +4,8 @@
     email = "{{ onepasswordRead "op://Personal/google.com-main/username" }}"
 {{- else if (and (eq .chezmoi.os "darwin") (eq .chezmoi.hostname "Timothy-Bryant")) }}
     email = "{{ onepasswordRead "op://Personal/simplisafe-okta/username" }}"
+{{- else if (eq .chezmoi.os "linux") }}
+    email = "{{ onepasswordRead "op://Personal/google.com-main/username" }}"
 {{ end }}
 
 [pager]
