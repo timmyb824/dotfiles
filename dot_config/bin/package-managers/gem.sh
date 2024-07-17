@@ -2,7 +2,19 @@
 
 source "$(dirname "$BASH_SOURCE")/../init/init.sh"
 
-# Function to initialize gem on macOS
+OS=$(get_os)
+
+initialize_gem_linux() {
+    if command_exists gem; then
+        echo_with_color "$GREEN_COLOR" "gem is already installed."
+        return
+    fi
+
+    echo_with_color "$GREEN" "Initializing rbenv for the current Linux session..."
+    export PATH="$HOME/.rbenv/bin:$PATH"
+    eval "$(rbenv init -)"
+}
+
 initialize_gem_macos() {
     if command_exists gem; then
         echo_with_color "$GREEN_COLOR" "gem is already installed."
@@ -48,7 +60,14 @@ install_gem_packages() {
     done < <(get_package_list gem)
 }
 
-add_brew_to_path
-initialize_gem_macos
+if [[ "$OS" == "MacOS" ]]; then
+    add_brew_to_path
+    initialize_gem_macos
+elif [[ "$OS" == "Linux" ]]; then
+    initialize_gem_linux
+else
+    exit_with_error "Unsupported operating system: $OS"
+fi
+
 confirm_ruby_and_gem
 install_gem_packages

@@ -2,6 +2,8 @@
 
 source "$(dirname "$BASH_SOURCE")/../init/init.sh"
 
+OS=$(get_os)
+
 # # Function to install micro editor plugin
 # install_micro_plugin() {
 #     local plugin=$1
@@ -34,14 +36,9 @@ install_micro_plugin() {
     fi
 }
 
-# # Function to attempt fixing the command, added for consistency
-# attempt_fix_micro_command() {
-#     attempt_fix_command "micro" "$HOME/.local/bin"
-# }
-
-add_brew_to_path
-
-# attempt_fix_micro_command
+if [[ "$OS" == "MacOS" ]]; then
+    add_brew_to_path
+fi
 
 if ! command_exists micro; then
     exit_with_error "micro not found"

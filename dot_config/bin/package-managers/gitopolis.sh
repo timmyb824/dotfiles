@@ -2,6 +2,8 @@
 
 source "$(dirname "$BASH_SOURCE")/../init/init.sh"
 
+OS=$(get_os)
+
 clone_repositories_with_gitopolis() {
     if [ ! -f "$HOME/DEV/homelab/.gitopolis.toml" ]; then
         exit_with_error "No .gitopolis.toml file found at $HOME/DEV/homelab"
@@ -17,7 +19,13 @@ clone_repositories_with_gitopolis() {
 
 }
 
-add_brew_to_path
+if [[ "$OS" == "MacOS" ]]; then
+    add_brew_to_path
+elif [[ "$OS" == "Linux" ]]; then
+    attempt_to_fix_command "gitopolis" "$HOME/.local/bin"
+else
+    exit_with_error "Unsupported operating system: $OS"
+fi
 
 if ! command_exists gitopolis; then
     exit_with_error "gitopolis is still not available. Please install it first with homebrew."

@@ -1,6 +1,14 @@
 #!/usr/bin/env bash
 
 source "$(dirname "$BASH_SOURCE")/../init/init.sh"
+
+OS=$(get_os)
+
+if ! [[ "$OS" == "macOS" ]]; then
+  echo_with_color "31" "This script is only for macOS"
+  exit 1
+fi
+
 # install rosetta
 if [[ ! -d "/Library/Apple/System/Library/LaunchDaemons" ]]; then
   echo "Rosetta is not installed. Installing Rosetta..."

@@ -2,8 +2,7 @@
 
 source "$(dirname "$BASH_SOURCE")/../init/init.sh"
 
-# Function to initialize pip on macOS
-initialize_pip_macos() {
+initialize_pip() {
     if command_exists pip; then
         echo_with_color "$GREEN_COLOR" "pip is already installed."
         return
@@ -21,7 +20,6 @@ initialize_pip_macos() {
         exit_with_error "pip installation required"
     fi
 }
-
 
 install_pipx_packages() {
     echo_with_color "$YELLOW_COLOR" "Installing pipx packages..."
@@ -45,6 +43,6 @@ if command_exists pipx; then
     install_pipx_packages
 else
     echo_with_color "$YELLOW_COLOR" "pipx is not installed. Initializing pipx..."
-    initialize_pip_macos
+    initialize_pip
     install_pipx_packages
 fi

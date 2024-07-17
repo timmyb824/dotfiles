@@ -2,6 +2,8 @@
 
 source "$(dirname "$BASH_SOURCE")/../init/init.sh"
 
+OS=$(get_os)
+
 # Function to add krew to PATH for the current session if it's not already in the PATH
 add_krew_to_path_for_session() {
     local krew_path="${KREW_ROOT:-$HOME/.krew}/bin"
@@ -35,8 +37,14 @@ install_krew_plugin() {
     fi
 }
 
-add_brew_to_path
-# attempt_fix_command "kubectl" "$HOME/.local/bin"
+if [[ "$OS" == "MacOS" ]]; then
+    add_brew_to_path
+    # attempt_fix_command "kubectl" "$HOME/.local/bin"
+elif [[ "$OS" == "Linux" ]]; then
+    attempt_fix_command "kubectl" "$HOME/.local/bin"
+else
+    exit_with_error "Unsupported operating system: $OS"
+fi
 
 check_krew_installation
 

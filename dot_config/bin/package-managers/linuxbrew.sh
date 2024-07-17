@@ -2,8 +2,20 @@
 
 source "$(dirname "$BASH_SOURCE")/../init/init.sh"
 
+# Function to remove commands that were installed outside of Homebrew using apt but are now managed by Homebrew
+safe_remove_command_apt() {
+    local command_name="$1"
+
+    if command_exists "$command_name"; then
+        echo_with_color "$YELLOW_COLOR" "Removing $command_name..."
+        sudo apt remove --purge -y "$command_name" || exit_with_error "Failed to remove $command_name."
+    else
+        echo_with_color "$GREEN_COLOR" "$command_name is not installed."
+    fi
+}
+
 # Function to install Homebrew on macOS
-install_brew_macos() {
+install_brew_linux() {
     if ! command_exists brew; then
         echo_with_color "$BLUE_COLOR" "Installing Homebrew..."
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" || exit_with_error "Homebrew installation failed."
@@ -49,7 +61,7 @@ install_packages_with_brew() {
 add_brew_to_path
 
 # Remove commands that were installed outside of Homebrew but are now managed by Homebrew
-safe_remove_command "/usr/local/bin/op"
+safe_remove_command_apt "1password-cli"
 
-install_brew_macos
+install_brew_linux
 install_packages_with_brew

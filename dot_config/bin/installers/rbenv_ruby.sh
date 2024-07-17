@@ -2,7 +2,8 @@
 
 source "$(dirname "$BASH_SOURCE")/../init/init.sh"
 
-# Function to install rbenv using Homebrew on macOS
+OS=$(get_os)
+
 install_rbenv_macos() {
   echo_with_color "$GREEN_COLOR" "Installing rbenv using Homebrew on macOS..."
   if ! command_exists brew; then
@@ -17,10 +18,26 @@ install_rbenv_macos() {
   fi
 }
 
+install_rbenv_linux() {
+  echo_with_color "$GREEN" "Installing rbenv and dependencies on Linux..."
+  sudo apt update || exit_with_error "Failed to update apt."
+  sudo apt install -y git curl autoconf bison build-essential libssl-dev libyaml-dev \
+    libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm6 libgdbm-dev libdb-dev ||
+    exit_with_error "Failed to install dependencies for rbenv and Ruby build."
+  curl -fsSL https://github.com/rbenv/rbenv-installer/raw/HEAD/bin/rbenv-installer | bash
+}
+
 # Function to initialize rbenv within the script
 initialize_rbenv() {
-  echo_with_color "$GREEN_COLOR" "Initializing rbenv for the current macOS session..."
-  eval "$(rbenv init -)"
+  echo_with_color "$GREEN_COLOR" "Initializing rbenv for the current session..."
+  if [[ "$OS" == "MacOS" ]]; then
+    eval "$(rbenv init -)"
+  elif [[ "$OS" == "Linux" ]]; then
+    export PATH="$HOME/.rbenv/bin:$PATH"
+    eval "$(rbenv init -)"
+  else
+    exit_with_error "Unsupported operating system: $OS"
+  fi
 }
 
 # Function to install Ruby and set it as the global version
@@ -28,20 +45,27 @@ install_and_set_ruby() {
   if [[ -z "$RUBY_VERSION" ]]; then
     exit_with_error "RUBY_VERSION is not set. Cannot proceed with Ruby installation."
   fi
-  echo_with_color "$GREEN_COLOR" "Installing Ruby version $RUBY_VERSION..."
-  rbenv install "$RUBY_VERSION" || exit_with_error "Failed to install Ruby version $RUBY_VERSION."
-  echo_with_color "$GREEN_COLOR" "Setting Ruby version $RUBY_VERSION as global..."
+
+  if rbenv versions | grep -q "$RUBY_VERSION"; then
+    echo_with_color "$GREEN" "Ruby version $RUBY_VERSION is already installed."
+  else
+    echo_with_color "$GREEN" "Installing Ruby version $RUBY_VERSION..."
+    rbenv install "$RUBY_VERSION" || exit_with_error "Failed to install Ruby version $RUBY_VERSION."
+  fi
+
+  echo_with_color "$GREEN" "Setting Ruby version $RUBY_VERSION as global..."
   rbenv global "$RUBY_VERSION" || exit_with_error "Failed to set Ruby version $RUBY_VERSION as global."
-  echo_with_color "$GREEN_COLOR" "Ruby installation completed. Ruby version set to $RUBY_VERSION."
 }
 
-# Call the function to add Homebrew to the path
-add_brew_to_path
-
-# Main execution
 if ! command_exists rbenv; then
-  echo_with_color "$GREEN_COLOR" "rbenv could not be found. Starting installation process..."
-  install_rbenv_macos
+  if [[ "$OS" == "MacOS" ]]; then
+    add_brew_to_path
+    install_rbenv_macos
+  elif [[ "$OS" == "Linux" ]]; then
+    install_rbenv_linux
+  else
+    exit_with_error "Unsupported operating system: $OS"
+  fi
 else
   echo_with_color "$GREEN_COLOR" "rbenv is already installed."
 fi

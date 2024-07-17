@@ -2,7 +2,6 @@
 
 source "$(dirname "$BASH_SOURCE")/../init/init.sh"
 
-# Function to uninstall individual binaries
 uninstall_binary() {
     local bin_path="$1"
     if [[ -f "$bin_path" ]]; then
@@ -15,11 +14,14 @@ prompt_for_package_list() {
     echo_with_color "$CYAN_COLOR" "Please select the package list you want to uninstall:"
     echo "1) pkgx_all.list"
     echo "2) pkgx_mac.list"
-    read -rp "Enter the number (1-2): " choice
+    echo "3) pkgx_linux.list"
+
+    read -rp "Enter the number (1-3): " choice
 
     case $choice in
     1) package_list="pkgx_all.list" ;;
     2) package_list="pkgx_mac.list" ;;
+    3) package_list="pkgx_linux.list" ;;
     *)
         echo_with_color "$RED_COLOR" "Invalid selection. Exiting."
         exit 1
@@ -49,9 +51,10 @@ uninstall_pkgx_directories() {
         "$HOME/.pkgx"
         "${XDG_CACHE_HOME:-$HOME/Library/Caches}/pkgx"
         "${XDG_DATA_HOME:-$HOME/Library/Application Support}"/pkgx
+        "${XDG_CACHE_HOME:-$HOME/.cache}/pkgx"
+        "${XDG_DATA_HOME:-$HOME/.local/share}"/pkgx
     )
 
-    # Loop through each directory and remove if it exists
     for dir in "${directories_to_remove[@]}"; do
         if [[ -d "$dir" ]]; then
             echo_with_color "$RED_COLOR" "Removing directory: $dir"

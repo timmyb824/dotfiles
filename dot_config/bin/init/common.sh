@@ -29,7 +29,7 @@ export AGE_SECRET_KEY="op://Personal/age-secret-key/credential"
 export AGE_SECRET_KEY_FILE="op://Personal/age-secret-key-file/age-master-key.txt"
 export AGE_SECRET_KEY_LOCATION="$HOME/.sops/age-master-key.txt"
 
-export CHEZMOI_CONFIG_FILE="op://Personal/chezmoi-toml-config-file/chezmoi.toml"
+export CHEZMOI_CONFIG_FILE="op://Personal/chezmoi-toml-config/chezmoi.toml"
 export CHEZMOI_CONFIG_FILE_LOCATION="$HOME/.config/chezmoi/chezmoi.toml"
 
 export SOPS_VERSION="v3.8.1"
@@ -40,6 +40,10 @@ export RUBY_VERSION="3.2.1"
 export ATUIN_USER="tbryant"
 
 export KUBECTL_VERSION="v1.25.0"
+
+export PROMTAIL_VERSION="2.9.8"
+
+export LOKI_URL="https://loki.local.timmybtech.com/loki/api/v1/push"
 
 ############# Global functions #############
 

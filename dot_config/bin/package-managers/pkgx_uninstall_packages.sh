@@ -7,11 +7,13 @@ prompt_for_package_list() {
     echo_with_color "$CYAN_COLOR" "Please select the package list you want to uninstall:"
     echo "1) pkgx_all.list"
     echo "2) pkgx_mac.list"
-    read -rp "Enter the number (1-2): " choice
+    echo "3) pkgx_linux.list"
+    read -rp "Enter the number (1-3): " choice
 
     case $choice in
     1) package_list="pkgx_all.list" ;;
     2) package_list="pkgx_mac.list" ;;
+    3) package_list="pkgx_linux.list" ;;
     *)
         echo_with_color "$RED_COLOR" "Invalid selection. Exiting."
         exit 1
@@ -46,15 +48,16 @@ for package in "${packages[@]}"; do
     elif [[ "$output" == "nothing provides:"* ]]; then
         echo_with_color "$RED_COLOR" "Error: Package ${package} is not a valid package."
         echo_with_color "$YELLOW_COLOR" "Continuing with the next package..."
+    elif [[ "$output" == *"No such file or directory"* ]]; then
+        echo_with_color "$RED_COLOR" "Error: An unexpected error occurred while trying to uninstall ${package}: $output"
+        echo_with_color "$YELLOW_COLOR" "Continuing with the next package..."
+        # echo "Error uninstalling ${package}: $output" >>uninstall_errors.log
     elif [[ -z "$output" ]]; then
         echo_with_color "$YELLOW_COLOR" "${package} was not installed."
     else
-        # Log the error but do not exit the script
         echo_with_color "$RED_COLOR" "An unexpected error occurred while trying to uninstall ${package}: $output"
-        # Optionally, you can write the error to a log file
-        # echo "Error uninstalling ${package}: $output" >> uninstall_errors.log
-        # Continue with the next iteration
         echo_with_color "$YELLOW_COLOR" "Continuing with the next package..."
+        # echo "Error uninstalling ${package}: $output" >> uninstall_errors.log
     fi
 done
 

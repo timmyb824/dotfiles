@@ -2,8 +2,9 @@
 
 source "$(dirname "$BASH_SOURCE")/../init/init.sh"
 
-# Function to initialize pip on macOS
-initialize_pip_macos() {
+OS=$(get_os)
+
+initialize_pip() {
     if command_exists pip; then
         echo_with_color "$GREEN_COLOR" "pip is already installed."
         return
@@ -39,7 +40,6 @@ confirm_python_and_pip() {
     fi
 }
 
-# Function to install pip packages
 install_pip_packages() {
     while IFS= read -r package; do
         if [ -z "$package" ]; then  # Skip empty lines
@@ -53,7 +53,10 @@ install_pip_packages() {
     done < <(get_package_list pip_mac)
 }
 
-add_brew_to_path
-initialize_pip_macos
+if [[ "$OS" == "MacOS" ]]; then
+    add_brew_to_path
+fi
+
+initialize_pip
 confirm_python_and_pip
 install_pip_packages

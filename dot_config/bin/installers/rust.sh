@@ -2,6 +2,8 @@
 
 source "$(dirname "$BASH_SOURCE")/../init/init.sh"
 
+OS=$(get_os)
+
 # function to install rustup with error handling
 install_rustup() {
     # Install rustup
@@ -17,4 +19,19 @@ install_rustup() {
     fi
 }
 
+install_rust_dependencies() {
+    # Install Rust dependencies
+    echo_with_color "$YELLOW_COLOR" "Installing Rust dependencies..."
+    if sudo apt-get install -y build-essential; then
+        echo_with_color "$GREEN_COLOR" "Rust dependencies installed successfully."
+    else
+        exit_with_error "Failed to install Rust dependencies, please check the installation script."
+    fi
+}
+
 install_rustup
+
+if [ "$OS" == "Linux" ]; then
+    install_rust_dependencies
+fi
+

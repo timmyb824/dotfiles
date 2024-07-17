@@ -19,6 +19,20 @@ install_pyenv_macos() {
     fi
 }
 
+install_pyenv_linux() {
+    echo_with_color "$GREEN" "Installing pyenv and Python dependencies for Linux..."
+    sudo apt update
+    sudo apt install -y build-essential libssl-dev zlib1g-dev \
+        libbz2-dev libreadline-dev libsqlite3-dev curl \
+        libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+
+    if command_exists curl; then
+        curl https://pyenv.run | bash
+    else
+        exit_with_error "The curl command is required to install pyenv but it's not installed."
+    fi
+}
+
 # Function to install and set up Python version using pyenv
 setup_python_version() {
     if pyenv install -s "${PYTHON_VERSION}"; then
@@ -47,16 +61,23 @@ if [ -z "${PYTHON_VERSION}" ]; then
     exit_with_error "PYTHON_VERSION is not set. Please specify the Python version to install."
 fi
 
-# Ensure Homebrew is in PATH
-add_brew_to_path
+if [ ! -f "$HOME/.pyenv/bin/pyenv" ]; then
+    echo_with_color "$YELLOW" "pyenv could not be found or the installation is incomplete."
 
-# Main installation process
-if ! command_exists pyenv; then
-    echo_with_color "$GREEN_COLOR" "pyenv could not be found. Starting installation process..."
-    install_pyenv_macos
+    if [[ "$OS" == "MacOS" ]]; then
+        add_brew_to_path
+        install_pyenv_macos
+        initialize_pyenv
+        setup_python_version
+    elif [[ "$OS" == "Linux" ]]; then
+        install_pyenv_linux
+        initialize_pyenv
+        setup_python_version
+    else
+        exit_with_error "Unsupported operating system: $OS"
+    fi
 else
-    echo_with_color "$GREEN_COLOR" "pyenv is already installed."
+    echo_with_color "$GREEN" "pyenv is already installed and appears to be properly set up."
+    initialize_pyenv
+    setup_python_version
 fi
-
-initialize_pyenv
-setup_python_version

@@ -4,8 +4,8 @@ README.md
 setup.sh
 lazy-lock.json
 
-# files to ignore on work mac
 {{ if (and (ne .chezmoi.hostname "Timothys-MacBook-Pro") (ne .chezmoi.hostname "Timothys-MacBook-Air") (ne .chezmoi.os "linux")) -}}
+# files to ignore on work mac
 .dblab.yaml
 .ssh/
 .oci/
@@ -18,23 +18,61 @@ DEV/
 .config/bin/Archive/
 {{- end }}
 
-# files to ignore on linux
 {{ if (ne .chezmoi.os "darwin") -}}
+# files to ignore on linux
+.hyper.js
 Library/
 .cache/
 .cache/starship/
+.config/bin/installers/fonts_macos.sh
+.config/bin/installers/kubectl_krew.sh
+.config/bin/installers/simplisafe.sh
+.config/bin/configuration/mac_settings.sh
+.config/bin/package-managers/homebrew.sh
 .config/1Password/
 .config/geany/
 .config/iterm_configs/
 .config/gh/hosts.yml
-.config/bin/ # this is temporary until scripts are combined
-.hyper.js
+.config/bin/installers/tailscale_macos.sh
+.config/bin/utilities/executable_update_packages.sh
 {{- end }}
 
-# files to ignore on macos
+
 {{ if (ne .chezmoi.os "linux") -}}
+# files to ignore on macos
 .config/k9s/
 .config/pypoetry/
 .config/ngrok/
+.config/bin/installers/docker.sh
+.config/bin/installers/docker_uninstall.sh
+.config/bin/installers/fzf.sh
+.config/bin/installers/fonts_linux.sh
+.config/bin/installers/glances.sh
+.config/bin/installers/glances_uninstall.sh
+.config/bin/installers/headscale.sh
+.config/bin/installers/jetbrainsmono_font.sh
+.config/bin/installers/misc_linux.sh
+.config/bin/installers/nebula.sh
+.config/bin/installers/nebula_uninstall.sh
+.config/bin/installers/ngrok.sh
+.config/bin/installers/node_exporter.sh
+.config/bin/installers/node_exporter_uninstall.sh
+.config/bin/installers/nvim.sh
+.config/bin/installers/podman.sh
+.config/bin/installers/podman_uninstall.sh
+.config/bin/installers/podman_exporter.sh
+.config/bin/installers/podman_exporter_uninstall.sh
+.config/bin/installers/promtail.sh
+.config/bin/installers/promtail_uninstall.sh
+.config/bin/installers/tailscale_linux.sh
+.config/bin/installers/zsh_shell.sh
+.config/bin/package-managers/apt.sh
+.config/bin/package-managers/go.sh
+.config/bin/package-managers/linuxbrew.sh
+.config/bin/utilities/cloudflare_dns.sh
+.config/bin/utilities/podman_auto_update_setup.sh
+.config/bin/utilities/podman_unit_create_service_file.sh
+.config/bin/utilities/podman_unit_delete_service_file.sh
+.config/bin/utilities/podman_unit_recreate_service_file.sh
 {{- end }}
 
