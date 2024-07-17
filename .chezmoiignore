@@ -3,6 +3,7 @@
 README.md
 setup.sh
 lazy-lock.json
+.config/bin/Archive/
 
 {{ if (and (ne .chezmoi.hostname "Timothys-MacBook-Pro") (ne .chezmoi.hostname "Timothys-MacBook-Air") (ne .chezmoi.os "linux")) -}}
 # files to ignore on work mac
@@ -15,7 +16,6 @@ DEV/
 .aws/
 .kube/
 .hyper.js
-.config/bin/Archive/
 {{- end }}
 
 {{ if (ne .chezmoi.os "darwin") -}}
