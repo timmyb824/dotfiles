@@ -43,6 +43,7 @@ Library/
 .config/k9s/
 .config/pypoetry/
 .config/ngrok/
+.config/bin/adhoc/
 .config/bin/installers/docker.sh
 .config/bin/installers/docker_uninstall.sh
 .config/bin/installers/fzf.sh
