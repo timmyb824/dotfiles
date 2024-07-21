@@ -34,7 +34,7 @@ Library/
 .config/iterm_configs/
 .config/gh/hosts.yml
 .config/bin/installers/tailscale_macos.sh
-.config/bin/utilities/executable_update_packages.sh
+.config/bin/utilities/update_packages.sh
 {{- end }}
 
 
