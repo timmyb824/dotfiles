@@ -255,6 +255,8 @@ if [[ "$OS" == "Linux" ]]; then
   else
     log "go is not installed. Skipping go install."
   fi
+else
+  log "Skipping go install on macOS."
 fi
 
 log "UPDATE PACKAGES SCRIPT COMPLETED!"
