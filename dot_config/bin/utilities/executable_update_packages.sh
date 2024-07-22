@@ -1,10 +1,5 @@
 #!/bin/bash
 
-####### VARIABLES #######
-
-PYTHON_VERSION="3.11.0"
-RUBY_VERSION="3.2.1"
-
 ######## FUNCTIONS ########
 
 # Function to log messages
@@ -21,6 +16,20 @@ handle_error() {
 command_exists() {
   command -v "$1" >/dev/null 2>&1
 }
+
+get_os() {
+  case "$(uname -s)" in
+  Linux*) echo "Linux" ;;
+  Darwin*) echo "MacOS" ;;
+  *) echo "Unknown" ;;
+  esac
+}
+
+####### VARIABLES #######
+
+PYTHON_VERSION="3.11.0"
+RUBY_VERSION="3.2.1"
+OS=$(get_os)
 
 ######## PACKAGES ########
 
@@ -144,7 +153,7 @@ else
   log "kubectl is not installed. Skipping kubectl krew update."
 fi
 
-### Gems ###
+### GEMS ###
 if command_exists gem; then
   # verify ruby version
   log "Verifying ruby version..."
@@ -164,7 +173,7 @@ else
   log "gem is not installed. Skipping gem update."
 fi
 
-### Basher ###
+### BASHER ###
 if command_exists basher; then
   log "Updating basher..."
   cd ~/.basher || handle_error "cd to ~/.basher failed."
@@ -185,7 +194,7 @@ else
   log "basher is not installed. Skipping basher update."
 fi
 
-### gh cli ###
+### GH CLI ###
 if command_exists gh; then
   log "Updating gh cli..."
   gh extension upgrade --all
@@ -197,7 +206,7 @@ else
   log "gh cli is not installed. Skipping gh extension upgrade --all."
 fi
 
-### micro editor ###
+### MICRO EDITOR ###
 if command_exists micro; then
   log "Updating micro editor plugins..."
   micro -plugin update
@@ -209,5 +218,43 @@ else
   log "micro is not installed. Skipping micro -plugin update."
 fi
 
+### APT-GET UPDATE ###
+if command_exists apt-get; then
+  log "Updating apt-get..."
+  sudo apt-get update
+  if [ $? -ne 0 ]; then
+    handle_error "apt-get update failed."
+  fi
+  log "apt-get updates completed."
+else
+  log "apt-get is not installed. Skipping apt-get update."
+fi
+
+### APT-GET UPGRADE ###
+if command_exists apt-get; then
+  log "Updating apt-get..."
+  sudo apt-get upgrade -y
+  if [ $? -ne 0 ]; then
+    handle_error "apt-get upgrade failed."
+  fi
+  log "apt-get updates completed."
+else
+  log "apt-get is not installed. Skipping apt-get upgrade."
+fi
+
+
+### GO INSTALL ###
+if [[ "$OS" == "Linux" ]]; then
+  if command_exists go; then
+    log "Updating go packages..."
+    bash "$HOME/.config/bin/package-managers/go.sh"
+    if [ $? -ne 0 ]; then
+      handle_error "go install failed."
+    fi
+    log "go updates completed."
+  else
+    log "go is not installed. Skipping go install."
+  fi
+fi
 
 log "UPDATE PACKAGES SCRIPT COMPLETED!"

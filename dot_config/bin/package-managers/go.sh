@@ -2,7 +2,9 @@
 
 source "$(dirname "$BASH_SOURCE")/../init/init.sh"
 
-install_go_packages() {
+OS=$(get_os)
+
+install_go_packages_linux() {
     echo_with_color "$CYAN_COLOR" "Installing go packages..."
 
     while IFS= read -r package; do
@@ -20,12 +22,13 @@ install_go_packages() {
     done < <(get_package_list go_linux.list)
 }
 
-attempt_fix_command "go" "$HOME/.local/bin"
-
-if command_exists go; then
-    echo_with_color "$CYAN_COLOR" "Go is installed, installing go packages..."
-    install_go_packages
-else
+if [[ "$OS" == "Linux" ]]; then
+    attempt_fix_command "go" "$HOME/.local/bin"
+    if command_exists go; then
+        echo_with_color "$CYAN_COLOR" "Go is installed, installing go packages..."
+        install_go_packages_linux
+    else
     echo_with_color "$RED_COLOR" "Go is not installed, skipping go packages installation..."
     exit_with_error "Please install Go to continue."
+    fi
 fi
