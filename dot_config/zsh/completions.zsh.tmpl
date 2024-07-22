@@ -1,6 +1,6 @@
-{{- if (and (eq .chezmoi.os "linux") (ne .chezmoi.hostname "tim-gaming-pc2")) -}}
+{{- if (and (eq .chezmoi.os "linux") (ne .chezmoi.hostname "tim-gaming-pc2") (ne .chezmoi.hostname "hp-laptop-ubuntu")) }}
 [[ -e "/home/tbryant/oracle-cli/lib/python3.11/site-packages/oci_cli/bin/oci_autocomplete.sh" ]] && source "/home/tbryant/oracle-cli/lib/python3.11/site-packages/oci_cli/bin/oci_autocomplete.sh"
-{{- end -}}
+{{ end -}}
 
 eval "$(op completion zsh)"; compdef _op op
 source <(chezmoi completion zsh)
@@ -8,5 +8,3 @@ source <(chezmoi completion zsh)
 if command -v ngrok &>/dev/null; then
   eval "$(ngrok completion)"
 fi
-
-
