@@ -2,9 +2,11 @@
 [[ -e "/home/tbryant/oracle-cli/lib/python3.11/site-packages/oci_cli/bin/oci_autocomplete.sh" ]] && source "/home/tbryant/oracle-cli/lib/python3.11/site-packages/oci_cli/bin/oci_autocomplete.sh"
 {{ end -}}
 
-eval "$(op completion zsh)"; compdef _op op
-source <(chezmoi completion zsh)
-
+{{- if (or (eq .chezmoi.hostname "Timothys-MacBook-Pro") (eq .chezmoi.hostname "Timothys-MacBook-Air")) }}
 if command -v ngrok &>/dev/null; then
   eval "$(ngrok completion)"
 fi
+{{ end -}}
+
+eval "$(op completion zsh)"; compdef _op op
+source <(chezmoi completion zsh)
