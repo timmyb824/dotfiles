@@ -71,3 +71,4 @@ safe_remove_command "/usr/local/bin/op"
 
 install_brew_macos
 install_packages_with_brew
+install_special_applications
