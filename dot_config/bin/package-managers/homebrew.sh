@@ -48,6 +48,21 @@ install_packages_with_brew() {
     rm "$temp_brewfile" || echo_with_color "$YELLOW_COLOR" "Warning: Failed to remove temporary Brewfile."
 }
 
+install_special_applications() {
+    if ! command_exists mas; then
+        msg_warn "mas is not installed. Skipping installation of Mac App Store apps."
+        return
+    fi
+
+    if ask_yes_or_no "Do you want to install Slack?"; then
+        if mas install 803453959; then
+            msg_ok "Slack installed successfully."
+        else
+            msg_error "Failed to install Slack."
+        fi
+    fi
+}
+
 # Function to add Homebrew to PATH if it's not already there
 add_brew_to_path
 
