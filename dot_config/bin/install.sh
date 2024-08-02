@@ -48,9 +48,9 @@ install_macos_packages() {
         "installers/cargo.sh"
         "installers/atuin.sh"
         "configuration/go_directories.sh"
-        "installers/gh_cli.sh"
-        "package-managers/ghq.sh"
-        "package-managers/gitopolis.sh"
+        "package-managers/gh_cli.sh"
+        "configuration/ghq_repos.sh"
+        "configuration/gitopolis_repos.sh"
     )
 
     for script in "${scripts_to_run[@]}"; do
@@ -74,7 +74,6 @@ install_linux_packages() {
         "package-managers/pipx.sh"
         "installers/tfenv_terraform.sh"
         "installers/tailscale.sh"
-        "installers/headscale.sh"
         "installers/rbenv_ruby.sh"
         "package-managers/gem.sh"
         "installers/rust.sh"
@@ -83,23 +82,15 @@ install_linux_packages() {
         "package-managers/npm.sh"
         "installers/atuin.sh"
         "installers/ngrok.sh"
-        "installers/docker.sh"
-        "installers/podman.sh"
-        "installers/promtail.sh"
         "configuration/go_directories.sh"
         "package-managers/go.sh"
-        "configuration/mount_nas.sh"
         "installers/nvim.sh"
         "installers/fzf.sh"
         "package-managers/gh_cli.sh"
-        "package-managers/ghq.sh"
-        "package-managers/gitopolis.sh"
-        "installers/fonts.sh"
-        "installers/jetbrainsmono_font.sh"
-        "installers/glances.sh"
-        "installers/node_exporter.sh"
+        "configuration/ghq_repos.sh"
+        "configuration/gitopolis_repos.sh"
         "installers/zsh_shell.sh"
-        "installers/misc.sh"
+        "installers/misc_linux.sh"
     )
 
     for script in "${scripts_to_run[@]}"; do
