@@ -23,8 +23,7 @@ if [ -f /usr/bin/nvim ]; then
     if sudo apt remove -y neovim; then
         echo_with_color "$GREEN_COLOR" "Neovim removed successfully."
     else
-        echo_with_color "$RED_COLOR" "Error: Failed to remove the existing Neovim installation."
-        exit 1
+        exit_with_error "Error: Failed to remove the existing Neovim installation."
     fi
 else
     echo_with_color "$YELLOW_COLOR" "No existing Neovim installation found."
