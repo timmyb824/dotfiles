@@ -44,16 +44,9 @@ Library/
 .config/pypoetry/
 .config/ngrok/
 .config/bin/installers/fzf.sh
-.config/bin/installers/jetbrainsmono_font.sh
 .config/bin/installers/misc_linux.sh
 .config/bin/installers/ngrok.sh
 .config/bin/installers/nvim.sh
-.config/bin/installers/podman.sh
-.config/bin/installers/podman_uninstall.sh
-.config/bin/installers/podman_exporter.sh
-.config/bin/installers/podman_exporter_uninstall.sh
-.config/bin/installers/promtail.sh
-.config/bin/installers/promtail_uninstall.sh
 .config/bin/installers/tailscale_linux.sh
 .config/bin/installers/zsh_shell.sh
 .config/bin/package-managers/apt.sh
