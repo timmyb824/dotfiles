@@ -59,7 +59,7 @@ keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 -- which-key leader groups
 keymap.set("n", "<leader>b", "<cmd>Telescope buffers<CR>", { desc = "buffers" }) -- list open buffers
 keymap.set("n", "<leader>c", "<cmd>Telescope coc-codeactions<CR>", { desc = "code actions" }) -- code actions
-keymap.set("n", "<leader>e", "<cmd>Telescope file_browser<CR>", { desc = "file browser" }) -- list explorer
+keymap.set("n", "<leader>e", "<cmd><CR>", { desc = "file browser" }) -- list explorer
 keymap.set("n", "<leader>f", "<cmd>Telescope find_files<CR>", { desc = "find files" }) -- fuzzy search
 keymap.set("n", "<leader>g", "<cmd>LazyGit<CR>", { desc = "lazygit" }) -- lazygit
 keymap.set("n", "<leader>m", "<cmd><CR>", { desc = "format code" }) -- format code
