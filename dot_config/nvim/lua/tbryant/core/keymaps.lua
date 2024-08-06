@@ -55,3 +55,16 @@ keymap.set("n", "<leader>bf", "<cmd>Telescope buffers<CR>", { desc = "Find buffe
 
 -- oil.nvim
 keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+
+-- which-key leader groups
+keymap.set("n", "<leader>b", "<cmd>Telescope buffers<CR>", { desc = "buffers" }) -- list open buffers
+keymap.set("n", "<leader>c", "<cmd>Telescope coc-codeactions<CR>", { desc = "code actions" }) -- code actions
+keymap.set("n", "<leader>e", "<cmd>Telescope file_browser<CR>", { desc = "file browser" }) -- list explorer
+keymap.set("n", "<leader>f", "<cmd>Telescope find_files<CR>", { desc = "find files" }) -- fuzzy search
+keymap.set("n", "<leader>g", "<cmd>LazyGit<CR>", { desc = "lazygit" }) -- lazygit
+keymap.set("n", "<leader>m", "<cmd><CR>", { desc = "format code" }) -- format code
+keymap.set("n", "<leader>n", "<cmd>Telescope quickfix<CR>", { desc = "clear search" }) -- clear search
+keymap.set("n", "<leader>s", "<cmd><CR>", { desc = "windows" }) -- window management
+keymap.set("n", "<leader>t", "<cmd><CR>", { desc = "tabs" }) -- tab management
+keymap.set("n", "<leader>w", "<cmd>Telescope sessions<CR>", { desc = "sessions" }) -- session management
+keymap.set("n", "<leader>x", "<cmd>Telescope trouble<CR>", { desc = "troublehshoot" }) -- troubleshooting
