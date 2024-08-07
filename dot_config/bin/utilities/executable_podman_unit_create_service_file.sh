@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source common.sh
+
 # Check if container name is provided
 if [ -z "$1" ]; then
   echo "Usage: $0 <container_name>"
@@ -39,7 +41,11 @@ list_systemd_containers() {
   systemctl --user list-units 'container*'
 }
 
-# Main script execution
+msg_info "Creating systemd unit file for container: ${CONTAINER_NAME}"
 generate_systemd_unit "${CONTAINER_NAME}" "always"
+
+msg_info "Enabling systemd service for container: ${CONTAINER_NAME}"
 enable_systemd_service "${CONTAINER_NAME}"
+
+msg_info "Listing systemd containers"
 list_systemd_containers
