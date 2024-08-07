@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ./common.sh
+source common.sh
 
 # confirm an argument is passed
 if [ -z "$1" ]; then

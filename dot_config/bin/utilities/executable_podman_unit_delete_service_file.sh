@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ./common.sh
+source common.sh
 
 # Check if a service name was provided
 if [ -z "$1" ]; then
