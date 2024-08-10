@@ -1,29 +1,6 @@
 #!/bin/bash
 
-######## FUNCTIONS ########
-
-# Function to log messages
-log() {
-  echo "$(date +'%Y-%m-%d %H:%M:%S') - $1"
-  echo "----------------------------------------"
-}
-
-# Function to handle errors
-handle_error() {
-  log "Error: $1"
-}
-
-command_exists() {
-  command -v "$1" >/dev/null 2>&1
-}
-
-get_os() {
-  case "$(uname -s)" in
-  Linux*) echo "Linux" ;;
-  Darwin*) echo "MacOS" ;;
-  *) echo "Unknown" ;;
-  esac
-}
+source common.sh
 
 ####### VARIABLES #######
 
@@ -34,229 +11,252 @@ OS=$(get_os)
 ######## PACKAGES ########
 
 ### HOMEBREW ###
+logger "STARTING HOMEBREW"
 if command_exists brew; then
-  # Run brew update
-  log "Running 'brew update'..."
   brew update
   if [ $? -ne 0 ]; then
-    handle_error "brew update failed."
-    log "Try running 'brew update' manually after the script completes."
+    mgs_error "brew update failed."
+    msg_warn "Try running 'brew update' manually after the script completes."
   fi
-  log "'brew update' completed."
+  msg_ok "'brew update' completed."
 
-  # Run brew upgrade
-  log "Running 'brew upgrade'..."
   brew upgrade
   if [ $? -ne 0 ]; then
-    handle_error "brew upgrade failed."
-    log "Try running 'brew upgrade' manually after the script completes."
+    msg_error "brew upgrade failed."
+    msg_warn "Try running 'brew upgrade' manually after the script completes."
   fi
-  log "'brew upgrade' completed."
+  msg_ok "'brew upgrade' completed."
 else
-  log "brew is not installed. Skipping brew update and upgrade."
+  msg_info "brew is not installed. Skipping brew update and upgrade."
 fi
 
 ### PKGX ###
+logger "STARTING PKGX"
 if command_exists pkgx; then
-  # Run pkgx mash pkgx/cache upgrade
-  log "Running 'pkgx mash pkgx/cache upgrade'..."
   pkgx mash pkgx/cache upgrade
   if [ $? -ne 0 ]; then
-    handle_error "pkgx mash pkgx/cache upgrade failed."
+    msg_error "pkgx mash pkgx/cache upgrade failed."
   fi
-  log "'pkgx mash pkgx/cache upgrade' completed."
+  msg_ok "'pkgx mash pkgx/cache upgrade' completed."
 else
-  log "pkgx is not installed. Skipping pkgx mash pkgx/cache upgrade."
+  msg_info "pkgx is not installed. Skipping pkgx mash pkgx/cache upgrade."
 fi
 
 ### VAGRANT PLUGINS ###
+logger "STARTING VAGRANT PLUGINS"
 if command_exists vagrant; then
-  log "Updating vagrant plugins..."
   vagrant plugin update
   if [ $? -ne 0 ]; then
-    handle_error "vagrant plugin update failed."
+    msg_error "vagrant plugin update failed."
   fi
-
-  log "Vagrant plugin updates completed."
+  msg_ok "Vagrant plugin updates completed."
 else
-  log "vagrant is not installed. Skipping vagrant plugin update."
+  msg_info "vagrant is not installed. Skipping vagrant plugin update."
 fi
 
 ### NPM ###
+logger "STARTING NPM"
 if command_exists npm; then
-  log "Updating npm packages..."
   npm update -g
   if [ $? -ne 0 ]; then
-    handle_error "npm update failed."
+    msg_error "npm update failed."
   fi
-
-  log "NPM updates completed."
+  msg_ok "NPM updates completed."
 else
-  log "npm is not installed. Skipping npm update."
+  msg_info "npm is not installed. Skipping npm update."
 fi
 
 ### PIP ###
+logger "STARTING PIP"
 if command_exists pip; then
-  # verify python version
-  log "Verifying python version..."
+  msg_info "Verifying python version..."
   python_version=$(python --version | awk '{print $2}')
   if [ "$python_version" != "$PYTHON_VERSION" ]; then
-    handle_error "Python version $PYTHON_VERSION is required. Found $python_version."
+    msg_error "Python version $PYTHON_VERSION is required. Found $python_version."
   fi
-  log "Python version matches $PYTHON_VERSION."
-  log "Updating pip..."
+  msg_info "Python version matches $PYTHON_VERSION."
+  msg_info "Updating pip..."
   pip install --upgrade pip
   if [ $? -ne 0 ]; then
-    handle_error "pip install --upgrade pip failed."
+    msg_error "pip install --upgrade pip failed."
   fi
 
-  log "Updating pip packages..."
+  msg_info "Updating pip packages..."
   pip freeze --local | grep -v '^-e' | cut -d = -f 1 | xargs -n1 pip install -U
   if [ $? -ne 0 ]; then
-    handle_error "pip install -U failed."
+    msg_error "pip install -U failed."
   fi
 
-  log "pip updates completed."
+  msg_ok "pip updates completed."
 else
-  log "pip is not installed. Skipping pip install --upgrade pip."
+  msg_info "pip is not installed. Skipping pip install --upgrade pip."
 fi
 
 ### PIPX ###
+logger "STARTING PIPX"
 if command_exists pipx; then
-  log "Updating pipx packages..."
   pipx upgrade-all
   if [ $? -ne 0 ]; then
-    handle_error "pipx upgrade-all failed."
+    msg_error "pipx upgrade-all failed."
   fi
-
-  log "pipx updates completed."
+  msg_ok "pipx updates completed."
 else
-  log "pipx is not installed. Skipping pipx upgrade-all."
+  msg_ok "pipx is not installed. Skipping pipx upgrade-all."
 fi
 
 ### Kubectl Krew ###
+logger "STARTING KUBECTL KREW"
 if command_exists kubectl-krew; then
-  log "Updating kubectl plugin index..."
   kubectl krew update
   if [ $? -ne 0 ]; then
-    handle_error "kubectl krew update failed."
+    msg_error "kubectl krew update failed."
   fi
 
-  log "Upgrading kubectl plugins..."
+  msg_info "Upgrading kubectl plugins..."
   kubectl krew upgrade
   if [ $? -ne 0 ]; then
-    handle_error "kubectl krew upgrade failed."
+    msg_error "kubectl krew upgrade failed."
   fi
-
-  log "krew updates completed."
+  msg_ok "krew updates completed."
 else
-  log "kubectl is not installed. Skipping kubectl krew update."
+  msg_info "kubectl is not installed. Skipping kubectl krew update."
 fi
 
 ### GEMS ###
+logger "STARTING GEMS"
 if command_exists gem; then
-  # verify ruby version
-  log "Verifying ruby version..."
+  msg_info "Verifying ruby version..."
   ruby_version=$(ruby --version | awk '{print $2}')
   if [ "$ruby_version" != "$RUBY_VERSION" ]; then
-    handle_error "Ruby version $RUBY_VERSION is required. Found $ruby_version."
+    msg_error "Ruby version $RUBY_VERSION is required. Found $ruby_version."
   fi
-  log "Ruby version matches $RUBY_VERSION."
-  log "Updating gems..."
+  msg_info "Ruby version matches $RUBY_VERSION."
+  msg_info "Updating gems..."
   gem update
   if [ $? -ne 0 ]; then
-    handle_error "gem update failed."
+    msg_error "gem update failed."
   fi
 
-  log "gem updates completed."
+  msg_ok "gem updates completed."
 else
-  log "gem is not installed. Skipping gem update."
+  msg_info "gem is not installed. Skipping gem update."
 fi
 
 ### BASHER ###
+logger "STARTING BASHER"
 if command_exists basher; then
-  log "Updating basher..."
-  cd ~/.basher || handle_error "cd to ~/.basher failed."
+  cd ~/.basher || msg_error "cd to ~/.basher failed."
   git pull
   if [ $? -ne 0 ]; then
-    handle_error "git pull in ~/.basher failed."
+    msg_error "git pull in ~/.basher failed."
   fi
-  log "Updating basher packages..."
+  msg_info "Updating basher packages..."
   outdated_packages=$(basher outdated | awk '{print $1}')
   for package in $outdated_packages; do
     basher upgrade "$package"
     if [ $? -ne 0 ]; then
-      handle_error "basher upgrade $package failed."
+      msg_error "basher upgrade $package failed."
     fi
   done
-  log "basher updates completed."
+  msg_ok "basher updates completed."
 else
-  log "basher is not installed. Skipping basher update."
+  msg_info "basher is not installed. Skipping basher update."
 fi
 
 ### GH CLI ###
+logger "STARTING GH CLI"
 if command_exists gh; then
-  log "Updating gh cli..."
   gh extension upgrade --all
   if [ $? -ne 0 ]; then
-    handle_error "gh extension upgrade --all failed."
+    msg_error "gh extension upgrade --all failed."
   fi
-  log "gh cli updates completed."
+  msg_ok "gh cli updates completed."
 else
-  log "gh cli is not installed. Skipping gh extension upgrade --all."
+  msg_info "gh cli is not installed. Skipping gh extension upgrade --all."
 fi
 
 ### MICRO EDITOR ###
+logger "STARTING MICRO EDITOR"
 if command_exists micro; then
-  log "Updating micro editor plugins..."
   micro -plugin update
   if [ $? -ne 0 ]; then
-    handle_error "micro -plugin update failed."
+    msg_error "micro -plugin update failed."
   fi
-  log "micro editor plugin updates completed."
+  msg_ok "micro editor plugin updates completed."
 else
-  log "micro is not installed. Skipping micro -plugin update."
+  msg_info "micro is not installed. Skipping micro -plugin update."
 fi
 
 ### APT-GET UPDATE ###
+logger "STARTING APT-GET UPDATE"
 if command_exists apt-get; then
-  log "Updating apt-get..."
   sudo apt-get update
   if [ $? -ne 0 ]; then
-    handle_error "apt-get update failed."
+    msg_error "apt-get update failed."
   fi
-  log "apt-get updates completed."
+  msg_ok "apt-get updates completed."
 else
-  log "apt-get is not installed. Skipping apt-get update."
+  msg_info "apt-get is not installed. Skipping apt-get update."
 fi
 
 ### APT-GET UPGRADE ###
+logger "STARTING APT-GET UPGRADE"
 if command_exists apt-get; then
-  log "Updating apt-get..."
   sudo apt-get upgrade -y
   if [ $? -ne 0 ]; then
-    handle_error "apt-get upgrade failed."
+    msg_error "apt-get upgrade failed."
   fi
-  log "apt-get updates completed."
+  msk_ok "apt-get updates completed."
 else
-  log "apt-get is not installed. Skipping apt-get upgrade."
+  msg_info "apt-get is not installed. Skipping apt-get upgrade."
 fi
-
 
 ### GO INSTALL ###
+logger "STARTING GO INSTALL"
 if [[ "$OS" == "Linux" ]]; then
   if command_exists go; then
-    log "Updating go packages..."
     bash "$HOME/.config/bin/package-managers/go.sh"
     if [ $? -ne 0 ]; then
-      handle_error "go install failed."
+      msg_error "go install failed."
     fi
-    log "go updates completed."
+    msg_ok "go updates completed."
   else
-    log "go is not installed. Skipping go install."
+    msg_info "go is not installed. Skipping go install."
   fi
 else
-  log "Skipping go install on macOS."
+  msg_info "Skipping go install on macOS."
 fi
 
-log "UPDATE PACKAGES SCRIPT COMPLETED!"
+### RUST ###
+logger "STARTING RUST"
+if [[ "$OS" == "Linux" ]]; then
+  if command_exists rustup; then
+    msg_info "Updating rust..."
+    rustup update
+    if [ $? -ne 0 ]; then
+      msg_error "rustup update failed."
+    fi
+    msg_ok "rust updates completed."
+
+    msg_info "Updating cargo packages..."
+    while IFS= read -r package; do
+      trimmed_package=$(echo "$package" | xargs)
+      if [ -n "$trimmed_package" ]; then
+        output=$(cargo install "$trimmed_package" --force)
+        echo "$output"
+        if [[ "$output" == *"error"* ]]; then
+          msg_error "Failed to update ${trimmed_package}."
+          msg_warn "Continuing with the next package..."
+        else
+          msg_ok "${trimmed_package} updated successfully."
+        fi
+      fi
+    done < <(get_package_list cargo_linux.list)
+  else
+    msg_info "rust is not installed. Skipping rust update."
+  fi
+else
+  msg_info "Skipping rust update on macOS."
+fi
+
+logger "UPDATE PACKAGES SCRIPT COMPLETED!"
