@@ -57,5 +57,9 @@ Library/
 .config/bin/utilities/podman_unit_create_service_file.sh
 .config/bin/utilities/podman_unit_delete_service_file.sh
 .config/bin/utilities/podman_unit_recreate_service_file.sh
+.config/bin/utilities/podman_unit_delete_service_file.sh
+.config/bin/utilities/podman_quadlet_create_container_file.sh
+.config/bin/utilities/podman_quadlet_create_network_file.sh
+.config/bin/utilities/podman_quadlet_delete_container_file.sh
 {{- end }}
 
