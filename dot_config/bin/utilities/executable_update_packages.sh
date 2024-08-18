@@ -206,7 +206,7 @@ if command_exists apt-get; then
   if [ $? -ne 0 ]; then
     msg_error "apt-get upgrade failed."
   fi
-  msk_ok "apt-get updates completed."
+  msk_ok "apt-get upgrade completed."
 else
   msg_info "apt-get is not installed. Skipping apt-get upgrade."
 fi
