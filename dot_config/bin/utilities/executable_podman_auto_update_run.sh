@@ -2,14 +2,22 @@
 
 source common.sh
 
-log_file="/var/log/podman-auto-update.log"
+log_file="$HOME/DEV/logs/podman-auto-update.log"
 
 logger() {
     echo -e "\033[1;35m$(date +'%Y-%m-%d %H:%M:%S') - $1\033[0m" | tee -a "$log_file"
     echo -e "---------------------------------------------" | tee -a "$log_file"
 }
 
-# Check if podman is installed
+if [ ! -d "$(dirname "$log_file")" ]; then
+    logger "Creating log directory: $(dirname "$log_file")"
+    if mkdir -p "$(dirname "$log_file")"; then
+        logger "Log directory created successfully."
+    else
+        logger "Failed to create log directory."
+    fi
+fi
+
 if ! command_exists podman; then
     handle_error "podman is not installed."
 fi
