@@ -54,6 +54,7 @@ Library/
 .config/bin/package-managers/linuxbrew.sh
 .config/bin/utilities/cloudflare_dns.sh
 .config/bin/utilities/podman_auto_update_setup.sh
+.config/bin/utilities/podman_auto_update_run.sh
 .config/bin/utilities/podman_unit_create_service_file.sh
 .config/bin/utilities/podman_unit_delete_service_file.sh
 .config/bin/utilities/podman_unit_recreate_service_file.sh
