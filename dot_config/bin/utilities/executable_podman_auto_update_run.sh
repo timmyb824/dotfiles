@@ -27,15 +27,19 @@ updates=$(podman auto-update --dry-run --format "{{.Image}} {{.Updated}}")
 pending_updates=$(echo "$updates" | grep "pending")
 
 if [[ -z "$pending_updates" ]]; then
+    msg_info "No updates available."
     logger "No updates available."
 else
+    msg_info "Updates available for the following images:"
     logger "Updates available for the following images:"
     echo "$pending_updates" | tee -a "$log_file"
 
     # Perform the update
     if podman auto-update; then
         msg_ok "Podman auto-update completed successfully."
+        logger "Podman auto-update completed successfully."
     else
         msg_error "Podman auto-update failed."
+        logger "Podman auto-update failed."
     fi
 fi
