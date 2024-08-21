@@ -1,4 +1,4 @@
-# Pull all using `gitopolis pull`
+# Pull all using `gitopolis clone`
 [[repos]]
 path = "automation_ansible"
 tags = ["automation_ansible", "homelab", "ansible"]
