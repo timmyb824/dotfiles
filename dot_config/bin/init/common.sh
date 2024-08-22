@@ -63,6 +63,16 @@ msg_error() {
     echo -e "\033[1;31m[ERROR]\033[0m $1"
 }
 
+handle_error() {
+    msg_error "$1"
+    exit 1
+}
+
+
+logger() {
+    echo "$(date +'%Y-%m-%d %H:%M:%S') - $1" | tee -a "$log_file"
+}
+
 # Function to check if the current user is privileged
 is_privileged_user() {
     for user in "${PRIVILEGED_USERS[@]}"; do
