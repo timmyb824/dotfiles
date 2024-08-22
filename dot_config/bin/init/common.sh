@@ -68,7 +68,6 @@ handle_error() {
     exit 1
 }
 
-
 logger() {
     echo "$(date +'%Y-%m-%d %H:%M:%S') - $1" | tee -a "$log_file"
 }
@@ -82,7 +81,6 @@ is_privileged_user() {
     done
     return 1 # The user is not privileged
 }
-
 
 # source via init.sh
 # Function to get a list of packages from a Gist
