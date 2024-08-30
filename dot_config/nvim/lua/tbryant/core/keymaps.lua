@@ -71,4 +71,5 @@ keymap.set("n", "<leader>x", "<cmd><CR>", { desc = "troublehshoot" }) -- trouble
 
 -- better copy and paste
 keymap.set("v", "<leader>y", '"+y', { desc = "Copy to clipboard" }) -- copy to clipboard
-keymap.set("n", "<leader>pc", '"+p', { desc = "Paste from clipboard" }) -- paste from clipboard
+keymap.set("n", "<leader>p", "<cmd><CR>", { desc = "Paste from clipboard" }) -- paste from clipboard
+keymap.set("n", "<leader>pc", '"+p', { desc = "Paste from clipboard" })

@@ -28,6 +28,7 @@ return {
       },
     })
 
+    vim.keymap.set("v", "<leader>m", "<cmd>Format file or range<CR>", { desc = "Format range" })
     vim.keymap.set({ "n", "v" }, "<leader>mp", function()
       conform.format({
         lsp_fallback = true,
