@@ -68,3 +68,7 @@ keymap.set("n", "<leader>s", "<cmd><CR>", { desc = "windows" }) -- window manage
 keymap.set("n", "<leader>t", "<cmd><CR>", { desc = "tabs" }) -- tab management
 keymap.set("n", "<leader>w", "<cmd><CR>", { desc = "sessions" }) -- session management
 keymap.set("n", "<leader>x", "<cmd><CR>", { desc = "troublehshoot" }) -- troubleshooting
+
+-- better copy and paste
+keymap.set("v", "<leader>y", '"+y', { desc = "Copy to clipboard" }) -- copy to clipboard
+keymap.set("n", "<leader>pc", '"+p', { desc = "Paste from clipboard" }) -- paste from clipboard
