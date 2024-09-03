@@ -139,6 +139,30 @@ install_logdy() {
 }
 
 
+instal_fastfetch(){
+    if ! command_exists fastfetch; then
+        echo_with_color "$YELLOW_COLOR" "fastfetch is not installed."
+        ask_yes_or_no "Do you want to install fastfetch?"
+        if [[ "$?" -eq 0 ]]; then
+          # if Ubuntu install ppa first
+          if [[ -f /etc/os-release ]]; then
+            source /etc/os-release
+            if [[ "$ID" == "ubuntu" ]]; then
+              sudo add-apt-repository ppa:fastfetch/ppa -y || echo_with_color "$RED_COLOR" "Failed to add fastfetch repository."
+              sudo apt update || echo_with_color "$RED_COLOR" "Failed to update apt."
+            fi
+          fi
+
+          sudo apt install fastfetch -y || echo_with_color "$RED_COLOR" "Failed to install fastfetch."
+          echo_with_color "$GREEN_COLOR" "fastfetch installed successfully."
+        else
+          echo_with_color "$GREEN_COLOR" "Skipping fastfetch installation."
+          fi
+    else
+        echo_with_color "$GREEN_COLOR" "fastfetch is already installed."
+    fi
+}
+
 # check for dependencies
 if ! command_exists "curl" && ! command_exists "wget"; then
     echo_with_color "$RED_COLOR" "curl/wget is required"
