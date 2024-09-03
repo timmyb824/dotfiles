@@ -140,21 +140,21 @@ install_logdy() {
 
 
 instal_fastfetch(){
+    local fastfetch_version="2.23.0"
+    local fastfetch_url="https://github.com/fastfetch-cli/fastfetch/releases/tag/${fastfetch_version}/fastfetch_linux_amd64.tar.gz"
     if ! command_exists fastfetch; then
         echo_with_color "$YELLOW_COLOR" "fastfetch is not installed."
         ask_yes_or_no "Do you want to install fastfetch?"
         if [[ "$?" -eq 0 ]]; then
-          # if Ubuntu install ppa first
-          if [[ -f /etc/os-release ]]; then
-            source /etc/os-release
-            if [[ "$ID" == "ubuntu" ]]; then
-              sudo add-apt-repository ppa:fastfetch/ppa -y || echo_with_color "$RED_COLOR" "Failed to add fastfetch repository."
-              sudo apt update || echo_with_color "$RED_COLOR" "Failed to update apt."
-            fi
+          if ! curl -sS "$fastfetch_url" -o fastfetch.tar.gz; then
+            echo_with_color "$RED_COLOR" "Failed to download fastfetch."
+          else
+            echo_with_color "$GREEN_COLOR" "Installing fastfetch..."
+            tar -xzf fastfetch.tar.gz
+            sudo mv fastfetch /usr/local/bin
+            rm fastfetch.tar.gz
+            echo_with_color "$GREEN_COLOR" "fastfetch installed successfully."
           fi
-
-          sudo apt install fastfetch -y || echo_with_color "$RED_COLOR" "Failed to install fastfetch."
-          echo_with_color "$GREEN_COLOR" "fastfetch installed successfully."
         else
           echo_with_color "$GREEN_COLOR" "Skipping fastfetch installation."
           fi
