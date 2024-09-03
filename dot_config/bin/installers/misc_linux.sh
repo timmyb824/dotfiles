@@ -175,3 +175,5 @@ install_supafile
 install_oci_cli
 install_cloudflared_cli
 install_logdy
+instal_fastfetch
+
