@@ -153,7 +153,8 @@ install_fastfetch(){
             else
                 echo_with_color "$GREEN_COLOR" "Installing fastfetch..."
                 tar -xzf fastfetch.tar.gz
-                sudo mv fastfetch /usr/local/bin
+                sudo mv fastfetch-linux-amd64/usr/bin/fastfetch /usr/local/bin
+                sudo mv fastfetch-linux-amd64/usr/bin/flashfetch /usr/local/bin                              
                 rm fastfetch.tar.gz
                 echo_with_color "$GREEN_COLOR" "fastfetch installed successfully."
             fi
