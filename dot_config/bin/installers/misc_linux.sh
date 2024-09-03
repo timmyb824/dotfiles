@@ -155,7 +155,7 @@ install_fastfetch(){
                 tar -xzf fastfetch.tar.gz
                 sudo mv fastfetch-linux-amd64/usr/bin/fastfetch /usr/local/bin
                 sudo mv fastfetch-linux-amd64/usr/bin/flashfetch /usr/local/bin                              
-                rm fastfetch-linux-amd64
+                rm -rf fastfetch-linux-amd64
                 echo_with_color "$GREEN_COLOR" "fastfetch installed successfully."
             fi
         else
@@ -165,6 +165,34 @@ install_fastfetch(){
         echo_with_color "$GREEN_COLOR" "fastfetch is already installed."
     fi
 }
+
+install_teller(){
+    local teller_version="2.0.7"
+    local teller_url="https://github.com/tellerops/teller/releases/download/v${teller_version}/teller-x86_64-linux.tar.xz"  
+    
+    if ! command_exists teller; then
+        echo_with_color "$YELLOW_COLOR" "teller is not installed."
+        ask_yes_or_no "Do you want to install teller?"
+        
+        if [[ "$?" -eq 0 ]]; then
+            if ! curl -L -sS "$teller_url" -o teller.tar.gz; then
+                echo_with_color "$RED_COLOR" "Failed to download teller."
+            else
+                echo_with_color "$GREEN_COLOR" "Installing teller..."
+                tar -xf teller.tar.gz
+                sudo mv teller/teller /usr/local/bin
+                rm -rf teller
+                echo_with_color "$GREEN_COLOR" "teller installed successfully."
+            fi
+        else
+            echo_with_color "$GREEN_COLOR" "Skipping teller installation."
+        fi
+    else
+        echo_with_color "$GREEN_COLOR" "teller is already installed."
+    fi
+}
+
+
 
 # check for dependencies
 if ! command_exists "curl" && ! command_exists "wget"; then
@@ -179,4 +207,5 @@ install_oci_cli
 install_cloudflared_cli
 install_logdy
 install_fastfetch
+install_teller
 
