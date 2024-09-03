@@ -139,25 +139,27 @@ install_logdy() {
 }
 
 
-instal_fastfetch(){
+install_fastfetch(){
     local fastfetch_version="2.23.0"
-    local fastfetch_url="https://github.com/fastfetch-cli/fastfetch/releases/tag/${fastfetch_version}/fastfetch_linux_amd64.tar.gz"
+    local fastfetch_url="https://github.com/fastfetch-cli/fastfetch/releases/download/${fastfetch_version}/fastfetch_linux_amd64.tar.gz"
+    
     if ! command_exists fastfetch; then
         echo_with_color "$YELLOW_COLOR" "fastfetch is not installed."
         ask_yes_or_no "Do you want to install fastfetch?"
+        
         if [[ "$?" -eq 0 ]]; then
-          if ! curl -sS "$fastfetch_url" -o fastfetch.tar.gz; then
-            echo_with_color "$RED_COLOR" "Failed to download fastfetch."
-          else
-            echo_with_color "$GREEN_COLOR" "Installing fastfetch..."
-            tar -xzf fastfetch.tar.gz
-            sudo mv fastfetch /usr/local/bin
-            rm fastfetch.tar.gz
-            echo_with_color "$GREEN_COLOR" "fastfetch installed successfully."
-          fi
+            if ! curl -L -sS "$fastfetch_url" -o fastfetch.tar.gz; then
+                echo_with_color "$RED_COLOR" "Failed to download fastfetch."
+            else
+                echo_with_color "$GREEN_COLOR" "Installing fastfetch..."
+                tar -xzf fastfetch.tar.gz
+                sudo mv fastfetch /usr/local/bin
+                rm fastfetch.tar.gz
+                echo_with_color "$GREEN_COLOR" "fastfetch installed successfully."
+            fi
         else
-          echo_with_color "$GREEN_COLOR" "Skipping fastfetch installation."
-          fi
+            echo_with_color "$GREEN_COLOR" "Skipping fastfetch installation."
+        fi
     else
         echo_with_color "$GREEN_COLOR" "fastfetch is already installed."
     fi
@@ -175,5 +177,5 @@ install_supafile
 install_oci_cli
 install_cloudflared_cli
 install_logdy
-instal_fastfetch
+install_fastfetch
 
