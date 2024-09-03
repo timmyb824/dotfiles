@@ -141,7 +141,7 @@ install_logdy() {
 
 install_fastfetch(){
     local fastfetch_version="2.23.0"
-    local fastfetch_url="https://github.com/fastfetch-cli/fastfetch/releases/download/${fastfetch_version}/fastfetch_linux_amd64.tar.gz"
+    local fastfetch_url="https://github.com/fastfetch-cli/fastfetch/releases/download/${fastfetch_version}/fastfetch-linux-amd64.tar.gz"
     
     if ! command_exists fastfetch; then
         echo_with_color "$YELLOW_COLOR" "fastfetch is not installed."
