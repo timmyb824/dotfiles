@@ -181,7 +181,8 @@ install_teller(){
                 echo_with_color "$GREEN_COLOR" "Installing teller..."
                 tar -xf teller.tar.gz
                 sudo mv teller-x86_64-linux/teller /usr/local/bin
-                rm -rf teller
+                rm -rf teller-x86_64-linux
+                rm -rf teller.tar.gz
                 echo_with_color "$GREEN_COLOR" "teller installed successfully."
             fi
         else
