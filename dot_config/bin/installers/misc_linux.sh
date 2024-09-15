@@ -79,21 +79,21 @@ install_supafile() {
 }
 
 install_oci_cli() {
-  if ! command_exists oci; then
-    echo_with_color "$YELLOW_COLOR" "Oracle Cloud Infrastructure CLI is not installed."
-    ask_yes_or_no "Do you want to install Oracle Cloud Infrastructure CLI?"
-    if [[ "$?" -eq 0 ]]; then
-      if ! bash -c "$(curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh)"; then
-      echo_with_color "$RED_COLOR" "Failed to install Oracle Cloud Infrastructure CLI."
-      else
-      echo_with_color "$GREEN_COLOR" "Oracle Cloud Infrastructure CLI installed successfully."
-      fi
+    if ! command_exists oci; then
+        echo_with_color "$YELLOW_COLOR" "Oracle Cloud Infrastructure CLI is not installed."
+        ask_yes_or_no "Do you want to install Oracle Cloud Infrastructure CLI?"
+        if [[ "$?" -eq 0 ]]; then
+            if ! bash -c "$(curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh)"; then
+                echo_with_color "$RED_COLOR" "Failed to install Oracle Cloud Infrastructure CLI."
+            else
+                echo_with_color "$GREEN_COLOR" "Oracle Cloud Infrastructure CLI installed successfully."
+            fi
+        else
+            echo_with_color "$GREEN_COLOR" "Skipping Oracle Cloud Infrastructure CLI installation."
+        fi
     else
-      echo_with_color "$GREEN_COLOR" "Skipping Oracle Cloud Infrastructure CLI installation."
+        echo_with_color "$GREEN_COLOR" "Oracle Cloud Infrastructure CLI is already installed."
     fi
-      else
-    echo_with_color "$GREEN_COLOR" "Oracle Cloud Infrastructure CLI is already installed."
-      fi
 }
 
 install_cloudflared_cli() {
@@ -138,15 +138,14 @@ install_logdy() {
     fi
 }
 
-
-install_fastfetch(){
+install_fastfetch() {
     local fastfetch_version="2.23.0"
     local fastfetch_url="https://github.com/fastfetch-cli/fastfetch/releases/download/${fastfetch_version}/fastfetch-linux-amd64.tar.gz"
-    
+
     if ! command_exists fastfetch; then
         echo_with_color "$YELLOW_COLOR" "fastfetch is not installed."
         ask_yes_or_no "Do you want to install fastfetch?"
-        
+
         if [[ "$?" -eq 0 ]]; then
             if ! curl -L -sS "$fastfetch_url" -o fastfetch.tar.gz; then
                 echo_with_color "$RED_COLOR" "Failed to download fastfetch."
@@ -154,7 +153,7 @@ install_fastfetch(){
                 echo_with_color "$GREEN_COLOR" "Installing fastfetch..."
                 tar -xzf fastfetch.tar.gz
                 sudo mv fastfetch-linux-amd64/usr/bin/fastfetch /usr/local/bin
-                sudo mv fastfetch-linux-amd64/usr/bin/flashfetch /usr/local/bin                              
+                sudo mv fastfetch-linux-amd64/usr/bin/flashfetch /usr/local/bin
                 rm -rf fastfetch-linux-amd64
                 echo_with_color "$GREEN_COLOR" "fastfetch installed successfully."
             fi
@@ -166,14 +165,14 @@ install_fastfetch(){
     fi
 }
 
-install_teller(){
+install_teller() {
     local teller_version="2.0.7"
-    local teller_url="https://github.com/tellerops/teller/releases/download/v${teller_version}/teller-x86_64-linux.tar.xz"  
-    
+    local teller_url="https://github.com/tellerops/teller/releases/download/v${teller_version}/teller-x86_64-linux.tar.xz"
+
     if ! command_exists teller; then
         echo_with_color "$YELLOW_COLOR" "teller is not installed."
         ask_yes_or_no "Do you want to install teller?"
-        
+
         if [[ "$?" -eq 0 ]]; then
             if ! curl -L -sS "$teller_url" -o teller.tar.gz; then
                 echo_with_color "$RED_COLOR" "Failed to download teller."
@@ -193,8 +192,6 @@ install_teller(){
     fi
 }
 
-
-
 # check for dependencies
 if ! command_exists "curl" && ! command_exists "wget"; then
     echo_with_color "$RED_COLOR" "curl/wget is required"
@@ -209,4 +206,3 @@ install_cloudflared_cli
 install_logdy
 install_fastfetch
 install_teller
-
