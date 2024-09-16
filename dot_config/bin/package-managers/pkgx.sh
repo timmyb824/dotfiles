@@ -3,6 +3,7 @@
 source "$(dirname "$BASH_SOURCE")/../init/init.sh"
 
 OS=$(get_os)
+ACTION="$1"
 
 install_pkgx_macos() {
     add_brew_to_path
@@ -34,13 +35,65 @@ prompt_for_package_list() {
     read -rp "Enter the number (1-3): " choice
 
     case $choice in
-        1) package_list="pkgx_all.list" ;;
-        2) package_list="pkgx_mac.list" ;;
-        3) package_list="pkgx_linux.list" ;;
-        *) echo_with_color "$RED_COLOR" "Invalid selection. Exiting."
-           exit 1 ;;
+    1) package_list="pkgx_all.list" ;;
+    2) package_list="pkgx_mac.list" ;;
+    3) package_list="pkgx_linux.list" ;;
+    *)
+        echo_with_color "$RED_COLOR" "Invalid selection. Exiting."
+        exit 1
+        ;;
     esac
 }
+
+install_packages() {
+    packages=($(get_package_list "$package_list"))
+
+    mc_bin_path="$HOME/.local/bin/mc"
+    mcomm_bin_path="$HOME/.local/bin/mcomm"
+
+    echo_with_color "$CYAN_COLOR" "Installing packages..."
+
+    # Install packages using pkgx
+    for package in "${packages[@]}"; do
+        output=$(pkgx install "${package}" 2>&1)
+
+        if [[ "$output" == *"pkgx: installed:"* ]]; then
+            echo_with_color "$GREEN_COLOR" "${package} installed successfully"
+            # Check if the package is "midnight-commander.org", and user is privileged
+            if [[ "${package}" == "midnight-commander.org" ]] && is_privileged_user; then
+                mv "$mc_bin_path" "$mcomm_bin_path" || exit_with_error "Failed to rename mc binary to mcomm."
+                echo_with_color "$BLUE_COLOR" "Renamed mc binary to mcomm"
+            fi
+        elif [[ "$output" == *"pkgx: already installed:"* ]]; then
+            echo_with_color "$YELLOW_COLOR" "${package} is already installed."
+        elif [[ "$output" == "nothing provides:"* ]]; then
+            echo_with_color "$RED_COLOR" "Error: Package ${package} is not a valid package."
+            echo_with_color "$YELLOW_COLOR" "Continuing with the next package..."
+        elif [[ "$output" == *"already exists"* ]]; then
+            echo_with_color "$RED_COLOR" "Error: Package ${package} already exists: $output"
+            echo_with_color "$YELLOW_COLOR" "Continuing with the next package..."
+        else
+            echo_with_color "$RED_COLOR" "An unexpected error occurred: failed to install ${package}: $output"
+            echo_with_color "$YELLOW_COLOR" "Continuing with the next package..."
+        fi
+    done
+}
+
+upgrade_pkgx() {
+    echo_with_color "$CYAN_COLOR" "Upgrading pkgx..."
+    if [[ "$OS" == "MacOS" ]]; then
+        brew upgrade pkgxdev/made/pkgx || exit_with_error "Upgrade of pkgx using Homebrew failed."
+    else
+        curl -Ssf https://pkgx.sh | sh || exit_with_error "Upgrade of pkgx using curl failed."
+    fi
+
+    echo_with_color "$GREEN_COLOR" "pkgx upgraded successfully"
+}
+
+if [ "$ACTION" = "upgrade" ]; then
+    upgrade_pkgx
+    exit 0
+fi
 
 if ! command_exists pkgx; then
     echo_with_color "$YELLOW_COLOR" "pkgx could not be found"
@@ -57,37 +110,4 @@ check_command pkgx
 
 prompt_for_package_list
 
-packages=( $(get_package_list "$package_list") )
-
-mc_bin_path="$HOME/.local/bin/mc"
-mcomm_bin_path="$HOME/.local/bin/mcomm"
-
-echo_with_color "$CYAN_COLOR" "Installing packages..."
-
-# Install packages using pkgx
-for package in "${packages[@]}"; do
-    output=$(pkgx install "${package}" 2>&1)
-
-    if [[ "$output" == *"pkgx: installed:"* ]]; then
-        echo_with_color "$GREEN_COLOR" "${package} installed successfully"
-        # Check if the package is "midnight-commander.org", and user is privileged
-        if [[ "${package}" == "midnight-commander.org" ]] && is_privileged_user; then
-            mv "$mc_bin_path" "$mcomm_bin_path" || exit_with_error "Failed to rename mc binary to mcomm."
-            echo_with_color "$BLUE_COLOR" "Renamed mc binary to mcomm"
-        fi
-    elif [[ "$output" == *"pkgx: already installed:"* ]]; then
-        echo_with_color "$YELLOW_COLOR" "${package} is already installed."
-    elif [[ "$output" == "nothing provides:"* ]]; then
-        echo_with_color "$RED_COLOR" "Error: Package ${package} is not a valid package."
-        echo_with_color "$YELLOW_COLOR" "Continuing with the next package..."
-    elif [[ "$output" == *"already exists"* ]]; then
-        echo_with_color "$RED_COLOR" "Error: Package ${package} already exists: $output"
-        echo_with_color "$YELLOW_COLOR" "Continuing with the next package..."
-    else
-        echo_with_color "$RED_COLOR" "An unexpected error occurred: failed to install ${package}: $output"
-        echo_with_color "$YELLOW_COLOR" "Continuing with the next package..."
-    fi
-done
-
-# Add local binary path to PATH
 add_to_path "$HOME/.local/bin"
