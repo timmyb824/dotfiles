@@ -75,6 +75,16 @@ install_supafile() {
         fi
     else
         echo_with_color "$GREEN_COLOR" "supafile is already installed."
+        ask_yes_or_no "Do you want to update supafile?"
+        if [[ "$?" -eq 0 ]]; then
+            if ! bash -c "$(wget -qO- https://superfile.netlify.app/update.sh)"; then
+                echo_with_color "$RED_COLOR" "Failed to update supafile."
+            else
+                echo_with_color "$GREEN_COLOR" "supafile updated successfully."
+            fi
+        else
+            echo_with_color "$GREEN_COLOR" "Skipping supafile update."
+        fi
     fi
 }
 
