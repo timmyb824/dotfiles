@@ -109,5 +109,6 @@ fi
 check_command pkgx
 
 prompt_for_package_list
+install_packages
 
 add_to_path "$HOME/.local/bin"
