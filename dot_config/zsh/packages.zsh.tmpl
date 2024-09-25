@@ -108,7 +108,7 @@ eval "$(op signin)"
 
 source $HOME/.config/broot/launcher/bash/br
 
-{{ if (and (ne .chezmoi.hostname "Timothys-MacBook-Pro") (ne .chezmoi.hostname "Timothys-MacBook-Air") (ne .chezmoi.os "linux")) -}}
+{{ if (and (ne .chezmoi.hostname "Timothys-MacBook-Pro") (ne .chezmoi.hostname "Timothys-MacBook-Air") (ne .chezmoi.hostname "timothys-macbook-air") (ne .chezmoi.os "linux")) -}}
 . ~/.dx-zsh-completion.sh
 source ~/.awashcli.sh
 {{ end -}}
