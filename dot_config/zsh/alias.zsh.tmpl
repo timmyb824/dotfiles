@@ -1,4 +1,4 @@
-{{ if (or (eq .chezmoi.hostname "Timothys-MacBook-Pro") (eq .chezmoi.hostname "Timothys-MacBook-Air")) -}}
+{{ if (or (eq .chezmoi.hostname "Timothys-MacBook-Pro") (eq .chezmoi.hostname "timothys-macbook-air") (eq .chezmoi.hostname "Timothys-MacBook-Air")) -}}
 ################### PERSONAL CONFIGUARTION ##################
 alias _=sudo
 alias awsp="source _awsp"
@@ -45,7 +45,7 @@ alias wtf=wtfutil
 alias zbench="for i in {1..10}; do /usr/bin/time zsh -lic exit; done"
 alias zshconfig="micro ~/.zshrc"
 alias zj="zellij"
-{{ else if (and (ne .chezmoi.hostname "Timothys-MacBook-Pro") (ne .chezmoi.hostname "Timothys-MacBook-Air") (ne .chezmoi.os "linux")) -}}
+{{ else if (and (ne .chezmoi.hostname "Timothys-MacBook-Pro") (ne .chezmoi.hostname "Timothys-MacBook-Air") (ne .chezmoi.hostname "timothys-macbook-air") (ne .chezmoi.os "linux")) -}}
 ################### WORK CONFIGUARTION ##################
 alias _=sudo
 alias awsp="source _awsp"
