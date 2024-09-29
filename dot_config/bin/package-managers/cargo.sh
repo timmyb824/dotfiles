@@ -8,8 +8,13 @@ install_cargo_packages_linux() {
     echo_with_color "$CYAN_COLOR" "Installing cargo packages..."
 
     while IFS= read -r package; do
-        trimmed_package=$(echo "$package" | xargs)  # Trim whitespace from the package name
-        if [ -n "$trimmed_package" ]; then  # Ensure the line is not empty
+        # if package is prefaced with --git then don't remove it
+        if [[ "$package" == "--git"* ]]; then
+            trimmed_package="$package"
+        else
+            trimmed_package=$(echo "$package" | xargs) # Trim whitespace from the package name
+        fi
+        if [ -n "$trimmed_package" ]; then # Ensure the line is not empty
             output=$(cargo install "$trimmed_package")
             echo "$output"
             if [[ "$trimmed_package" == "zellij" ]]; then
@@ -38,8 +43,8 @@ install_cargo_packages_macos() {
     echo_with_color "$CYAN_COLOR" "Installing cargo packages..."
 
     while IFS= read -r package; do
-        trimmed_package=$(echo "$package" | xargs)  # Trim whitespace from the package name
-        if [ -n "$trimmed_package" ]; then  # Ensure the line is not empty
+        trimmed_package=$(echo "$package" | xargs) # Trim whitespace from the package name
+        if [ -n "$trimmed_package" ]; then         # Ensure the line is not empty
             if cargo install "$trimmed_package"; then
                 echo_with_color "$GREEN_COLOR" "Successfully installed $trimmed_package."
             else
