@@ -21,6 +21,7 @@ DEV/
 {{ if (ne .chezmoi.os "darwin") -}}
 # files to ignore on linux
 .hyper.js
+.dune-prelude
 Library/
 .cache/
 .cache/starship/
