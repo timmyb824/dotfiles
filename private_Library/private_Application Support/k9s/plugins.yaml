@@ -72,7 +72,7 @@ plugins:
       - -c
       - "kubectl get-all --context $CONTEXT -n $NAMESPACE | less -K"
   helm-values:
-    shortCut: v
+    shortCut: Shift-V
     confirm: false
     description: Values
     scopes:

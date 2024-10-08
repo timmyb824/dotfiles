@@ -1,6 +1,10 @@
 k9s:
   liveViewAutoRefresh: false
+  {{ if (or (eq .chezmoi.hostname "Timothys-MacBook-Pro") (eq .chezmoi.hostname "Timothys-MacBook-Air") (eq .chezmoi.hostname "timothys-macbook-air")) -}}
+  screenDumpDir: /Users/timothybryant/Library/Application Support/k9s/screen-dumps
+  {{ else if (and (ne .chezmoi.hostname "Timothys-MacBook-Pro") (ne .chezmoi.hostname "Timothys-MacBook-Air") (ne .chezmoi.hostname "timothys-macbook-air") (ne .chezmoi.os "linux")) -}}
   screenDumpDir: /Users/timothy.bryant/Library/Application Support/k9s/screen-dumps
+  {{ end -}}
   refreshRate: 2
   maxConnRetry: 5
   readOnly: false
