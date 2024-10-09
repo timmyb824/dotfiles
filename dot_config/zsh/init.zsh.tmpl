@@ -8,7 +8,7 @@ FPATH="$HOME/.zsh/completion:$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 autoload -Uz compinit && compinit
 
 # initialize shell integration
-source <(pkgx --shellcode)  #docs.pkgx.sh/shellcode
+# source <(pkgx --shellcode)  #docs.pkgx.sh/shellcode
 
 if [[ $TERM_PROGRAM != "WarpTerminal" ]]; then
     source <(starship init zsh --print-full-init)
@@ -24,7 +24,7 @@ FPATH="$HOME/.zsh/completion:${FPATH}"
 
 autoload -Uz compinit && compinit
 
-source <(pkgx --shellcode)  #docs.pkgx.sh/shellcode
+# source <(pkgx --shellcode)  #docs.pkgx.sh/shellcode
 
 if [ -d "$HOME/.cargo" ]; then
   . "$HOME/.cargo/env"
