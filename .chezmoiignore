@@ -4,6 +4,7 @@ README.md
 setup.sh
 lazy-lock.json
 .config/bin/Archive/
+.pre-commit-config.yaml
 
 {{ if (and (ne .chezmoi.hostname "Timothys-MacBook-Pro") (ne .chezmoi.hostname "Timothys-MacBook-Air") (ne .chezmoi.hostname "timothys-macbook-air") (ne .chezmoi.os "linux")) -}}
 # files to ignore on work mac
@@ -65,4 +66,3 @@ Library/
 .config/bin/utilities/podman_quadlet_create_network_file.sh
 .config/bin/utilities/podman_quadlet_delete_container_file.sh
 {{- end }}
-

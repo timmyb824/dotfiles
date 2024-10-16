@@ -1,0 +1,39 @@
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+    -   id: check-yaml
+        args: [--unsafe]
+    -   id: end-of-file-fixer
+    -   id: trailing-whitespace
+    -   id: check-toml
+    -   id: check-added-large-files
+    -   id: check-ast
+    -   id: check-json
+    -   id: check-merge-conflict
+    -   id: check-xml
+    -   id: debug-statements
+    -   id: mixed-line-ending
+
+-   repo: https://github.com/sirwart/ripsecrets
+    rev: v0.1.6
+    hooks:
+    -   id: ripsecrets
+
+-   repo: https://github.com/trufflesecurity/trufflehog
+    rev: v3.63.1
+    hooks:
+    -   id: trufflehog
+        name: TruffleHog
+        description: Detect secrets in your data.
+        entry: bash -c 'trufflehog git file://. --since-commit HEAD --only-verified --fail'
+        language: system
+        stages: ["commit"]
+
+# enforce conventional commit messages
+# -   repo: https://github.com/compilerla/conventional-pre-commit
+#     rev: 'v2.4.0'
+#     hooks:
+#       - id: conventional-pre-commit
+#         stages: [commit-msg]
+#         args: [refactor, chore, build, ci, docs, feat, fix, test, perf, style, BREAKING_CHANGE]
