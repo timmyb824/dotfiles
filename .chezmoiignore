@@ -37,6 +37,7 @@ Library/
 .config/iterm_configs/
 .config/gh/hosts.yml
 .config/bin/installers/tailscale_macos.sh
+.config/bin/utilities/organize_downloads.py
 {{- end }}
 
 
