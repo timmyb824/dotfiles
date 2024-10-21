@@ -4,6 +4,16 @@ import os
 import shutil
 
 
+def identify_downloads_folder():
+    user = os.getlogin()
+    if user == "timothybryant":
+        return "/Users/timothybryant/Downloads"
+    elif user == "timothy.bryant":
+        return "/Users/timothy.bryant/Downloads"
+    else:
+        return None
+
+
 def organize_folder(folder):
     file_types = {
         "Images": [".jpeg", ".jpg", ".png", ".gif"],
@@ -37,4 +47,8 @@ def organize_folder(folder):
 
 
 if __name__ == "__main__":
-    organize_folder("/Users/timothybryant/Downloads")
+    folder = identify_downloads_folder()
+    if folder is not None:
+        organize_folder(folder)
+    else:
+        print("Downloads folder not found")
