@@ -15,7 +15,8 @@ return {
                 end
             },
             win_options = {
-                wrap = true
+                wrap = true,
+                signcolumn = 'yes:2',
             }
         })
     end
