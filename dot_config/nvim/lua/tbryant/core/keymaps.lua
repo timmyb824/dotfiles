@@ -67,7 +67,7 @@ keymap.set("n", "<leader>n", "<cmd><CR>", { desc = "clear search" }) -- clear se
 keymap.set("n", "<leader>s", "<cmd><CR>", { desc = "windows" }) -- window management
 keymap.set("n", "<leader>t", "<cmd><CR>", { desc = "tabs" }) -- tab management
 keymap.set("n", "<leader>w", "<cmd><CR>", { desc = "sessions" }) -- session management
-keymap.set("n", "<leader>x", "<cmd><CR>", { desc = "troublehshoot" }) -- troubleshooting
+keymap.set("n", "<leader>x", "<cmd><CR>", { desc = "troubleshoot" }) -- troubleshooting
 
 -- better copy and paste
 keymap.set("v", "<leader>y", '"+y', { desc = "Copy to clipboard" }) -- copy to clipboard
