@@ -10,6 +10,7 @@ return {
 	config = function()
 		local telescope = require("telescope")
 		local actions = require("telescope.actions")
+		local builtin = require("telescope.builtin")
 
 		telescope.setup({
 			defaults = {
@@ -34,5 +35,12 @@ return {
 		keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<cr>", { desc = "Find string in cwd" })
 		keymap.set("n", "<leader>fc", "<cmd>Telescope grep_string<cr>", { desc = "Find string under cursor in cwd" })
 		keymap.set("n", "<leader>ft", "<cmd>TodoTelescope<cr>", { desc = "Find todos" })
+		keymap.set("n", "<leader>/", function()
+			-- You can pass additional configuration to Telescope to change the theme, layout, etc.
+			builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
+				winblend = 10,
+				previewer = false,
+			}))
+		end, { desc = "[/] Fuzzily search in current buffer" })
 	end,
 }
