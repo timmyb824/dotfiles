@@ -45,6 +45,7 @@ return {
 				--"sourcery",
 				"yamlls",
 				"terraformls",
+				"ruff",
 			},
 		})
 
