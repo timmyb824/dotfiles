@@ -66,7 +66,7 @@ elseif executable("xclip") then
 	}
 else
 	-- fallback to unnamedplus if no clipboard tool is available
-	opt.clipboard:append({"unnamedplus"})
+	opt.clipboard:append({ "unnamedplus" })
 end
 
 -- clipboard (original setting on macOS before the above logic was added)
@@ -88,5 +88,12 @@ vim.cmd("let g:ruby_host_prog = '~/.rbenv/versions/3.2.1/bin/neovim-ruby-host'")
 -- disable perl provider
 vim.cmd("let g:loaded_perl_provider = 0")
 
-
-
+-- Automatically indent to the correct level when entering insert mode on a blank line
+vim.api.nvim_create_autocmd("InsertEnter", {
+	pattern = "*",
+	callback = function()
+		if vim.fn.getline(".") == "" and vim.bo.buftype == "" then -- Reject special buffers like telescope inputs
+			vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-f>", true, true, true), "n", false)
+		end
+	end,
+})
