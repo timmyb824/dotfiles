@@ -1,8 +1,8 @@
 [user]
     name = Tim Bryant
-{{- if (and (eq .chezmoi.os "darwin") (ne .chezmoi.hostname "Timothy-Bryant")) }}
+{{- if (or (eq .chezmoi.hostname "Timothys-MacBook-Pro") (eq .chezmoi.hostname "Timothys-MacBook-Air") (eq .chezmoi.hostname "timothys-macbook-air") (eq .chezmoi.os "linux")) }}
     email = "{{ onepasswordRead "op://Personal/google.com-main/username" }}"
-{{- else if (and (eq .chezmoi.os "darwin") (eq .chezmoi.hostname "Timothy-Bryant")) }}
+{{- else if (and (ne .chezmoi.hostname "Timothys-MacBook-Pro") (ne .chezmoi.hostname "Timothys-MacBook-Air") (ne .chezmoi.hostname "timothys-macbook-air") (ne .chezmoi.os "linux")) }}
     email = "{{ onepasswordRead "op://Personal/simplisafe-okta/username" }}"
 {{- else if (eq .chezmoi.os "linux") }}
     email = "{{ onepasswordRead "op://Personal/google.com-main/username" }}"
