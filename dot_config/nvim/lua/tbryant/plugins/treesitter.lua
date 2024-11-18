@@ -38,7 +38,6 @@ return {
         "lua",
         "vim",
         "dockerfile",
-        "gitignore",
         "query",
         "vimdoc",
         "c",
