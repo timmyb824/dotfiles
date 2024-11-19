@@ -5,7 +5,6 @@ set -e
 OS=$(get_os)
 SCRIPT_DIR="dot_config/bin"
 
-
 INIT_SCRIPT_PATH="$(dirname "$BASH_SOURCE")/init/init.sh"
 if [[ -f "$INIT_SCRIPT_PATH" ]]; then
     source "$INIT_SCRIPT_PATH"
@@ -17,8 +16,8 @@ change_and_run_script() {
     local script="$1"
     if ask_yes_or_no "Do you want to run $script?"; then
         echo_with_color "$GREEN_COLOR" "Running $script..."
-        chmod +x "$script"  # Make the script executable
-        "$script"           # Execute the script
+        chmod +x "$script" # Make the script executable
+        "$script"          # Execute the script
         echo_with_color "$GREEN_COLOR" "$script completed."
     else
         echo_with_color "$YELLOW_COLOR" "Skipping $script..."
