@@ -1,0 +1,18 @@
+{
+  "languageserver": {
+    "sourcery": {
+      "command": "/home/tbryant/.pyenv/shims/sourcery",
+      "args": ["lsp"],
+      "filetypes": ["python"],
+      "initializationOptions": {
+        "extension_version": "coc.vim",
+        "editor_version": "vim"
+      },
+      "settings": {
+        "sourcery": {
+          "metricsEnabled": true
+        }
+      }
+    }
+  }
+}
