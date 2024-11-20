@@ -1,0 +1,153 @@
+{
+  // EDITOR SETTINGS
+  "editor.fontFamily": "Berkeley Mono, Hack Nerd Font Mono, Fira Code, JetBrains Mono, Hack Nerd Font, Menlo, Monaco, Courier New, monospace",
+  "editor.fontSize": 13,
+  // "window.zoomLevel": -0.0,
+  "editor.fontLigatures": false,
+  "editor.fontWeight": "400",
+  "editor.formatOnPaste": false,
+  "editor.formatOnSave": true,
+  "editor.guides.bracketPairs": false,
+  "editor.guides.indentation": false,
+  "editor.inlineSuggest.enabled": true,
+  "editor.inlayHints.enabled": "off",
+  "editor.letterSpacing": 0.1,
+  "editor.lineHeight": 0,
+  "editor.linkedEditing": true,
+  "editor.renderWhitespace": "all",
+  "editor.snippetSuggestions": "top",
+  "editor.stickyScroll.enabled": true,
+  "editor.suggestSelection": "first",
+  "editor.minimap.enabled": false,
+  "editor.wordWrap": "off",
+  "diffEditor.ignoreTrimWhitespace": false,
+  "diffEditor.wordWrap": "off",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[dockerfile]": {
+    "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+  },
+  "[gotmpl]": {
+    "editor.defaultFormatter": "golang.go"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[lua]": {
+    "editor.defaultFormatter": "sumneko.lua"
+  },
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.formatOnType": true
+  },
+  "[shellscript]": {
+    "editor.defaultFormatter": "mkhl.shfmt"
+  },
+  "[terraform]": {
+    "editor.defaultFormatter": "hashicorp.terraform"
+  },
+  "[terraform-vars]": {
+    "editor.defaultFormatter": "hashicorp.terraform"
+  },
+  "[xml]": {
+    "editor.defaultFormatter": "DotJoshJohnson.xml"
+  },
+
+  // EDITOR LANGUAGE SETTINGS
+  "python.languageServer": "Pylance",
+  "python.analysis.typeCheckingMode": "basic", // off, basic, strict
+
+  // WORKBENCH SETTINGS
+  "workbench.colorTheme": "Dracula Theme",
+  "windsurf.autocompleteSpeed": "fast",
+  "workbench.iconTheme": "material-icon-theme",
+  "explorer.compactFolders": false,
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "files.associations": {
+    "*.html": "html",
+    "*.yaml": "yaml",
+    ".envrc": "properties",
+    ".env": "dotenv",
+    "*.config": "properties",
+    ".env*": "dotenv",
+    "*.sh": "shellscript",
+    "*.conf ": "properties",
+    "*.tf": "terraform"
+  },
+  "files.exclude": {
+    "**/.git": false
+  },
+  "files.trimTrailingWhitespace": true,
+  "launch": {
+    "configurations": [],
+    "compounds": []
+  },
+  "security.workspace.trust.untrustedFiles": "open",
+  "workbench.colorCustomizations": {
+    "editor.lineHighlightBackground": "#1073cf2d",
+    "editor.lineHighlightBorder": "#9fced11f"
+  },
+  "workbench.startupEditor": "none",
+
+  // TERMINAL SETTINGS
+  "terminal.integrated.fontSize": 15,
+  "terminal.integrated.fontFamily": "Berkeley Mono, Hack Nerd Font Mono, Fira Code, JetBrains Mono, Hack Nerd Font, Menlo, Monaco, 'Courier New', monospace",
+  "terminal.integrated.cursorStyle": "line",
+  "terminal.integrated.scrollback": 10000,
+  "application.shellEnvironmentResolutionTimeout": 60,
+  "terminal.integrated.enableFileLinks": "on",
+  "terminal.integrated.enableMultiLinePasteWarning": "never",
+  "terminal.integrated.shellIntegration.enabled": true,
+
+  // OTHER SETTINGS
+  "redhat.telemetry.enabled": false,
+  "cSpell.ignoreWords": [
+    "GOPATH",
+    "Opsgenie",
+    "Runbook",
+    "VERACODE",
+    "esbenp",
+    "filippo",
+    "foxundermoon",
+    "gelf",
+    "mktemp",
+    "rsyslog",
+    "runbooks",
+    "simplisafe",
+    "sourcery",
+    "sudoer",
+    "sumneko",
+    "synologynas",
+    "tailscale",
+    "tbryant",
+    "tiomothybryant"
+  ],
+  "cSpell.userWords": [
+    "gelf",
+    "Opsgenie",
+    "rsyslog",
+    "Runbook",
+    "runbooks",
+    "simplisafe",
+    "sourcery",
+    "sudoer",
+    "synologynas",
+    "tailscale",
+    "tbryant",
+    "tiomothybryant",
+    "VERACODE",
+    "dotenv"
+  ],
+  "cSpell.diagnosticLevel": "Hint",
+  "git.autofetch": true,
+  "githubPullRequests.pullBranch": "never",
+
+  "sourcery.codeLens": true,
+  "go.toolsManagement.autoUpdate": true
+}
