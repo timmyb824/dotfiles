@@ -56,5 +56,5 @@
 
 {{ if (and (ne .chezmoi.hostname "Timothys-MacBook-Pro") (ne .chezmoi.hostname "Timothys-MacBook-Air") (ne .chezmoi.hostname "timothys-macbook-air") (ne .chezmoi.os "linux")) -}}
 [alias]
-  mypush = !git -c user.name=\"Tim Bryant\" -c user.email={{ onepasswordRead "op://Personal/github.com-personal/username" }} -c credential.username=timmyb824 -c credential.helper=\"!f() { echo password={{ onepasswordRead "op://Personal/github.com-personal/gh_http_token" }}; }; f\" push
+  mypush = !git -c user.name='Tim Bryant' -c user.email='{{ onepasswordRead "op://Personal/github.com-personal/username" }}' -c credential.username=timmyb824 -c credential.helper=\"!echo password={{ onepasswordRead "op://Personal/github.com-personal/gh_http_token" }}\" push
 {{ end -}}
