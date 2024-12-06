@@ -24,6 +24,7 @@ DEV/
 .hyper.js
 .dune-prelude
 Library/
+.windsurf/
 .cache/
 .cache/starship/
 .config/bin/installers/fonts_macos.sh
