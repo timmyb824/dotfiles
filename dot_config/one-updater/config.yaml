@@ -1,0 +1,129 @@
+# One-Updater Full Configuration
+# This configuration includes all supported package managers
+
+# Global configuration
+verbose: false # Set to true to enable verbose output by default
+logging:
+  level: "INFO" # Can be DEBUG, INFO, WARNING, ERROR, CRITICAL
+  format: "%(message)s"
+
+package_managers:
+  apt:
+    enabled: true
+    commands:
+      update: ["sudo", "apt-get", "update"]
+      upgrade: ["sudo", "apt-get", "upgrade", "-y"]
+
+  basher:
+    enabled: true
+    commands:
+      update: ["bash", "-c", "cd ~/.basher && git pull"]
+      upgrade: ["basher", "upgrade"]
+
+  brew:
+    enabled: true
+    commands:
+      update: ["brew", "update"]
+      upgrade: ["brew", "upgrade"]
+
+  cargo:
+    enabled: true
+    commands:
+      update: ["rustup", "update"]
+      upgrade: [] # Empty list indicates upgrade is supported but packages are handled internally
+
+  dnf:
+    enabled: true
+    commands:
+      update: ["sudo", "dnf", "check-update"]
+      upgrade: ["sudo", "dnf", "upgrade", "-y"]
+
+  flatpak:
+    enabled: false
+    commands:
+      update: ["flatpak", "update", "-y"]
+      upgrade: ["flatpak", "upgrade", "-y"]
+
+  gem:
+    enabled: true
+    commands:
+      update: ["gem", "update", "--system"] # Updates RubyGems itself
+      upgrade: ["gem", "update"] # Updates all installed gems
+
+  gh-cli:
+    enabled: true
+    commands:
+      update: []
+      upgrade: ["gh", "extension", "upgrade", "--all"]
+
+  go:
+    enabled: true
+    commands:
+      update: [] # Go itself doesn't need updating
+      upgrade: [] # Upgrade handled internally by code
+
+  krew:
+    enabled: true
+    commands:
+      update: ["kubectl-krew", "update"]
+      upgrade: ["kubectl-krew", "upgrade"]
+
+  micro:
+    enabled: true
+    commands:
+      update: ["micro", "-plugin", "update"]
+      upgrade: ["micro", "-plugin", "update"]
+
+  npm:
+    enabled: true
+    commands:
+      update: ["npm", "update", "-g"]
+      upgrade: ["npm", "upgrade", "-g"]
+
+  pacman:
+    enabled: false
+    commands:
+      update: ["sudo", "pacman", "-Sy"]
+      upgrade: ["sudo", "pacman", "-Su", "--noconfirm"]
+
+  pip:
+    enabled: true
+    commands:
+      update: ["pip", "install", "--upgrade", "pip"]
+      upgrade: [] # Upgrade handled internally by code
+    # Optional: Use a specific virtualenv
+    # virtualenv: "/path/to/your/virtualenv"
+    # Optional: Use a specific pyenv version
+    pyenv_version:
+      - "3.11.0"
+      - "homelab-3.11.0"
+
+  pipx:
+    enabled: true
+    commands:
+      update: []
+      upgrade: ["pipx", "upgrade-all"]
+
+  pkgx:
+    enabled: true
+    commands:
+      update: []
+      upgrade: ["pkgx", "mash", "pkgx/cache", "upgrade"]
+
+  snap:
+    enabled: true
+    commands:
+      update: ["snap", "refresh"]
+      upgrade: ["snap", "refresh"]
+
+  tldr:
+    enabled: true
+    commands:
+      update: ["tldr", "--update"]
+      upgrade: ["tldr", "--update"]
+
+  vagrant:
+    enabled: true
+    commands:
+      update: ["vagrant", "plugin", "update"]
+      upgrade: []
