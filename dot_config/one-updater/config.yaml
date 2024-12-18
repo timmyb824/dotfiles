@@ -113,8 +113,8 @@ package_managers:
   snap:
     enabled: true
     commands:
-      update: ["snap", "refresh"]
-      upgrade: ["snap", "refresh"]
+      update: ["sudo", "snap", "refresh"]
+      upgrade: ["sudo", "snap", "refresh"]
 
   tldr:
     enabled: true
