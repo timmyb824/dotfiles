@@ -93,6 +93,8 @@ install_for_linux() {
     fi
 }
 
+OS=$(get_os)
+
 if [[ "$OS" == "MacOS" ]]; then
     install_for_macos
 elif [[ "$OS" == "Linux" ]]; then
