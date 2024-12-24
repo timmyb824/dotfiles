@@ -26,6 +26,7 @@ def organize_folder(folder):
         "Apps": [".dmg", ".pkg", ".app"],
         "Webpages": [".html", ".htm", ".php", ".css", ".js"],
         "Configuration": [".json", ".xml", ".yaml", ".yml", ".toml", ".ini"],
+        "3D-Printing": [".stl", ".3mf"],
     }
 
     # use set to avoid redundant directory checks
