@@ -23,20 +23,30 @@ initialize_pip() {
 
 install_pipx_packages() {
     echo_with_color "$YELLOW_COLOR" "Installing pipx packages..."
+    local failed_packages=()
+
     while IFS= read -r package; do
-        if [ -z "$package" ]; then  # Skip empty lines
+        if [ -z "$package" ]; then # Skip empty lines
             continue
         fi
 
         if pipx install "$package"; then
             echo_with_color "$GREEN_COLOR" "${package} installed successfully."
         else
-            exit_with_error "Failed to install ${package}."
+            echo_with_color "$RED_COLOR" "Failed to install ${package}."
+            failed_packages+=("$package")
         fi
     done < <(get_package_list pipx)
-    echo_with_color "$GREEN_COLOR" "All pipx packages installed successfully."
-}
 
+    if [ ${#failed_packages[@]} -eq 0 ]; then
+        echo_with_color "$GREEN_COLOR" "All pipx packages installed successfully."
+    else
+        echo_with_color "$YELLOW_COLOR" "Installation completed with some failures:"
+        for package in "${failed_packages[@]}"; do
+            echo_with_color "$RED_COLOR" "  - ${package}"
+        done
+    fi
+}
 
 if command_exists pipx; then
     echo_with_color "$GREEN_COLOR" "pipx is already installed."
