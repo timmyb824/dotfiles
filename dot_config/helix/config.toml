@@ -1,4 +1,4 @@
-theme = "onedark"
+theme = "catppuccin_macchiato"
 
 [editor]
 line-number = "relative"
@@ -8,6 +8,7 @@ auto-pairs = false
 cursorline = true
 cursorcolumn = true
 bufferline = "always"
+color-modes = true
 
 [editor.lsp]
 display-messages = true
@@ -112,3 +113,10 @@ ins = "normal_mode"
 S-A-down = ["normal_mode", "extend_to_line_bounds", "yank", "open_below", "replace_with_yanked", "collapse_selection"]
 S-A-up = ["normal_mode", "extend_to_line_bounds", "yank", "open_above", "replace_with_yanked", "collapse_selection"]
 
+[keys.normal.C-y]
+# Open the file(s) in the current window
+y = ":sh zellij run -c -f -x 10% -y 10% --width 80% --height 80% -- bash ~/.config/helix/yazi-picker.sh open"
+# Open the file(s) in a vertical pane
+v = ":sh zellij run -c -f -x 10% -y 10% --width 80% --height 80% -- bash ~/.config/helix/yazi-picker.sh vsplit"
+# Open the file(s) in a horizontal pane
+h = ":sh zellij run -c -f -x 10% -y 10% --width 80% --height 80% -- bash ~/.config/helix/yazi-picker.sh hsplit"

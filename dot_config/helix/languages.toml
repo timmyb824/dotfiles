@@ -1,0 +1,23 @@
+[[language]]
+name = "python"
+file-types = ["py"]
+auto-format = true
+formatter = {command = "black", args = ["-q", "-"]}
+language-servers = ["pylsp"]
+indent = { tab-width = 4, unit = "    " }
+
+[language-server.pylsp.config.pylsp.plugins]
+flake8 = {enabled = false, ignore = ["E501"]}
+autopep8 = {enabled = false}
+mccabe = {enabled = false}
+pycodestyle = {enabled = false}
+pyflakes = {enabled = false}
+pylint = {enabled = true}
+yapf = {enabled = false}
+ruff = {enabled = false}
+black = {enabled = true}
+
+[[language]]
+name = "yaml"
+auto-format = true
+formatter = { command = "yamlfmt", args = ["-"] }
