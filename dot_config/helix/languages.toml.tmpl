@@ -22,6 +22,7 @@ config = {}
 
 [[language]]
 name = "python"
+scope = "source.python"
 file-types = ["py", "pyi", "py3", "pyw", ".pythonstartup", ".pythonrc"]
 auto-format = true
 formatter = { command = "black", args = ["-q", "-"] }
@@ -56,6 +57,8 @@ args = ["--server"]
 
 [[language]]
 name = "yaml-language-server"
+scope = "source.yaml"
+file-types = ["yml", "yaml"]
 auto-format = true
 formatter = { command = "yamlfmt", args = ["-"] }
 language-servers = [ "gpt", "yaml-language-server" ]
@@ -70,6 +73,7 @@ validation = true
 
 [[language]]
 name = "typescript"
+scope = "source.ts"
 auto-format = true
 indent = { tab-width = 2, unit = " " }
 formatter = { command = "prettier", args = ["--parser", "typescript"] }
@@ -81,6 +85,7 @@ language-servers = [
 
 [[language]]
 name = "javascript"
+scope = "source.js"
 auto-format = true
 indent = { tab-width = 2, unit = " " }
 formatter = { command = "prettier", args = ["--parser", "typescript"] }
@@ -101,6 +106,7 @@ language-id = "bash"
 
 [[language]]
 name = "bash"
+scope = "source.bash"
 auto-format = true
 indent = { tab-width = 2, unit = " " }
 formatter = { command = "beautysh" }
@@ -119,6 +125,7 @@ language-id = "go"
 
 [[language]]
 name = "go"
+scope = "source.go"
 auto-format = true
 formatter = { command = "goimports" }
 language-servers = [
@@ -132,6 +139,7 @@ language-servers = [
 
 [[language]]
 name = "json"
+scope = "source.json"
 auto-format = true
 #formatter = { command = "prettier", args = ["--parser", "json"] }
 language-servers = [
@@ -149,6 +157,7 @@ config = { "provideFormatter" = true, "json" = { "keepLines" = { "enable" = true
 
 [[language]]
 name = "rust"
+scope = "source.rust"
 auto-format = true
 language-servers = [
   "rust-analyzer",
@@ -176,11 +185,15 @@ command = "clippy"
 
 [[language]]
 name = "hcl"
+scope = "source.hcl"
+auto-format = true
 language-servers = [ "terraform-ls" ]
 language-id = "terraform"
 
 [[language]]
 name = "tfvars"
+scope = "source.tfvars"
+auto-format = true
 language-servers = [ "terraform-ls" ]
 language-id = "terraform-vars"
 
@@ -194,4 +207,6 @@ args = ["serve"]
 
 [[language]]
 name = "toml"
+scope = "source.toml"
+auto-format = true
 formatter = { command = "taplo", args = ["fmt", "-"] }
