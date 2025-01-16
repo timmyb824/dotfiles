@@ -43,7 +43,7 @@ install_plandex_cli() {
     fi
 }
 
-istall_helix_edtor() {
+install_helix_edtor() {
     if ! command_exists "hx"; then
         echo_with_color "$YELLOW_COLOR" "Helix editor is not installed."
         ask_yes_or_no "Do you want to install Helix editor?"
@@ -209,7 +209,7 @@ fi
 
 install_local_send
 install_plandex_cli
-istall_helix_edtor
+install_helix_edtor
 install_supafile
 install_oci_cli
 install_cloudflared_cli

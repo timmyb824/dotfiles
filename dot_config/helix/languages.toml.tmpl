@@ -25,8 +25,20 @@ name = "python"
 file-types = ["py", "pyi", "py3", "pyw", ".pythonstartup", ".pythonrc"]
 auto-format = true
 formatter = { command = "black", args = ["-q", "-"] }
-language-servers = ["pyright", "gpt"]
+language-servers = ["pyright", "gpt", "pylyzer"]
 indent = { tab-width = 4, unit = "    " }
+
+[language-server.pyright.config.python.analysis]
+typeCheckingMode = "basic"
+
+[language-server.pyright]
+command = "pyright-langserver"
+args = ["--stdio"]
+config = {}
+
+[language-server.pylyzer]
+command = "pylyzer"
+args = ["--server"]
 
 # [language-server.pylsp.config.pylsp.plugins]
 # flake8 = { enabled = false, ignore = ["E501"] }
@@ -39,29 +51,23 @@ indent = { tab-width = 4, unit = "    " }
 # ruff = { enabled = false }
 # black = { enabled = true }
 
-[language-server.pyright]
-command = "pyright-langserver"
-args = ["--stdio"]
-config = {}
-
 ##############################
 ## Configuration for yaml   ##
 ##############################
 
 [[language]]
-name = "yaml"
+name = "yaml-language-server"
 auto-format = true
 formatter = { command = "yamlfmt", args = ["-"] }
 language-servers = [ "gpt", "yaml-language-server" ]
 
-####################################
-## Configuration for javascript   ##
-####################################
+[language-server.yaml-language-server.config.yaml]
+format = { enable = true }
+validation = true
 
-[language-server.ts]
-command = "typescript-language-server"
-args = ["--stdio"]
-language-id = "javascript"
+###############################
+## Configuration for JS/TS   ##
+###############################
 
 [[language]]
 name = "typescript"
@@ -69,7 +75,19 @@ auto-format = true
 indent = { tab-width = 2, unit = " " }
 formatter = { command = "prettier", args = ["--parser", "typescript"] }
 language-servers = [
-  "ts",
+  "typescript-language-server",
+  "vscode-eslint-language-server",
+  "gpt"
+]
+
+[[language]]
+name = "javascript"
+auto-format = true
+indent = { tab-width = 2, unit = " " }
+formatter = { command = "prettier", args = ["--parser", "typescript"] }
+language-servers = [
+  "typescript-language-server",
+  "vscode-eslint-language-server",
   "gpt"
 ]
 
@@ -86,7 +104,7 @@ language-id = "bash"
 name = "bash"
 auto-format = true
 indent = { tab-width = 2, unit = " " }
-formatter = { command = "beautysh", args = ["-"] }
+formatter = { command = "beautysh" }
 language-servers = [
   "bash",
   "gpt"
@@ -100,11 +118,81 @@ language-servers = [
 command = "gopls"
 language-id = "go"
 
-[[language]] 
+[[language]]
 name = "go"
 auto-format = true
-formatter = { command = "goimports" } 
+formatter = { command = "goimports" }
 language-servers = [
   "gopls",
   "gpt"
 ]
+
+############################
+## Configuration for JSON ##
+############################
+
+[[language]]
+name = "json"
+auto-format = true
+#formatter = { command = "prettier", args = ["--parser", "json"] }
+language-servers = [
+  "json",
+  "gpt"
+]
+
+[language-server.json]
+language-id = "json"
+config = { "provideFormatter" = true, "json" = { "keepLines" = { "enable" = true } } }
+
+############################
+## Configuration for Rust ##
+############################
+
+[[language]]
+name = "rust"
+auto-format = true
+language-servers = [
+  "rust-analyzer",
+  "gpt"
+]
+roots = [
+  "Cargo.toml",
+  "Cargo.lock"
+]
+
+[language-server.rust-analyzer.config]
+inlayHints.bindingModeHints.enable = false
+inlayHints.closingBraceHints.minLines = 10
+inlayHints.closureReturnTypeHints.enable = "with_block"
+inlayHints.discriminantHints.enable = "fieldless"
+inlayHints.lifetimeElisionHints.enable = "skip_trivial"
+inlayHints.typeHints.hideClosureInitialization = false
+
+[language-server.rust-analyzer.config.check]
+command = "clippy"
+
+#################################
+## Configuration for Terraform ##
+#################################
+
+[[language]]
+name = "hcl"
+language-servers = [ "terraform-ls" ]
+language-id = "terraform"
+
+[[language]]
+name = "tfvars"
+language-servers = [ "terraform-ls" ]
+language-id = "terraform-vars"
+
+[language-server.terraform-ls]
+command = "terraform-ls"
+args = ["serve"]
+
+############################
+## Configuration for TOML ##
+############################
+
+[[language]]
+name = "toml"
+formatter = { command = "taplo", args = ["fmt", "-"] }
