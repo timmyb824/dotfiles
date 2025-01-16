@@ -51,162 +51,162 @@ args = ["--server"]
 # ruff = { enabled = false }
 # black = { enabled = true }
 
-##############################
-## Configuration for yaml   ##
-##############################
+############################
+## Configuration for yaml ##
+############################
 
-# [[language]]
-# name = "yaml-language-server"
-# scope = "source.yaml"
-# file-types = ["yml", "yaml"]
-# auto-format = true
-# formatter = { command = "yamlfmt", args = ["-"] }
-# language-servers = [ "gpt", "yaml-language-server" ]
+[[language]]
+name = "yaml-language-server"
+scope = "source.yaml"
+file-types = ["yml", "yaml"]
+auto-format = true
+formatter = { command = "yamlfmt", args = ["-"] }
+language-servers = [ "yaml-language-server", "gpt" ]
 
-# [language-server.yaml-language-server.config.yaml]
-# format = { enable = true }
-# validation = true
+[language-server.yaml-language-server.config.yaml]
+format = { enable = true }
+validation = true
 
-# ###############################
-# ## Configuration for JS/TS   ##
-# ###############################
+#############################
+## Configuration for JS/TS ##
+#############################
 
-# [[language]]
-# name = "typescript"
-# scope = "source.ts"
-# auto-format = true
-# indent = { tab-width = 2, unit = " " }
-# formatter = { command = "prettier", args = ["--parser", "typescript"] }
-# language-servers = [
-#   "typescript-language-server",
-#   "vscode-eslint-language-server",
-#   "gpt"
-# ]
+[[language]]
+name = "typescript"
+scope = "source.ts"
+auto-format = true
+indent = { tab-width = 2, unit = " " }
+formatter = { command = "prettier", args = ["--parser", "typescript"] }
+language-servers = [
+  "typescript-language-server",
+  "vscode-eslint-language-server",
+  "gpt"
+]
 
-# [[language]]
-# name = "javascript"
-# scope = "source.js"
-# auto-format = true
-# indent = { tab-width = 2, unit = " " }
-# formatter = { command = "prettier", args = ["--parser", "typescript"] }
-# language-servers = [
-#   "typescript-language-server",
-#   "vscode-eslint-language-server",
-#   "gpt"
-# ]
+[[language]]
+name = "javascript"
+scope = "source.js"
+auto-format = true
+indent = { tab-width = 2, unit = " " }
+formatter = { command = "prettier", args = ["--parser", "typescript"] }
+language-servers = [
+  "typescript-language-server",
+  "vscode-eslint-language-server",
+  "gpt"
+]
 
 
-# ############################
-# ## Configuration for bash ##
-# ############################
+############################
+## Configuration for bash ##
+############################
 
-# [language-server.bash]
-# command = "bash-language-server"
-# language-id = "bash"
+[language-server.bash]
+command = "bash-language-server"
+language-id = "bash"
 
-# [[language]]
-# name = "bash"
-# scope = "source.bash"
-# auto-format = true
-# indent = { tab-width = 2, unit = " " }
-# formatter = { command = "beautysh" }
-# language-servers = [
-#   "bash",
-#   "gpt"
-# ]
+[[language]]
+name = "bash"
+scope = "source.bash"
+auto-format = true
+indent = { tab-width = 2, unit = " " }
+formatter = { command = "beautysh" }
+language-servers = [
+  "bash",
+  "gpt"
+]
 
 # ##########################
 # ## Configuration for Go ##
 # ##########################
 
-# [language-server.go]
-# command = "gopls"
-# language-id = "go"
+[language-server.go]
+command = "gopls"
+language-id = "go"
 
-# [[language]]
-# name = "go"
-# scope = "source.go"
-# auto-format = true
-# formatter = { command = "goimports" }
-# language-servers = [
-#   "gopls",
-#   "gpt"
-# ]
+[[language]]
+name = "go"
+scope = "source.go"
+auto-format = true
+formatter = { command = "goimports" }
+language-servers = [
+  "gopls",
+  "gpt"
+]
 
-# ############################
-# ## Configuration for JSON ##
-# ############################
+############################
+## Configuration for JSON ##
+############################
 
-# [[language]]
-# name = "json"
-# scope = "source.json"
-# auto-format = true
-# #formatter = { command = "prettier", args = ["--parser", "json"] }
-# language-servers = [
-#   "json",
-#   "gpt"
-# ]
+[[language]]
+name = "json"
+scope = "source.json"
+auto-format = true
+formatter = { command = "prettier", args = ["--parser", "json"] }
+language-servers = [
+  "json",
+  "gpt"
+]
 
-# [language-server.json]
-# language-id = "json"
-# config = { "provideFormatter" = true, "json" = { "keepLines" = { "enable" = true } } }
+[language-server.json]
+command = "vscode-json-language-server"
+language-id = "json"
 
 # ############################
 # ## Configuration for Rust ##
 # ############################
 
-# [[language]]
-# name = "rust"
-# scope = "source.rust"
-# auto-format = true
-# language-servers = [
-#   "rust-analyzer",
-#   "gpt"
-# ]
-# roots = [
-#   "Cargo.toml",
-#   "Cargo.lock"
-# ]
+[[language]]
+name = "rust"
+scope = "source.rust"
+auto-format = true
+language-servers = [
+  "rust-analyzer",
+  "gpt"
+]
+roots = [
+  "Cargo.toml",
+  "Cargo.lock"
+]
 
-# [language-server.rust-analyzer.config]
-# inlayHints.bindingModeHints.enable = false
-# inlayHints.closingBraceHints.minLines = 10
-# inlayHints.closureReturnTypeHints.enable = "with_block"
-# inlayHints.discriminantHints.enable = "fieldless"
-# inlayHints.lifetimeElisionHints.enable = "skip_trivial"
-# inlayHints.typeHints.hideClosureInitialization = false
+[language-server.rust-analyzer.config]
+inlayHints.bindingModeHints.enable = false
+inlayHints.closingBraceHints.minLines = 10
+inlayHints.closureReturnTypeHints.enable = "with_block"
+inlayHints.discriminantHints.enable = "fieldless"
+inlayHints.lifetimeElisionHints.enable = "skip_trivial"
+inlayHints.typeHints.hideClosureInitialization = false
 
-# [language-server.rust-analyzer.config.check]
-# command = "clippy"
+[language-server.rust-analyzer.config.check]
+command = "clippy"
 
-# #################################
-# ## Configuration for Terraform ##
-# #################################
+#################################
+## Configuration for Terraform ##
+#################################
 
-# [[language]]
-# name = "hcl"
-# scope = "source.hcl"
-# auto-format = true
-# language-servers = [ "terraform-ls" ]
-# language-id = "terraform"
+[[language]]
+name = "hcl"
+scope = "source.hcl"
+auto-format = true
+language-servers = [ "terraform-ls", "gpt" ]
+language-id = "terraform"
 
-# [[language]]
-# name = "tfvars"
-# scope = "source.tfvars"
-# auto-format = true
-# language-servers = [ "terraform-ls" ]
-# language-id = "terraform-vars"
+[[language]]
+name = "tfvars"
+scope = "source.tfvars"
+auto-format = true
+language-servers = [ "terraform-ls", "gpt" ]
+language-id = "terraform-vars"
 
-# [language-server.terraform-ls]
-# command = "terraform-ls"
-# args = ["serve"]
+[language-server.terraform-ls]
+command = "terraform-ls"
+args = ["serve"]
 
-# ############################
-# ## Configuration for TOML ##
-# ############################
+############################
+## Configuration for TOML ##
+############################
 
-# [[language]]
-# name = "toml"
-# scope = "source.toml"
-# auto-format = true
-# formatter = { command = "taplo", args = ["fmt", "-"] }
+[[language]]
+name = "toml"
+scope = "source.toml"
+auto-format = true
+formatter = { command = "taplo", args = ["fmt", "-"] }
