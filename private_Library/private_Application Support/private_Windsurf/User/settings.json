@@ -149,5 +149,8 @@
   "githubPullRequests.pullBranch": "never",
 
   "sourcery.codeLens": true,
-  "go.toolsManagement.autoUpdate": true
+  "go.toolsManagement.autoUpdate": true,
+  "[toml]": {
+    "editor.defaultFormatter": "tamasfe.even-better-toml"
+  }
 }

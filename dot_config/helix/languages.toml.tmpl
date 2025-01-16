@@ -2,109 +2,19 @@
 ## Configuration for lsp-ai ##
 ##############################
 
-[language-server.lsp-ai]
-command = "lsp-ai"
+# CURRENTLY BROKEN
+# [language-server.lsp-ai]
+# command = "lsp-ai"
+# args = ["--config", "/Users/timothybryant/.config/helix/lsp-ai.json"]
 
-[language-server.lsp-ai.config.memory]
-file_store = { }
+#################################
+## Configuration for helix-gpt ##
+#################################
 
-[language-server.lsp-ai.config.models.model1]
-type = "open_ai"
-chat_endpoint = "https://api.openai.com/v1/chat/completions"
-model =  "gpt-4o"
-auth_token_env_var_name = "{{ onepasswordRead "op://Personal/openai-api/credential" }}"
-
-[language-server.lsp-ai.config.completion]
-model = "model1"
-
-[language-server.lsp-ai.config.completion.parameters]
-max_tokens = 64
-max_context = 1024
-
-## Configure the messages per your needs
-[[language-server.lsp-ai.config.completion.parameters.messages]]
-role = "system"
-content = "Instructions:\n- You are an AI programming assistant.\n- Given a piece of code with the cursor location marked by \"<CURSOR>\", replace \"<CURSOR>\" with the correct code or comment.\n- First, think step-by-step.\n- Describe your plan for what to build in pseudocode, written out in great detail.\n- Then output the code replacing the \"<CURSOR>\"\n- Ensure that your completion fits within the language context of the provided code snippet (e.g., Python, JavaScript, Rust).\n\nRules:\n- Only respond with code or comments.\n- Only replace \"<CURSOR>\"; do not include any previously written code.\n- Never include \"<CURSOR>\" in your response\n- If the cursor is within a comment, complete the comment meaningfully.\n- Handle ambiguous cases by providing the most contextually appropriate completion.\n- Be consistent with your responses."
-
-[[language-server.lsp-ai.config.completion.parameters.messages]]
-role = "user"
-content = "def greet(name):\n    print(f\"Hello, {<CURSOR>}\")"
-
-[[language-server.lsp-ai.config.completion.parameters.messages]]
-role = "assistant"
-content = "name"
-
-[[language-server.lsp-ai.config.completion.parameters.messages]]
-role = "user"
-content = "function sum(a, b) {\n    return a + <CURSOR>;\n}"
-
-[[language-server.lsp-ai.config.completion.parameters.messages]]
-role = "assistant"
-content = "b"
-
-[[language-server.lsp-ai.config.completion.parameters.messages]]
-role = "user"
-content = "fn multiply(a: i32, b: i32) -> i32 {\n    a * <CURSOR>\n}"
-
-[[language-server.lsp-ai.config.completion.parameters.messages]]
-role = "assistant"
-content = "b"
-
-[[language-server.lsp-ai.config.completion.parameters.messages]]
-role = "user"
-content = "# <CURSOR>\ndef add(a, b):\n    return a + b"
-
-[[language-server.lsp-ai.config.completion.parameters.messages]]
-role = "assistant"
-content = "Adds two numbers"
-
-[[language-server.lsp-ai.config.completion.parameters.messages]]
-role = "user"
-content = "# This function checks if a number is even\n<CURSOR>"
-
-[[language-server.lsp-ai.config.completion.parameters.messages]]
-role = "assistant"
-content = "def is_even(n):\n    return n % 2 == 0"
-
-[[language-server.lsp-ai.config.completion.parameters.messages]]
-role = "user"
-content = "{CODE}"
-
-[language-server.lsp-ai.config]
-chat = [
-
-    {
-        trigger = "!C",
-        action_display_name = "Chat",
-        model = "model1",
-        parameters = {
-            contents = [
-                { role = "user", parts = [
-                    { text = "{CODE}" },
-                ] },
-            ],
-            systemInstruction = {
-                role = "system",
-                parts = [
-                    {
-                        text = "You are a code assistant chatbot. The user will ask you for assistance coding and you will do your best to answer succinctly and accurately.\n",
-                    },
-                ],
-            },
-        },
-    },
-
-    # {
-    #     trigger = "!CC",
-    #     action_display_name = "Chat with context",
-    #     model = "model1",
-    #     parameters = {
-    #         max_context = 4096,
-    #         max_tokens = 1024,
-    #         system = "You are a code assistant chatbot. The user will ask you for assistance coding and you will do your best to answer succinctly and accurately given the code context:\n\n{CONTEXT}",
-    #     },
-    # },
-]
+[language-server.gpt]
+command = "helix-gpt"
+args = [ "--handler", "copilot", "--copilotApiKey", "{{ onepasswordRead "op://Personal/helix-gpt/credential" }}" ]
+config = {}
 
 ##############################
 ## Configuration for python ##
@@ -112,29 +22,27 @@ chat = [
 
 [[language]]
 name = "python"
-file-types = ["py","pyi","py3","pyw",".pythonstartup",".pythonrc"]
+file-types = ["py", "pyi", "py3", "pyw", ".pythonstartup", ".pythonrc"]
 auto-format = true
-formatter = {command = "black", args = ["-q", "-"]}
-#language-servers = ["pylsp"]
-language-servers = [ "pyright", "lsp-ai" ]
+formatter = { command = "black", args = ["-q", "-"] }
+language-servers = ["pyright", "gpt"]
 indent = { tab-width = 4, unit = "    " }
 
-#[language-server.pylsp.config.pylsp.plugins]
-#flake8 = {enabled = false, ignore = ["E501"]}
-#autopep8 = {enabled = false}
-#mccabe = {enabled = false}
-#pycodestyle = {enabled = false}
-#pyflakes = {enabled = false}
-#pylint = {enabled = true}
-#yapf = {enabled = false}
-#ruff = {enabled = false}
-#black = {enabled = true}
+# [language-server.pylsp.config.pylsp.plugins]
+# flake8 = { enabled = false, ignore = ["E501"] }
+# autopep8 = { enabled = false }
+# mccabe = { enabled = false }
+# pycodestyle = { enabled = false }
+# pyflakes = { enabled = false }
+# pylint = { enabled = false }
+# yapf = { enabled = false }
+# ruff = { enabled = false }
+# black = { enabled = true }
 
 [language-server.pyright]
 command = "pyright-langserver"
 args = ["--stdio"]
-config = {} # buggy behaviour, you need a pyproject.toml and pyrightconfig.json
-
+config = {}
 
 ##############################
 ## Configuration for yaml   ##

@@ -1,0 +1,51 @@
+{
+    "memory": {
+        "file_store": {}
+    },
+    "models": {
+        "model1": {
+            "type": "open_ai",
+            "chat_endpoint": "https://api.openai.com/v1/chat/completions",
+            "model": "gpt-4o",
+            "auth_token_env_var_name": "{{ onepasswordRead "op://Personal/openai-api/credential" }}"
+        }
+    },
+    "completion": {
+        "model": "model1",
+        "parameters": {
+            "messages": [
+                {
+                    "role": "system",
+                    "content": "Test"
+                },
+                {
+                    "role": "user",
+                    "content": "Test {CONTEXT} - {CODE}"
+                }
+            ],
+            "max_context": 1024
+        }
+    },
+    "chat": [
+        {
+            "trigger": "!C",
+            "action_display_name": "Chat",
+            "model": "model1",
+            "parameters": {
+                "max_context": 4096,
+                "max_tokens": 1024,
+                "system": "You are a code assistant chatbot. The user will ask you for assistance coding and you will do you best to answer succinctly and accurately"
+            }
+        },
+        {
+            "trigger": "!CC",
+            "action_display_name": "Chat with context",
+            "model": "model1",
+            "parameters": {
+                "max_context": 4096,
+                "max_tokens": 1024,
+                "system": "You are a code assistant chatbot. The user will ask you for assistance coding and you will do you best to answer succinctly and accurately given the code context:\n\n{CONTEXT}"
+            }
+        }
+    ]
+}
