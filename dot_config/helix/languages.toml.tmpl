@@ -52,3 +52,59 @@ config = {}
 name = "yaml"
 auto-format = true
 formatter = { command = "yamlfmt", args = ["-"] }
+language-servers = [ "gpt", "yaml-language-server" ]
+
+####################################
+## Configuration for javascript   ##
+####################################
+
+[language-server.ts]
+command = "typescript-language-server"
+args = ["--stdio"]
+language-id = "javascript"
+
+[[language]]
+name = "typescript"
+auto-format = true
+indent = { tab-width = 2, unit = " " }
+formatter = { command = "prettier", args = ["--parser", "typescript"] }
+language-servers = [
+  "ts",
+  "gpt"
+]
+
+
+############################
+## Configuration for bash ##
+############################
+
+[language-server.bash]
+command = "bash-language-server"
+language-id = "bash"
+
+[[language]]
+name = "bash"
+auto-format = true
+indent = { tab-width = 2, unit = " " }
+formatter = { command = "beautysh", args = ["-"] }
+language-servers = [
+  "bash",
+  "gpt"
+]
+
+##########################
+## Configuration for Go ##
+##########################
+
+[language-server.go]
+command = "gopls"
+language-id = "go"
+
+[[language]] 
+name = "go"
+auto-format = true
+formatter = { command = "gofmt", args = ["-w", "-"]} 
+language-servers = [
+  "gopls",
+  "gpt"
+]
