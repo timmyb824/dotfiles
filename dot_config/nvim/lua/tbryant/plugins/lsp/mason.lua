@@ -37,6 +37,7 @@ return {
 				"emmet_ls",
 				"prismals",
 				"pyright",
+				"pylyzer",
 				"ansiblels",
 				"bashls",
 				"dockerls",
