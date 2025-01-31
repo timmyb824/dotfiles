@@ -44,7 +44,7 @@ return {
     },
     specs = { -- configure optional plugins
         { "AstroNvim/astroui", opts = { icons = { Avante = "" } } },
-        {   -- if copilot.lua is available, default to copilot provider
+        {     -- if copilot.lua is available, default to copilot provider
             "zbirenbaum/copilot.lua",
             optional = true,
             specs = {

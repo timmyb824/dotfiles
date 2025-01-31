@@ -13,4 +13,18 @@ return {
   { import = "astrocommunity.completion.copilot-lua" },
   { import = "astrocommunity.completion.codeium-nvim" },
   { import = "astrocommunity.completion.copilot-lua-cmp" },
+  { import = "astrocommunity.diagnostics.trouble-nvim" },
+  { import = "astrocommunity.editing-support.chatgpt-nvim" },
+  { import = "astrocommunity.editing-support.conform-nvim" },
+  { import = "astrocommunity.editing-support.copilotchat-nvim" },
+  { import = "astrocommunity.editing-support.hypersonic-nvim" },
+  { import = "astrocommunity.editing-support.cutlass-nvim" },
+  { import = "astrocommunity.editing-support.rainbow-delimiters-nvim" },
+  { import = "astrocommunity.editing-support.refactoring-nvim" },
+  { import = "astrocommunity.editing-support.text-case-nvim" },
+  { import = "astrocommunity.editing-support.undotree" },
+  { import = "astrocommunity.editing-support.vim-move" },
+  { import = "astrocommunity.git.blame-nvim" },
+  { import = "astrocommunity.git.diffview-nvim" },
+
 }
