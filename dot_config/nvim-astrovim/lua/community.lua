@@ -29,6 +29,14 @@ return {
   { import = "astrocommunity.git.gist-nvim" },
   { import = "astrocommunity.git.nvim-tinygit" },
   { import = "astrocommunity.git.octo-nvim" },
-
+  { import = "astrocommunity.indent.indent-rainbowline" },
+  { import = "astrocommunity.keybinding.nvcheatsheet-nvim" },
+  { import = "astrocommunity.markdown-and-latex.glow-nvim" },
+  { import = "astrocommunity.markdown-and-latex.markdown-preview-nvim" },
+  { import = "astrocommunity.media.drop-nvim" },
+  { import = "astrocommunity.scrolling.nvim-scrollbar" },
+  { import = "astrocommunity.motion.flash-nvim" },
+  { import = "astrocommunity.motion.tabout-nvim" },
+  { import = "astrocommunity.note-taking.global-note-nvim" },
 
 }

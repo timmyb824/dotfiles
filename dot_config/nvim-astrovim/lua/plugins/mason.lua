@@ -24,6 +24,7 @@ return {
         "stylua",
         -- add more arguments for adding more null-ls sources
       },
+      automatic_installation = true,
     },
   },
   {
