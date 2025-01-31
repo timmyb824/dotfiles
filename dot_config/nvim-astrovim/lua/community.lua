@@ -24,7 +24,11 @@ return {
   { import = "astrocommunity.editing-support.text-case-nvim" },
   { import = "astrocommunity.editing-support.undotree" },
   { import = "astrocommunity.editing-support.vim-move" },
-  { import = "astrocommunity.git.blame-nvim" },
+  { import = "astrocommunity.git.git-blame-nvim" },
   { import = "astrocommunity.git.diffview-nvim" },
+  { import = "astrocommunity.git.gist-nvim" },
+  { import = "astrocommunity.git.nvim-tinygit" },
+  { import = "astrocommunity.git.octo-nvim" },
+
 
 }
