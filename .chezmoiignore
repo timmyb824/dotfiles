@@ -23,6 +23,7 @@ DEV/
 # files to ignore on linux
 .hyper.js
 .dune-prelude
+.wezterm.lua
 Library/
 .windsurf/
 .cache/
