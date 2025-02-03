@@ -7,12 +7,16 @@ auto-format = true
 auto-pairs = false
 cursorline = true
 cursorcolumn = true
-bufferline = "always"
+bufferline = "multiple" # change from "always"
 color-modes = true
+rulers = [120]
+true-color = true
+end-of-line-diagnostics = "hint"
 
 [editor.lsp]
 display-messages = true
 display-inlay-hints = true
+auto-signature-help = false
 
 [editor.cursor-shape]
 insert = "bar"
@@ -58,9 +62,19 @@ render = true
 character = "╎" # Some characters that work well: "▏", "┆", "┊", "⸽"
 skip-levels = 1
 
+[editor.inline-diagnostics]
+cursor-line = "error"
+other-lines = "disable"
+
 [keys.normal]
 # https://www.root.cz/clanky/textovy-editor-helix-ve-funkci-vyvojoveho-prostredi-2-cast/#k11
 ins = "insert_mode"
+"A-," = "goto_previous_buffer"
+"A-." = "goto_next_buffer"
+"A-w" = ":buffer-close"
+"A-/" = "repeat_last_motion"
+A-x = "extend_to_line_bounds"
+X = "select_line_above"
 esc = ["collapse_selection", "keep_primary_selection"]
 C-o = ":open ~/.config/helix/config.toml" # Maps Ctrl-o to opening of the helix config file
 C-r = ":config-reload"
@@ -78,7 +92,7 @@ D = [ "extend_to_line_end", "change_selection"] # Wipe and edit the current line
 # c = ["trim_selections", "change_selection"] # Make 'c' automatically strip the selection of extra whitespace
 # a = ["append_mode", "collapse_selection"] # Remove the selection when entering insert mode with 'a'
 "tab" = "goto_next_function" # Select and jump to the next function via Treesitter
-"S-tab" = "goto_prev_function" # Select and jump to the previous function via Treesitter 
+"S-tab" = "goto_prev_function" # Select and jump to the previous function via Treesitter
 
 # Use system clipboard
 p = "paste_clipboard_before"
@@ -101,6 +115,10 @@ S-A-up = ["normal_mode", "extend_to_line_bounds", "yank", "open_above", "replace
 S-space = ["half_page_up"]
 
 space."." = "file_picker_in_current_buffer_directory"
+
+[keys.select]
+A-x = "extend_to_line_bounds"
+X = "select_line_above"
 
 # [keys.normal.space]
 # "." = "file_picker_in_current_buffer_directory"
