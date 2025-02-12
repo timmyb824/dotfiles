@@ -1,12 +1,12 @@
-theme = "catppuccin_macchiato"
+theme = "dracula"
 
 [editor]
 line-number = "relative"
 mouse = true
 auto-format = true
 auto-pairs = false
-cursorline = true
-cursorcolumn = true
+cursorline = false
+cursorcolumn = false
 bufferline = "multiple" # change from "always"
 color-modes = true
 rulers = [120]
