@@ -29,9 +29,8 @@ install_rust_dependencies() {
     fi
 }
 
-install_rustup
-
 if [ "$OS" == "Linux" ]; then
     install_rust_dependencies
 fi
 
+install_rustup
