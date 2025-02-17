@@ -87,6 +87,7 @@ eval "$(rbenv init - zsh)"
 eval "$(zoxide init --cmd cd zsh)"
 
 {{- if eq .chezmoi.os "darwin" }}
+
 # --- pyenv ---
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
