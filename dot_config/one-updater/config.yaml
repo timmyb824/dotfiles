@@ -99,7 +99,7 @@ package_managers:
       - "homelab-3.11.0"
 
   pipx:
-    enabled: true
+    enabled: false
     commands:
       update: []
       upgrade: ["pipx", "upgrade-all"]
