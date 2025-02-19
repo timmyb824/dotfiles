@@ -87,7 +87,7 @@ package_managers:
       upgrade: ["sudo", "pacman", "-Su", "--noconfirm"]
 
   pip:
-    enabled: true
+    enabled: false
     commands:
       update: ["pip", "install", "--upgrade", "pip"]
       upgrade: [] # Upgrade handled internally by code
@@ -121,6 +121,12 @@ package_managers:
     commands:
       update: ["tldr", "--update"]
       upgrade: ["tldr", "--update"]
+
+  uv:
+    enabled: true
+    commands:
+      update: ["uv", "self", "update"]
+      upgrade: ["uv", "tool", "upgrade", "--all"]
 
   vagrant:
     enabled: true
