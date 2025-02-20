@@ -46,7 +46,8 @@ home_symbol = " 🏠"
 disabled =  false
 
 [direnv]
-disabled = true
+format = "[$symbol$loaded/$allowed]($style) "
+disabled = false
 
 [docker_context]
 format = 'via [🐳 $context](blue bold)'
@@ -116,14 +117,14 @@ disabled = false
 
 [python]
 # format = "[$symbol$version]($style) "
-# format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
-format = '[${symbol}(${version} )]($style)'
+format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+# format = '[${symbol}(${version} )]($style)'
 style = "bold green"
 symbol = "🐍 "
 python_binary = ['python']
-pyenv_prefix = "pyenv-"
+# pyenv_prefix = "pyenv-"
 disabled = false
-pyenv_version_name = true
+pyenv_version_name = false
 
 [ruby]
 format = "[$symbol($version )]($style)"
