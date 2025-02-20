@@ -81,7 +81,7 @@ package_managers:
       upgrade: ["npm", "upgrade", "-g"]
 
   pacman:
-    enabled: false
+    enabled: true
     commands:
       update: ["sudo", "pacman", "-Sy"]
       upgrade: ["sudo", "pacman", "-Su", "--noconfirm"]
