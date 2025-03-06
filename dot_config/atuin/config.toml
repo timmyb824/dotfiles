@@ -155,9 +155,7 @@ common_subcommands = [
 ]
 ## Configures commands that should be totally stripped from stats calculations.
 ## For example, ‘sudo’ should be ignored.
-common_prefix = [
-  "sudo",
-]
+common_prefix = ["sudo"]
 
 ## Enable sync v2
 [sync]
@@ -177,3 +175,6 @@ records = true
 # atuin dotfiles alias delete k
 [dotfiles]
 enabled = false
+
+[theme]
+name = "marine"
