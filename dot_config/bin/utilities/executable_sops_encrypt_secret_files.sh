@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+source common.sh
+
 # Ensure that AGE_SECRET_KEY is passed as the first argument
 if [ -z "$1" ]; then
   echo "Usage: $0 <AGE_SECRET_KEY> <encrypt|decrypt>"
@@ -13,19 +15,6 @@ if [ -z "$2" ]; then
   exit 1
 fi
 ACTION="$2"
-
-# Function to log messages
-log() {
-  local level="$1"
-  local message="$2"
-  echo "$(date +'%Y-%m-%d %H:%M:%S') - [$level] $message"
-}
-
-# Function to handle errors
-handle_error() {
-  log "ERROR" "$1"
-  exit 1
-}
 
 # Ensure required commands are available
 command -v sops >/dev/null 2>&1 || handle_error "sops is required but not installed."

@@ -21,6 +21,12 @@ logger() {
     echo -e "---------------------------------------------"
 }
 
+log() {
+    local level="$1"
+    local message="$2"
+    echo "$(date +'%Y-%m-%d %H:%M:%S') - [$level] $message"
+}
+
 handle_error() {
     log "Error: $1"
     exit 1
@@ -31,11 +37,11 @@ command_exists() {
 }
 
 get_os() {
-  case "$(uname -s)" in
-  Linux*) echo "Linux" ;;
-  Darwin*) echo "MacOS" ;;
-  *) echo "Unknown" ;;
-  esac
+    case "$(uname -s)" in
+    Linux*) echo "Linux" ;;
+    Darwin*) echo "MacOS" ;;
+    *) echo "Unknown" ;;
+    esac
 }
 
 get_package_list() {
@@ -52,4 +58,3 @@ get_package_list() {
     # Fetch the package list, remove comments, and trim whitespace
     curl -fsSL "$gist_url" | sed 's/#.*//' | awk '{$1=$1};1'
 }
-

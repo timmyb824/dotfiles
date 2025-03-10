@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source common.sh
+
 UV_BASE_DIR="$HOME/uv/virtualenvs"
 
 # Function to create virtualenv
@@ -11,7 +13,7 @@ create_venv() {
 
     # Check if virtualenv already exists
     if [ -d "$UV_BASE_DIR/$venv_name" ]; then
-        echo "Virtualenv '$venv_name' already exists in $UV_BASE_DIR"
+        msg_warn "Virtualenv '$venv_name' already exists in $UV_BASE_DIR"
         exit 1
     fi
 
@@ -19,9 +21,9 @@ create_venv() {
     cd "$UV_BASE_DIR" && uv venv "$venv_name"
 
     if [ $? -eq 0 ]; then
-        echo "Created virtualenv '$venv_name' in $UV_BASE_DIR"
+        msg_ok "Created virtualenv '$venv_name' in $UV_BASE_DIR"
     else
-        echo "Failed to create virtualenv '$venv_name'"
+        msg_error "Failed to create virtualenv '$venv_name'"
         exit 1
     fi
 }
@@ -32,11 +34,11 @@ activate_venv() {
     local venv_path="$UV_BASE_DIR/$venv_name"
 
     if [ ! -d "$venv_path" ]; then
-        echo "Virtualenv '$venv_name' does not exist in $UV_BASE_DIR"
+        msg_error "Virtualenv '$venv_name' does not exist in $UV_BASE_DIR"
         exit 1
     fi
 
-    echo "source $venv_path/bin/activate"
+    msg_info "source $venv_path/bin/activate"
 }
 
 # Function to delete virtualenv
@@ -45,12 +47,12 @@ delete_venv() {
     local venv_path="$UV_BASE_DIR/$venv_name"
 
     if [ ! -d "$venv_path" ]; then
-        echo "Virtualenv '$venv_name' does not exist in $UV_BASE_DIR"
+        msg_error "Virtualenv '$venv_name' does not exist in $UV_BASE_DIR"
         exit 1
     fi
 
     rm -rf "$venv_path"
-    echo "Deleted virtualenv '$venv_name'"
+    msg_ok "Deleted virtualenv '$venv_name'"
 }
 
 # Function to cd to virtualenv directory
@@ -59,11 +61,11 @@ cd_venv() {
     local venv_path="$UV_BASE_DIR/$venv_name"
 
     if [ ! -d "$venv_path" ]; then
-        echo "Virtualenv '$venv_name' does not exist in $UV_BASE_DIR"
+        msg_error "Virtualenv '$venv_name' does not exist in $UV_BASE_DIR"
         exit 1
     fi
 
-    echo "cd $venv_path"
+    msg_info "cd $venv_path"
 }
 
 # Main script logic

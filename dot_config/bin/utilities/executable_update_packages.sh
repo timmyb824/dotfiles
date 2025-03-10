@@ -1,5 +1,9 @@
 #!/bin/bash
 
+#########################################################
+# This has been replaced by my one-updater pythong tool #
+#########################################################
+
 source common.sh
 
 ####### VARIABLES #######

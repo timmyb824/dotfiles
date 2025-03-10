@@ -5,10 +5,12 @@ import shutil
 
 
 def identify_downloads_folder():
+    """Identify the user's downloads folder."""
     return os.path.expanduser("~/Downloads")
 
 
 def organize_folder(folder):
+    """Organize files in the given folder."""
     file_types = {
         "Images": [".jpeg", ".jpg", ".png", ".gif", ".HEIC"],
         "Videos": [".mp4", ".avi", ".mov"],
