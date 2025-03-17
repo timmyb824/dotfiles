@@ -4,7 +4,7 @@
 #### VARIABLES ####
 ###################
 
-CHEZMOI_BIN="/usr/local/bin/chezmoi"
+CHEZMOI_BIN="$(command -v chezmoi)" || "/usr/local/bin/chezmoi"
 DOTFILES_REPO="timmyb824/dotfiles"
 SOPS_VERSION="3.9.4"
 AGE_VERSION="1.2.1"
