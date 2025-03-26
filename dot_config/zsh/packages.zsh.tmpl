@@ -77,6 +77,12 @@ _fzf_comprun() {
   esac
 }
 
+# Interactive completion for ssh
+sshf() {
+  local host
+  host=$(grep "Host " ~/.ssh/config | grep -vE "HostName|Hostname|no" | awk '{print $2}' | sed -E "/\*/d" | fzf)
+  [[ -n $host ]] && command ssh "$host"
+}
 
 # --- other ---
 eval "$(basher init - zsh)"
