@@ -11,7 +11,7 @@ return {
 	{ import = "astrocommunity.colorscheme.dracula-nvim" },
 	{ import = "astrocommunity.completion.avante-nvim" },
 	{ import = "astrocommunity.completion.copilot-lua" },
-	{ import = "astrocommunity.completion.codeium-nvim" },
+	-- { import = "astrocommunity.completion.codeium-nvim" },
 	{ import = "astrocommunity.completion.copilot-lua-cmp" },
 	{ import = "astrocommunity.diagnostics.trouble-nvim" },
 	{ import = "astrocommunity.editing-support.chatgpt-nvim" },
