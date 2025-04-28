@@ -1,6 +1,6 @@
 repos:
 -   repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.4.0
+    rev: v5.0.0
     hooks:
     -   id: check-yaml
         args: [--unsafe]
@@ -16,12 +16,12 @@ repos:
     -   id: mixed-line-ending
 
 -   repo: https://github.com/sirwart/ripsecrets
-    rev: v0.1.6
+    rev: v0.1.9
     hooks:
     -   id: ripsecrets
 
 -   repo: https://github.com/trufflesecurity/trufflehog
-    rev: v3.63.1
+    rev: v3.88.25
     hooks:
     -   id: trufflehog
         name: TruffleHog
