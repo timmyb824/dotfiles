@@ -10,9 +10,8 @@ Regarding terminals, I prefer using [iterm2](https://iterm2.com/). Any custom se
 
 ## Installation
 
-To set up my dotfiles, I've created various custom bash scripts. The primary script is `setup.sh`, which will set up chezmoi and my dependencies (1password for secrets management and sops/age for encryption) before installing the dotfiles with chezmoi. It will then call the `.config/bin/install.sh` script, to handle the installation of packages and tooling.
+To set up my dotfiles, I've created various custom bash scripts. The primary script is `setup.sh`, which will set up chezmoi and my dependencies (1password for secrets management and sops/age for encryption) before installing the dotfiles with chezmoi. It used to then call the `.config/bin/install.sh` script, to handle the installation of packages and tooling however I've moved these to [ansible](https://github.com/timmyb824/automation_ansible).
 
 ## Thoughts
 
 I use to use [oh-my-zsh](https://ohmyz.sh/), but I found that it was too bloated and slow. It would often take me several seconds to load a new terminal. I decided to switch to a more minimal setup, which has been working well for me. I have been using this setup for many months now, and I have been happy with it.
-
