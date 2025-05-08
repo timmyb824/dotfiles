@@ -15,9 +15,9 @@ config.colors = {
 }
 
 config.font = wezterm.font(
-    "BerkeleyMono Nerd Font Mono Plus Font Awesome Plus Octicons Plus Power Symbols Plus Codicons Plus Pomicons Plus Font Logos Plus Material Design Icons Plus Weather Icons",
+    "TX02 Nerd Font",
     {
-        weight = 'Bold'
+        weight = 'ExtraBold'
     })
 config.font_size = 16
 
