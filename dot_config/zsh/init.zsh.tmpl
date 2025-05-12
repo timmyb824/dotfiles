@@ -11,7 +11,15 @@ autoload -Uz compinit && compinit
 # source <(pkgx --shellcode)  #docs.pkgx.sh/shellcode
 
 if [[ $TERM_PROGRAM != "WarpTerminal" ]]; then
-    source <(starship init zsh --print-full-init)
+    # source <(starship init zsh --print-full-init)
+    # Check that the function `starship_zle-keymap-select()` is defined.
+    # xref: https://github.com/starship/starship/issues/3418
+    type starship_zle-keymap-select >/dev/null || \
+      {
+        echo "Load starship"
+        eval "$(/opt/homebrew/bin/starship init zsh --print-full-init)"
+      }
+
     export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
     eval "$(atuin init zsh)"
     test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
