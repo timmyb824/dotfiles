@@ -6,19 +6,22 @@ local config = wezterm.config_builder()
 
 -- This is where you actually apply your config choices
 
-config.color_scheme = 'FirefoxDev'
+config.color_scheme = "FirefoxDev"
 
 -- Overwrrite the color_scheme with custom colors
 config.colors = {
-    background = "#000000",
-    foreground = "#8ea0b3",
+	background = "#000000",
+	foreground = "#8ea0b3",
 }
 
-config.font = wezterm.font(
-    "TX02 Nerd Font",
-    {
-        weight = 'ExtraBold'
-    })
+config.font = wezterm.font_with_fallback({
+	-- /Users/timothy.bryant/Library/Fonts/TX02NerdFont-Bold.ttf, CoreText
+	{ family = "TX02 Nerd Font", weight = "ExtraBold" },
+
+	-- /Users/timothy.bryant/Library/Fonts/JetBrainsMono[wght].ttf index=0 variation=4, CoreText
+	"JetBrains Mono",
+})
+
 config.font_size = 16
 
 config.enable_tab_bar = true
@@ -28,20 +31,21 @@ config.window_background_opacity = 1.0 -- 0.75
 config.macos_window_background_blur = 0 -- 8
 
 config.keys = { -- Make Option-Left equivalent to Alt-b which many line editors interpret as backward-word
-{
-    key = "LeftArrow",
-    mods = "OPT",
-    action = wezterm.action {
-        SendString = "\x1bb"
-    }
-}, -- Make Option-Right equivalent to Alt-f; forward-word
-{
-    key = "RightArrow",
-    mods = "OPT",
-    action = wezterm.action {
-        SendString = "\x1bf"
-    }
-}}
+	{
+		key = "LeftArrow",
+		mods = "OPT",
+		action = wezterm.action({
+			SendString = "\x1bb",
+		}),
+	}, -- Make Option-Right equivalent to Alt-f; forward-word
+	{
+		key = "RightArrow",
+		mods = "OPT",
+		action = wezterm.action({
+			SendString = "\x1bf",
+		}),
+	},
+}
 
 -- and finally, return the configuration to wezterm
 return config

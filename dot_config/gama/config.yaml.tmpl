@@ -1,0 +1,16 @@
+github:
+  token: "{{ onepasswordRead "op://Personal/github.com-personal/gh_http_token" }}"
+
+keys:
+  switch_tab_right: shift+right
+  switch_tab_left: shift+left
+  quit: ctrl+c
+  refresh: ctrl+r
+  live_mode: ctrl+l  # Toggle live mode on/off
+  enter: enter
+  tab: tab
+
+settings:
+  live_mode:
+    enabled: true    # Enable live mode at startup
+    interval: 15s    # Refresh interval for live updates
