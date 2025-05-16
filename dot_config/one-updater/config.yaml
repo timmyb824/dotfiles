@@ -131,5 +131,5 @@ package_managers:
   vagrant:
     enabled: true
     commands:
-      update: ["vagrant", "plugin", "update"]
+      update: ["export", "VAGRANT_DISABLE_STRICT_DEPENDENCY_ENFORCEMENT=1", "vagrant", "plugin", "update"]
       upgrade: []
