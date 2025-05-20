@@ -100,11 +100,12 @@ disabled = false
 
 [kubernetes]
 #format = '[⛵ ($user on )($cluster in )$context \($namespace\)](dimmed green) '
-format = '[$symbol$context( \($namespace\) )]($style)'
+#format = '[$symbol$context( \($namespace\) )]($style)'
+format = '[$symbol$context]($style)'
 symbol = "⛵ "
-detect_folders = ["!~/"]
-detect_files = ["config_k3s"]
-disabled = true
+#detect_folders = ["!~/"]
+#detect_files = ["config_k3s"]
+disabled = false
 # [kubernetes.context_aliases]
 # "arn:aws:eks:us-east-1:0123456789:cluster/qa-us-east-1-cse-app" = "QA"
 
