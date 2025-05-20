@@ -106,8 +106,11 @@ symbol = "⛵ "
 #detect_folders = ["!~/"]
 #detect_files = ["config_k3s"]
 disabled = false
-# [kubernetes.context_aliases]
-# "arn:aws:eks:us-east-1:0123456789:cluster/qa-us-east-1-cse-app" = "QA"
+contexts = [
+  { context_pattern = "{{ onepasswordRead "op://Personal/ss_k8s_aliases/qa" }}", style = "bold green", context_alias = "cse-qa"},
+  { context_pattern = "{{ onepasswordRead "op://Personal/ss_k8s_aliases/stg" }}", style = "bold blue", context_alias = "cse-stg"},
+  { context_pattern = "{{ onepasswordRead "op://Personal/ss_k8s_aliases/prd" }}", style = "bold red", context_alias = "cse-prd"},
+]
 
 [memory_usage]
 format = "$symbol[${ram}( | ${swap})]($style) "
