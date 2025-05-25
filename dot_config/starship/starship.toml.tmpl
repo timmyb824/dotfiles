@@ -3,7 +3,7 @@
 
 # Inserts a blank line between shell prompts
 add_newline = true
-command_timeout = 3000
+command_timeout = 1000
 
 [line_break]
 disabled = false
@@ -47,7 +47,7 @@ disabled =  false
 
 [direnv]
 format = "[$symbol$loaded/$allowed]($style) "
-disabled = false
+disabled = true
 
 [docker_context]
 format = 'via [🐳 $context](blue bold)'
@@ -82,7 +82,7 @@ format = "$all_status$ahead_behind "
 [golang]
 format = "[$symbol($version )]($style)"
 symbol = "🐹 "
-disabled = false
+disabled = true
 
 [gcloud]
 format = 'GCP: [$symbol$active$account(@$domain)(\($project\))]($style) '
@@ -103,8 +103,8 @@ disabled = false
 #format = '[$symbol$context( \($namespace\) )]($style)'
 format = '[$symbol$context]($style)'
 symbol = "⛵ "
-#detect_folders = ["!~/"]
-#detect_files = ["config_k3s"]
+detect_folders = [".kube", "k8s", "kubernetes-apps", "gitops", "kubernetes"]
+detect_files = ["kubectl"]
 disabled = false
 contexts = [
   { context_pattern = "{{ onepasswordRead "op://Personal/ss_k8s_aliases/qa" }}", style = "bold green", context_alias = "cse-qa"},
@@ -117,7 +117,7 @@ format = "$symbol[${ram}( | ${swap})]($style) "
 symbol = "🐑 "
 threshold = 90
 style = "bold dimmed white"
-disabled = false
+disabled = true
 
 [python]
 # format = "[$symbol$version]($style) "
@@ -136,15 +136,16 @@ symbol= "💎 "
 detect_extensions = ["rb"]
 detect_files = ["Gemfile", ".ruby-version"]
 detect_variables = []
-disabled = false
+disabled = true
 
 [rust]
 format = "[$symbol$version]($style) "
 style = "bold green"
-disabled = false
+disabled = true
 
 [terraform]
 format = '[🏎💨 $version $workspace]($style) '
+disabled = true
 
 [time]
 time_format = "%T"
@@ -158,7 +159,7 @@ show_always = true
 
 [nodejs]
 format = "via [🤖 $version](bold green) "
-disabled = false
+disabled = true
 
 [vagrant]
 format = "[🚶 $version](bold white) "

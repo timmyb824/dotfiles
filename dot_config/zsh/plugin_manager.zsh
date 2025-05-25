@@ -59,23 +59,23 @@ plugins=(
   ChrisPenner/copy-pasta
   reegnz/jq-zsh-plugin
   hlissner/zsh-autopair
-  Matt561/zsh-nhl-schedule
   amstrad/oh-my-matrix
   MichaelAquilina/zsh-you-should-use
   supercrabtree/k
+
+  # Plugins previously only loaded outside Warp, now always loaded
+  Aloxaf/fzf-tab
+  zdharma/fast-syntax-highlighting
+  clarketm/zsh-completions
+  zsh-users/zsh-autosuggestions
+  zsh-users/zsh-history-substring-search
+
   # zsh-users/zsh-syntax-highlighting
   # timmyb824/zsh-pins # my own fork of mehalter/zsh-pins (zoxide does the same thing)
   # Matt561/zsh-nhl-schedule
 
   # speed things up by loading intensive plugins after zsh-defer
   romkatv/zsh-defer
-
-  # Plugins previously only loaded outside Warp, now always loaded
-  Aloxaf/fzf-tab
-  zdharma/fast-syntax-highlighting
-  clarketm/zsh-completions
-  zsh-users/zsh-autosuggestions # comment to use termium instead
-  zsh-users/zsh-history-substring-search
 )
 
 plugin-load "${plugins[@]}"

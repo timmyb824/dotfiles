@@ -21,9 +21,11 @@ source <(starship init zsh --print-full-init)
 
 export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 eval "$(atuin init zsh)"
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+# test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=white,bold,bg=c0c0c0,bold"
+
 {{- else if eq .chezmoi.os "linux" -}}
+
 # PS4='+ ${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]}:' # uncomment for debugging (run `set -x` to enable)
 
 FPATH="$HOME/.zsh/completion:${FPATH}"
@@ -39,7 +41,7 @@ fi
 source <(starship init zsh --print-full-init)
 export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 eval "$(atuin init zsh)"
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+# test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 test -e "$HOME/.shellfishrc" && source "$HOME/.shellfishrc"
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=white,bold,bg=c0c0c0,bold"
 {{- end }}
