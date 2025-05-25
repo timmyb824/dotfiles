@@ -3,28 +3,26 @@
 eval "$(/opt/homebrew/bin/brew shellenv)"
 FPATH="$HOME/.zsh/completion:$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 
-# PS4='+ ${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]}:' # uncomment for debugging (run `set -x` to enable)
+PS4='+ ${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]}:' # uncomment for debugging (run `set -x` to enable)
 
 autoload -Uz compinit && compinit
 
 # initialize shell integration
 # source <(pkgx --shellcode)  #docs.pkgx.sh/shellcode
 
-if [[ $TERM_PROGRAM != "WarpTerminal" ]]; then
-    # source <(starship init zsh --print-full-init)
-    # Check that the function `starship_zle-keymap-select()` is defined.
-    # xref: https://github.com/starship/starship/issues/3418
-    type starship_zle-keymap-select >/dev/null || \
-      {
-        echo "Load starship"
-        eval "$(/opt/homebrew/bin/starship init zsh --print-full-init)"
-      }
+source <(starship init zsh --print-full-init)
+# Check that the function `starship_zle-keymap-select()` is defined.
+# xref: https://github.com/starship/starship/issues/3418
+# type starship_zle-keymap-select >/dev/null || \
+#   {
+#     echo "Load starship"
+#     eval "$(/opt/homebrew/bin/starship init zsh --print-full-init)"
+#   }
 
-    export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
-    eval "$(atuin init zsh)"
-    test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=white,bold,bg=c0c0c0,bold"
-fi
+export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
+eval "$(atuin init zsh)"
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=white,bold,bg=c0c0c0,bold"
 {{- else if eq .chezmoi.os "linux" -}}
 # PS4='+ ${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]}:' # uncomment for debugging (run `set -x` to enable)
 
@@ -38,12 +36,10 @@ if [ -d "$HOME/.cargo" ]; then
   . "$HOME/.cargo/env"
 fi
 
-if [[ $TERM_PROGRAM != "WarpTerminal" ]]; then
-    source <(starship init zsh --print-full-init) #pkgx
-    export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
-    eval "$(atuin init zsh)"
-    test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-    test -e "$HOME/.shellfishrc" && source "$HOME/.shellfishrc"
-    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=white,bold,bg=c0c0c0,bold"
-fi
+source <(starship init zsh --print-full-init)
+export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
+eval "$(atuin init zsh)"
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+test -e "$HOME/.shellfishrc" && source "$HOME/.shellfishrc"
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=white,bold,bg=c0c0c0,bold"
 {{- end }}

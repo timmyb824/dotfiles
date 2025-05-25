@@ -69,21 +69,14 @@ plugins=(
 
   # speed things up by loading intensive plugins after zsh-defer
   romkatv/zsh-defer
-)
 
-# List of github repo plugins not to load on Warp terminal
-warp_exclusive_plugins=(
+  # Plugins previously only loaded outside Warp, now always loaded
   Aloxaf/fzf-tab
   zdharma/fast-syntax-highlighting
   clarketm/zsh-completions
   zsh-users/zsh-autosuggestions # comment to use termium instead
   zsh-users/zsh-history-substring-search
 )
-
-# If not running on Warp terminal, load the additional plugins
-if [[ $TERM_PROGRAM != "WarpTerminal" ]]; then
-  plugins=("${plugins[@]}" "${warp_exclusive_plugins[@]}")
-fi
 
 plugin-load "${plugins[@]}"
 
