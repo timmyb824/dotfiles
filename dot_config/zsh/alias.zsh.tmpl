@@ -14,8 +14,10 @@ alias gop="gitopolis"
 alias g=git
 # alias k9s="k9s --kubeconfig ~/.kube/config_k3s "
 alias kk=kubectl
-alias kns='kubectl ns' # installed with krew
-alias kcx='kubectl ctx' # installed with krew
+alias kprd='kk --context=k3s-prod'
+alias kdev='kk --context=k3s-dev'
+alias kns='kk ns' # installed with krew
+alias kcx='kk ctx' # installed with krew
 alias lg="lazygit"
 alias ldot="eza --icons=always -ld .*"
 alias la="eza --icons=always -lAh"
