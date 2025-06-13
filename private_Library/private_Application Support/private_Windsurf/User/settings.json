@@ -1,6 +1,6 @@
 {
   // EDITOR SETTINGS
-  "editor.fontFamily": "Berkeley Mono, Hack Nerd Font Mono, Fira Code, JetBrains Mono, Hack Nerd Font, Menlo, Monaco, Courier New, monospace",
+  "editor.fontFamily": "TX02 Nerd Font, Berkeley Mono, Hack Nerd Font Mono, Fira Code, JetBrains Mono, Hack Nerd Font, Menlo, Monaco, Courier New, monospace",
   "editor.fontSize": 13,
   // "window.zoomLevel": -0.0,
   "editor.fontLigatures": false,
@@ -24,7 +24,7 @@
   "diffEditor.wordWrap": "off",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[dockerfile]": {
-    "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+    "editor.defaultFormatter": "foxundermoon.shell-format"
   },
   "[gotmpl]": {
     "editor.defaultFormatter": "golang.go"
@@ -46,7 +46,7 @@
     "editor.formatOnType": true
   },
   "[shellscript]": {
-    "editor.defaultFormatter": "mkhl.shfmt"
+    "editor.defaultFormatter": "foxundermoon.shell-format" // mkhl.shfmt
   },
   "[terraform]": {
     "editor.defaultFormatter": "hashicorp.terraform"
@@ -57,14 +57,15 @@
   "[xml]": {
     "editor.defaultFormatter": "DotJoshJohnson.xml"
   },
+  "[yaml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
 
   // EDITOR LANGUAGE SETTINGS
-  "python.languageServer": "Pylance",
-  "python.analysis.typeCheckingMode": "basic", // off, basic, strict
+  "python.languageServer": "Default",
 
   // WORKBENCH SETTINGS
   "workbench.colorTheme": "Dracula Theme",
-  "windsurf.autocompleteSpeed": "fast",
   "workbench.iconTheme": "material-icon-theme",
   "explorer.compactFolders": false,
   "explorer.confirmDelete": false,
@@ -97,7 +98,7 @@
 
   // TERMINAL SETTINGS
   "terminal.integrated.fontSize": 15,
-  "terminal.integrated.fontFamily": "Berkeley Mono, Hack Nerd Font Mono, Fira Code, JetBrains Mono, Hack Nerd Font, Menlo, Monaco, 'Courier New', monospace",
+  "terminal.integrated.fontFamily": "TX02 Nerd Font, Berkeley Mono, Hack Nerd Font Mono, Fira Code, JetBrains Mono, Hack Nerd Font, Menlo, Monaco, 'Courier New', monospace",
   "terminal.integrated.cursorStyle": "line",
   "terminal.integrated.scrollback": 10000,
   "application.shellEnvironmentResolutionTimeout": 60,
