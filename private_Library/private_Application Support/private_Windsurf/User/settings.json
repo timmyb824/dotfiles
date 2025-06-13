@@ -63,6 +63,7 @@
 
   // EDITOR LANGUAGE SETTINGS
   "python.languageServer": "Default",
+  "shellformat.path": "/opt/homebrew/bin/shfmt",
 
   // WORKBENCH SETTINGS
   "workbench.colorTheme": "Dracula Theme",
