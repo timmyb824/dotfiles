@@ -1,5 +1,6 @@
-background = 000000
-foreground = 91a0b1
+theme = "catppuccin-mocha.conf"
+#background = 000000
+#foreground = 91a0b1
 font-family-bold = "TX02 Nerd Font"
 font-size = 18
 font-family = "TX02 Nerd Font"
