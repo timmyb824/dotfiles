@@ -66,8 +66,8 @@
   "shellformat.path": "/opt/homebrew/bin/shfmt",
 
   // WORKBENCH SETTINGS
-  "workbench.colorTheme": "Dracula Theme",
-  "workbench.iconTheme": "material-icon-theme",
+  "workbench.colorTheme": "Catppuccin Macchiato",
+  "workbench.iconTheme": "catppuccin-macchiato",
   "explorer.compactFolders": false,
   "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": false,
