@@ -22,7 +22,7 @@ return {
   { import = "astrocommunity.pack.yaml" },
   { import = "astrocommunity.colorscheme.dracula-nvim" },
   { import = "astrocommunity.colorscheme.catppuccin" },
-  { import = "astrocommunity.keybinding.nvcheatsheet-nvim" },
+  { import = "astrocommunity.keybinding.mini-clue" },
   { import = "astrocommunity.markdown-and-latex.glow-nvim" },
   { import = "astrocommunity.markdown-and-latex.markdown-preview-nvim" },
   { import = "astrocommunity.git.git-blame-nvim" },
