@@ -1,7 +1,7 @@
 {
   // EDITOR SETTINGS
   "editor.fontFamily": "TX02 Nerd Font, Berkeley Mono, Hack Nerd Font Mono, Fira Code, JetBrains Mono, Hack Nerd Font, Menlo, Monaco, Courier New, monospace",
-  "editor.fontSize": 13,
+  "editor.fontSize": 14,
   // "window.zoomLevel": -0.0,
   "editor.fontLigatures": false,
   "editor.fontWeight": "400",
