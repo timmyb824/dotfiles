@@ -41,5 +41,5 @@ generate_systemd_unit "${CONTAINER_NAME}" "always"
 msg_info "Enabling systemd service for container: ${CONTAINER_NAME}"
 enable_systemd_service "${CONTAINER_NAME}"
 
-msg_info "Listing systemd containers"
-list_systemd_containers
+# msg_info "Listing systemd containers"
+# list_systemd_containers
