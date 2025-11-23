@@ -18,6 +18,7 @@ args = [
   "github:codemaestroai/filesystem-mcp",
   "/home/tbryant/homelab/podman-apps",
 ]
+startup_timeout_sec = 30_000
 
 [mcp_servers.sequential-thinking]
 command = "npx"
