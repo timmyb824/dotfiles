@@ -1,6 +1,3 @@
-approval_policy = "on-request"
-sandbox_mode = "workspace-write"
-
 [projects."/home/tbryant/DEV"]
 trust_level = "trusted"
 
@@ -14,10 +11,10 @@ trust_level = "untrusted"
 command = "npx"
 args = ["mcp-fetch-server"]
 
-[mcp_servers.filesystem]
-command = "npx"
-args = ["-y", "github:codemaestroai/filesystem-mcp", "${workspaceFolder}"]
-startup_timeout_sec = 30_000
+# [mcp_servers.filesystem]
+# command = "npx"
+# args = ["-y", "github:codemaestroai/filesystem-mcp", "${workspaceFolder}"]
+# startup_timeout_sec = 30_000
 
 [mcp_servers.sequential-thinking]
 command = "npx"
