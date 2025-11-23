@@ -13,7 +13,11 @@ args = ["mcp-fetch-server"]
 
 [mcp_servers.filesystem]
 command = "npx"
-args = ["-y", "@modelcontextprotocol/server-filesystem", "/home/tbryant"]
+args = [
+  "-y",
+  "github:codemaestroai/filesystem-mcp",
+  "/home/tbryant/homelab/podman-apps",
+]
 
 [mcp_servers.sequential-thinking]
 command = "npx"
