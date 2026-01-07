@@ -1,0 +1,70 @@
+{{ if (or (eq .chezmoi.hostname "Timothys-MacBook-Pro") (eq .chezmoi.hostname "timothys-macbook-air") (eq .chezmoi.hostname "Timothys-MacBook-Air")) -}}
+[projects."/Users/timothybryant/DEV"]
+trust_level = "trusted"
+
+[projects."/Users/timothybryant/DEV/homelab/podman-apps"]
+trust_level = "trusted"
+
+[projects."/home/timothybryant/.codex"]
+trust_level = "untrusted"
+
+[mcp_servers.fetch]
+command = "npx"
+args = ["mcp-fetch-server"]
+
+# [mcp_servers.filesystem]
+# command = "npx"
+# args = ["-y", "github:codemaestroai/filesystem-mcp", "${workspaceFolder}"]
+# startup_timeout_sec = 30_000
+
+[mcp_servers.sequential-thinking]
+command = "npx"
+args = ["-y", "@modelcontextprotocol/server-sequential-thinking"]
+
+{{ else if (and (ne .chezmoi.hostname "Timothys-MacBook-Pro") (ne .chezmoi.hostname "Timothys-MacBook-Air") (ne .chezmoi.hostname "timothys-macbook-air") (ne .chezmoi.os "linux")) -}}
+[projects."/Users/timothy.bryant/.codex"]
+trust_level = "untrusted"
+
+[projects."/Users/timothy.bryant/ghq/github.com/simplisafe/backstage"]
+trust_level = "trusted"
+
+[mcp_servers.fetch]
+command = "npx"
+args = ["mcp-fetch-server"]
+
+# [mcp_servers.filesystem]
+# command = "npx"
+# args = ["-y", "github:codemaestroai/filesystem-mcp", "${workspaceFolder}"]
+# startup_timeout_sec = 30_000
+
+[mcp_servers.sequential-thinking]
+command = "npx"
+args = ["-y", "@modelcontextprotocol/server-sequential-thinking"]
+
+{{ else if (eq .chezmoi.os "linux") -}}
+[projects."/home/tbryant/DEV"]
+trust_level = "trusted"
+
+[projects."/home/tbryant/DEV/homelab/podman-apps"]
+trust_level = "trusted"
+
+[projects."/home/tbryant/.codex"]
+trust_level = "untrusted"
+
+[projects."/home/tbryant/DEV/homelab/kubernetes-apps"]
+trust_level = "untrusted"
+
+[mcp_servers.fetch]
+command = "npx"
+args = ["mcp-fetch-server"]
+
+# [mcp_servers.filesystem]
+# command = "npx"
+# args = ["-y", "github:codemaestroai/filesystem-mcp", "${workspaceFolder}"]
+# startup_timeout_sec = 30_000
+
+[mcp_servers.sequential-thinking]
+command = "npx"
+args = ["-y", "@modelcontextprotocol/server-sequential-thinking"]
+
+{{ end }}
