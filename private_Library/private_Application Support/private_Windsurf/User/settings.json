@@ -177,5 +177,6 @@
   },
   "[github-actions-workflow]": {
     "editor.defaultFormatter": "redhat.vscode-yaml"
-  }
+  },
+  "explorer.confirmPasteNative": false
 }
