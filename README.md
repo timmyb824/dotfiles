@@ -6,12 +6,12 @@ This is a collection of my dotfiles and configurations. I use [chezmoi](https://
 
 I utilize [starship](https://starship.rs/) for customizing my prompt. My configuration is stored in `starship.toml`. I have separate files for my aliases, exports, completions, and functions. To manage and install plugins, I employ simple zsh functions inspired by [zsh-unplugged](https://github.com/mattmc3/zsh_unplugged), which can be found in the `plugin_manager.zsh` file. All other settings are mainly located in the `.config/` directory.
 
-Regarding terminals, I prefer using [iterm2](https://iterm2.com/). Any custom settings can be found in the `iterm2_configs` directory. I've tried many different terminal emulators, including hyper.js, warp, alacritty, kitty, and tabby but I find that I keep coming back to iterm2 for one reason or another.
+Regarding terminals, I've tried so many and will likely try more. I've been using [rio](https://rioterm.com) lately and I'm happy with it.But ask me again in a year or so and I'll probably be using something else.
 
 ## Installation
 
-To set up my dotfiles, I've created various custom bash scripts. The primary script is `setup.sh`, which will set up chezmoi and my dependencies (1password for secrets management and sops/age for encryption) before installing the dotfiles with chezmoi. It used to then call the `.config/bin/install.sh` script, to handle the installation of packages and tooling however I've moved these to [ansible](https://github.com/timmyb824/automation_ansible).
+To set up my dotfiles, I created a script called `setup.sh`, which will install chezmoi and my dependencies (1password for secrets management and sops/age for encryption) before installing the dotfiles with chezmoi. I then use [Ansible](https://github.com/timmyb824/automation_ansible) to install packages and tooling.
 
 ## Thoughts
 
-I use to use [oh-my-zsh](https://ohmyz.sh/), but I found that it was too bloated and slow. It would often take me several seconds to load a new terminal. I decided to switch to a more minimal setup, which has been working well for me. I have been using this setup for many months now, and I have been happy with it.
+I use to use [oh-my-zsh](https://ohmyz.sh/), but I found that it was too bloated and slow. It would often take me several seconds to load a new terminal. I decided to switch to a more minimal setup, which has been working well for me. I have been using this setup for many years now, and I have been happy with it.
