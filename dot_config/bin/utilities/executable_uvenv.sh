@@ -68,12 +68,18 @@ cd_venv() {
     msg_info "cd $venv_path"
 }
 
+# Function to list virtualenvs
+list_venvs() {
+    ls "$UV_BASE_DIR"
+}
+
 # Main script logic
 if [ $# -eq 0 ]; then
     echo "Usage: $(basename $0) <name>          # Create new virtualenv"
     echo "       $(basename $0) activate <name> # Activate existing virtualenv"
     echo "       $(basename $0) delete <name>   # Delete existing virtualenv"
     echo "       $(basename $0) cd <name>       # Change to virtualenv directory"
+    echo "       $(basename $0) list            # List all virtualenvs"
     exit 1
 fi
 
@@ -98,6 +104,9 @@ case "$1" in
         exit 1
     fi
     cd_venv "$2"
+    ;;
+"list")
+    list_venvs
     ;;
 *)
     create_venv "$1"
