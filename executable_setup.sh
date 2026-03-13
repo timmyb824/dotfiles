@@ -99,6 +99,17 @@ is_privileged_user() {
     fi
 }
 
+# we need to make sure homebrew is available and installed packages on macos i.e., eval "$(/opt/homebrew/bin/brew shellenv)"
+initialize_homebrew() {
+    if [[ "$OS" == "MacOS" ]]; then
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+		if ! command_exists brew; then
+			handle_error "Homebrew is not installed. Please install Homebrew first."
+		fi
+    fi
+}
+
+
 ################
 #### SCRIPT ####
 ################
