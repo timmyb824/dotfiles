@@ -1,4 +1,4 @@
-{{ if (or (eq .chezmoi.hostname "Timothys-MacBook-Pro") (eq .chezmoi.hostname "timothys-macbook-air") (eq .chezmoi.hostname "Timothys-MacBook-Air")) (eq .chezmoi.hostname "Timmybs-MacBook-Pro") -}}
+{{ if (or (eq .chezmoi.hostname "Timothys-MacBook-Pro") (eq .chezmoi.hostname "timothys-macbook-air") (eq .chezmoi.hostname "Timothys-MacBook-Air") (eq .chezmoi.hostname "Timmybs-MacBook-Pro")) -}}
 [projects."/Users/timothybryant/DEV"]
 trust_level = "trusted"
 
@@ -21,7 +21,7 @@ args = ["mcp-fetch-server"]
 command = "npx"
 args = ["-y", "@modelcontextprotocol/server-sequential-thinking"]
 
-{{ else if (and (ne .chezmoi.hostname "Timothys-MacBook-Pro") (ne .chezmoi.hostname "Timothys-MacBook-Air") (ne .chezmoi.hostname "timothys-macbook-air") (ne .chezmoi.os "linux")) -}}
+{{ else if (and (ne .chezmoi.hostname "Timothys-MacBook-Pro") (ne .chezmoi.hostname "Timothys-MacBook-Air") (ne .chezmoi.hostname "timothys-macbook-air") (ne .chezmoi.hostname "Timmybs-MacBook-Pro") (ne .chezmoi.os "linux")) -}}
 [projects."/Users/timothy.bryant/.codex"]
 trust_level = "untrusted"
 
