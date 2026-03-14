@@ -29,7 +29,7 @@
 # More examples can be found here:
 #  https://developer.1password.com/docs/ssh/agent/config
 
-{{ if (or (eq .chezmoi.hostname "Timothys-MacBook-Pro") (eq .chezmoi.hostname "Timothys-MacBook-Air")) -}}
+{{ if (or (eq .chezmoi.hostname "Timothys-MacBook-Pro") (eq .chezmoi.hostname "Timothys-MacBook-Air") (eq .chezmoi.hostname "Timmybs-MacBook-Pro")) -}}
 ################### PERSONAL CONFIGUARTION ##################
 [[ssh-keys]]
 item = "id_master_key"
@@ -48,7 +48,7 @@ vault = "Personal"
 
 [[ssh-keys]]
 vault = "Private"
-{{ else if (and (ne .chezmoi.hostname "Timothys-MacBook-Pro") (ne .chezmoi.hostname "Timothys-MacBook-Air")) -}}
+{{ else if (and (ne .chezmoi.hostname "Timothys-MacBook-Pro") (ne .chezmoi.hostname "Timothys-MacBook-Air") (ne .chezmoi.hostname "Timmybs-MacBook-Pro")) -}}
 ################### WORK CONFIGUARTION ##################
 [[ssh-keys]]
 item = "csebot-prd"
