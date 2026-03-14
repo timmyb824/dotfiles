@@ -5117,7 +5117,6 @@ The script should do this: \(ai.prompt)</string>
 	<array>
 		<string>Notes</string>
 		<string>Paste History</string>
-		<string>Snippets</string>
 		<string>Codecierge</string>
 	</array>
 	<key>VisualIndicatorForEsc</key>
