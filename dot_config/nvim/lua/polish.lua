@@ -8,7 +8,7 @@
 --------------------OPTIONS--------------------
 -----------------------------------------------
 vim.g.python3_host_prog = vim.fn.expand("~/uv/virtualenvs/neovim/bin/python")
-vim.g.ruby_host_prog = vim.fn.expand("~/.rbenv/versions/3.2.1/bin/neovim-ruby-host")
+vim.g.ruby_host_prog = vim.fn.expand("~/.rbenv/versions/3.2.2/bin/neovim-ruby-host")
 vim.g.loaded_perl_provider = 0
 
 -----------------------------------------------
