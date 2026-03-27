@@ -1,0 +1,25 @@
+[font]
+family = "TX02 Nerd Font"
+size = 18
+cell_width = "100%"
+cell_height = "100%"
+fallback = ["Symbols Nerd Font Mono", "Noto Color Emoji"]
+ligatures = true
+
+[scrollback]
+lines = 20000
+
+[reflow]
+enabled = true
+
+[theme]
+name = "catppuccin-mocha"
+
+[program]
+shell = "/bin/zsh"
+args = ["-l"]
+working_directory = "/Users/timothybryant"
+
+[statusbar]
+enabled = true
+position = "top" # "top" or "bottom"
