@@ -1,7 +1,7 @@
 type=conventional
 max-length=100
 generate=2
-OPENAI_API_KEY={{ onepasswordRead "op://Personal/openai-project-key/credential" }}
-OPENAI_BASE_URL=https://api.openai.com/v1
-OPENAI_MODEL=gpt-5-mini
+OPENAI_API_KEY={{ onepasswordRead "op://Personal/litellm-aicommits/credential" }}
+OPENAI_BASE_URL={{ onepasswordRead "op://Personal/litellm-aicommits/hostname" }}
+OPENAI_MODEL=gpt-4o-mini
 locale=en
