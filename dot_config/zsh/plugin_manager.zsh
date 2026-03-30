@@ -60,7 +60,7 @@ plugins=(
   reegnz/jq-zsh-plugin
   hlissner/zsh-autopair
   amstrad/oh-my-matrix
-  MichaelAquilina/zsh-you-should-use
+  # MichaelAquilina/zsh-you-should-use
   supercrabtree/k
 
   # Plugins previously only loaded outside Warp, now always loaded
