@@ -47,6 +47,7 @@
   "flexMode": "full-minus-40",
   "compactThreshold": 60,
   "colorLevel": 2,
+  "defaultPadding": " ",
   "inheritSeparatorColors": false,
   "globalBold": false,
   "powerline": {
@@ -63,8 +64,7 @@
     "endCaps": [
       ""
     ],
-    "autoAlign": false,
-    "theme": "tokyonight"
-  },
-  "defaultPadding": " "
+    "theme": "tokyonight",
+    "autoAlign": true
+  }
 }
