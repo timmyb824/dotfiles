@@ -19,7 +19,7 @@ The script should do this: \(ai.prompt)</string>
 	<key>AIFeatureStreamingResponses</key>
 	<true/>
 	<key>AITermAPI</key>
-	<integer>7</integer>
+	<integer>1</integer>
 	<key>AIVectorStore</key>
 	<integer>0</integer>
 	<key>AIVendor</key>
@@ -27,11 +27,11 @@ The script should do this: \(ai.prompt)</string>
 	<key>AiMaxTokens</key>
 	<integer>200000</integer>
 	<key>AiModel</key>
-	<string>claude-opus-4-6</string>
+	<string>claude-sonnet</string>
 	<key>AiResponseMaxTokens</key>
-	<integer>128000</integer>
+	<integer>16000</integer>
 	<key>AitermURL</key>
-	<string>https://api.anthropic.com/v1/messages</string>
+	<string>https://litellm.timmybtech.com/v1/chat/completions</string>
 	<key>AllowClipboardAccess</key>
 	<true/>
 	<key>AlternateMouseScroll</key>
@@ -5119,6 +5119,8 @@ The script should do this: \(ai.prompt)</string>
 		<string>Paste History</string>
 		<string>Codecierge</string>
 	</array>
+	<key>UseRecommendedAIModel</key>
+	<false/>
 	<key>VisualIndicatorForEsc</key>
 	<false/>
 	<key>findMode_iTerm</key>
