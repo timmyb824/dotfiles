@@ -41,6 +41,7 @@ alias sopse="sops --encrypt --age $(cat $SOPS_AGE_KEY_FILE | grep -oP "public ke
 alias sopsd="sops --decrypt --age $(cat $SOPS_AGE_KEY_FILE | grep -oP "public key: \K(.*)") -i "
 alias sshadd="ssh-add ~/.ssh/id_master_key"
 alias sshstart="eval `ssh-agent -s`"
+alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 alias tf=terraform
 alias update_spotify_playlist='spotify_to_ytmusic liked --name "Liked songs (Spotify)"'
 alias uvenv='uvenv.sh'
