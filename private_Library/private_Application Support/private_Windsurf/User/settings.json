@@ -24,41 +24,41 @@
   "diffEditor.wordWrap": "off",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[dockerfile]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format"
+    "editor.defaultFormatter": "foxundermoon.shell-format",
   },
   "[gotmpl]": {
-    "editor.defaultFormatter": "golang.go"
+    "editor.defaultFormatter": "golang.go",
   },
   "[html]": {
-    "editor.defaultFormatter": "vscode.html-language-features"
+    "editor.defaultFormatter": "vscode.html-language-features",
   },
   "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "[json]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
+    "editor.defaultFormatter": "vscode.json-language-features",
   },
   "[lua]": {
-    "editor.defaultFormatter": "sumneko.lua"
+    "editor.defaultFormatter": "sumneko.lua",
   },
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter",
-    "editor.formatOnType": true
+    "editor.formatOnType": true,
   },
   "[shellscript]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format"
+    "editor.defaultFormatter": "foxundermoon.shell-format",
   },
   "[terraform]": {
-    "editor.defaultFormatter": "hashicorp.terraform"
+    "editor.defaultFormatter": "hashicorp.terraform",
   },
   "[terraform-vars]": {
-    "editor.defaultFormatter": "hashicorp.terraform"
+    "editor.defaultFormatter": "hashicorp.terraform",
   },
   "[xml]": {
-    "editor.defaultFormatter": "DotJoshJohnson.xml"
+    "editor.defaultFormatter": "DotJoshJohnson.xml",
   },
   "[yaml]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
 
   // EDITOR LANGUAGE SETTINGS
@@ -81,20 +81,20 @@
     ".env*": "dotenv",
     "*.sh": "shellscript",
     "*.conf ": "properties",
-    "*.tf": "terraform"
+    "*.tf": "terraform",
   },
   "files.exclude": {
-    "**/.git": false
+    "**/.git": false,
   },
   "files.trimTrailingWhitespace": true,
   "launch": {
     "configurations": [],
-    "compounds": []
+    "compounds": [],
   },
   "security.workspace.trust.untrustedFiles": "open",
   "workbench.colorCustomizations": {
     "editor.lineHighlightBackground": "#1073cf2d",
-    "editor.lineHighlightBorder": "#9fced11f"
+    "editor.lineHighlightBorder": "#9fced11f",
   },
   "workbench.startupEditor": "none",
 
@@ -129,7 +129,7 @@
     "synologynas",
     "tailscale",
     "tbryant",
-    "tiomothybryant"
+    "tiomothybryant",
   ],
   "cSpell.userWords": [
     "gelf",
@@ -145,7 +145,7 @@
     "tbryant",
     "tiomothybryant",
     "VERACODE",
-    "dotenv"
+    "dotenv",
   ],
   "cSpell.diagnosticLevel": "Hint",
   "git.autofetch": true,
@@ -154,16 +154,16 @@
   "sourcery.codeLens": true,
   "go.toolsManagement.autoUpdate": true,
   "[toml]": {
-    "editor.defaultFormatter": "tamasfe.even-better-toml"
+    "editor.defaultFormatter": "tamasfe.even-better-toml",
   },
   "[dotenv]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format"
+    "editor.defaultFormatter": "foxundermoon.shell-format",
   },
   "[properties]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format"
+    "editor.defaultFormatter": "foxundermoon.shell-format",
   },
   "[ignore]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format"
+    "editor.defaultFormatter": "foxundermoon.shell-format",
   },
   "[dockercompose]": {
     "editor.insertSpaces": true,
@@ -172,20 +172,20 @@
     "editor.quickSuggestions": {
       "other": true,
       "comments": false,
-      "strings": true
+      "strings": true,
     },
-    "editor.defaultFormatter": "redhat.vscode-yaml"
+    "editor.defaultFormatter": "redhat.vscode-yaml",
   },
   "[github-actions-workflow]": {
-    "editor.defaultFormatter": "redhat.vscode-yaml"
+    "editor.defaultFormatter": "redhat.vscode-yaml",
   },
   "explorer.confirmPasteNative": false,
   "windsurfPyright.disableLanguageServices": true,
   "vs-kubernetes": {
-    "vs-kubernetes.crd-code-completion": "disabled"
+    "vs-kubernetes.crd-code-completion": "disabled",
   },
   "terminal.integrated.showCommandHint": false,
   "isort.check": true,
   "python.useEnvironmentsExtension": false,
-  "python.venvFolders": ["/Users/timothybryant/uv/virtualenvs"]
+  "python.venvFolders": ["/Users/timothybryant/uv/virtualenvs"],
 }
