@@ -1,0 +1,39 @@
+{
+  "active_profile": "personal",
+  "profiles": {
+    "personal": {
+      "name": "personal",
+      "mcp_servers": {
+        "airis-mcp-gateway": "sse",
+        "cloudflare-docs": "npx",
+        "mcp-playwright": "npx",
+        "terraform": "docker"
+      },
+      "agents": {
+        "claude-code": {
+          "enabled": true,
+          "mcp_scope": "local"
+        },
+        "windsurf": {
+          "enabled": true,
+          "mcp_scope": "local"
+        }
+      },
+      "agent_overrides": {
+        "windsurf": {
+          "airis-mcp-gateway": "npx"
+        }
+      },
+      "agent_exclusions": {
+        "claude-code": [
+          "mcp-playwright"
+        ]
+      }
+    },
+    "work": {
+      "name": "work",
+      "mcp_servers": {},
+      "agents": {}
+    }
+  }
+}

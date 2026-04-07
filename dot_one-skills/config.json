@@ -1,0 +1,39 @@
+{
+  "version": "1",
+  "skills_dir": "/Users/timothybryant/.one-skills/skills",
+  "skills": {
+    "conventional-commits": {
+      "name": "conventional-commits",
+      "source": "/Users/timothybryant/.one-skills/skills/conventional-commits",
+      "source_type": "local",
+      "agents": [
+        "claude-code",
+        "windsurf"
+      ]
+    }
+  },
+  "rules_dir": "/Users/timothybryant/.one-skills/rules",
+  "rules": {
+    "python-development.md": {
+      "name": "python-development.md",
+      "source": "/Users/timothybryant/.one-skills/rules/python-development.md",
+      "agents": [
+        "claude-code"
+      ]
+    },
+    "windsurf-global-rules.md": {
+      "name": "windsurf-global-rules.md",
+      "source": "/Users/timothybryant/.codeium/windsurf/memories/global_rules.md",
+      "agents": [
+        "windsurf"
+      ]
+    },
+    "cursor-global-rules.md": {
+      "name": "cursor-global-rules.md",
+      "source": "/Users/timothybryant/.one-skills/rules/cursor-global-rules.md",
+      "agents": [
+        "cursor"
+      ]
+    }
+  }
+}
