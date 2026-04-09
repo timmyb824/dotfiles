@@ -1,5 +1,5 @@
 {
-  "active_profile": "personal",
+  "active_profile": "work",
   "profiles": {
     "personal": {
       "name": "personal",
@@ -32,8 +32,56 @@
     },
     "work": {
       "name": "work",
-      "mcp_servers": {},
-      "agents": {}
+      "mcp_servers": {
+        "atlassian-mcp-server": "sse",
+        "github-mcp-server-windsurf": "custom",
+        "github-mcp-server-cursor": "custom",
+        "github-mcp-server-claude-code": "custom",
+        "fetch": "uvx",
+        "filesystem": "npx",
+        "git": "uvx",
+        "memory": "npx",
+        "postgresql": "npx",
+        "rootly": "uvx",
+        "sequential-thinking": "npx",
+        "server-puppeteer": "custom",
+        "time": "uvx"
+      },
+      "agents": {
+        "cursor": {
+          "enabled": true,
+          "mcp_scope": "local"
+        },
+        "windsurf": {
+          "enabled": true,
+          "mcp_scope": "local"
+        },
+        "claude-code": {
+          "enabled": true,
+          "mcp_scope": "local"
+        }
+      },
+      "agent_exclusions": {
+        "windsurf": [
+          "atlassian-mcp-server",
+          "github-mcp-server-cursor",
+          "github-mcp-server-claude-code"
+        ],
+        "cursor": [
+          "github-mcp-server-windsurf",
+          "github-mcp-server-claude-code"
+        ],
+        "claude-code": [
+          "github-mcp-server-windsurf",
+          "github-mcp-server-cursor",
+          "atlassian-mcp-server"
+        ]
+      },
+      "last_synced": {
+        "windsurf": "2026-04-09T01:46:21.395607+00:00",
+        "cursor": "2026-04-09T01:46:21.395607+00:00",
+        "claude-code": "2026-04-09T01:46:21.395607+00:00"
+      }
     }
   }
 }

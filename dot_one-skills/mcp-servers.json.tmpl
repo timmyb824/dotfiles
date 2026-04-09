@@ -1,0 +1,258 @@
+{
+  "servers": {
+    "airis-mcp-gateway": {
+      "description": "AIRIS MCP Gateway",
+      "transports": {
+        "sse": {
+          "type": "sse",
+          "url": "http://192.168.86.53:9400/sse"
+        },
+        "npx": {
+          "type": "stdio",
+          "command": "npx",
+          "args": [
+            "-y",
+            "mcp-remote@latest",
+            "http://192.168.86.53:9400/sse",
+            "--transport",
+            "sse-only",
+            "--allow-http"
+          ]
+        }
+      }
+    },
+    "mcp-playwright": {
+      "description": "Imported from Windsurf (npx)",
+      "transports": {
+        "npx": {
+          "type": "stdio",
+          "command": "npx",
+          "args": [
+            "-y",
+            "@playwright/mcp@latest"
+          ]
+        }
+      }
+    },
+    "terraform": {
+      "description": "Imported from Windsurf (docker)",
+      "transports": {
+        "docker": {
+          "type": "stdio",
+          "command": "podman",
+          "args": [
+            "run",
+            "-i",
+            "--name",
+            "terraform-mcp-server",
+            "--rm",
+            "hashicorp/terraform-mcp-server"
+          ]
+        }
+      }
+    },
+    "cloudflare-docs": {
+      "description": "Search the Cloudflare documentation.",
+      "transports": {
+        "npx": {
+          "type": "stdio",
+          "command": "npx",
+          "args": [
+            "-y",
+            "mcp-remote",
+            "https://docs.mcp.cloudflare.com/mcp"
+          ]
+        }
+      }
+    },
+    "atlassian-mcp-server": {
+      "description": "Imported from Cursor (sse)",
+      "transports": {
+        "sse": {
+          "type": "sse",
+          "url": "https://mcp.atlassian.com/v1/sse"
+        }
+      }
+    },
+    "github-mcp-server-windsurf": {
+      "description": "Imported from Windsurf (custom)",
+      "transports": {
+        "custom": {
+          "type": "stdio",
+          "command": "/Users/timothy.bryant/.config/bin/utilities/gh_token_mcp.sh",
+          "args": [
+            "windsurf"
+          ],
+          "env": {
+            "GITHUB_TOOLSETS": "repos,issues,pull_requests,code_security"
+          }
+        }
+      }
+    },
+    "github-mcp-server-cursor": {
+      "description": "Imported from Cursor (custom)",
+      "transports": {
+        "custom": {
+          "type": "stdio",
+          "command": "/Users/timothy.bryant/.config/bin/utilities/gh_token_mcp.sh",
+          "args": [
+            "cursor"
+          ],
+          "env": {
+            "GITHUB_TOOLSETS": "repos,issues,pull_requests,code_security"
+          }
+        }
+      }
+    },
+    "github-mcp-server-claude-code": {
+      "description": "Imported from Claude Code (custom)",
+      "transports": {
+        "custom": {
+          "type": "stdio",
+          "command": "/Users/timothy.bryant/.config/bin/utilities/gh_token_mcp.sh",
+          "args": [
+            "claude-code"
+          ],
+          "env": {
+            "GITHUB_TOOLSETS": "repos,issues,pull_requests,code_security"
+          }
+        }
+      }
+    },
+    "fetch": {
+      "description": "Imported from Windsurf (uvx)",
+      "transports": {
+        "uvx": {
+          "type": "stdio",
+          "command": "uvx",
+          "args": [
+            "mcp-server-fetch"
+          ]
+        }
+      }
+    },
+    "filesystem": {
+      "description": "Imported from Windsurf (npx)",
+      "transports": {
+        "npx": {
+          "type": "stdio",
+          "command": "npx",
+          "args": [
+            "-y",
+            "@modelcontextprotocol/server-filesystem",
+            "/Users/timothy.bryant/DEV",
+            "/Users/timothy.bryant/ghq"
+          ]
+        }
+      }
+    },
+    "git": {
+      "description": "Imported from Windsurf (uvx)",
+      "transports": {
+        "uvx": {
+          "type": "stdio",
+          "command": "uvx",
+          "args": [
+            "mcp-server-git"
+          ]
+        }
+      }
+    },
+    "memory": {
+      "description": "Imported from Windsurf (npx)",
+      "transports": {
+        "npx": {
+          "type": "stdio",
+          "command": "npx",
+          "args": [
+            "-y",
+            "@modelcontextprotocol/server-memory"
+          ],
+          "env": {
+            "MEMORY_FILE_PATH": ""
+          }
+        }
+      }
+    },
+    "postgresql": {
+      "description": "Imported from Windsurf (npx)",
+      "transports": {
+        "npx": {
+          "type": "stdio",
+          "command": "npx",
+          "args": [
+            "-y",
+            "@modelcontextprotocol/server-postgres",
+            "{{ onepasswordRead "op://Personal/cse-prod-rds-conn/credential" }}"
+          ]
+        }
+      }
+    },
+    "rootly": {
+      "description": "Imported from Windsurf (uvx)",
+      "transports": {
+        "uvx": {
+          "type": "stdio",
+          "command": "uvx",
+          "args": [
+            "--from",
+            "rootly-mcp-server",
+            "rootly-mcp-server"
+          ],
+          "env": {
+            "ROOTLY_API_TOKEN": "{{ onepasswordRead "op://Personal/rootly-mcp-server-token/credential" }}"
+          }
+        }
+      }
+    },
+    "sequential-thinking": {
+      "description": "Imported from Windsurf (npx)",
+      "transports": {
+        "npx": {
+          "type": "stdio",
+          "command": "npx",
+          "args": [
+            "-y",
+            "@modelcontextprotocol/server-sequential-thinking"
+          ]
+        }
+      }
+    },
+    "time": {
+      "description": "Imported from Windsurf (uvx)",
+      "transports": {
+        "uvx": {
+          "type": "stdio",
+          "command": "uvx",
+          "args": [
+            "mcp-server-time"
+          ]
+        }
+      }
+    },
+    "context7": {
+      "description": "Imported from Windsurf (sse)",
+      "transports": {
+        "sse": {
+          "type": "sse",
+          "url": "https://mcp.context7.com/mcp",
+          "headers": {
+            "CONTEXT7_API_KEY": "{{ onepasswordRead "op://Personal/Context7/api-key" }}"
+          }
+        }
+      }
+    },
+    "server-puppeteer": {
+      "description": "Imported from Claude Code (stdio)",
+      "transports": {
+        "custom": {
+          "type": "stdio",
+          "command": "/Users/timothy.bryant/.local/state/fnm_multishells/91001_1754413218977/bin/node",
+          "args": [
+            "/Users/timothy.bryant/Library/Application Support/fnm/node-versions/v21.1.0/installation/lib/node_modules/@modelcontextprotocol/server-puppeteer/dist/index.js"
+          ]
+        }
+      }
+    }
+  }
+}

@@ -10,6 +10,14 @@
         "claude-code",
         "windsurf"
       ]
+    },
+    "find-skills": {
+      "name": "find-skills",
+      "source": "~/.cursor/skills/find-skills",
+      "source_type": "local",
+      "agents": [
+        "cursor"
+      ]
     }
   },
   "rules_dir": "~/.one-skills/rules",
