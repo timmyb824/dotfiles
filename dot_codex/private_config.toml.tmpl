@@ -9,17 +9,38 @@ base_url = "{{ onepasswordRead "op://Personal/litellm-codex/hostname" }}"
 env_key = "OPENAI_API_KEY"
 supports_websockets = false
 
-[mcp_servers.fetch]
-command = "npx"
-args = ["mcp-fetch-server"]
-
-[mcp_servers.sequential-thinking]
-command = "npx"
-args = ["-y", "@modelcontextprotocol/server-sequential-thinking"]
-
 [notice.model_migrations]
 "gpt-5.3-codex" = "gpt-5.4"
 "gpt-5.1-codex" = "gpt-5.3-codex"
+
+[mcp_servers.airis-mcp-gateway-codex]
+url = "http://192.168.86.53:9400/mcp"
+
+[mcp_servers.cloudflare-docs]
+command = "npx"
+args = [
+    "-y",
+    "mcp-remote",
+    "https://docs.mcp.cloudflare.com/mcp",
+]
+
+[mcp_servers.mcp-playwright]
+command = "npx"
+args = [
+    "-y",
+    "@playwright/mcp@latest",
+]
+
+[mcp_servers.terraform]
+command = "podman"
+args = [
+    "run",
+    "-i",
+    "--name",
+    "terraform-mcp-server",
+    "--rm",
+    "hashicorp/terraform-mcp-server",
+]
 
 [projects."/Users/timothybryant/DEV/projects/one-skills-manager"]
 trust_level = "trusted"

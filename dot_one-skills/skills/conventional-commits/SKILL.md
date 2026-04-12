@@ -1,5 +1,3 @@
-
-
 ---
 name: conventional-commits
 description: This skill should be used when creating Git commits to ensure they follow the Conventional Commits specification. It provides guidance on commit message structure, types, scopes, and best practices for writing clear, consistent, and automated-friendly commit messages. Use when committing code changes or reviewing commit history.

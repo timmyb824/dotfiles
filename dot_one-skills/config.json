@@ -8,7 +8,8 @@
       "source_type": "local",
       "agents": [
         "claude-code",
-        "windsurf"
+        "windsurf",
+        "codex"
       ]
     },
     "find-skills": {
@@ -16,7 +17,8 @@
       "source": "~/.cursor/skills/find-skills",
       "source_type": "local",
       "agents": [
-        "cursor"
+        "cursor",
+        "codex"
       ]
     }
   },
@@ -26,7 +28,8 @@
       "name": "python-development.md",
       "source": "~/.one-skills/rules/python-development.md",
       "agents": [
-        "claude-code"
+        "claude-code",
+        "codex"
       ]
     },
     "windsurf-global-rules.md": {

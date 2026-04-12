@@ -1,10 +1,11 @@
 {
-  "active_profile": "work",
+  "active_profile": "personal",
   "profiles": {
     "personal": {
       "name": "personal",
       "mcp_servers": {
         "airis-mcp-gateway": "sse",
+        "airis-mcp-gateway-codex": "sse",
         "cloudflare-docs": "npx",
         "mcp-playwright": "npx",
         "terraform": "docker"
@@ -17,6 +18,10 @@
         "windsurf": {
           "enabled": true,
           "mcp_scope": "local"
+        },
+        "codex": {
+          "enabled": true,
+          "mcp_scope": "local"
         }
       },
       "agent_overrides": {
@@ -27,7 +32,15 @@
       "agent_exclusions": {
         "claude-code": [
           "mcp-playwright"
+        ],
+        "codex": [
+          "airis-mcp-gateway"
         ]
+      },
+      "last_synced": {
+        "claude-code": "2026-04-12T18:39:41.556831+00:00",
+        "windsurf": "2026-04-12T18:39:41.556831+00:00",
+        "codex": "2026-04-12T18:39:41.556831+00:00"
       }
     },
     "work": {
@@ -76,11 +89,6 @@
           "github-mcp-server-cursor",
           "atlassian-mcp-server"
         ]
-      },
-      "last_synced": {
-        "windsurf": "2026-04-09T01:46:21.395607+00:00",
-        "cursor": "2026-04-09T01:46:21.395607+00:00",
-        "claude-code": "2026-04-09T01:46:21.395607+00:00"
       }
     }
   }
