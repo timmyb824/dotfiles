@@ -188,4 +188,5 @@
   "isort.check": true,
   "python.useEnvironmentsExtension": false,
   "python.venvFolders": ["/Users/timothybryant/uv/virtualenvs"],
+  "claudeCode.preferredLocation": "panel",
 }
