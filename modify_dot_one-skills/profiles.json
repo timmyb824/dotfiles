@@ -1,3 +1,16 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+tmp="$(mktemp)"
+trap 'rm -f "$tmp"' EXIT
+cat > "$tmp"
+
+jq --slurpfile cur "$tmp" '
+  . as $managed
+  | $cur[0] as $current
+  | .active_profile = ($current.active_profile // $managed.active_profile)
+  | .profiles.personal.last_synced = ($current.profiles.personal.last_synced // .profiles.personal.last_synced)
+' <<'JSON'
 {
   "active_profile": "personal",
   "profiles": {
@@ -45,11 +58,6 @@
           "terraform-claude",
           "terraform-codex"
         ]
-      },
-      "last_synced": {
-        "claude-code": "2026-04-15T02:35:15.262816+00:00",
-        "windsurf": "2026-04-15T02:35:15.262816+00:00",
-        "codex": "2026-04-15T02:35:15.262816+00:00"
       }
     },
     "work": {
@@ -102,3 +110,4 @@
     }
   }
 }
+JSON
