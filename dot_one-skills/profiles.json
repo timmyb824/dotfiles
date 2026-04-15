@@ -5,10 +5,11 @@
       "name": "personal",
       "mcp_servers": {
         "airis-mcp-gateway": "sse",
-        "airis-mcp-gateway-codex": "sse",
         "cloudflare-docs": "npx",
         "mcp-playwright": "npx",
-        "terraform": "docker"
+        "terraform-claude": "custom",
+        "terraform-windsurf": "custom",
+        "terraform-codex": "custom"
       },
       "agents": {
         "claude-code": {
@@ -31,16 +32,24 @@
       },
       "agent_exclusions": {
         "claude-code": [
-          "mcp-playwright"
+          "mcp-playwright",
+          "terraform-codex",
+          "terraform-windsurf"
         ],
         "codex": [
-          "airis-mcp-gateway"
+          "airis-mcp-gateway",
+          "terraform-claude",
+          "terraform-windsurf"
+        ],
+        "windsurf": [
+          "terraform-claude",
+          "terraform-codex"
         ]
       },
       "last_synced": {
-        "claude-code": "2026-04-12T18:39:41.556831+00:00",
-        "windsurf": "2026-04-12T18:39:41.556831+00:00",
-        "codex": "2026-04-12T18:39:41.556831+00:00"
+        "claude-code": "2026-04-15T02:35:15.262816+00:00",
+        "windsurf": "2026-04-15T02:35:15.262816+00:00",
+        "codex": "2026-04-15T02:35:15.262816+00:00"
       }
     },
     "work": {

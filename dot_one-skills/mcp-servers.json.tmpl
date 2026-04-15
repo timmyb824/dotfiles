@@ -21,15 +21,6 @@
         }
       }
     },
-    "airis-mcp-gateway-codex": {
-      "description": "AIRIS MCP Gateway - Codex",
-      "transports": {
-        "sse": {
-          "type": "sse",
-          "url": "http://192.168.86.53:9400/mcp"
-        }
-      }
-    },
     "mcp-playwright": {
       "description": "Imported from Windsurf (npx)",
       "transports": {
@@ -43,19 +34,38 @@
         }
       }
     },
-    "terraform": {
-      "description": "Imported from Windsurf (docker)",
+    "terraform-windsurf": {
+      "description": "terraform MCP server for Windsurf (custom)",
       "transports": {
-        "docker": {
+        "custom": {
           "type": "stdio",
-          "command": "podman",
+          "command": "/Users/timothybryant/.one-skills/scripts/terraform_mcp.sh",
           "args": [
-            "run",
-            "-i",
-            "--name",
-            "terraform-mcp-server",
-            "--rm",
-            "hashicorp/terraform-mcp-server"
+            "windsurf"
+          ]
+        }
+      }
+    },
+    "terraform-codex": {
+      "description": "terraform MCP server for Codex (custom)",
+      "transports": {
+        "custom": {
+          "type": "stdio",
+          "command": "/Users/timothybryant/.one-skills/scripts/terraform_mcp.sh",
+          "args": [
+            "codex"
+          ]
+        }
+      }
+    },
+    "terraform-claude": {
+      "description": "terraform MCP server for Claude (custom)",
+      "transports": {
+        "custom": {
+          "type": "stdio",
+          "command": "/Users/timothybryant/.one-skills/scripts/terraform_mcp.sh",
+          "args": [
+            "claude"
           ]
         }
       }
