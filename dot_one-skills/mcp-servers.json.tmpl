@@ -39,7 +39,7 @@
       "transports": {
         "custom": {
           "type": "stdio",
-          "command": "/Users/timothybryant/.one-skills/scripts/terraform_mcp.sh",
+          "command": "$HOME/.config/bin/utilities/terraform_mcp.sh",
           "args": [
             "windsurf"
           ]
@@ -51,22 +51,52 @@
       "transports": {
         "custom": {
           "type": "stdio",
-          "command": "/Users/timothybryant/.one-skills/scripts/terraform_mcp.sh",
+          "command": "$HOME/.config/bin/utilities/terraform_mcp.sh",
           "args": [
             "codex"
           ]
         }
       }
     },
-    "terraform-claude": {
+    "terraform-claude-code": {
       "description": "terraform MCP server for Claude (custom)",
       "transports": {
         "custom": {
           "type": "stdio",
-          "command": "/Users/timothybryant/.one-skills/scripts/terraform_mcp.sh",
+          "command": "$HOME/.config/bin/utilities/terraform_mcp.sh",
           "args": [
             "claude"
           ]
+        }
+      }
+    },
+    "terraform-cursor": {
+      "description": "terraform MCP server for Cursor (custom)",
+      "transports": {
+        "custom": {
+          "type": "stdio",
+          "command": "$HOME/.config/bin/utilities/terraform_mcp.sh",
+          "args": [
+            "cursor"
+          ]
+        }
+      }
+    },
+    "cloudflare": {
+      "description": "Cloudflare MCP server",
+      "transports": {
+        "npx": {
+          "type": "stdio",
+          "command": "npx",
+          "args": [
+            "-y",
+            "@cloudflare/mcp-server-cloudflare@latest",
+            "run"
+          ],
+          "env": {
+            "CLOUDFLARE_ACCOUNT_ID": "{{ onepasswordRead "op://Personal/cloudflare/account-id" }}",
+            "CLOUDFLARE_API_TOKEN": "{{ onepasswordRead "op://Personal/cloudflare/read-all-token" }}"
+          }
         }
       }
     },
@@ -98,7 +128,7 @@
       "transports": {
         "custom": {
           "type": "stdio",
-          "command": "/Users/timothy.bryant/.config/bin/utilities/gh_token_mcp.sh",
+          "command": "$HOME/.config/bin/utilities/gh_token_mcp.sh",
           "args": [
             "windsurf"
           ],
@@ -113,7 +143,7 @@
       "transports": {
         "custom": {
           "type": "stdio",
-          "command": "/Users/timothy.bryant/.config/bin/utilities/gh_token_mcp.sh",
+          "command": "$HOME/.config/bin/utilities/gh_token_mcp.sh",
           "args": [
             "cursor"
           ],
@@ -128,9 +158,24 @@
       "transports": {
         "custom": {
           "type": "stdio",
-          "command": "/Users/timothy.bryant/.config/bin/utilities/gh_token_mcp.sh",
+          "command": "$HOME/.config/bin/utilities/gh_token_mcp.sh",
           "args": [
             "claude-code"
+          ],
+          "env": {
+            "GITHUB_TOOLSETS": "repos,issues,pull_requests,code_security"
+          }
+        }
+      }
+    },
+    "github-mcp-server-codex": {
+      "description": "Imported from Codex (custom)",
+      "transports": {
+        "custom": {
+          "type": "stdio",
+          "command": "$HOME/.config/bin/utilities/gh_token_mcp.sh",
+          "args": [
+            "codex"
           ],
           "env": {
             "GITHUB_TOOLSETS": "repos,issues,pull_requests,code_security"
@@ -160,8 +205,8 @@
             "-y",
             "@modelcontextprotocol/server-filesystem",
             "~/DEV",
-            "/Users/timothy.bryant/ghq",
-            "/Users/timothy.bryant/DEV"
+            "$HOME/ghq",
+            "$HOME/DEV"
           ]
         }
       }
@@ -275,7 +320,7 @@
       }
     },
     "tavily": {
-      "description": "Imported from Windsurf (npx)",
+      "description": "Imported from Airis Gateway",
       "transports": {
         "npx": {
           "type": "stdio",
@@ -289,7 +334,7 @@
       }
     },
     "chrome-devtools": {
-      "description": "Imported from Claude Code (stdio)",
+      "description": "Imported from Airis Gateway",
       "transports": {
         "npx": {
           "type": "stdio",
@@ -298,10 +343,11 @@
             "-y",
             "chrome-devtools-mcp@latest"
           ]
+        }
       }
     },
     "morphllm": {
-      "description": "Imported from Claude Code (stdio)",
+      "description": "Imported from Airis Gateway",
       "transports": {
         "npx": {
           "type": "stdio",
@@ -314,11 +360,11 @@
             "MORPH_API_KEY": "{{ onepasswordRead "op://Personal/Morphllm/demo-api-key" }}",
             "ENABLED_TOOLS": "edit_file,warpgrep_codebase_search"
           }
-        } 
+        }
       }
     },
     "magic": {
-      "description": "Imported from Claude Code (stdio)",
+      "description": "Imported from Airis Gateway",
       "transports": {
         "npx": {
           "type": "stdio",
@@ -338,9 +384,9 @@
       "transports": {
         "custom": {
           "type": "stdio",
-          "command": "/Users/timothy.bryant/.local/state/fnm_multishells/91001_1754413218977/bin/node",
+          "command": "$HOME/.local/state/fnm_multishells/91001_1754413218977/bin/node",
           "args": [
-            "/Users/timothy.bryant/Library/Application Support/fnm/node-versions/v21.1.0/installation/lib/node_modules/@modelcontextprotocol/server-puppeteer/dist/index.js"
+            "$HOME/Library/Application Support/fnm/node-versions/v21.1.0/installation/lib/node_modules/@modelcontextprotocol/server-puppeteer/dist/index.js"
           ]
         }
       }

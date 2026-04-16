@@ -18,11 +18,25 @@ jq --slurpfile cur "$tmp" '
       "name": "personal",
       "mcp_servers": {
         "airis-mcp-gateway": "sse",
+        "chrome-devtools": "npx",
         "cloudflare-docs": "npx",
-        "mcp-playwright": "npx",
-        "terraform-claude": "custom",
+        "cloudflare": "npx",
+        "context7": "npx",
+        "terraform-claude-code": "custom",
         "terraform-windsurf": "custom",
-        "terraform-codex": "custom"
+        "terraform-codex": "custom",
+        "github-mcp-server-codex": "custom",
+        "fetch": "uvx",
+        "filesystem": "npx",
+        "git": "uvx",
+        "magic": "npx",
+        "mcp-playwright": "npx",
+        "memory": "npx",
+        "morphllm": "npx",
+        "sequential-thinking": "npx",
+        "server-puppeteer": "custom",
+        "tavily": "npx",
+        "time": "uvx"
       },
       "agents": {
         "claude-code": {
@@ -47,16 +61,28 @@ jq --slurpfile cur "$tmp" '
         "claude-code": [
           "mcp-playwright",
           "terraform-codex",
-          "terraform-windsurf"
+          "terraform-windsurf",
+          "github-mcp-server-codex",
+          "context7",
+          "tavily",
+          "chrome-devtools",
+          "morphllm",
+          "magic"
         ],
         "codex": [
           "airis-mcp-gateway",
-          "terraform-claude",
-          "terraform-windsurf"
+          "terraform-claude-code",
+          "terraform-windsurf",
         ],
         "windsurf": [
-          "terraform-claude",
-          "terraform-codex"
+          "terraform-claude-code",
+          "terraform-codex",
+          "context7",
+          "tavily",
+          "chrome-devtools",
+          "morphllm",
+          "magic",
+          "github-mcp-server-codex"
         ]
       }
     },
@@ -75,6 +101,7 @@ jq --slurpfile cur "$tmp" '
         "rootly": "uvx",
         "sequential-thinking": "npx",
         "server-puppeteer": "custom",
+        "terraform-cursor": "custom",
         "time": "uvx"
       },
       "agents": {
@@ -95,7 +122,8 @@ jq --slurpfile cur "$tmp" '
         "windsurf": [
           "atlassian-mcp-server",
           "github-mcp-server-cursor",
-          "github-mcp-server-claude-code"
+          "github-mcp-server-claude-code",
+          "terraform-cursor"
         ],
         "cursor": [
           "github-mcp-server-windsurf",
@@ -104,7 +132,8 @@ jq --slurpfile cur "$tmp" '
         "claude-code": [
           "github-mcp-server-windsurf",
           "github-mcp-server-cursor",
-          "atlassian-mcp-server"
+          "atlassian-mcp-server",
+          "terraform-cursor"
         ]
       }
     }

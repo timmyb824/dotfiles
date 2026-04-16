@@ -1,0 +1,19 @@
+#!/bin/sh
+
+if [ $# -eq 1 ]; then
+    name=github-mcp-server-${1}
+else
+    name=github-mcp-server
+fi
+
+{{ if (or (eq .chezmoi.hostname "Timothys-MacBook-Pro") (eq .chezmoi.hostname "Timothys-MacBook-Air") (eq .chezmoi.hostname "timothys-macbook-air") (eq .chezmoi.hostname "Timmybs-MacBook-Pro") (eq .chezmoi.os "linux")) -}}
+export GITHUB_PERSONAL_ACCESS_TOKEN={{ onepasswordRead "op://Personal/github.com-personal/gh_http_token" }}
+{{ else -}}
+export GITHUB_PERSONAL_ACCESS_TOKEN={{ onepasswordRead "op://Personal/ss-github-token/mcp-token" }}
+{{ end -}}
+
+if command -v docker &> /dev/null; then
+    exec docker run -i --rm --name "$name" -e GITHUB_PERSONAL_ACCESS_TOKEN -e GITHUB_TOOLSETS ghcr.io/github/github-mcp-server
+else
+    exec podman run -i --rm --name "$name" -e GITHUB_PERSONAL_ACCESS_TOKEN -e GITHUB_TOOLSETS ghcr.io/github/github-mcp-server
+fi
