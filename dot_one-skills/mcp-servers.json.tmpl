@@ -159,8 +159,9 @@
           "args": [
             "-y",
             "@modelcontextprotocol/server-filesystem",
-            "/Users/timothy.bryant/DEV",
-            "/Users/timothy.bryant/ghq"
+            "~/DEV",
+            "/Users/timothy.bryant/ghq",
+            "/Users/timothy.bryant/DEV"
           ]
         }
       }
@@ -257,6 +258,77 @@
           "url": "https://mcp.context7.com/mcp",
           "headers": {
             "CONTEXT7_API_KEY": "{{ onepasswordRead "op://Personal/Context7/api-key" }}"
+          }
+        },
+        "npx": {
+          "type": "stdio",
+          "command": "npx",
+          "args": [
+            "-y",
+            "mcp-remote",
+            "https://mcp.context7.com/mcp"
+          ],
+          "env": {
+            "CONTEXT7_API_KEY": "{{ onepasswordRead "op://Personal/Context7/api-key" }}"
+          }
+        }
+      }
+    },
+    "tavily": {
+      "description": "Imported from Windsurf (npx)",
+      "transports": {
+        "npx": {
+          "type": "stdio",
+          "command": "npx",
+          "args": [
+            "-y",
+            "mcp-remote",
+            "https://mcp.tavily.com/mcp/?tavilyApiKey={{ onepasswordRead "op://Personal/Tavily/api-key" }}"
+          ]
+        }
+      }
+    },
+    "chrome-devtools": {
+      "description": "Imported from Claude Code (stdio)",
+      "transports": {
+        "npx": {
+          "type": "stdio",
+          "command": "npx",
+          "args": [
+            "-y",
+            "chrome-devtools-mcp@latest"
+          ]
+      }
+    },
+    "morphllm": {
+      "description": "Imported from Claude Code (stdio)",
+      "transports": {
+        "npx": {
+          "type": "stdio",
+          "command": "npx",
+          "args": [
+            "-y",
+            "@morphllm/morphmcp"
+          ],
+          "env": {
+            "MORPH_API_KEY": "{{ onepasswordRead "op://Personal/Morphllm/demo-api-key" }}",
+            "ENABLED_TOOLS": "edit_file,warpgrep_codebase_search"
+          }
+        } 
+      }
+    },
+    "magic": {
+      "description": "Imported from Claude Code (stdio)",
+      "transports": {
+        "npx": {
+          "type": "stdio",
+          "command": "npx",
+          "args": [
+            "-y",
+            "@21st-dev/magic@latest"
+          ],
+          "env": {
+            "API_KEY": "{{ onepasswordRead "op://Personal/magic-mcp/dev-api-key" }}"
           }
         }
       }
