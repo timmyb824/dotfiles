@@ -72,7 +72,7 @@ jq --slurpfile cur "$tmp" '
         "codex": [
           "airis-mcp-gateway",
           "terraform-claude-code",
-          "terraform-windsurf",
+          "terraform-windsurf"
         ],
         "windsurf": [
           "terraform-claude-code",
