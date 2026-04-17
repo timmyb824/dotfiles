@@ -85,19 +85,13 @@
     "cloudflare": {
       "description": "Cloudflare MCP server",
       "transports": {
-        "npx": {
-          "type": "stdio",
-          "command": "npx",
-          "args": [
-            "-y",
-            "@cloudflare/mcp-server-cloudflare@latest",
-            "run"
-          ],
-          "env": {
-            "CLOUDFLARE_ACCOUNT_ID": "{{ onepasswordRead "op://Personal/cloudflare/account-id" }}",
-            "CLOUDFLARE_API_TOKEN": "{{ onepasswordRead "op://Personal/cloudflare/read-all-token" }}"
-          }
-        }
+        "sse": {
+          "type": "sse",
+          "url": "https://mcp.cloudflare.com/mcp",
+          "headers": {
+            "Authorization": "Bearer {{ onepasswordRead "op://Personal/cloudflare/read-all-token" }}"
+            }
+         }
       }
     },
     "cloudflare-docs": {
@@ -384,9 +378,10 @@
       "transports": {
         "custom": {
           "type": "stdio",
-          "command": "$HOME/.local/state/fnm_multishells/91001_1754413218977/bin/node",
+          "command": "npx",
           "args": [
-            "$HOME/Library/Application Support/fnm/node-versions/v21.1.0/installation/lib/node_modules/@modelcontextprotocol/server-puppeteer/dist/index.js"
+            "-y",
+            "@modelcontextprotocol/server-puppeteer"
           ]
         }
       }

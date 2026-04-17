@@ -7,7 +7,9 @@ cat > "$tmp"
 
 jq --slurpfile cur "$tmp" '
   . as $managed
-  | $cur[0] as $current
+  | $cur[
+  0
+] as $current
   | .active_profile = ($current.active_profile // $managed.active_profile)
   | .profiles.personal.last_synced = ($current.profiles.personal.last_synced // .profiles.personal.last_synced)
 ' <<'JSON'
@@ -20,7 +22,7 @@ jq --slurpfile cur "$tmp" '
         "airis-mcp-gateway": "sse",
         "chrome-devtools": "npx",
         "cloudflare-docs": "npx",
-        "cloudflare": "npx",
+        "cloudflare": "sse",
         "context7": "npx",
         "terraform-claude-code": "custom",
         "terraform-windsurf": "custom",

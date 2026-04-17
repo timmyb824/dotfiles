@@ -14,3 +14,4 @@ paths:
 7. Use `rich` for console output
 8. Imports should also be at the top of the file
 9. Use python named expressions (:=) when appropriate
+10. All calls to `requests.get()` should include a timeout parameter, e.g., `requests.get(url, timeout=10)`

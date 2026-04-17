@@ -9,6 +9,7 @@ alias cd..="cd .."
 alias cdicloud="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs"
 alias chez="chezmoi"
 alias codex='OPENAI_API_KEY="{{ onepasswordRead "op://Personal/litellm-codex/credential" }}" codex'
+alias claudeapi='ANTHROPIC_BASE_URL={{ onepasswordRead "op://Personal/litellm-claude-code/hostname" }} ANTHROPIC_AUTH_TOKEN={{ onepasswordRead "op://Personal/litellm-claude-code/credential" }} claude'
 alias fdn='find . -type d -name' # fd is a seperate command
 alias ff="find . -type f -name"
 alias gop="gitopolis"
@@ -118,6 +119,8 @@ alias btmm="btm --theme gruvbox"
 alias cat="bat"
 alias cd..="cd .."
 alias chez="chezmoi"
+alias codex='OPENAI_API_KEY="{{ onepasswordRead "op://Personal/litellm-codex/credential" }}" codex'
+alias claudeapi='ANTHROPIC_BASE_URL={{ onepasswordRead "op://Personal/litellm-claude-code/hostname" }} ANTHROPIC_AUTH_TOKEN={{ onepasswordRead "op://Personal/litellm-claude-code/credential" }} claude'
 alias fdn='find . -type d -name' # fd is a seperate command
 alias ff="find . -type f -name"
 alias gop="gitopolis"
