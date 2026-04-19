@@ -12,9 +12,9 @@ def identify_downloads_folder():
 def organize_folder(folder):
     """Organize files in the given folder."""
     file_types = {
-        "Images": [".jpeg", ".jpg", ".png", ".gif", ".HEIC"],
-        "Videos": [".mp4", ".avi", ".mov"],
-        "Documents": [
+        "IMAGES": [".jpeg", ".jpg", ".png", ".gif", ".HEIC"],
+        "VIDEOS": [".mp4", ".avi", ".mov"],
+        "DOCUMENTS": [
             ".pdf",
             ".docx",
             ".txt",
@@ -24,13 +24,13 @@ def organize_folder(folder):
             ".xls",
             ".list",
         ],
-        "Archives": [".zip", ".rar", ".tar", ".gz", ".deb", ".bz2", ".tgz", ".rpm"],
-        "Executables": [".exe", ".msi"],
-        "Scripts": [".py", ".sh", ".bat", ".tf", ".tfvars", ".hcl", ".sql", ".tfstate"],
-        "Music": [".mp3", ".wav"],
-        "Apps": [".dmg", ".pkg", ".app", ".ismp7", ".vsix"],
-        "Webpages": [".html", ".htm", ".php", ".css", ".js"],
-        "Configuration": [
+        "ARCHIVES": [".zip", ".rar", ".tar", ".gz", ".deb", ".bz2", ".tgz", ".rpm"],
+        "EXECUTABLES": [".exe", ".msi"],
+        "SCRIPTS": [".py", ".sh", ".bat", ".tf", ".tfvars", ".hcl", ".sql", ".tfstate"],
+        "MUSIC": [".mp3", ".wav"],
+        "APPS": [".dmg", ".pkg", ".app", ".ismp7", ".vsix"],
+        "WEBPAGES": [".html", ".htm", ".php", ".css", ".js"],
+        "CONFIGURATION": [
             ".json",
             ".xml",
             ".yaml",
@@ -42,7 +42,7 @@ def organize_folder(folder):
             ".conf",
             ".properties",
         ],
-        "3D-Printing": [".stl", ".3mf"],
+        "3D-PRINTING": [".stl", ".3mf"],
     }
 
     created_dirs = set()
