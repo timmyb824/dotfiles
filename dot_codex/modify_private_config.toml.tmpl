@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+tmp="$(mktemp)"
+trap 'rm -f "$tmp"' EXIT
+cat > "$tmp"
+
+cat <<'TOML'
+model = "gpt-5.3-codex"
+openai_base_url = "{{ onepasswordRead "op://Personal/litellm-codex/hostname" }}"
+forced_login_method = "api"
+model_provider = "litellm"
+
+[model_providers.litellm]
+name = "LiteLLM"
+base_url = "{{ onepasswordRead "op://Personal/litellm-codex/hostname" }}"
+env_key = "OPENAI_API_KEY"
+supports_websockets = false
+TOML
+
+if [[ -s "$tmp" ]]; then
+  tail -n +11 "$tmp"
+fi
