@@ -17,6 +17,7 @@ DEV/
 .aws/
 .kube/
 .hyper.js
+.claude/CLAUDE.md
 {{- end }}
 
 {{ if (ne .chezmoi.os "darwin") -}}
