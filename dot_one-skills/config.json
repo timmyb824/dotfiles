@@ -13,12 +13,6 @@
       "source": "~/.cursor/skills/find-skills",
       "source_type": "local",
       "agents": ["cursor", "codex"]
-    },
-    "security-check-remediate": {
-      "name": "security-check-remediate",
-      "source": "~/.one-skills/skills/security-check-remediate",
-      "source_type": "local",
-      "agents": ["shared"]
     }
   },
   "rules_dir": "~/.one-skills/rules",
