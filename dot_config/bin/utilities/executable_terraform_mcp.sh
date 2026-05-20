@@ -6,8 +6,8 @@ else
     name=terraform-mcp-server
 fi
 
-if command -v docker &> /dev/null; then
-    docker run -i --name $name --rm hashicorp/terraform-mcp-server
+if command -v docker &>/dev/null; then
+    docker run -i --name $name --rm docker.io/hashicorp/terraform-mcp-server
 else
-    podman run -i --name $name --rm hashicorp/terraform-mcp-server
+    podman run -i --name $name --rm docker.io/hashicorp/terraform-mcp-server
 fi
