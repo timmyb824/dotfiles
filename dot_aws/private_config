@@ -2,10 +2,6 @@
 region = us-east-1
 output = json
 
-[profile cse-prd-acct]
-region = us-east-1
-output = json
-
 [profile aws-arch-lab-deployer]
 region = us-east-1
 output = json
