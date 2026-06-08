@@ -2,7 +2,7 @@
 [[ -e "/home/tbryant/oracle-cli/lib/python3.11/site-packages/oci_cli/bin/oci_autocomplete.sh" ]] && source "/home/tbryant/oracle-cli/lib/python3.11/site-packages/oci_cli/bin/oci_autocomplete.sh"
 {{ end -}}
 
-{{- if (or (eq .chezmoi.hostname "Timothys-MacBook-Pro") (eq .chezmoi.hostname "Timothys-MacBook-Air") (eq .chezmoi.hostname "Timmybs-MacBook-Pro")) }}
+{{- if (or (eq .chezmoi.hostname "Timothys-MacBook-Pro") (eq .chezmoi.hostname "Timothys-MacBook-Air") (eq .chezmoi.hostname "Timmybs-MacBook-Pro") (eq .chezmoi.hostname "timmybs-macbook-pro")) }}
 if command -v ngrok &>/dev/null; then
   eval "$(ngrok completion)"
 fi

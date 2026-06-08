@@ -62,13 +62,13 @@
   },
 
   // EDITOR LANGUAGE SETTINGS
-  "python.languageServer": "Default",
+  "python.languageServer": "None",
   "shellformat.path": "/opt/homebrew/bin/shfmt",
   "flake8.args": ["--max-line-length=88"],
 
   // WORKBENCH SETTINGS
-  "workbench.colorTheme": "Catppuccin Macchiato",
-  "workbench.iconTheme": "catppuccin-macchiato",
+  "workbench.colorTheme": "WebStorm Darker",
+  "workbench.iconTheme": "catppuccin-frappe",
   "explorer.compactFolders": false,
   "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": false,

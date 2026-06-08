@@ -6,7 +6,7 @@ else
     name=github-mcp-server
 fi
 
-{{ if (or (eq .chezmoi.hostname "Timothys-MacBook-Pro") (eq .chezmoi.hostname "Timothys-MacBook-Air") (eq .chezmoi.hostname "timothys-macbook-air") (eq .chezmoi.hostname "Timmybs-MacBook-Pro") (eq .chezmoi.os "linux")) -}}
+{{ if (or (eq .chezmoi.hostname "Timothys-MacBook-Pro") (eq .chezmoi.hostname "Timothys-MacBook-Air") (eq .chezmoi.hostname "timothys-macbook-air") (eq .chezmoi.hostname "Timmybs-MacBook-Pro") (eq .chezmoi.hostname "timmybs-macbook-pro") (eq .chezmoi.os "linux")) -}}
 export GITHUB_PERSONAL_ACCESS_TOKEN={{ onepasswordRead "op://Personal/github.com-personal/gh_http_token" }}
 {{ else -}}
 export GITHUB_PERSONAL_ACCESS_TOKEN={{ onepasswordRead "op://Personal/ss-github-token/mcp-token" }}

@@ -1,6 +1,6 @@
 k9s:
   liveViewAutoRefresh:
-  {{ if (or (eq .chezmoi.hostname "Timothys-MacBook-Pro") (eq .chezmoi.hostname "timothys-macbook-air") (eq .chezmoi.hostname "Timothys-MacBook-Air") (eq .chezmoi.hostname "Timmybs-MacBook-Pro")) -}}
+  {{ if (or (eq .chezmoi.hostname "Timothys-MacBook-Pro") (eq .chezmoi.hostname "timothys-macbook-air") (eq .chezmoi.hostname "Timothys-MacBook-Air") (eq .chezmoi.hostname "Timmybs-MacBook-Pro") (eq .chezmoi.hostname "timmybs-macbook-pro")) -}}
   screenDumpDir: /Users/timothybryant/k9s/screen-dumps
   {{ else if (and (ne .chezmoi.hostname "Timothys-MacBook-Pro") (ne .chezmoi.hostname "Timothys-MacBook-Air") (ne .chezmoi.hostname "timothys-macbook-air") (ne .chezmoi.hostname "Timmybs-MacBook-Pro") (ne .chezmoi.os "linux")) -}}
   screenDumpDir: /Users/timothy.bryant/k9s/screen-dumps

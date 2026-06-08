@@ -1,5 +1,5 @@
-{{ if (or (eq .chezmoi.hostname "Timothys-MacBook-Pro") (eq .chezmoi.hostname "Timothys-MacBook-Air") (eq .chezmoi.hostname "Timmybs-MacBook-Pro")) -}}
+{{ if (or (eq .chezmoi.hostname "Timothys-MacBook-Pro") (eq .chezmoi.hostname "Timothys-MacBook-Air") (eq .chezmoi.hostname "Timmybs-MacBook-Pro") (eq .chezmoi.hostname "timmybs-macbook-pro")) -}}
 {{- onepasswordDocument "personal_nvim_coc-settings" -}}
-{{ else if (and (ne .chezmoi.hostname "Timothys-MacBook-Pro") (ne .chezmoi.hostname "Timothys-MacBook-Air") (ne .chezmoi.hostname "Timmybs-MacBook-Pro")) -}}
+{{ else if (and (ne .chezmoi.hostname "Timothys-MacBook-Pro") (ne .chezmoi.hostname "Timothys-MacBook-Air") (ne .chezmoi.hostname "Timmybs-MacBook-Pro") (ne .chezmoi.hostname "timmybs-macbook-pro")) -}}
 {{- onepasswordDocument "work_nvim_coc-settings" -}}
 {{ end -}}
