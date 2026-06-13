@@ -26,28 +26,28 @@ usage() {
 
 create_container() {
   local name="$1"
+  local quadlet_file="${QUADLET_DIR}/container-${name}.container"
 
   msg_info "Generating quadlet container file for: ${name}"
   mkdir -p "${QUADLET_DIR}"
-  cd "${QUADLET_DIR}" || exit 1
 
-  rm -f "${name}.container"
+  rm -f "${quadlet_file}"
 
-  if ! podlet --file . generate container "${name}"; then
+  if ! podlet --file "${quadlet_file}" generate container "${name}"; then
     msg_error "Failed to generate container file for: ${name}"
     exit 1
   fi
-  msg_ok "Generated: ${QUADLET_DIR}/${name}.container"
+  msg_ok "Generated: ${quadlet_file}"
 
   systemctl --user daemon-reload
 
-  msg_info "Starting service: ${name}.service"
-  if ! systemctl --user start "${name}.service"; then
-    msg_error "Failed to start ${name}.service"
+  msg_info "Starting service: container-${name}.service"
+  if ! systemctl --user start "container-${name}.service"; then
+    msg_error "Failed to start container-${name}.service"
     exit 1
   fi
 
-  if systemctl --user is-active --quiet "${name}.service"; then
+  if systemctl --user is-active --quiet "container-${name}.service"; then
     msg_ok "Container ${name} is running"
   else
     msg_error "Container ${name} is not running after start"
@@ -78,11 +78,11 @@ create_network() {
 
 delete_container() {
   local name="$1"
-  local unit_file="${QUADLET_DIR}/${name}.container"
+  local unit_file="${QUADLET_DIR}/container-${name}.container"
 
-  msg_info "Stopping service: ${name}.service"
-  systemctl --user stop "${name}.service" 2>/dev/null \
-    || msg_warn "Service ${name}.service was not running"
+  msg_info "Stopping service: container-${name}.service"
+  systemctl --user stop "container-${name}.service" 2>/dev/null \
+    || msg_warn "Service container-${name}.service was not running"
 
   msg_info "Removing quadlet file: ${unit_file}"
   rm -f "${unit_file}" || msg_warn "File ${unit_file} not found"
