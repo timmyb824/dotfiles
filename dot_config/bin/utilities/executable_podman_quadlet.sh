@@ -32,12 +32,18 @@ create_container() {
   mkdir -p "${QUADLET_DIR}"
 
   rm -f "${quadlet_file}"
+  systemctl --user daemon-reload
 
   if ! podlet --file "${quadlet_file}" generate container "${name}"; then
     msg_error "Failed to generate container file for: ${name}"
     exit 1
   fi
   msg_ok "Generated: ${quadlet_file}"
+
+  # Ensure the unit starts on boot; podlet does not add [Install] by default
+  if ! grep -q '^\[Install\]' "${quadlet_file}"; then
+    printf '\n[Install]\nWantedBy=default.target\n' >> "${quadlet_file}"
+  fi
 
   systemctl --user daemon-reload
 
