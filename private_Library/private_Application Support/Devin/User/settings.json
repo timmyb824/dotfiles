@@ -1,0 +1,237 @@
+{
+  // EDITOR SETTINGS
+  "editor.fontFamily": "TX02 Nerd Font, Berkeley Mono, Hack Nerd Font Mono, Fira Code, JetBrains Mono, Hack Nerd Font, Menlo, Monaco, Courier New, monospace",
+  "editor.fontSize": 15,
+  // "window.zoomLevel": -0.0,
+  "editor.fontLigatures": false,
+  "editor.fontWeight": "400",
+  "editor.formatOnPaste": false,
+  "editor.formatOnSave": true,
+  "editor.guides.bracketPairs": false,
+  "editor.guides.indentation": false,
+  "editor.inlineSuggest.enabled": true,
+  "editor.inlayHints.enabled": "off",
+  "editor.letterSpacing": 0.1,
+  "editor.lineHeight": 0,
+  "editor.linkedEditing": true,
+  "editor.renderWhitespace": "all",
+  "editor.snippetSuggestions": "top",
+  "editor.stickyScroll.enabled": true,
+  "editor.suggestSelection": "first",
+  "editor.minimap.enabled": false,
+  "editor.wordWrap": "off",
+  "diffEditor.ignoreTrimWhitespace": false,
+  "diffEditor.wordWrap": "off",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[dockerfile]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format",
+  },
+  "[gotmpl]": {
+    "editor.defaultFormatter": "golang.go",
+  },
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features",
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+  },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features",
+  },
+  "[lua]": {
+    "editor.defaultFormatter": "sumneko.lua",
+  },
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.formatOnType": true,
+  },
+  "[shellscript]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format",
+  },
+  "[terraform]": {
+    "editor.defaultFormatter": "hashicorp.terraform",
+  },
+  "[terraform-vars]": {
+    "editor.defaultFormatter": "hashicorp.terraform",
+  },
+  "[xml]": {
+    "editor.defaultFormatter": "DotJoshJohnson.xml",
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+  },
+
+  // EDITOR LANGUAGE SETTINGS
+  "python.languageServer": "Default",
+  "shellformat.path": "/opt/homebrew/bin/shfmt",
+  "flake8.args": ["--max-line-length=88"],
+
+  // WORKBENCH SETTINGS
+  "workbench.colorTheme": "One Dark Vivid",
+  "workbench.iconTheme": "catppuccin-macchiato",
+  "explorer.compactFolders": false,
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "files.associations": {
+    "*.html": "html",
+    "*.yaml": "yaml",
+    ".envrc": "properties",
+    ".env": "dotenv",
+    "*.config": "properties",
+    ".env*": "dotenv",
+    "*.sh": "shellscript",
+    "*.conf ": "properties",
+    "*.tf": "terraform",
+  },
+  "files.exclude": {
+    "**/.git": false,
+  },
+  "files.trimTrailingWhitespace": true,
+  "launch": {
+    "configurations": [],
+    "compounds": [],
+  },
+  "security.workspace.trust.untrustedFiles": "open",
+  "workbench.colorCustomizations": {
+    "editor.lineHighlightBackground": "#1073cf2d",
+    "editor.lineHighlightBorder": "#9fced11f",
+  },
+  "workbench.startupEditor": "none",
+
+  // TERMINAL SETTINGS
+  "terminal.integrated.fontSize": 15,
+  "terminal.integrated.fontFamily": "TX02 Nerd Font, Berkeley Mono, Hack Nerd Font Mono, Fira Code, JetBrains Mono, Hack Nerd Font, Menlo, Monaco, 'Courier New', monospace",
+  "terminal.integrated.cursorStyle": "line",
+  "terminal.integrated.scrollback": 10000,
+  "application.shellEnvironmentResolutionTimeout": 60,
+  "terminal.integrated.enableFileLinks": "on",
+  "terminal.integrated.enableMultiLinePasteWarning": "never",
+  "terminal.integrated.shellIntegration.enabled": true,
+
+  // OTHER SETTINGS
+  "redhat.telemetry.enabled": false,
+  "cSpell.ignoreWords": [
+    "GOPATH",
+    "Opsgenie",
+    "Runbook",
+    "VERACODE",
+    "esbenp",
+    "filippo",
+    "foxundermoon",
+    "gelf",
+    "mktemp",
+    "rsyslog",
+    "runbooks",
+    "simplisafe",
+    "sourcery",
+    "sudoer",
+    "sumneko",
+    "synologynas",
+    "tailscale",
+    "tbryant",
+    "tiomothybryant",
+  ],
+  "cSpell.userWords": [
+    "gelf",
+    "Opsgenie",
+    "rsyslog",
+    "Runbook",
+    "runbooks",
+    "simplisafe",
+    "sourcery",
+    "sudoer",
+    "synologynas",
+    "tailscale",
+    "tbryant",
+    "tiomothybryant",
+    "VERACODE",
+    "dotenv",
+  ],
+  "cSpell.diagnosticLevel": "Hint",
+  "git.autofetch": true,
+  "githubPullRequests.pullBranch": "never",
+
+  "sourcery.codeLens": true,
+  "go.toolsManagement.autoUpdate": true,
+  "[toml]": {
+    "editor.defaultFormatter": "tamasfe.even-better-toml",
+  },
+  "[dotenv]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format",
+  },
+  "[properties]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format",
+  },
+  "[ignore]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format",
+  },
+  "[dockercompose]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2,
+    "editor.autoIndent": "advanced",
+    "editor.quickSuggestions": {
+      "other": true,
+      "comments": false,
+      "strings": true,
+    },
+    "editor.defaultFormatter": "redhat.vscode-yaml",
+  },
+  "[github-actions-workflow]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml",
+  },
+  "explorer.confirmPasteNative": false,
+  "windsurfPyright.disableLanguageServices": true,
+  "vs-kubernetes": {
+    "vs-kubernetes.crd-code-completion": "disabled",
+  },
+  "terminal.integrated.showCommandHint": false,
+  "isort.check": true,
+  "python.useEnvironmentsExtension": false,
+  "python.venvFolders": ["/Users/timothybryant/uv/virtualenvs"],
+  "claudeCode.preferredLocation": "panel",
+  "windsurf.allowCascadeAccessGitignoreFiles": true,
+  "devin.allowCascadeAccessGitignoreFiles": true,
+  "devin.acp.enabledAgents": {
+    "claude-acp": true,
+  },
+  "devin.acp.preferredAgent": "claude-acp",
+  "editor.tokenColorCustomizations": {
+    "textMateRules": [
+      {
+        "name": "One Dark italic",
+        "scope": [
+          "comment",
+          "entity.other.attribute-name",
+          "keyword",
+          "markup.underline.link",
+          "storage.modifier",
+          "storage.type",
+          "string.url",
+          "variable.language.super",
+          "variable.language.this",
+        ],
+        "settings": {
+          "fontStyle": "italic",
+        },
+      },
+      {
+        "name": "One Dark italic reset",
+        "scope": [
+          "keyword.operator",
+          "keyword.other.type",
+          "storage.modifier.import",
+          "storage.modifier.package",
+          "storage.type.built-in",
+          "storage.type.function.arrow",
+          "storage.type.generic",
+          "storage.type.java",
+          "storage.type.primitive",
+        ],
+        "settings": {
+          "fontStyle": "",
+        },
+      },
+    ],
+  },
+  "makefile.configureOnOpen": true,
+}
