@@ -6,7 +6,7 @@
       "name": "conventional-commits",
       "source": "~/.one-skills/skills/conventional-commits",
       "source_type": "local",
-      "agents": ["claude-code", "shared"]
+      "agents": ["claude-code"]
     }
   },
   "rules_dir": "~/.one-skills/rules",
@@ -14,7 +14,7 @@
     "python-development.md": {
       "name": "python-development.md",
       "source": "~/.one-skills/rules/python-development.md",
-      "agents": ["claude-code", "shared"]
+      "agents": ["claude-code"]
     },
     "windsurf-global-rules.md": {
       "name": "windsurf-global-rules.md",
