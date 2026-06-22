@@ -48,10 +48,6 @@ jq --slurpfile cur "$tmp" '
         "windsurf": {
           "enabled": true,
           "mcp_scope": "local"
-        },
-        "codex": {
-          "enabled": true,
-          "mcp_scope": "local"
         }
       },
       "agent_overrides": {
@@ -92,8 +88,6 @@ jq --slurpfile cur "$tmp" '
       "name": "work",
       "mcp_servers": {
         "atlassian-mcp-server": "sse",
-        "github-mcp-server-windsurf": "custom",
-        "github-mcp-server-cursor": "custom",
         "github-mcp-server-claude-code": "custom",
         "fetch": "uvx",
         "filesystem": "npx",
@@ -107,35 +101,14 @@ jq --slurpfile cur "$tmp" '
         "time": "uvx"
       },
       "agents": {
-        "cursor": {
-          "enabled": true,
-          "mcp_scope": "local"
-        },
-        "windsurf": {
-          "enabled": true,
-          "mcp_scope": "local"
-        },
         "claude-code": {
           "enabled": true,
           "mcp_scope": "local"
         }
       },
       "agent_exclusions": {
-        "windsurf": [
-          "atlassian-mcp-server",
-          "github-mcp-server-cursor",
-          "github-mcp-server-claude-code",
-          "terraform-cursor"
-        ],
-        "cursor": [
-          "github-mcp-server-windsurf",
-          "github-mcp-server-claude-code"
-        ],
         "claude-code": [
-          "github-mcp-server-windsurf",
-          "github-mcp-server-cursor",
-          "atlassian-mcp-server",
-          "terraform-cursor"
+          "atlassian-mcp-server"
         ]
       }
     }

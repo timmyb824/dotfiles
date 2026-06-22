@@ -6,13 +6,7 @@
       "name": "conventional-commits",
       "source": "~/.one-skills/skills/conventional-commits",
       "source_type": "local",
-      "agents": ["claude-code", "windsurf", "codex"]
-    },
-    "find-skills": {
-      "name": "find-skills",
-      "source": "~/.cursor/skills/find-skills",
-      "source_type": "local",
-      "agents": ["cursor", "codex"]
+      "agents": ["claude-code", "shared"]
     }
   },
   "rules_dir": "~/.one-skills/rules",
@@ -20,17 +14,12 @@
     "python-development.md": {
       "name": "python-development.md",
       "source": "~/.one-skills/rules/python-development.md",
-      "agents": ["claude-code", "codex", "shared"]
+      "agents": ["claude-code", "shared"]
     },
     "windsurf-global-rules.md": {
       "name": "windsurf-global-rules.md",
       "source": "~/.codeium/windsurf/memories/global_rules.md",
       "agents": ["windsurf"]
-    },
-    "cursor-global-rules.md": {
-      "name": "cursor-global-rules.md",
-      "source": "~/.one-skills/rules/cursor-global-rules.md",
-      "agents": ["cursor"]
     }
   }
 }
