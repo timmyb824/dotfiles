@@ -18,6 +18,7 @@ DEV/
 .kube/
 .hyper.js
 .claude/CLAUDE.md
+.serena/serena_config.yml
 {{- end }}
 
 {{ if (ne .chezmoi.os "darwin") -}}
