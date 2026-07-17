@@ -385,6 +385,22 @@
           ]
         }
       }
+    },
+    "grafana-homelab": {
+      "description": "Grafana MCP server for querying metrics and dashboards",
+      "transports": {
+        "uvx": {
+          "type": "stdio",
+          "command": "uvx",
+          "args": [
+            "mcp-grafana"
+          ],
+          "env": {
+            "GRAFANA_URL": "{{ onepasswordRead "op://Personal/homelab-grafana/url" }}",
+            "GRAFANA_TOKEN": "{{ onepasswordRead "op://Personal/homelab-grafana/homelab-sa-token" }}"
+          }
+        }
+      }
     }
   }
 }

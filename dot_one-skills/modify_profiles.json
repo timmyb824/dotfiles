@@ -28,6 +28,7 @@ jq --slurpfile cur "$tmp" '
         "terraform-windsurf": "custom",
         "terraform-codex": "custom",
         "github-mcp-server-codex": "custom",
+        "grafana-homelab": "uvx",
         "fetch": "uvx",
         "filesystem": "npx",
         "git": "uvx",

@@ -192,9 +192,8 @@
   "windsurf.allowCascadeAccessGitignoreFiles": true,
   "devin.allowCascadeAccessGitignoreFiles": true,
   "devin.acp.enabledAgents": {
-    "claude-acp": true,
+    "claude-acp": false,
   },
-  "devin.acp.preferredAgent": "claude-acp",
   "editor.tokenColorCustomizations": {
     "textMateRules": [
       {
@@ -234,4 +233,12 @@
     ],
   },
   "makefile.configureOnOpen": true,
+  "yaml.disableSchemaDetection": [
+    "**/.github/workflows/*.yml",
+    "**/.github/workflows/*.yaml",
+    "**/.gitea/workflows/*.yml",
+    "**/.gitea/workflows/*.yaml",
+    "**/.forgejo/workflows/*.yml",
+    "**/.forgejo/workflows/*.yaml",
+  ],
 }
