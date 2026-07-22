@@ -1,0 +1,7 @@
+[MAIN]
+load-plugins=pylint.extensions.code_style
+
+[MESSAGES CONTROL]
+disable=all
+enable=consider-using-assignment-expr
+

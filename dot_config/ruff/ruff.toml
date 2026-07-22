@@ -1,0 +1,5 @@
+# ~/.config/ruff/ruff.toml
+[lint]
+select = ["E", "F", "SIM", "FURB", "UP", "PLR", "C4"]
+preview = true
+
