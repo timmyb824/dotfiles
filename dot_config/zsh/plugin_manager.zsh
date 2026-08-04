@@ -52,6 +52,7 @@ function plugin-load {
 
 # List of github repo plugins
 plugins=(
+  # azhuchkov/cobalt-spark
   mdumitru/git-aliases
   agpenton/1password-zsh-plugin
   sparsick/ansible-zsh
