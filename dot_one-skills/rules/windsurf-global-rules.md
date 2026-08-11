@@ -10,3 +10,4 @@
 10. All calls to `requests.get()` should include a timeout parameter, e.g., `requests.get(url, timeout=10)`
 11. All commits should use the conventional commit format (refer to the conventional-commits skill for details)
 12. On hostname `Timmybs-MacBook-Pro.local`, use `podman` instead of `docker`.
+13. Do not automatically commit changes unless explicitly asked to do so.

@@ -11,9 +11,6 @@
 [pager]
     branch = false
 
-#[includeIf "gitdir:~/DevOps-Work/"]
-#    path = ~/DevOps-Work/.gitconfig
-
 [init]
     defaultBranch = main
 
@@ -29,9 +26,6 @@
 
 [trim]
     bases = develop,main
-
-[pull]
-    rebase = true
 
 [push]
     autoSetupRemote = true
@@ -53,6 +47,11 @@
 
 [diff]
   colorMoved = default
+
+{{ if (and (eq .chezmoi.hostname "Timothys-MacBook-Pro") (eq .chezmoi.hostname "Timothys-MacBook-Air") (eq .chezmoi.hostname "timothys-macbook-air") (eq .chezmoi.hostname "Timmybs-MacBook-Pro") (eq .chezmoi.hostname "timmybs-macbook-pro") (eq .chezmoi.os "linux")) -}}
+[pull]
+    rebase = false
+{{ end -}}
 
 {{ if (and (ne .chezmoi.hostname "Timothys-MacBook-Pro") (ne .chezmoi.hostname "Timothys-MacBook-Air") (ne .chezmoi.hostname "timothys-macbook-air") (ne .chezmoi.hostname "Timmybs-MacBook-Pro") (ne .chezmoi.hostname "timmybs-macbook-pro") (ne .chezmoi.os "linux")) -}}
 [alias]
