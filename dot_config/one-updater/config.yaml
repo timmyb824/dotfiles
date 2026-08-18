@@ -20,6 +20,12 @@ package_managers:
       update: ["bash", "-c", "cd ~/.basher && git pull"]
       upgrade: ["basher", "upgrade"]
 
+  bin:
+    enabled: true
+    commands:
+      update: ["bin", "update"]
+      upgrade: ["bin", "update"]
+
   brew:
     enabled: true
     commands:
