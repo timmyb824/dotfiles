@@ -21,7 +21,7 @@ DEV/
 .serena/serena_config.yml
 {{- end }}
 
-{{ if (ne .chezmoi.os "darwin") -}}
+{{ if (or (ne .chezmoi.os "darwin") (ne .chezmoi.os "windows")) -}}
 # files to ignore on linux
 .hyper.js
 .dune-prelude
@@ -45,7 +45,7 @@ Library/
 {{- end }}
 
 
-{{ if (ne .chezmoi.os "linux") -}}
+{{ if (or (ne .chezmoi.os "linux") (ne .chezmoi.os "windows")) -}}
 # files to ignore on macos
 .config/k9s/
 .config/pypoetry/
@@ -70,4 +70,9 @@ Library/
 .config/bin/utilities/podman_quadlet_create_container_file.sh
 .config/bin/utilities/podman_quadlet_create_network_file.sh
 .config/bin/utilities/podman_quadlet_delete_container_file.sh
+{{- end }}
+
+{{ if (or (ne .chezmoi.os "linux") (ne .chezmoi.os "darwin")) -}}
+# files to ignore on windows
+*
 {{- end }}
