@@ -6,7 +6,17 @@ local config = wezterm.config_builder()
 
 -- This is where you actually apply your config choices
 
-config.color_scheme = "FirefoxDev"
+--config.color_scheme = "FirefoxDev"
+-- Overwrrite the color_scheme with custom colors
+-- config.colors = {
+--	background = "#000000",
+--	foreground = "#8ea0b3",
+--}
+
+config.color_scheme = "Catppuccin Mocha"
+-- config.colors = {
+--	background = "#12121C", -- slightly darker than Mocha
+--}
 
 -- Overwrrite the color_scheme with custom colors
 config.colors = {
@@ -15,11 +25,8 @@ config.colors = {
 }
 
 config.font = wezterm.font_with_fallback({
-	-- /Users/timothy.bryant/Library/Fonts/TX02NerdFont-Bold.ttf, CoreText
 	{ family = "TX02 Nerd Font", weight = "ExtraBold" },
-
-	-- /Users/timothy.bryant/Library/Fonts/JetBrainsMono[wght].ttf index=0 variation=4, CoreText
-	"JetBrains Mono",
+	{ family = "JetBrains Mono", weight = "ExtraBold" },
 })
 
 config.font_size = 16
@@ -46,6 +53,11 @@ config.keys = { -- Make Option-Left equivalent to Alt-b which many line editors 
 		}),
 	},
 }
+
+{{ if (eq .chezmoi.os "windows") }}
+--config.default_domain = "WSL:Ubuntu"
+config.default_prog = { "pwsh" }
+{{ end }}
 
 -- and finally, return the configuration to wezterm
 return config

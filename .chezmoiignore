@@ -42,6 +42,9 @@ Library/
 .config/gh/hosts.yml
 .config/bin/installers/tailscale_macos.sh
 .config/bin/utilities/organize_downloads.py
+.config/micro/bindings.json
+OneDrive/*
+AppData/*
 {{- end }}
 
 
@@ -70,9 +73,42 @@ Library/
 .config/bin/utilities/podman_quadlet_create_container_file.sh
 .config/bin/utilities/podman_quadlet_create_network_file.sh
 .config/bin/utilities/podman_quadlet_delete_container_file.sh
+.config/micro/bindings.json
+OneDrive/*
+AppData/*
 {{- end }}
 
 {{ if (or (ne .chezmoi.os "linux") (ne .chezmoi.os "darwin")) -}}
 # files to ignore on windows
 *
+!.gitconfig
+!.nanorc
+!.wezterm.lua
+
+!.config
+.config/*
+!.config/micro
+.config/micro/*
+!.config/micro/settings.json
+!.config/micro/bindings.json
+!.config/starship
+.config/starship/*
+!.config/starship/starship.toml
+
+!OneDrive
+OneDrive/*
+!OneDrive/Documents
+OneDrive/Documents/*
+!OneDrive/Documents/PowerShell
+OneDrive/Documents/PowerShell/*
+!OneDrive/Documents/PowerShell/Microsoft.PowerShell_profile.ps1
+!OneDrive/Documents/PowerShell/powershell.config.json
+
+!AppData
+AppData/*
+!AppData/Local
+AppData/Local/*
+!AppData/Local/rio
+AppData/Local/rio/*
+!AppData/Local/rio/config.toml
 {{- end }}

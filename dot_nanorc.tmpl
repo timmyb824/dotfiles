@@ -11,6 +11,8 @@ set numbercolor yellow
 set mouse
 {{ if (eq .chezmoi.os "darwin") -}}
 include /opt/homebrew/share/nano/*.nanorc
+{{ else if (eq .chezmoi.os "windows") -}}
+include "/Users/timot/.config/nano/syntax/*.nanorc"
 {{ else -}}
 include /usr/share/nano/*.nanorc
 {{ end }}
