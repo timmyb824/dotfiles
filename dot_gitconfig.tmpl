@@ -53,7 +53,7 @@
 
 {{ if (or (eq .chezmoi.hostname "Timothys-MacBook-Pro") (eq .chezmoi.hostname "Timothys-MacBook-Air") (eq .chezmoi.hostname "timothys-macbook-air") (eq .chezmoi.hostname "Timmybs-MacBook-Pro") (eq .chezmoi.hostname "timmybs-macbook-pro") (eq .chezmoi.os "linux") (eq .chezmoi.os "windows")) -}}
 [pull]
-    rebase = false
+    rebase = true
 {{ end -}}
 
 {{ if (and (ne .chezmoi.hostname "Timothys-MacBook-Pro") (ne .chezmoi.hostname "Timothys-MacBook-Air") (ne .chezmoi.hostname "timothys-macbook-air") (ne .chezmoi.hostname "Timmybs-MacBook-Pro") (ne .chezmoi.hostname "timmybs-macbook-pro") (ne .chezmoi.os "linux") (ne .chezmoi.os "windows")) -}}
