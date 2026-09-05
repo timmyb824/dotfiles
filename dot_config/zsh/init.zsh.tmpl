@@ -39,6 +39,8 @@ if [ -d "$HOME/.cargo" ]; then
   . "$HOME/.cargo/env"
 fi
 
+export PATH="$HOME/.local/bin:$PATH"
+
 source <(starship init zsh --print-full-init)
 export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 eval "$(atuin init zsh)"
