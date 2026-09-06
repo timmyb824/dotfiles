@@ -23,8 +23,8 @@ package_managers:
   bin:
     enabled: true
     commands:
-      update: ["bin", "update"]
-      upgrade: ["bin", "update"]
+      update: ["bin", "update", "--yes", "--continue-on-error"]
+      upgrade: ["bin", "update", "--yes", "--continue-on-error"]
 
   brew:
     enabled: true
