@@ -6,7 +6,7 @@
   "editor.fontLigatures": false,
   "editor.fontWeight": "400",
   "editor.formatOnPaste": false,
-  "editor.formatOnSave": true,
+  "editor.formatOnSave": false,
   "editor.guides.bracketPairs": false,
   "editor.guides.indentation": false,
   "editor.inlineSuggest.enabled": true,
@@ -46,7 +46,7 @@
     "editor.formatOnType": true,
   },
   "[shellscript]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format",
+    "editor.defaultFormatter": "mkhl.shfmt",
   },
   "[terraform]": {
     "editor.defaultFormatter": "hashicorp.terraform",
@@ -189,10 +189,19 @@
   "python.useEnvironmentsExtension": false,
   "python.venvFolders": ["/Users/timothybryant/uv/virtualenvs"],
   "claudeCode.preferredLocation": "panel",
+  "todo-tree.ripgrep.ripgrep": "/opt/homebrew/bin/rg",
   "windsurf.allowCascadeAccessGitignoreFiles": true,
   "devin.allowCascadeAccessGitignoreFiles": true,
   "devin.acp.enabledAgents": {
-    "claude-acp": false,
+    "claude-acp": true,
+    "devin-cloud": true,
+    "devin-cli": true,
+  },
+  "devin.acp.agentPreferences": {
+    "claude-acp": {
+      "mode": "auto",
+      "model": "default"
+    }
   },
   "editor.tokenColorCustomizations": {
     "textMateRules": [
@@ -241,4 +250,13 @@
     "**/.forgejo/workflows/*.yml",
     "**/.forgejo/workflows/*.yaml",
   ],
+
+  // WORK ONLY SETTINGS
+  {{- if (and (ne .chezmoi.hostname "Timothys-MacBook-Pro") (ne .chezmoi.hostname "Timothys-MacBook-Air") (ne .chezmoi.hostname "timothys-macbook-air") (ne .chezmoi.hostname "Timmybs-MacBook-Pro") (ne .chezmoi.hostname "timmybs-macbook-pro") (ne .chezmoi.os "linux") (ne .chezmoi.os "windows")) }}
+  "devin.acp.preferredAgent": "claude-acp",
+  "vscode-kubernetes.helm-path-mac": "/Users/timothy.bryant/.vs-kubernetes/tools/helm/darwin-arm64/helm",
+  "vscode-kubernetes.kubectl-path-mac": "/Users/timothy.bryant/.vs-kubernetes/tools/kubectl/kubectl",
+  "vscode-kubernetes.minikube-path-mac": "/Users/timothy.bryant/.vs-kubernetes/tools/minikube/darwin-arm64/minikube"
+  {{ end -}}
+
 }
