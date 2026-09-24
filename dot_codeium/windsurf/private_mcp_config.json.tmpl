@@ -1,0 +1,85 @@
+{
+  "mcpServers": {
+    "fetch": {
+      "args": [
+        "mcp-server-fetch"
+      ],
+      "command": "uvx"
+    },
+    "filesystem": {
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/Users/timothy.bryant/DEV",
+        "/Users/timothy.bryant/ghq",
+        "/Users/timothy.bryant/DEV"
+      ],
+      "command": "npx"
+    },
+    "git": {
+      "args": [
+        "mcp-server-git"
+      ],
+      "command": "uvx"
+    },
+    "github-mcp-server-windsurf": {
+      "args": [
+        "windsurf"
+      ],
+      "command": "/Users/timothy.bryant/.config/bin/utilities/gh_token_mcp.sh",
+      "disabled": false,
+      "env": {
+        "GITHUB_TOOLSETS": "repos,issues,pull_requests,code_security"
+      }
+    },
+    "memory": {
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-memory"
+      ],
+      "command": "npx",
+      "env": {
+        "MEMORY_FILE_PATH": ""
+      }
+    },
+    "postgresql": {
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-postgres",
+        "{{ onepasswordRead "op://Personal/cse-prod-rds-conn/credential" }}"
+      ],
+      "command": "npx"
+    },
+    "rootly": {
+      "args": [
+        "--from",
+        "rootly-mcp-server",
+        "rootly-mcp-server"
+      ],
+      "command": "uvx",
+      "env": {
+        "ROOTLY_API_TOKEN": "{{ onepasswordRead "op://Personal/rootly-mcp-server-token/credential" }}"
+      }
+    },
+    "sequential-thinking": {
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ],
+      "command": "npx"
+    },
+    "server-puppeteer": {
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-puppeteer"
+      ],
+      "command": "npx"
+    },
+    "time": {
+      "args": [
+        "mcp-server-time"
+      ],
+      "command": "uvx"
+    }
+  }
+}

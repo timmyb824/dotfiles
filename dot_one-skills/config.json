@@ -10,16 +10,5 @@
     }
   },
   "rules_dir": "~/.one-skills/rules",
-  "rules": {
-    "python-development.md": {
-      "name": "python-development.md",
-      "source": "~/.one-skills/rules/python-development.md",
-      "agents": ["claude-code"]
-    },
-    "windsurf-global-rules.md": {
-      "name": "windsurf-global-rules.md",
-      "source": "~/.codeium/windsurf/memories/global_rules.md",
-      "agents": ["windsurf"]
-    }
-  }
+  "rules": {}
 }
