@@ -1,3 +1,109 @@
+{{- if (or (eq .chezmoi.hostname "Timothys-MacBook-Pro") (eq .chezmoi.hostname "Timothys-MacBook-Air") (eq .chezmoi.hostname "timothys-macbook-air") (eq .chezmoi.hostname "Timmybs-MacBook-Pro") (eq .chezmoi.hostname "timmybs-macbook-pro") (eq .chezmoi.os "linux") (eq .chezmoi.os "windows")) -}}
+{
+  "mcpServers": {
+    "airis-mcp-gateway": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-remote@latest",
+        "http://192.168.86.53:9400/sse",
+        "--transport",
+        "sse-only",
+        "--allow-http"
+      ]
+    },
+    "cloudflare-docs": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-remote",
+        "https://docs.mcp.cloudflare.com/mcp"
+      ]
+    },
+    "cloudflare": {
+      "url": "https://mcp.cloudflare.com/mcp",
+      "headers": {
+        "Authorization": "Bearer {{ onepasswordRead "op://Personal/cloudflare/Other Fields/read-all-token" }}"
+      }
+    },
+    "terraform-windsurf": {
+      "command": "/Users/timothybryant/.config/bin/utilities/terraform_mcp.sh",
+      "args": [
+        "windsurf"
+      ]
+    },
+    "grafana-homelab": {
+      "command": "uvx",
+      "args": [
+        "mcp-grafana"
+      ],
+      "env": {
+        "GRAFANA_URL": "{{ onepasswordRead "op://Personal/homelab-grafana/url" }}",
+        "GRAFANA_TOKEN": "{{ onepasswordRead "op://Personal/homelab-grafana/homelab-sa-token" }}"
+      }
+    },
+    "fetch": {
+      "command": "uvx",
+      "args": [
+        "mcp-server-fetch"
+      ]
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/Users/timothybryant/DEV",
+        "/Users/timothybryant/ghq",
+        "/Users/timothybryant/DEV"
+      ]
+    },
+    "git": {
+      "command": "uvx",
+      "args": [
+        "mcp-server-git"
+      ]
+    },
+    "mcp-playwright": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@playwright/mcp@latest"
+      ]
+    },
+    "memory": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-memory"
+      ],
+      "env": {
+        "MEMORY_FILE_PATH": ""
+      }
+    },
+    "sequential-thinking": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ]
+    },
+    "server-puppeteer": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-puppeteer"
+      ]
+    },
+    "time": {
+      "command": "uvx",
+      "args": [
+        "mcp-server-time"
+      ]
+    }
+  }
+}
+{{- else if (and (ne .chezmoi.hostname "Timothys-MacBook-Pro") (ne .chezmoi.hostname "Timothys-MacBook-Air") (ne .chezmoi.hostname "timothys-macbook-air") (ne .chezmoi.hostname "Timmybs-MacBook-Pro") (ne .chezmoi.os "linux") (ne .chezmoi.os "windows")) -}}
 {
   "mcpServers": {
     "fetch": {
@@ -83,3 +189,4 @@
     }
   }
 }
+{{ end }}

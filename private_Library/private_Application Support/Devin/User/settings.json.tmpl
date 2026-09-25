@@ -250,13 +250,14 @@
     "**/.forgejo/workflows/*.yml",
     "**/.forgejo/workflows/*.yaml",
   ],
-
-  // WORK ONLY SETTINGS
   {{- if (and (ne .chezmoi.hostname "Timothys-MacBook-Pro") (ne .chezmoi.hostname "Timothys-MacBook-Air") (ne .chezmoi.hostname "timothys-macbook-air") (ne .chezmoi.hostname "Timmybs-MacBook-Pro") (ne .chezmoi.hostname "timmybs-macbook-pro") (ne .chezmoi.os "linux") (ne .chezmoi.os "windows")) }}
+  // WORK ONLY SETTINGS
   "devin.acp.preferredAgent": "claude-acp",
   "vscode-kubernetes.helm-path-mac": "/Users/timothy.bryant/.vs-kubernetes/tools/helm/darwin-arm64/helm",
   "vscode-kubernetes.kubectl-path-mac": "/Users/timothy.bryant/.vs-kubernetes/tools/kubectl/kubectl",
   "vscode-kubernetes.minikube-path-mac": "/Users/timothy.bryant/.vs-kubernetes/tools/minikube/darwin-arm64/minikube"
-  {{ end -}}
-
+  "git.confirmSync": false,
+  "devin.acp.preferredAgent": "claude-acp"
+}
+  {{ end }}
 }
