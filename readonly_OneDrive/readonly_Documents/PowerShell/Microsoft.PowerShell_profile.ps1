@@ -42,6 +42,11 @@ Set-Alias nano Open-NanoWithConfig
 $ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
 if (Test-Path($ChocolateyProfile)) {
   Import-Module "$ChocolateyProfile"
+}
+
+atuin init powershell | Out-String | Invoke-Expression
+(& uv generate-shell-completion powershell) | Out-String | Invoke-Expression
+(& uvx --generate-shell-completion powershell) | Out-String | Invoke-Expression
 ################AUTO-COMPLETIONS################
 
 ################OTHER################
@@ -53,10 +58,5 @@ Invoke-Expression (& {
 ################OTHER################
 
 
-}
 
-#f45873b3-b655-43a6-b217-97c00aa0db58 PowerToys CommandNotFound module
 
-Import-Module -Name Microsoft.WinGet.CommandNotFound
-#f45873b3-b655-43a6-b217-97c00aa0db58
-atuin init powershell | Out-String | Invoke-Expression
