@@ -1,0 +1,126 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+tmp="$(mktemp)"
+trap 'rm -f "$tmp"' EXIT
+cat > "$tmp"
+
+mcp="$(cat <<'JSON'
+{
+  "airis-mcp-gateway": {
+    "url": "http://192.168.86.53:9400/sse",
+    "type": "sse"
+  },
+  "cloudflare-docs": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "mcp-remote",
+      "https://docs.mcp.cloudflare.com/mcp"
+    ],
+    "type": "stdio"
+  },
+  "cloudflare": {
+    "url": "https://mcp.cloudflare.com/mcp",
+    "headers": {
+      "Authorization": "Bearer {{ onepasswordRead "op://Personal/cloudflare/Other Fields/read-all-token" }}"
+    },
+    "type": "sse"
+  },
+  "terraform-claude-code": {
+    "command": "/Users/timothybryant/.config/bin/utilities/terraform_mcp.sh",
+    "args": [
+      "claude"
+    ],
+    "type": "stdio"
+  },
+  "grafana-homelab": {
+    "command": "uvx",
+    "args": [
+      "mcp-grafana"
+    ],
+    "env": {
+      "GRAFANA_URL": "{{ onepasswordRead "op://Personal/homelab-grafana/url" }}",
+      "GRAFANA_TOKEN": "{{ onepasswordRead "op://Personal/homelab-grafana/homelab-sa-token" }}"
+    },
+    "type": "stdio"
+  },
+  "fetch": {
+    "command": "uvx",
+    "args": [
+      "mcp-server-fetch"
+    ],
+    "type": "stdio"
+  },
+  "filesystem": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@modelcontextprotocol/server-filesystem",
+      {{ if eq .chezmoi.os "linux" }}
+      "/home/tbryant/DEV",
+      "/home/tbryant/ghq"
+      {{ else }}
+      "/Users/timothybryant/DEV",
+      "/Users/timothybryant/ghq"
+      {{ end }}
+    ],
+    "type": "stdio"
+  },
+  "git": {
+    "command": "uvx",
+    "args": [
+      "mcp-server-git"
+    ],
+    "type": "stdio"
+  },
+  "memory": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@modelcontextprotocol/server-memory"
+    ],
+    "env": {
+      "MEMORY_FILE_PATH": ""
+    },
+    "type": "stdio"
+  },
+  "sequential-thinking": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@modelcontextprotocol/server-sequential-thinking"
+    ],
+    "type": "stdio"
+  },
+  "server-puppeteer": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@modelcontextprotocol/server-puppeteer"
+    ],
+    "type": "stdio"
+  },
+  "time": {
+    "command": "uvx",
+    "args": [
+      "mcp-server-time"
+    ],
+    "type": "stdio"
+  },
+  "degoog": {
+    "type": "http",
+    "url": "https://degoog-mcp.local.timmybtech.com/mcp",
+    "headers": {
+      "Authorization": "Bearer {{ onepasswordRead "op://Personal/degoog/mcp-auth-token" }}"
+    }
+  }
+}
+JSON
+)"
+
+if [[ -s "$tmp" ]]; then
+  jq --argjson mcp "$mcp" '.mcpServers = $mcp' "$tmp"
+else
+  jq -n --argjson mcp "$mcp" '{mcpServers: $mcp}'
+fi
