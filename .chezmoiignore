@@ -19,6 +19,7 @@ DEV/
 .hyper.js
 .claude/CLAUDE.md
 .serena/serena_config.yml
+.claude.json
 {{- end }}
 
 {{ if (and (ne .chezmoi.os "darwin") (ne .chezmoi.os "windows")) -}}
