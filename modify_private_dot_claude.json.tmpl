@@ -7,10 +7,6 @@ cat > "$tmp"
 
 mcp="$(cat <<'JSON'
 {
-  "airis-mcp-gateway": {
-    "url": "http://192.168.86.53:9400/sse",
-    "type": "sse"
-  },
   "cloudflare-docs": {
     "command": "npx",
     "args": [
@@ -20,17 +16,15 @@ mcp="$(cat <<'JSON'
     ],
     "type": "stdio"
   },
-  "cloudflare": {
-    "url": "https://mcp.cloudflare.com/mcp",
-    "headers": {
-      "Authorization": "Bearer {{ onepasswordRead "op://Personal/cloudflare/Other Fields/read-all-token" }}"
-    },
-    "type": "sse"
+  "cloudflare-api": {
+    "type": "http",
+    "url": "https://mcp.cloudflare.com/mcp"
   },
-  "terraform-claude-code": {
-    "command": "/Users/timothybryant/.config/bin/utilities/terraform_mcp.sh",
+  "context7": {
+    "command": "npx",
     "args": [
-      "claude"
+      "-y",
+      "@upstash/context7-mcp"
     ],
     "type": "stdio"
   },
@@ -57,13 +51,13 @@ mcp="$(cat <<'JSON'
     "args": [
       "-y",
       "@modelcontextprotocol/server-filesystem",
-      {{ if eq .chezmoi.os "linux" }}
+      {{ if eq .chezmoi.os "linux" -}}
       "/home/tbryant/DEV",
       "/home/tbryant/ghq"
-      {{ else }}
+      {{ else -}}
       "/Users/timothybryant/DEV",
       "/Users/timothybryant/ghq"
-      {{ end }}
+      {{ end -}}
     ],
     "type": "stdio"
   },
@@ -72,6 +66,17 @@ mcp="$(cat <<'JSON'
     "args": [
       "mcp-server-git"
     ],
+    "type": "stdio"
+  },
+  "github": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@modelcontextprotocol/server-github"
+    ],
+    "env": {
+      "GITHUB_PERSONAL_ACCESS_TOKEN": "{{ onepasswordRead "op://Hermes/github-personal-access-token/credential" }}"
+    },
     "type": "stdio"
   },
   "memory": {
@@ -101,6 +106,22 @@ mcp="$(cat <<'JSON'
     ],
     "type": "stdio"
   },
+  "playwright": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@playwright/mcp@latest"
+    ],
+    "type": "stdio"
+  },
+  "chrome-devtools": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "chrome-devtools-mcp@latest"
+    ],
+    "type": "stdio"
+  },
   "time": {
     "command": "uvx",
     "args": [
@@ -108,12 +129,33 @@ mcp="$(cat <<'JSON'
     ],
     "type": "stdio"
   },
+  "magic": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@21st-dev/magic@latest"
+    ],
+    "env": {
+      "API_KEY": "{{ onepasswordRead "op://Personal/magic-mcp/dev-api-key" }}"
+    },
+    "type": "stdio"
+  },
+  "postgres": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@modelcontextprotocol/server-postgres",
+      "{{ onepasswordRead "op://Personal/homelab-postgres/conn-string" }}"
+    ],
+    "env": {},
+    "type": "stdio"
+  },
   "degoog": {
-    "type": "http",
     "url": "https://degoog-mcp.local.timmybtech.com/mcp",
     "headers": {
       "Authorization": "Bearer {{ onepasswordRead "op://Personal/degoog/mcp-auth-token" }}"
-    }
+    },
+    "type": "http"
   }
 }
 JSON
