@@ -156,6 +156,17 @@ mcp="$(cat <<'JSON'
       "Authorization": "Bearer {{ onepasswordRead "op://Personal/degoog/mcp-auth-token" }}"
     },
     "type": "http"
+  },
+  "mem0": {
+    "type": "http",
+    "url": "https://mem0-mcp.local.timmybtech.com/mcp",
+    "headers": {
+      "Authorization": "Bearer {{ onepasswordRead "op://Personal/homelab-mem0/mcp-auth-token" }}"
+    }
+  },
+  "n8n": {
+    "type": "http",
+    "url": "https://n8n.timmybtech.com/mcp-server/http"
   }
 }
 JSON
