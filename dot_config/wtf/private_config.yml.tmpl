@@ -106,21 +106,6 @@ wtf:
       refreshInterval: 15
       title: "⚡️"
 
-    opsgenie:
-      apiKey: "{{ onepasswordRead "op://Personal/ss-opsgenie-api-key/credential" }}"
-      displayEmpty: false
-      enabled: true
-      position:
-        top: 6
-        left: 3
-        height: 1
-        width: 1
-      refreshInterval: 6h
-      region: "us"
-      schedule:
-      - "Problem_Coordinator_schedule"
-      scheduleIdentifierType: "name"
-
     uptime:
       args: [""]
       cmd: "uptime"
@@ -169,9 +154,7 @@ wtf:
       timeout: 25
       urls:
         - https://timothybryantjr.com
-        - https://blog.timothybryantjr.com
-        - https://adguard.timmybtech.com
-        - https://grafana.timmybtech.com
+        - https://grafana2.timmybtech.com
         - https://wiki.timmybtech.com
         - https://umami.timmybtech.com
       position:
