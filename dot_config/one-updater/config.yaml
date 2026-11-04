@@ -21,7 +21,7 @@ package_managers:
       upgrade: ["basher", "upgrade"]
 
   bin:
-    enabled: true
+    enabled: false
     commands:
       update: ["bin", "update", "--yes", "--continue-on-error"]
       upgrade: ["bin", "update", "--yes", "--continue-on-error"]
