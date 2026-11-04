@@ -106,11 +106,6 @@ symbol = "⛵ "
 detect_folders = [".kube", "k8s", "kubernetes-apps", "gitops", "kubernetes"]
 detect_files = ["kubectl"]
 disabled = false
-contexts = [
-  { context_pattern = "{{ onepasswordRead "op://Personal/ss_k8s_aliases/qa" }}", style = "bold green", context_alias = "cse-qa"},
-  { context_pattern = "{{ onepasswordRead "op://Personal/ss_k8s_aliases/stg" }}", style = "bold blue", context_alias = "cse-stg"},
-  { context_pattern = "{{ onepasswordRead "op://Personal/ss_k8s_aliases/prd" }}", style = "bold red", context_alias = "cse-prd"},
-]
 
 [memory_usage]
 format = "$symbol[${ram}( | ${swap})]($style) "
