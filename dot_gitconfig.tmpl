@@ -1,6 +1,8 @@
 [user]
     name = Tim Bryant
-{{- if (or (eq .chezmoi.hostname "Timothys-MacBook-Pro") (eq .chezmoi.hostname "Timothys-MacBook-Air") (eq .chezmoi.hostname "timothys-macbook-air") (eq .chezmoi.hostname "Timmybs-MacBook-Pro") (eq .chezmoi.hostname "timmybs-macbook-pro") (eq .chezmoi.os "linux") (eq .chezmoi.os "windows")) }}
+{{- if (and (eq .chezmoi.os "linux") (env "CODER")) }}
+    # email comes from GIT_AUTHOR_EMAIL, which the Coder agent sets from your Coder account
+{{- else if (or (eq .chezmoi.hostname "Timothys-MacBook-Pro") (eq .chezmoi.hostname "Timothys-MacBook-Air") (eq .chezmoi.hostname "timothys-macbook-air") (eq .chezmoi.hostname "Timmybs-MacBook-Pro") (eq .chezmoi.hostname "timmybs-macbook-pro") (eq .chezmoi.os "linux") (eq .chezmoi.os "windows")) }}
     email = "{{ onepasswordRead "op://Personal/google.com-main/username" }}"
 {{- else if (and (ne .chezmoi.hostname "Timothys-MacBook-Pro") (ne .chezmoi.hostname "Timothys-MacBook-Air") (ne .chezmoi.hostname "timothys-macbook-air") (ne .chezmoi.hostname "Timmybs-MacBook-Pro") (ne .chezmoi.os "linux") (ne .chezmoi.os "windows")) }}
     email = "{{ onepasswordRead "op://Personal/simplisafe-okta/username" }}"

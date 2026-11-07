@@ -79,6 +79,35 @@ OneDrive/
 AppData/
 {{- end }}
 
+{{ if (and (eq .chezmoi.os "linux") (env "CODER")) -}}
+# files to ignore inside a Coder workspace (CODER=true is set by the Coder agent).
+# No age key or 1Password CLI is available there, so skip anything that is
+# age-encrypted or renders with onepasswordRead.
+.vault-token
+.ssh/
+.aws/
+.kube/
+.oci/
+.cloudflared/
+.dblab.yaml
+.aicommits
+.opencommit
+.claude.json
+.claude/CLAUDE.md
+.claude/settings.json
+.codeium/windsurf/mcp_config.json
+.codex/config.toml
+.one-skills/mcp-servers.json
+.config/gitearc/
+.config/gobang/
+.config/ngrok/
+.config/containerchecker/
+.config/helix/lsp-ai.json
+.config/helix/languages.toml
+.config/bin/utilities/gh_token_mcp.sh
+DEV/
+{{- end }}
+
 {{ if (and (ne .chezmoi.os "linux") (ne .chezmoi.os "darwin")) -}}
 # files to ignore on windows
 *
