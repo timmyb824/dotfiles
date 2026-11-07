@@ -83,6 +83,10 @@ AppData/
 # files to ignore inside a Coder workspace (CODER=true is set by the Coder agent).
 # No age key or 1Password CLI is available there, so skip anything that is
 # age-encrypted or renders with onepasswordRead.
+# Without age configured, chezmoi keeps the ".age" suffix on target names
+# (e.g. .claude/CLAUDE.md.age), so ignore every encrypted file by suffix.
+*.age
+**/*.age
 .vault-token
 .ssh/
 .aws/
