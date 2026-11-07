@@ -99,7 +99,7 @@ AppData/
 .claude.json
 .claude/CLAUDE.md
 .claude/settings.json
-.codeium/windsurf/mcp_config.json
+.codeium/
 .codex/config.toml
 .one-skills/mcp-servers.json
 .config/gitearc/
