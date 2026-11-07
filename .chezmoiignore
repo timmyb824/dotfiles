@@ -108,6 +108,9 @@ AppData/
 .config/containerchecker/
 .config/helix/lsp-ai.json
 .config/helix/languages.toml
+.config/gama/
+.config/wtf/
+.config/nvim-archive/
 .config/bin/utilities/gh_token_mcp.sh
 DEV/
 {{- end }}
