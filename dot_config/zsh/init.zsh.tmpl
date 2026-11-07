@@ -31,7 +31,13 @@ PS4='+ ${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]}:' # uncomment for debugging (run 
 FPATH="$HOME/.zsh/completion:${FPATH}"
 fpath+=~/.zfunc
 
+{{ if env "CODER" -}}
+# The NFS-backed home reports every directory as 777, which trips compinit's
+# insecure-directory check; -u skips it (single-user workspace).
+autoload -Uz compinit && compinit -u
+{{- else -}}
 autoload -Uz compinit && compinit
+{{- end }}
 
 zstyle ':completion:*' menu select
 

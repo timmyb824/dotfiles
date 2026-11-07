@@ -9,7 +9,7 @@ eval "$(fzf --zsh)"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 {{- end }}
 
-source $HOME/ghq/github.com/junegunn/fzf-git.sh/fzf-git.sh
+[ -f "$HOME/ghq/github.com/junegunn/fzf-git.sh/fzf-git.sh" ] && source "$HOME/ghq/github.com/junegunn/fzf-git.sh/fzf-git.sh"
 
 # Use fd (https://github.com/sharkdp/fd) for listing path candidates.
 # - The first argument to the function ($1) is the base path to start traversal
@@ -94,11 +94,15 @@ function y() {
 }
 
 # --- other ---
+{{- if not (env "CODER") }}
 eval "$(basher init - zsh)"
+{{- end }}
 eval "$(direnv hook zsh)"
 eval "$(fnm env --use-on-cd)"
+{{- if not (env "CODER") }}
 eval "$(kickstart infect)"
 eval "$(rbenv init - zsh)"
+{{- end }}
 eval "$(zoxide init --cmd cd zsh)"
 
 {{- if eq .chezmoi.os "darwin" }}
@@ -108,11 +112,13 @@ eval $(thefuck --alias fk)
 if [ -d "$HOME/.cargo" ]; then
   . "$HOME/.cargo/env"
 fi
-{{- else if eq .chezmoi.os "linux" }}
+{{- else if and (eq .chezmoi.os "linux") (not (env "CODER")) }}
 eval "$(op signin)"
 {{- end }}
 
+{{ if not (env "CODER") -}}
 source $HOME/.config/broot/launcher/bash/br
+{{- end }}
 
 {{ if (and (ne .chezmoi.hostname "Timothys-MacBook-Pro") (ne .chezmoi.hostname "Timothys-MacBook-Air") (ne .chezmoi.hostname "timothys-macbook-air") (ne .chezmoi.hostname "Timmybs-MacBook-Pro") (ne .chezmoi.hostname "timmybs-macbook-pro") (ne .chezmoi.os "linux")) -}}
 . ~/.dx-zsh-completion.sh

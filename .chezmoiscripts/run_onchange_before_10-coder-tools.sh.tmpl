@@ -29,16 +29,17 @@ done
 have curl || { warn "curl is required, aborting"; exit 1; }
 
 case "$(uname -m)" in
-  x86_64 | amd64) ARCH="x86_64" ;;
-  aarch64 | arm64) ARCH="aarch64" ;;
+  x86_64 | amd64) ARCH="x86_64"; GOARCH="amd64"; FNM_ASSET="fnm-linux" ;;
+  aarch64 | arm64) ARCH="aarch64"; GOARCH="arm64"; FNM_ASSET="fnm-arm64" ;;
   *) warn "unsupported arch $(uname -m)"; exit 1 ;;
 esac
 
 # Download the latest GitHub release asset whose name ends with $2 (a regex
-# suffix) and install the binary called $3 into BIN_DIR.
+# suffix) and install the binary called $3 into BIN_DIR. Handles .tar.gz and
+# .zip assets (zip falls back to python3 if unzip is missing).
 #   install_gh_binary <owner/repo> <asset-suffix-regex> <binary-name>
 install_gh_binary() {
-  local repo="$1" suffix="$2" bin="$3" url tmp
+  local repo="$1" suffix="$2" bin="$3" url tmp found
   have "$bin" && { info "$bin already installed"; return 0; }
   url="$(curl -fsSL "https://api.github.com/repos/${repo}/releases/latest" \
     | grep -oE '"browser_download_url": *"[^"]+"' \
@@ -50,8 +51,19 @@ install_gh_binary() {
   fi
   info "installing ${bin} from ${url}"
   tmp="$(mktemp -d)"
-  curl -fsSL "$url" | tar -xz -C "$tmp"
-  install -m 0755 "$(find "$tmp" -type f -name "$bin" | head -n1)" "$BIN_DIR/$bin"
+  mkdir -p "$tmp/x"
+  curl -fsSL "$url" -o "$tmp/pkg"
+  case "$url" in
+    *.zip)
+      if have unzip; then unzip -q "$tmp/pkg" -d "$tmp/x"; else python3 -m zipfile -e "$tmp/pkg" "$tmp/x"; fi ;;
+    *) tar -xzf "$tmp/pkg" -C "$tmp/x" ;;
+  esac
+  found="$(find "$tmp/x" -type f -name "$bin" | head -n1)"
+  if [ -n "$found" ]; then
+    install -m 0755 "$found" "$BIN_DIR/$bin"
+  else
+    warn "${bin} not found inside ${url}"
+  fi
   rm -rf "$tmp"
 }
 
@@ -94,6 +106,29 @@ fi
 install_gh_binary sharkdp/fd "${ARCH}-unknown-linux-musl\\.tar\\.gz" fd
 install_gh_binary sharkdp/bat "${ARCH}-unknown-linux-musl\\.tar\\.gz" bat
 install_gh_binary eza-community/eza "eza_${ARCH}-unknown-linux-musl\\.tar\\.gz" eza
+
+# --- shell hooks used by packages.zsh ---
+if have direnv; then
+  info "direnv already installed"
+else
+  info "installing direnv"
+  curl -sfL https://direnv.net/install.sh | bin_path="$BIN_DIR" bash
+fi
+
+install_gh_binary Schniz/fnm "${FNM_ASSET}\\.zip" fnm
+
+# --- ghq + fzf-git.sh (packages.zsh sources ~/ghq/github.com/junegunn/fzf-git.sh) ---
+install_gh_binary x-motemen/ghq "ghq_linux_${GOARCH}\\.zip" ghq
+if have ghq; then
+  if [ -d "$HOME/ghq/github.com/junegunn/fzf-git.sh" ]; then
+    info "fzf-git.sh already cloned"
+  else
+    info "ghq get fzf-git.sh"
+    ghq get https://github.com/junegunn/fzf-git.sh
+  fi
+else
+  warn "ghq not available, skipping fzf-git.sh"
+fi
 
 info "done"
 {{- end -}}
