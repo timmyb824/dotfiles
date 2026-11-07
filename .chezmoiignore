@@ -102,6 +102,9 @@ AppData/
 .codeium/
 .codex/config.toml
 .one-skills/mcp-servers.json
+.config/alacritty/
+.config/attyx/
+.config/geany/
 .config/gitearc/
 .config/gobang/
 .config/ngrok/
