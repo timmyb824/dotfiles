@@ -8,7 +8,9 @@ if command -v ngrok &>/dev/null; then
 fi
 {{ end -}}
 
-eval "$(op completion zsh)"; compdef _op op
+if command -v op &>/dev/null; then
+  eval "$(op completion zsh)"; compdef _op op
+fi
 source <(chezmoi completion zsh)
 
 if command -v uv &>/dev/null; then

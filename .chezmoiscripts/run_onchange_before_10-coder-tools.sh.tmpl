@@ -115,6 +115,10 @@ else
   curl -sfL https://direnv.net/install.sh | bin_path="$BIN_DIR" bash
 fi
 
+# atuin: Ansible builds it with `cargo install`; a prebuilt release is much faster.
+# Run `atuin login` yourself to enable sync (no credentials are stored here).
+install_gh_binary atuinsh/atuin "atuin-${ARCH}-unknown-linux-musl\\.tar\\.gz" atuin
+
 install_gh_binary Schniz/fnm "${FNM_ASSET}\\.zip" fnm
 
 # --- ghq + fzf-git.sh (packages.zsh sources ~/ghq/github.com/junegunn/fzf-git.sh) ---
