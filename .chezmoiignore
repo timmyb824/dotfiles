@@ -117,6 +117,7 @@ AppData/
 .config/nvim-archive/
 .config/bin/utilities/gh_token_mcp.sh
 DEV/
+.serena/
 {{- end }}
 
 {{ if (and (ne .chezmoi.os "linux") (ne .chezmoi.os "darwin")) -}}
