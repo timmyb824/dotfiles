@@ -39,13 +39,6 @@ mcp="$(cat <<'JSON'
     },
     "type": "stdio"
   },
-  "fetch": {
-    "command": "uvx",
-    "args": [
-      "mcp-server-fetch"
-    ],
-    "type": "stdio"
-  },
   "git": {
     "command": "uvx",
     "args": [
@@ -61,17 +54,6 @@ mcp="$(cat <<'JSON'
     ],
     "env": {
       "GITHUB_PERSONAL_ACCESS_TOKEN": "{{ onepasswordRead "op://Hermes/github-personal-access-token/credential" }}"
-    },
-    "type": "stdio"
-  },
-  "memory": {
-    "command": "npx",
-    "args": [
-      "-y",
-      "@modelcontextprotocol/server-memory"
-    ],
-    "env": {
-      "MEMORY_FILE_PATH": ""
     },
     "type": "stdio"
   },
