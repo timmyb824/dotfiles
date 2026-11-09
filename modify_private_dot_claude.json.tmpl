@@ -46,21 +46,6 @@ mcp="$(cat <<'JSON'
     ],
     "type": "stdio"
   },
-  "filesystem": {
-    "command": "npx",
-    "args": [
-      "-y",
-      "@modelcontextprotocol/server-filesystem",
-      {{ if eq .chezmoi.os "linux" -}}
-      "/home/tbryant/DEV",
-      "/home/tbryant/ghq"
-      {{ else -}}
-      "/Users/timothybryant/DEV",
-      "/Users/timothybryant/ghq"
-      {{ end -}}
-    ],
-    "type": "stdio"
-  },
   "git": {
     "command": "uvx",
     "args": [
