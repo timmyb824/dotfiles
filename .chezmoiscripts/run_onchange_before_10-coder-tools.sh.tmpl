@@ -76,6 +76,13 @@ else
 fi
 # Make a default interpreter available (no-op if one is already managed by uv)
 uv python install || warn "uv python install failed (will retry next change)"
+uv_tool_list = ["pre-commit", "ansible", "black", "isort", "ruff", "pytest", "sourcery"]
+# Install tool that aren't already installed
+for tool in ${uv_tool_list}; do
+  if ! have $tool; then
+    uv tool install $tool || warn "$tool install failed (will retry next change)"
+  fi
+done
 
 # --- prompt / navigation ---
 if have starship; then
@@ -143,6 +150,18 @@ else
   curl -LO https://github.com/BurntSushi/ripgrep/releases/download/${ripgrep_version}/ripgrep_${ripgrep_version}-1_amd64.deb
   sudo dpkg -i ripgrep_${ripgrep_version}-1_amd64.deb
   rm ripgrep_${ripgrep_version}-1_amd64.deb
+fi
+
+# --- zellij ---
+zellij_version="0.45.1"
+if have zellij; then
+  info "zellij already installed"
+else
+  info "installing zellij"
+  curl -L0 https://github.com/zellij-org/zellij/releases/download/v${zellij_version}/zellij-x86_64-unknown-linux-musl.tar.gz
+  tar -xzf zellij-x86_64-unknown-linux-musl.tar.gz
+  sudo mv zellij /usr/local/bin/
+  rm zellij-x86_64-unknown-linux-musl.tar.gz
 fi
 
 info "done installing coder tools"
