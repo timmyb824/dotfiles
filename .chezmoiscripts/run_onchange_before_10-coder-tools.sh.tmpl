@@ -76,10 +76,26 @@ else
 fi
 # Make a default interpreter available (no-op if one is already managed by uv)
 uv python install || warn "uv python install failed (will retry next change)"
-UV_TOOL_LIST = ["pre-commit", "ansible", "black", "isort", "ruff", "pytest", "sourcery"]
-for tool in ${UV_TOOL_LIST}; do
-  if ! have $tool; then
-    uv tool install $tool || warn "$tool install failed (will retry next change)"
+
+# uv tools, as "package:executable". ansible-core is the package that actually
+# ships the ansible* executables (the plain `ansible` package exposes none).
+UV_TOOLS=(
+  "pre-commit:pre-commit"
+  "ansible-core:ansible"
+  "black:black"
+  "isort:isort"
+  "ruff:ruff"
+  "pytest:pytest"
+  "sourcery:sourcery"
+)
+for entry in "${UV_TOOLS[@]}"; do
+  pkg="${entry%%:*}"
+  bin="${entry##*:}"
+  if have "$bin"; then
+    info "$bin already installed"
+  else
+    info "uv tool install $pkg"
+    uv tool install "$pkg" || warn "$pkg install failed (will retry next change)"
   fi
 done
 
@@ -140,28 +156,11 @@ else
   warn "ghq not available, skipping fzf-git.sh"
 fi
 
-# --- install ripgrep ---
-ripgrep_version="14.1.1"
-if have rg; then
-  info "ripgrep already installed"
-else
-  info "installing ripgrep"
-  curl -LO https://github.com/BurntSushi/ripgrep/releases/download/${ripgrep_version}/ripgrep_${ripgrep_version}-1_amd64.deb
-  sudo dpkg -i ripgrep_${ripgrep_version}-1_amd64.deb
-  rm ripgrep_${ripgrep_version}-1_amd64.deb
-fi
+# --- ripgrep (no root: take the release tarball, not the .deb) ---
+install_gh_binary BurntSushi/ripgrep "${ARCH}-unknown-linux-musl\\.tar\\.gz" rg
 
 # --- zellij ---
-zellij_version="0.45.1"
-if have zellij; then
-  info "zellij already installed"
-else
-  info "installing zellij"
-  curl -L0 https://github.com/zellij-org/zellij/releases/download/v${zellij_version}/zellij-x86_64-unknown-linux-musl.tar.gz
-  tar -xzf zellij-x86_64-unknown-linux-musl.tar.gz
-  sudo mv zellij /usr/local/bin/
-  rm zellij-x86_64-unknown-linux-musl.tar.gz
-fi
+install_gh_binary zellij-org/zellij "zellij-${ARCH}-unknown-linux-musl\\.tar\\.gz" zellij
 
 info "done installing coder tools"
 {{- end -}}
