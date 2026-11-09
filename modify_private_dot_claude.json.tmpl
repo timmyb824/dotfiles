@@ -57,14 +57,6 @@ mcp="$(cat <<'JSON'
     },
     "type": "stdio"
   },
-  "sequential-thinking": {
-    "command": "npx",
-    "args": [
-      "-y",
-      "@modelcontextprotocol/server-sequential-thinking"
-    ],
-    "type": "stdio"
-  },
   "server-puppeteer": {
     "command": "npx",
     "args": [
@@ -86,13 +78,6 @@ mcp="$(cat <<'JSON'
     "args": [
       "-y",
       "chrome-devtools-mcp@latest"
-    ],
-    "type": "stdio"
-  },
-  "time": {
-    "command": "uvx",
-    "args": [
-      "mcp-server-time"
     ],
     "type": "stdio"
   },
