@@ -104,6 +104,7 @@ AppData/
 .codex/config.toml
 .one-skills/mcp-servers.json
 .config/alacritty/
+.config/atuin/
 .config/attyx/
 .config/geany/
 .config/gitearc/
