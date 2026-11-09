@@ -76,9 +76,8 @@ else
 fi
 # Make a default interpreter available (no-op if one is already managed by uv)
 uv python install || warn "uv python install failed (will retry next change)"
-uv_tool_list = ["pre-commit", "ansible", "black", "isort", "ruff", "pytest", "sourcery"]
-# Install tool that aren't already installed
-for tool in ${uv_tool_list}; do
+UV_TOOL_LIST = ["pre-commit", "ansible", "black", "isort", "ruff", "pytest", "sourcery"]
+for tool in ${UV_TOOL_LIST}; do
   if ! have $tool; then
     uv tool install $tool || warn "$tool install failed (will retry next change)"
   fi
