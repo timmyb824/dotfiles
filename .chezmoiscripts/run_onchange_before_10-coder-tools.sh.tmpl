@@ -134,5 +134,16 @@ else
   warn "ghq not available, skipping fzf-git.sh"
 fi
 
-info "done"
+# --- install ripgrep ---
+ripgrep_version="14.1.1"
+if have rg; then
+  info "ripgrep already installed"
+else
+  info "installing ripgrep"
+  curl -LO https://github.com/BurntSushi/ripgrep/releases/download/${ripgrep_version}/ripgrep_${ripgrep_version}-1_amd64.deb
+  sudo dpkg -i ripgrep_${ripgrep_version}-1_amd64.deb
+  rm ripgrep_${ripgrep_version}-1_amd64.deb
+fi
+
+info "done installing coder tools"
 {{- end -}}
