@@ -113,6 +113,7 @@ AppData/
 .config/wtf/
 .config/nvim-archive/
 .config/bin/utilities/gh_token_mcp.sh
+.windsurf/
 DEV/
 .serena/
 {{- end }}

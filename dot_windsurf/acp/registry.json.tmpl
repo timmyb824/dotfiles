@@ -1,0 +1,63 @@
+{{ if (or (eq .chezmoi.hostname "Timothys-MacBook-Pro") (eq .chezmoi.hostname "Timothys-MacBook-Air") (eq .chezmoi.hostname "timothys-macbook-air") (eq .chezmoi.hostname "Timmybs-MacBook-Pro") (eq .chezmoi.hostname "timmybs-macbook-pro")) -}}
+{
+  "version": "1.0.0",
+  "agents": [
+    {
+      "id": "claude-agent-acp",
+      "name": "Claude Agent",
+      "version": "1.0.0",
+      "description": "Claude agent via the Agent Client Protocol adapter",
+      "authors": [
+        "Anthropic"
+      ],
+      "license": "proprietary",
+      "distribution": {
+        "binary": {
+          "darwin-aarch64": {
+            "archive": "",
+            "cmd": "/Users/timothybryant/Library/Application Support/fnm/node-versions/v22.23.4/installation/bin/claude-agent-acp",
+            "args": []
+          },
+          "darwin-x86_64": {
+            "archive": "",
+            "cmd": "/Users/timothybryant/Library/Application Support/fnm/node-versions/v22.23.4/installation/bin/claude-agent-acp",
+            "args": []
+          }
+        }
+      }
+    }
+  ],
+  "extensions": []
+}
+{{ else if (and (ne .chezmoi.hostname "Timothys-MacBook-Pro") (ne .chezmoi.hostname "Timothys-MacBook-Air") (ne .chezmoi.hostname "timothys-macbook-air") (ne .chezmoi.os "linux")) -}}
+{
+  "version": "1.0.0",
+  "agents": [
+    {
+      "id": "claude-agent-acp",
+      "name": "Claude Agent",
+      "version": "1.0.0",
+      "description": "Claude agent via the Agent Client Protocol adapter",
+      "authors": [
+        "Anthropic"
+      ],
+      "license": "proprietary",
+      "distribution": {
+        "binary": {
+          "darwin-aarch64": {
+            "archive": "",
+            "cmd": "/Users/timothy.bryant/Library/Application Support/fnm/node-versions/v22.23.4/installation/bin/claude-agent-acp",
+            "args": []
+          },
+          "darwin-x86_64": {
+            "archive": "",
+            "cmd": "/Users/timothy.bryant/Library/Application Support/fnm/node-versions/v22.23.4/installation/bin/claude-agent-acp",
+            "args": []
+          }
+        }
+      }
+    }
+  ],
+  "extensions": []
+}
+{{ end }}
