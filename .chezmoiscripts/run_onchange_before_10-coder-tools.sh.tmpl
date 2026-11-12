@@ -82,11 +82,13 @@ uv python install || warn "uv python install failed (will retry next change)"
 UV_TOOLS=(
   "pre-commit:pre-commit"
   "ansible-core:ansible"
+  "ansible-lint:ansible-lint"
   "black:black"
   "isort:isort"
   "ruff:ruff"
   "pytest:pytest"
   "sourcery:sourcery"
+  "yamllint:yamllint"
 )
 for entry in "${UV_TOOLS[@]}"; do
   pkg="${entry%%:*}"
