@@ -145,6 +145,33 @@ install_gh_binary atuinsh/atuin "atuin-${ARCH}-unknown-linux-musl\\.tar\\.gz" at
 
 install_gh_binary Schniz/fnm "${FNM_ASSET}\\.zip" fnm
 
+# --- node via fnm + global npm packages ---
+# NODE_VERSION is the exact version fnm installs and aliases as default.
+# `fnm exec --using` runs npm inside that version without needing shell hooks.
+NODE_VERSION="22.23.4"
+NPM_PACKAGES=(
+  "aicommits"
+)
+if have fnm; then
+  if fnm list | grep -q "v${NODE_VERSION}"; then
+    info "node v${NODE_VERSION} already installed"
+  else
+    info "fnm install ${NODE_VERSION}"
+    fnm install "$NODE_VERSION" || warn "fnm install ${NODE_VERSION} failed (will retry next change)"
+  fi
+  fnm default "$NODE_VERSION" || warn "fnm default ${NODE_VERSION} failed"
+  for pkg in "${NPM_PACKAGES[@]}"; do
+    if fnm exec --using "$NODE_VERSION" npm ls -g --depth=0 "$pkg" >/dev/null 2>&1; then
+      info "$pkg already installed"
+    else
+      info "npm install -g $pkg"
+      fnm exec --using "$NODE_VERSION" npm install -g "$pkg" || warn "$pkg install failed (will retry next change)"
+    fi
+  done
+else
+  warn "fnm not available, skipping node/npm setup"
+fi
+
 # --- ghq + fzf-git.sh (packages.zsh sources ~/ghq/github.com/junegunn/fzf-git.sh) ---
 install_gh_binary x-motemen/ghq "ghq_linux_${GOARCH}\\.zip" ghq
 if have ghq; then
