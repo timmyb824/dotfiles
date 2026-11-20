@@ -34,7 +34,7 @@ create_container() {
   rm -f "${quadlet_file}"
   systemctl --user daemon-reload
 
-  if ! podlet --file "${quadlet_file}" generate container "${name}"; then
+  if ! podlet --podman-version "$(podman version --format '{{.Server.Version}}')" --file "${quadlet_file}" generate container "${name}"; then
     msg_error "Failed to generate container file for: ${name}"
     exit 1
   fi
@@ -68,7 +68,7 @@ create_network() {
   mkdir -p "${QUADLET_DIR}"
   cd "${QUADLET_DIR}" || exit 1
 
-  if ! podlet --file . generate network "${name}"; then
+  if ! podlet --podman-version "$(podman version --format '{{.Server.Version}}')" --file . generate network "${name}"; then
     msg_error "Failed to generate network file for: ${name}"
     exit 1
   fi
