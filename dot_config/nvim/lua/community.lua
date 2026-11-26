@@ -29,4 +29,5 @@ return {
   { import = "astrocommunity.git.diffview-nvim" },
   { import = "astrocommunity.git.gist-nvim" },
   { import = "astrocommunity.git.octo-nvim" },
+  { import = "astrocommunity.ai.sidekick-nvim" },
 }
